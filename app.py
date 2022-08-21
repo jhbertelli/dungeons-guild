@@ -7,7 +7,7 @@ app = Flask(__name__, static_folder='assets/resources', template_folder='assets/
 
 # para referenciar tais arquivos no HTML em suas respectivas pastas:
 # referencie o CSS com: styles/<arquivo>.css
-# imagens com: images/<arquivo>.<extensão>
+# imagens com: images/<arquivo>.<extensão> no html ou ../images/<arquivo>.<extensão> dentro do CSS
 # e JavaScript com: js/<arquivo>.js
 
 @app.route('/<path:filename>')
@@ -19,5 +19,8 @@ def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
 def mundos():
     return render_template('mundos.html')
 
+@app.route("/personagem")
+def personagem():
+    return render_template('personagem.html')
 
 app.run(debug = True)
