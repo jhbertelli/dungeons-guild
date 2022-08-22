@@ -1,8 +1,27 @@
+/* Fontes:
+
+Inter 400, 700
+
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+
 @mixin flex-centralize {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+@mixin inter($font-size, $weight, $line-height) {
+    font-family: "Inter";
+    font-style: normal;
+    font-size: $font-size;
+    font-weight: $weight;
+    line-height: $line-height;
+}
+
+$mainsize: 20px;
+$salvaguardas: 20px;
 
 * {
     margin: 0;
@@ -27,7 +46,8 @@ main {
     width: 80%;
     margin: 50px 0 50px 0;
     display: flex;
-
+    color: white;
+    
     .info-principal {
         width: 30%;
         height: 300px;
@@ -36,32 +56,70 @@ main {
     .info {
         width: 70%;
         height: 300px;
+        @include flex-centralize();
+
+        div, section {
+            width: 90%;
+        }
+
+        h1 {
+            @include inter($mainsize, 700, 29px);
+            margin-top: 10px;
+        }
+
+        .salvaguardas {
+            > div {
+                margin-top: 10px;
+
+                p {
+                    @include inter(18px, 400, 24px);
+                    display: flex;
+                    align-items: center;
+
+                    svg {
+                        margin-right: $salvaguardas;
+                    }
+
+                    span {
+                        margin-left: $salvaguardas;
+                    }
+                }
+            }
+        }
     }
 }
 
 .carousel {
     height: 50px;
-}
 
-.carousel-inner {
-    display: flex;
-    width: 70%;
-    margin: 0 auto 0 auto;
-    height: 100%;
-}
-
-.carrosel-dentro {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    ul {
-        list-style: none;
-        margin-bottom: 0;
-        width: 100%;
+    .carousel-inner {
         display: flex;
-        justify-content: space-around;
-    } 
+        width: 70%;
+        margin: 0 auto 0 auto;
+        height: 100%;
+
+        .carrosel-dentro {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            ul {
+                @include inter($mainsize, 400, 29px);
+                text-align: center;
+                color: white;
+
+                list-style: none;
+                text-decoration: underline;
+                user-select: none;
+
+                margin-bottom: 0;
+                width: 100%;
+
+                display: flex;
+                justify-content: space-around;
+            }
+        }
+    }
 }
