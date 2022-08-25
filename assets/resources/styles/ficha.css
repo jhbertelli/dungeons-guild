@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Fontes:
 
 Inter 400, 700
@@ -26,26 +27,43 @@ nav {
   height: 80px;
   background-color: #161616;
 }
+nav img {
+  /* fazendo a logo não ser selecionável */
+  user-select: none;
+  -webkit-user-drag: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
 
 main {
   width: 80%;
   margin: 50px 0 50px 0;
   display: flex;
   color: white;
+  height: 500px;
 }
 main .info-principal {
   width: 30%;
-  height: 300px;
+  height: 100%;
 }
 main .info {
   width: 70%;
-  height: 300px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-main .info div, main .info section {
+main .info > div, main .info section {
   width: 90%;
+}
+main .info section {
+  display: flex;
+  flex-wrap: wrap;
+}
+main .info section > div {
+  width: 50%;
 }
 main .info h1 {
   font-family: "Inter";
@@ -70,7 +88,7 @@ main .info .salvaguardas > div p {
 main .info .salvaguardas > div p svg {
   margin-right: 20px;
 }
-main .info .salvaguardas > div p span {
+main .info .salvaguardas > div p b, main .info .salvaguardas > div p span {
   margin-left: 20px;
 }
 
