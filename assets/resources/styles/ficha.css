@@ -15,7 +15,7 @@ body {
   flex-direction: column;
   align-items: center;
   background-image: url("../images/bgficha.png");
-  background-size: auto;
+  background-size: cover;
 }
 
 nav {
@@ -37,61 +37,6 @@ nav img {
   -ms-user-select: none;
 }
 
-main {
-  width: 80%;
-  margin: 50px 0 50px 0;
-  display: flex;
-  color: white;
-  height: 500px;
-}
-main .info-principal {
-  width: 30%;
-  height: 100%;
-}
-main .info {
-  width: 70%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-main .info > div, main .info section {
-  width: 90%;
-}
-main .info section {
-  display: flex;
-  flex-wrap: wrap;
-}
-main .info section > div {
-  width: 50%;
-}
-main .info h1 {
-  font-family: "Inter";
-  font-style: normal;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 29px;
-  margin-top: 10px;
-}
-main .info .salvaguardas > div {
-  margin-top: 10px;
-}
-main .info .salvaguardas > div p {
-  font-family: "Inter";
-  font-style: normal;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 24px;
-  display: flex;
-  align-items: center;
-}
-main .info .salvaguardas > div p svg {
-  margin-right: 20px;
-}
-main .info .salvaguardas > div p b, main .info .salvaguardas > div p span {
-  margin-left: 20px;
-}
-
 .carousel {
   height: 50px;
 }
@@ -111,16 +56,129 @@ main .info .salvaguardas > div p b, main .info .salvaguardas > div p span {
 .carousel .carousel-inner .carrosel-dentro ul {
   font-family: "Inter";
   font-style: normal;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 29px;
   text-align: center;
   color: white;
   list-style: none;
-  text-decoration: underline;
   user-select: none;
   margin-bottom: 0;
   width: 100%;
   display: flex;
   justify-content: space-around;
+}
+.carousel .carousel-inner .carrosel-dentro ul li {
+  border-bottom: 1px white solid;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+main {
+  width: 80%;
+  margin: 50px 0 50px 0;
+  display: flex;
+  color: white;
+  height: min-content;
+}
+main .info-principal {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main .info-principal .img-div {
+  height: 9vw;
+  width: 9vw;
+  border-radius: 50%;
+  border: 6px solid white;
+  margin-top: 50px;
+}
+main .info-principal h1 {
+  font-family: "Inter";
+  font-style: normal;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 38px;
+  margin: 25px 0 15px 0;
+  text-align: center;
+}
+main .info-principal h3 {
+  font-family: "Inter";
+  font-style: normal;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 27px;
+}
+main .info-principal table {
+  font-family: "Inter";
+  font-style: normal;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 24px;
+  width: 80%;
+  margin: 55px 0 50px 0;
+  border-collapse: separate;
+  border-spacing: 5px;
+}
+main .info-principal table td {
+  text-align: right;
+}
+main .info {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+main .info > div,
+main .info section {
+  width: 90%;
+}
+main .info h2 {
+  font-family: "Inter";
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 29px;
+  margin-top: 10px;
+}
+main .info .detalhes {
+  display: flex;
+}
+main .info .detalhes section > div {
+  padding-bottom: 20px;
+}
+main .info .detalhes input {
+  margin: 0 21px 0 3px;
+}
+main .info .detalhes label, main .info .detalhes p {
+  font-family: "Inter";
+  font-style: normal;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 24px;
+}
+main .info .detalhes label span, main .info .detalhes p span {
+  margin-left: 10px;
+}
+main .info .detalhes p {
+  display: flex;
+  align-items: center;
+}
+main .info .detalhes p svg {
+  margin-right: 20px;
+}
+main .info .detalhes p b,
+main .info .detalhes p span {
+  margin-left: 20px;
+}
+main .info .detalhes .salvaguardas > div {
+  margin-top: 10px;
+}
+main .info .historia p {
+  text-align: justify;
 }

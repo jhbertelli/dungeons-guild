@@ -20,7 +20,7 @@ Inter 400, 700
     line-height: $line-height;
 }
 
-$mainsize: 20px;
+$mainsize: 18px;
 $salvaguardas: 20px;
 
 * {
@@ -31,7 +31,7 @@ $salvaguardas: 20px;
 body {
     @include flex-centralize();
     background-image: url("../images/bgficha.png");
-    background-size: auto;
+    background-size: cover;
 }
 
 nav {
@@ -49,63 +49,6 @@ nav {
         -webkit-user-drag: none;
         -webkit-user-select: none;
         -ms-user-select: none;
-    }
-}
-
-main {
-    width: 80%;
-    margin: 50px 0 50px 0;
-    display: flex;
-    color: white;
-    height: 500px;
-    
-    .info-principal {
-        width: 30%;
-        height: 100%;
-    }
-
-    .info {
-        width: 70%;
-        height: 100%;
-        @include flex-centralize();
-
-        > div, section {
-            width: 90%;
-        }
-
-        section {
-            display: flex;
-            flex-wrap: wrap;
-            
-            > div {
-                width: 50%
-            }
-        }
-
-        h1 {
-            @include inter($mainsize, 700, 29px);
-            margin-top: 10px;
-        }
-
-        .salvaguardas {
-            > div {
-                margin-top: 10px;
-
-                p {
-                    @include inter(18px, 400, 24px);
-                    display: flex;
-                    align-items: center;
-
-                    svg {
-                        margin-right: $salvaguardas;
-                    }
-
-                    b, span {
-                        margin-left: $salvaguardas;
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -131,7 +74,7 @@ main {
                 color: white;
 
                 list-style: none;
-                text-decoration: underline;
+                // text-decoration: underline;
                 user-select: none;
 
                 margin-bottom: 0;
@@ -139,6 +82,126 @@ main {
 
                 display: flex;
                 justify-content: space-around;
+
+                li {
+                    border-bottom: 1px white solid;
+                }
+            }
+        }
+    }
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+main {
+    width: 80%;
+    margin: 50px 0 50px 0;
+    display: flex;
+    color: white;
+    height: min-content;
+
+    .info-principal {
+        width: 30%;
+        @include flex-centralize();
+
+        .img-div {
+            height: 9vw;
+            width: 9vw;
+            border-radius: 50%;
+            border: 6px solid white;
+            margin-top: 50px;
+        }
+
+        h1 {
+            @include inter(24px, 700, 38px);
+            margin: 25px 0 15px 0;
+            text-align: center;
+        }
+
+        h3 {
+            @include inter(19px, 400, 27px);
+        }
+
+        table {
+            @include inter(17px, 400, 24px);
+            width: 80%;
+            margin: 55px 0 50px 0;
+            border-collapse: separate;
+            border-spacing: 5px;
+            
+            td {
+                text-align: right;
+            }
+        }
+    }
+
+    .info {
+        width: 70%;
+        @include flex-centralize();
+        padding-bottom: 20px;
+
+        > div,
+        section {
+            width: 90%;
+        }
+        
+        h2 {
+            @include inter($mainsize, 700, 29px);
+            margin-top: 10px;
+        }
+
+        .detalhes {
+            display: flex;
+
+            section {
+                // padding-bottom: 50px;
+
+                > div {
+                    padding-bottom: 20px;
+                }
+            }
+
+
+            input {
+                margin: 0 21px 0 3px;
+            }
+
+            label {
+                @include inter(17px, 400, 24px);
+
+                span {
+                    margin-left: 10px;
+                }
+            }
+
+            p {
+                @extend label;
+                display: flex;
+                align-items: center;
+
+                svg {
+                    margin-right: $salvaguardas;
+                }
+
+                b,
+                span {
+                    margin-left: $salvaguardas;
+                }
+            }
+
+            .salvaguardas {
+                > div {
+                    margin-top: 10px;
+                }
+            }
+        }
+
+        .historia {
+            p {
+                text-align: justify;
             }
         }
     }
