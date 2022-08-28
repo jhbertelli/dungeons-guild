@@ -19,8 +19,10 @@ def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
 def mundos():
     return render_template('mundos.html')
 
+
 @app.route("/personagem")
 def personagem():
     return render_template('personagem.html')
+
 
 app.run(debug = True)
