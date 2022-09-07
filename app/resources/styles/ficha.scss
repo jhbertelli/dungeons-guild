@@ -32,6 +32,7 @@ body {
     @include flex-centralize();
     background-image: url("../images/bgficha.png");
     background-size: cover;
+    background-attachment: fixed;
 }
 
 nav {
@@ -54,10 +55,15 @@ nav {
 
 .carousel {
     height: 50px;
+    margin-top: 5px;
+
+    button {
+        width: 8%;
+    }
 
     .carousel-inner {
         display: flex;
-        width: 70%;
+        width: 85%;
         margin: 0 auto 0 auto;
         height: 100%;
 
@@ -77,6 +83,7 @@ nav {
                 // text-decoration: underline;
                 user-select: none;
 
+                padding: 0;
                 margin-bottom: 0;
                 width: 100%;
 
@@ -103,6 +110,10 @@ main {
     color: white;
     height: min-content;
 
+    td {
+        text-align: right;
+    }
+
     .info-principal {
         width: 30%;
         @include flex-centralize();
@@ -125,16 +136,16 @@ main {
             @include inter(19px, 400, 27px);
         }
 
+        .vida {
+            margin-bottom: 30px;
+        }
+
         table {
             @include inter(17px, 400, 24px);
             width: 80%;
-            margin: 55px 0 50px 0;
+            margin: 0 0 20px 0;
             border-collapse: separate;
             border-spacing: 5px;
-            
-            td {
-                text-align: right;
-            }
         }
     }
 
@@ -147,7 +158,7 @@ main {
         section {
             width: 90%;
         }
-        
+
         h2 {
             @include inter($mainsize, 700, 29px);
             margin-top: 10px;
@@ -155,22 +166,27 @@ main {
 
         .detalhes {
             display: flex;
+            // gap: 10px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            // padding-bottom: 50px;
 
-            section {
-                // padding-bottom: 50px;
-
-                > div {
-                    padding-bottom: 20px;
-                }
+            > div {
+                width: 48%;
+                padding-bottom: 20px;
             }
-
 
             input {
                 margin: 0 21px 0 3px;
             }
 
+            textarea {
+                width: 100%;
+                height: max-content;
+            }
+
             label {
-                @include inter(17px, 400, 24px);
+                @include inter(16px, 400, 24px);
 
                 span {
                     margin-left: 10px;
@@ -181,6 +197,7 @@ main {
                 @extend label;
                 display: flex;
                 align-items: center;
+                text-align: justify;
 
                 svg {
                     margin-right: $salvaguardas;
@@ -195,6 +212,25 @@ main {
             .salvaguardas {
                 > div {
                     margin-top: 10px;
+                }
+            }
+
+            .equips {
+                > div {
+                    @include flex-centralize();
+                }
+                table {
+                    width: 35%;
+                }
+            }
+
+            .magias {
+                h2 {
+                    margin-right: 10px;
+                }
+
+                select {
+                    height: 220px;
                 }
             }
         }

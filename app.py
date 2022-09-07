@@ -1,6 +1,6 @@
 from flask import Flask, render_template, send_from_directory
 
-app = Flask(__name__, static_folder='assets/resources', template_folder='assets/screens')
+app = Flask(__name__, static_folder='app/resources', template_folder='app/screens')
 
 # static_folder é a pasta que contém arquivos de css, javascript, imagens
 # template_folder é a pasta que contém os htmls

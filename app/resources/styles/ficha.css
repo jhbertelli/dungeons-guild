@@ -16,6 +16,7 @@ body {
   align-items: center;
   background-image: url("../images/bgficha.png");
   background-size: cover;
+  background-attachment: fixed;
 }
 
 nav {
@@ -39,10 +40,14 @@ nav img {
 
 .carousel {
   height: 50px;
+  margin-top: 5px;
+}
+.carousel button {
+  width: 8%;
 }
 .carousel .carousel-inner {
   display: flex;
-  width: 70%;
+  width: 85%;
   margin: 0 auto 0 auto;
   height: 100%;
 }
@@ -63,6 +68,7 @@ nav img {
   color: white;
   list-style: none;
   user-select: none;
+  padding: 0;
   margin-bottom: 0;
   width: 100%;
   display: flex;
@@ -83,6 +89,9 @@ main {
   display: flex;
   color: white;
   height: min-content;
+}
+main td {
+  text-align: right;
 }
 main .info-principal {
   width: 30%;
@@ -113,6 +122,9 @@ main .info-principal h3 {
   font-weight: 400;
   line-height: 27px;
 }
+main .info-principal .vida {
+  margin-bottom: 30px;
+}
 main .info-principal table {
   font-family: "Inter";
   font-style: normal;
@@ -120,12 +132,9 @@ main .info-principal table {
   font-weight: 400;
   line-height: 24px;
   width: 80%;
-  margin: 55px 0 50px 0;
+  margin: 0 0 20px 0;
   border-collapse: separate;
   border-spacing: 5px;
-}
-main .info-principal table td {
-  text-align: right;
 }
 main .info {
   width: 70%;
@@ -148,17 +157,24 @@ main .info h2 {
 }
 main .info .detalhes {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-main .info .detalhes section > div {
+main .info .detalhes > div {
+  width: 48%;
   padding-bottom: 20px;
 }
 main .info .detalhes input {
   margin: 0 21px 0 3px;
 }
+main .info .detalhes textarea {
+  width: 100%;
+  height: max-content;
+}
 main .info .detalhes label, main .info .detalhes p {
   font-family: "Inter";
   font-style: normal;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 24px;
 }
@@ -168,6 +184,7 @@ main .info .detalhes label span, main .info .detalhes p span {
 main .info .detalhes p {
   display: flex;
   align-items: center;
+  text-align: justify;
 }
 main .info .detalhes p svg {
   margin-right: 20px;
@@ -178,6 +195,20 @@ main .info .detalhes p span {
 }
 main .info .detalhes .salvaguardas > div {
   margin-top: 10px;
+}
+main .info .detalhes .equips > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main .info .detalhes .equips table {
+  width: 35%;
+}
+main .info .detalhes .magias h2 {
+  margin-right: 10px;
+}
+main .info .detalhes .magias select {
+  height: 220px;
 }
 main .info .historia p {
   text-align: justify;
