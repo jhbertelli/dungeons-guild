@@ -21,13 +21,16 @@
                 background-position: 50% 50%;
                 background-size: cover;
             }
-            .info {
-                background: rgba(54, 137, 164, 0.75);
+            .info-principal > div > div {
+                background: rgba(54, 137, 164, 0.85);
             }
             .vida {
                 padding: 5px 20px 5px 20px;
                 background: rgb(54, 137, 164);
                 border-radius: 25px;
+            }
+            .info {
+                background: rgba(54, 137, 164, 0.75);
             }
         </style>
         <link rel="shortcut icon" href="images/favicon.svg" />
@@ -96,6 +99,30 @@
                         <td>Branca</td>
                     </tr>
                 </table>
+                <div class="flex">
+                    <div><h3>10</h3></div>
+                    <h4>Bônus de Proficiência</h4>
+                </div>
+                <div class="flex">
+                    <div><h3>8</h3></div>
+                    <h4>Sabedoria Passiva (Percepção)</h4>
+                </div>
+                <div class="flex">
+                    <div><h3>2</h3></div>
+                    <h4>Dados de Vida</h4>
+                </div>
+                <div class="flex">
+                    <div><h3>3</h3></div>
+                    <h4>Classe de Armadura</h4>
+                </div>
+                <div class="flex">
+                    <div><h3>3</h3></div>
+                    <h4>Iniciativa</h4>
+                </div>
+                <div class="flex">
+                    <div><h3>4</h3></div>
+                    <h4>Deslocamento</h4>
+                </div>
             </div>
             <div class="info">
                 <div
@@ -127,8 +154,9 @@
                             <div class="carrosel-dentro">
                                 <ul>
                                     <li>Magias</li>
-                                    <li>Item 8</li>
                                     <li>História</li>
+                                    <li>Aliados</li>
+                                    <li>Tesouro</li>
                                 </ul>
                             </div>
                         </div>
@@ -335,9 +363,17 @@
                         </select>
                     </div>
                 </div>
-                <div class="historia">
+                <div class="detalhesfora historia">
                     <h2>História</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur metus odio, laoreet luctus posuere vitae, hendrerit ut libero. Nunc ornare ex non sapien sodales, convallis efficitur tortor iaculis. Maecenas nec imperdiet erat. Sed tempor erat non molestie blandit. Ut id justo neque. Aenean venenatis risus sit amet nisi elementum scelerisque. Aenean commodo, nibh et auctor pretium, sem ex tempus ligula, ac euismod nibh metus sed nisi.</p>
+                </div>
+                <div class="detalhesfora aliados">
+                    <h2>Aliados e Organizações</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+                <div class="detalhesfora tesouro">
+                    <h2>Tesouro</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur metus odio, laoreet luctus posuere vitae, hendrerit ut libero.</p>
                 </div>
             </div>
         </main>
@@ -350,7 +386,7 @@
             crossorigin="anonymous"
         ></script>
 
-        <script src="json/spells.json"></script>
+        
         <script src="js/ficha.js"></script>
     </body>
 </html>

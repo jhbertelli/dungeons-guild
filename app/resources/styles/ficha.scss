@@ -117,13 +117,25 @@ main {
     .info-principal {
         width: 30%;
         @include flex-centralize();
+        
+        > div {
+            margin-bottom: 10px;
+            > div {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                @include flex-centralize();
+                justify-content: center;
+                margin-right: 10px;
+            }
+        }
 
         .img-div {
             height: 9vw;
             width: 9vw;
             border-radius: 50%;
             border: 6px solid white;
-            margin-top: 50px;
+            margin: 50px 0 0 0;
         }
 
         h1 {
@@ -134,10 +146,16 @@ main {
 
         h3 {
             @include inter(19px, 400, 27px);
+            margin: 0;
+        }
+
+        h4 {
+            @include inter(17px, 400, 27px);
+            margin: 0;
         }
 
         .vida {
-            margin-bottom: 30px;
+            margin: 10px 0 30px 0;
         }
 
         table {
@@ -235,7 +253,7 @@ main {
             }
         }
 
-        .historia {
+        .detalhesfora {
             p {
                 text-align: justify;
             }

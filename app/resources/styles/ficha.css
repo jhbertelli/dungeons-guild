@@ -99,12 +99,25 @@ main .info-principal {
   flex-direction: column;
   align-items: center;
 }
+main .info-principal > div {
+  margin-bottom: 10px;
+}
+main .info-principal > div > div {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
 main .info-principal .img-div {
   height: 9vw;
   width: 9vw;
   border-radius: 50%;
   border: 6px solid white;
-  margin-top: 50px;
+  margin: 50px 0 0 0;
 }
 main .info-principal h1 {
   font-family: "Inter";
@@ -121,9 +134,18 @@ main .info-principal h3 {
   font-size: 19px;
   font-weight: 400;
   line-height: 27px;
+  margin: 0;
+}
+main .info-principal h4 {
+  font-family: "Inter";
+  font-style: normal;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 27px;
+  margin: 0;
 }
 main .info-principal .vida {
-  margin-bottom: 30px;
+  margin: 10px 0 30px 0;
 }
 main .info-principal table {
   font-family: "Inter";
@@ -210,6 +232,6 @@ main .info .detalhes .magias h2 {
 main .info .detalhes .magias select {
   height: 220px;
 }
-main .info .historia p {
+main .info .detalhesfora p {
   text-align: justify;
 }

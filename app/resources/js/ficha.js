@@ -2,14 +2,22 @@ const carouselButtons = document.querySelectorAll(".carrosel-dentro ul li")
 
 // exibindo/ocultando elementos ao clicar nos botões no carrosel
 
-for (let i = 0; i < 8; i++) {
+for (let i = 0; i < 7; i++) {
     carouselButtons[i].addEventListener("click", () => {
         $(document.querySelector(".detalhes").children[i]).slideToggle(300)
     })
 }
 
-carouselButtons[8].addEventListener("click", () => {
+carouselButtons[7].addEventListener("click", () => {
     $(document.querySelector(".historia")).slideToggle(300)
+})
+
+carouselButtons[8].addEventListener("click", () => {
+    $(document.querySelector(".aliados")).slideToggle(300)
+})
+
+carouselButtons[9].addEventListener("click", () => {
+    $(document.querySelector(".tesouro")).slideToggle(300)
 })
 
 $.getJSON("../json/spells.json", (json) => {
