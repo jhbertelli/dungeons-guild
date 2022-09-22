@@ -40,18 +40,18 @@ h1 {
 
 .card-mundo {
   width: 32.666%;
-  height: 655px;
+  height: 605px;
   background: #181818;
   margin-bottom: 2%;
 }
 .card-mundo img {
   width: 100%;
-  height: 400px;
+  height: 350px;
 }
 
 .criar-mundo {
   width: 32.666%;
-  height: 655px;
+  height: 605px;
   background: #181818;
   font-family: "Inknut Antiqua";
   font-style: normal;

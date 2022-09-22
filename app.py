@@ -10,6 +10,7 @@ app = Flask(__name__, static_folder='app/resources', template_folder='app/screen
 # imagens com: images/<arquivo>.<extensão> no html ou ../images/<arquivo>.<extensão> dentro do CSS
 # e JavaScript com: js/<arquivo>.js
 
+
 @app.route('/<path:filename>')
 def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
     return send_from_directory(app.static_folder, filename)
@@ -20,9 +21,15 @@ def mundos():
     return render_template('mundos.html')
 
 
-@app.route("/personagem")
-def personagem():
-    return render_template('personagem.html')
+@app.route("/personagens")
+def personagens():
+    return render_template('personagens.html')
 
 
-app.run(debug = True)
+@app.route("/ficha")
+def ficha():
+    return render_template('ficha.html')
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

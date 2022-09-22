@@ -1,0 +1,116 @@
+/* Fontes:
+
+Inknut Antiqua 400
+Cormorant Infant 700
+
+*/
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@700&family=Inknut+Antiqua&display=swap");
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main hr {
+  opacity: 1;
+}
+
+.personagens {
+  width: 90%;
+}
+.personagens > hr {
+  margin: 20px 0 20px 0;
+}
+
+h1 {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 35px;
+  letter-spacing: 0.15em;
+  margin-top: 35px;
+}
+
+.meus-personagens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1%;
+  margin: 0 auto 0 auto;
+}
+
+.card-personagem {
+  width: 32.666%;
+  height: 465px;
+  background: #181818;
+  margin-bottom: 2%;
+}
+.card-personagem .card-color {
+  width: 100%;
+  height: 104px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.card-personagem .card-color img {
+  width: 136px;
+  height: 136px;
+  position: absolute;
+  bottom: -68px;
+  border: 6px solid #FFFFFF;
+  border-radius: 50%;
+}
+
+.criar-personagem {
+  width: 32.666%;
+  height: 465px;
+  background: #181818;
+  font-family: "Inknut Antiqua";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 33px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 98px;
+  text-align: center;
+}
+
+.desc {
+  width: 80%;
+  margin: 85px auto 0 auto;
+}
+.desc h3 {
+  font-family: "Inknut Antiqua";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 35px;
+  text-align: center;
+  margin: 20px 0;
+}
+.desc table {
+  width: 100%;
+  margin-top: 25px;
+}
+.desc table td {
+  font-family: "Cormorant Infant";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 35px;
+  padding-bottom: 5px;
+  text-align: right;
+}
+.desc table th {
+  display: flex;
+  align-items: center;
+}
+.desc table th span {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 35px;
+  margin-left: 15px;
+}
