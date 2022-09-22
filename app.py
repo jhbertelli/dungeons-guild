@@ -30,6 +30,25 @@ def personagens():
 def ficha():
     return render_template('ficha.html')
 
+@app.route("/personagensvazio")
+def personagensvazio():
+    return render_template('personagensvazio.html')
+
+@app.route("/personagens")
+def personagens():
+    return render_template('personagens.html')
+
+@app.route("/mundosvazio")
+def mundosvazio():
+    return render_template('mundosvazio.html')
+
+@app.route("/embreve")
+def embreve():
+    return render_template('embreve.html')
+
+@app.route("/livros")
+def livros():
+    return render_template('livros.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

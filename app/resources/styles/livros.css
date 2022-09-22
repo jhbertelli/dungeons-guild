@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica+SC&display=swap');
+
+main {
+    display:flex;
+}
+
+main > a {
+    background-position: 50% 50%;
+    align-items: center;
+    display:flex;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+}
+
+main > a > h1 {
+    flex-direction: column;
+    font-family: 'IM Fell DW Pica SC', serif;
+}
+
+.livro1 {
+    width:33.33333%;
+    height: 100vh;
+}
+
+.livro2 {
+    width:33.33333%;
+    height: 100vh;
+}
+
+.livro3 {
+    width:33.33333%;
+    height: 100vh;
+}
