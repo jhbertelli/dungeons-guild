@@ -21,6 +21,11 @@ def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
 def cadastro():
     return render_template('cadastro.html')
 
+@app.route("/login")
+def login():
+    return render_template('login.html')
+
+
 
 @app.route("/personagens")
 def personagens():
