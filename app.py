@@ -17,34 +17,31 @@ def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
     return send_from_directory(app.static_folder, filename)
 
 
+# páginas de cadastro e login
 @app.route("/cadastro")
 def cadastro():
     return render_template('cadastro.html')
+
 
 @app.route("/login")
 def login():
     return render_template('login.html')
 
 
-
+# telas do dashboard
 @app.route("/personagens")
 def personagens():
     return render_template('personagens.html')
 
 
-@app.route("/mundos")
-def mundos():
-    return render_template('mundos.html')
-
-
-@app.route("/ficha")
-def ficha():
-    return render_template('ficha.html')
-
-
 @app.route("/personagensvazio")
 def personagensvazio():
     return render_template('personagensvazio.html')
+
+
+@app.route("/mundos")
+def mundos():
+    return render_template('mundos.html')
 
 
 @app.route("/mundosvazio")
@@ -60,6 +57,17 @@ def embreve():
 @app.route("/livros")
 def livros():
     return render_template('livros.html')
+
+
+@app.route("/perfil")
+def perfil():
+    return render_template('perfil.html')
+
+
+# ficha de criação do personagem
+@app.route("/ficha")
+def ficha():
+    return render_template('ficha.html')
 
 
 if __name__ == "__main__":

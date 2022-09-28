@@ -1,0 +1,35 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main .profile {
+  background-color: #1c1c1c;
+  width: 90%;
+  border-radius: 10px 10px 0px 0px;
+}
+main .profile .cover {
+  width: 100%;
+  height: 280px;
+  border-radius: 10px 10px 0px 0px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+main .profile .cover .person-icon {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  bottom: -100px;
+  background: #1c1c1c;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main .profile .cover .person-icon img {
+  width: 80%;
+  height: 80%;
+}

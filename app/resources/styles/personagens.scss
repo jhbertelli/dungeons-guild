@@ -8,6 +8,7 @@ Cormorant Infant 700
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@700&family=Inknut+Antiqua&display=swap");
 
 $description-size: 20px;
+$img-size: 136px;
 
 @mixin card {
     width: 32.666%;
@@ -74,10 +75,10 @@ h1 {
         justify-content: center;
 
         img {
-            width: 136px;
-            height: 136px;
+            width: $img-size;
+            height: $img-size;
             position: absolute;
-            bottom: -68px;
+            bottom: $img-size / -2;
             border: 6px solid #FFFFFF;
             border-radius: 50%;
         }
