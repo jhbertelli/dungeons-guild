@@ -111,6 +111,7 @@ input{
     border: none;
     outline: none;
     background-color: transparent;
+    caret-color: white;
     
 }
 
@@ -190,7 +191,9 @@ button {
 
 
 input:-webkit-autofill {
-    box-shadow: 0 0 0 30px white inset !important;
+    box-shadow: 0 0 0 30px #161616 inset !important;
+    -webkit-text-fill-color: white;
+
 }
 
 input::-webkit-outer-spin-button,
