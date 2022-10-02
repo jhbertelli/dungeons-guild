@@ -1,4 +1,5 @@
 from flask import Flask, render_template, send_from_directory
+import mysql.connector as mysql
 
 app = Flask(__name__, static_folder='app/resources',
             template_folder='app/screens')
@@ -11,8 +12,17 @@ app = Flask(__name__, static_folder='app/resources',
 # imagens com: images/<arquivo>.<extensão> no html ou ../images/<arquivo>.<extensão> dentro do CSS
 # e JavaScript com: js/<arquivo>.js
 
+db = mysql.connect(
+    host="localhost",
+    port=3307,
+    user="root",
+    password="",
+    database="dungeonsguild"
+)
 
-@app.route('/<path:filename>')
+cursor = db.cursor()
+
+@app.route("/<path:filename>")
 def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
     return send_from_directory(app.static_folder, filename)
 
@@ -21,6 +31,9 @@ def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
 @app.route("/cadastro")
 def cadastro():
     return render_template('cadastro.html')
+@app.route("/template")
+def template():
+    return render_template('template-dashboard.html')
 
 
 @app.route("/login")

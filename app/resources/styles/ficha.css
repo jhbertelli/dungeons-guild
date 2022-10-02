@@ -110,7 +110,7 @@ main .info-principal > div > div {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-right: 10px;
+  margin-left: 20px;
 }
 main .info-principal .img-div {
   height: 9vw;
