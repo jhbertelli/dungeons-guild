@@ -1,5 +1,6 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, jsonify
 import mysql.connector as mysql
+
 
 app = Flask(__name__, static_folder='app/resources',
             template_folder='app/screens')
@@ -20,7 +21,17 @@ db = mysql.connect(
     database="dungeonsguild"
 )
 
-cursor = db.cursor()
+
+@app.route("/pericias")
+def test():
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM pericias")
+    rows = cursor.fetchall()
+    resp = jsonify(rows)
+    resp.status_code = 200
+    
+    return resp
+    
 
 @app.route("/<path:filename>")
 def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
