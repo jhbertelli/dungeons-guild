@@ -29,9 +29,8 @@ def test():
     rows = cursor.fetchall()
     resp = jsonify(rows)
     resp.status_code = 200
-    
     return resp
-    
+
 
 @app.route("/<path:filename>")
 def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
@@ -42,9 +41,6 @@ def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
 @app.route("/cadastro")
 def cadastro():
     return render_template('cadastro.html')
-@app.route("/template")
-def template():
-    return render_template('template-dashboard.html')
 
 
 @app.route("/login")
