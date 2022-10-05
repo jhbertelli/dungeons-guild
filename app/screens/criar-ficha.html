@@ -11,13 +11,16 @@
             crossorigin="anonymous"
         />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <link rel="stylesheet" href="http://127.0.0.1:5000/styles/ficha.css" />
+        <link
+            rel="stylesheet"
+            href="http://127.0.0.1:5000/styles/criar-ficha.css"
+        />
         <style>
             .info-principal {
                 background: rgba(54, 137, 164, 0.85);
             }
             .info-principal .img-div {
-                background-image: url(http://127.0.0.1:5000/images/example.png);
+                background-color: #fff;
                 background-position: 50% 50%;
                 background-size: cover;
             }
@@ -25,7 +28,7 @@
                 background: rgba(54, 137, 164, 0.85);
             }
             .vida {
-                padding: 5px 20px 5px 20px;
+                padding: 12px 20px 12px 20px;
                 background: rgb(54, 137, 164);
                 border-radius: 25px;
             }
@@ -37,6 +40,20 @@
             rel="shortcut icon"
             href="http://127.0.0.1:5000/images/svg/favicon.svg"
         />
+        <script>
+            function hexToRGB(hex, alpha) {
+                // função que transforma um valor hexadecimal de cor para rgba
+                const r = parseInt(hex.slice(1, 3), 16),
+                    g = parseInt(hex.slice(3, 5), 16),
+                    b = parseInt(hex.slice(5, 7), 16)
+
+                if (alpha) {
+                    return `rgba(${r}, ${g}, ${b}, ${alpha})`
+                } else {
+                    return `rgb(${r}, ${g}, ${b})`
+                }
+            }
+        </script>
     </head>
     <body>
         <nav>
@@ -48,14 +65,59 @@
         </nav>
         <main>
             <div class="info-principal">
-                <div class="img-div"></div>
-                <h1>Petrus Trannyth</h1>
+                <label for="img-personagem">
+                    <div class="img-div">
+                        <span>Insira uma imagem</span>
+                    </div>
+                </label>
+                <input
+                    type="file"
+                    name="img-personagem"
+                    id="img-personagem"
+                    style="display: none"
+                />
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nome do seu personagem"
+                    name="nome-personagem"
+                />
                 <h3>Pontos de Vida</h3>
-                <div class="vida"><span>8</span> / <span>10</span></div>
+                <div class="vida">
+                    <input
+                        type="number"
+                        placeholder="Vida atual"
+                        class="form-control"
+                        name="vida-atual"
+                    />
+                    /
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Vida total"
+                        name="vida-total"
+                    />
+                </div>
                 <table>
                     <tr>
                         <th>Classe e nível:</th>
-                        <td>Clérigo 1</td>
+                        <td>
+                            <select
+                                class="form-select"
+                                name="classe"
+                                id="classes"
+                            >
+                                <option selected>Selecione uma classe</option>
+                            </select>
+                            <input
+                                type="number"
+                                class="form-control"
+                                placeholder="LV"
+                                name="nivel-classe"
+                                min="0"
+                                style="width: 45px"
+                            />
+                        </td>
                     </tr>
                     <tr>
                         <th>Antecedente:</th>
@@ -67,71 +129,198 @@
                     </tr>
                     <tr>
                         <th>Raça:</th>
-                        <td>Humano</td>
+                        <td>
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Raça"
+                                name="raca"
+                            />
+                        </td>
                     </tr>
                     <tr>
                         <th>Tendência:</th>
-                        <td>Neutro e Bom</td>
+                        <td>
+                            <select
+                                class="form-select"
+                                name="tendencia"
+                                id="tendencias"
+                            >
+                                <option selected>
+                                    Selecione uma tendência
+                                </option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <th>Pontos de experiência:</th>
-                        <td>50/300</td>
+                        <td>
+                            <input
+                                type="number"
+                                placeholder="XP atual"
+                                class="form-control"
+                                name="xp-atual"
+                            />
+                            <span style="margin: 0 4px 0 4px">/</span>
+                            <input
+                                type="number"
+                                placeholder="XP total"
+                                class="form-control"
+                                name="xp-total"
+                            />
+                        </td>
                     </tr>
                 </table>
                 <table>
                     <tr>
                         <th>Idade:</th>
-                        <td>32</td>
+                        <td>
+                            <input
+                                type="number"
+                                placeholder="Idade"
+                                class="form-control"
+                                name="idade"
+                            />
+                        </td>
                     </tr>
                     <tr>
                         <th>Altura:</th>
-                        <td>1,84 m</td>
+                        <td>
+                            <input
+                                type="number"
+                                placeholder="Altura"
+                                class="form-control"
+                                name="altura"
+                            />
+                            <span style="margin-left: 8px">m</span>
+                        </td>
                     </tr>
                     <tr>
                         <th>Peso:</th>
-                        <td>84,6 kg</td>
+                        <td>
+                            <input
+                                type="number"
+                                placeholder="Peso"
+                                class="form-control"
+                                name="peso"
+                            />
+                            <span style="margin-left: 8px">kg</span>
+                        </td>
                     </tr>
                     <tr>
                         <th>Cabelo:</th>
-                        <td>Castanho claro</td>
+                        <td>
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Cor do cabelo"
+                                name="cabelo"
+                            />
+                        </td>
                     </tr>
                     <tr>
                         <th>Olhos:</th>
-                        <td>Castanho</td>
+                        <td>
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Cor dos olhos"
+                                name="olho"
+                            />
+                        </td>
                     </tr>
                     <tr>
                         <th>Pele:</th>
-                        <td>Branca</td>
+                        <td>
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Cor da pele"
+                                name="pele"
+                            />
+                        </td>
                     </tr>
                 </table>
                 <div class="flex">
                     <h4>Inspiração</h4>
-                    <div><h3>2</h3></div>
+                    <div>
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="inspiracao"
+                        />
+                    </div>
                 </div>
                 <div class="flex">
                     <h4>Bônus de Proficiência</h4>
-                    <div><h3>4</h3></div>
+                    <div>
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="proficiencia"
+                        />
+                    </div>
                 </div>
                 <div class="flex">
                     <h4>Sabedoria Passiva (Percepção)</h4>
-                    <div><h3>8</h3></div>
+                    <div>
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="percepcao"
+                        />
+                    </div>
                 </div>
                 <div class="flex">
                     <h4>Dados de Vida</h4>
-                    <div><h3>2</h3></div>
+                    <div>
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="dados-vida"
+                        />
+                    </div>
                 </div>
                 <div class="flex">
                     <h4>Classe de Armadura</h4>
-                    <div><h3>3</h3></div>
+                    <div>
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="classe-armadura"
+                        />
+                    </div>
                 </div>
                 <div class="flex">
                     <h4>Iniciativa</h4>
-                    <div><h3>3</h3></div>
+                    <div>
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="iniciativa"
+                        />
+                    </div>
                 </div>
                 <div class="flex">
                     <h4>Deslocamento</h4>
-                    <div><h3>4</h3></div>
+                    <div>
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="deslocamento"
+                        />
+                    </div>
                 </div>
+                <hr />
+                <label for="cor-ficha" class="form-label">Cor da ficha</label>
+                <input
+                    type="color"
+                    class="form-control form-control-color"
+                    id="cor-ficha"
+                    name="cor-ficha"
+                    value="#563d7c"
+                    title="Choose your color"
+                />
             </div>
             <div class="info">
                 <div
@@ -570,6 +759,7 @@
                         </div>
                         <select
                             class="form-select"
+                            name="magias"
                             multiple
                             aria-label="multiple select example"
                         >
@@ -626,6 +816,6 @@
             crossorigin="anonymous"
         ></script>
 
-        <script src="http://127.0.0.1:5000/js/ficha.js"></script>
+        <script src="http://127.0.0.1:5000/js/criarficha.js"></script>
     </body>
 </html>

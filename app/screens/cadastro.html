@@ -1,104 +1,126 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="styles/cadastro.css" />
-  </head>
-  <body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cadastro</title>
+        <link
+            rel="stylesheet"
+            href="http://127.0.0.1:5000/styles/cadastro.css"
+        />
+    </head>
+    <body>
+        <div id="header">
+            <img
+                id="dgicon"
+                src="http://127.0.0.1:5000/images/logo.png"
+                alt=""
+            />
+        </div>
 
-    <div id="header">
-      <img id="dgicon" src="images/logo.png" alt="">
-    </div>
-    
-    <div class="cadastrofundo">
-      <div>
-        <h1>Cadastre-se</h1>
-        <h2>Embarque conosco na sua primeira jornada!</h2>
-        <hr/>
+        <div class="cadastrofundo">
+            <div>
+                <h1>Cadastre-se</h1>
+                <h2>Embarque conosco na sua primeira jornada!</h2>
+                <hr />
 
-        <form class="form-wrapper" method="post">
-          <div>
-            <label for="name-input"
-              >Nome
-              <div class="input-wrapper">
-                <img src="images/svg/nomeicon.svg" />
-                <input
-                  id="name-input"
-                  name="nome"
-                  required
-                  placeholder="Insira seu Nome"
-                />
-              </div>
-            </label>
-          </div>
-          <div>
-            <label for="nick-input"
-              >Apelido
-              <div class="input-wrapper">
-                <img src="images/svg/apelidoicon.svg" />
-                <input
-                  id="nick-input"
-                  name="apelido"
-                  required
-                  placeholder="Insira seu Apelido"
-                />
-              </div>
-            </label>
-          </div>
-          <div>
-            <label for="email-input"
-              >E-mail
-              <div class="input-wrapper">
-                <img src="images/svg/emailicon.svg" />
-                <input
-                  id="email-input"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Insira seu E-mail"
-                />
-              </div>
-            </label>
-          </div>
-          <div>
-            <label for="password-input"
-              >Senha
-              <div class="input-wrapper">
-                <img src="images/svg/senhaicon.svg" />
-                <input
-                  id="password-input"
-                  name="senha"
-                  type="password"
-                  required
-                  placeholder="Insira sua Senha"
-                />
-              </div>
-            </label>
-          </div>
-          <div>
-            <label for="verify-password-input"
-              >Confirmar senha
-              <div class="input-wrapper">
-                <img src="images/svg/confsenhaicon.svg" />
-                <input
-                  id="verify-password-input"
-                  name="verificarSenha"
-                  type="password"
-                  required
-                  placeholder="Confirme sua senha"
-                />
-              </div>
-            </label>
-          </div>
-          <button id="register-button" name="submit-button" type="submit">
-            Cadastre-se
-          </button>
-          <small id="form-text">ou <a href="login"> Faça Login</a> </small>
-        </form>
-      </div>
-    </div>
-  </body>
+                <form class="form-wrapper" method="post">
+                    <div>
+                        <label for="name-input"
+                            >Nome
+                            <div class="input-wrapper">
+                                <img
+                                    src="http://127.0.0.1:5000/images/svg/nomeicon.svg"
+                                />
+                                <input
+                                    id="name-input"
+                                    name="nome"
+                                    required
+                                    placeholder="Insira seu Nome"
+                                />
+                            </div>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="nick-input"
+                            >Apelido
+                            <div class="input-wrapper">
+                                <img
+                                    src="http://127.0.0.1:5000/images/svg/apelidoicon.svg"
+                                />
+                                <input
+                                    id="nick-input"
+                                    name="apelido"
+                                    required
+                                    placeholder="Insira seu Apelido"
+                                />
+                            </div>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="email-input"
+                            >E-mail
+                            <div class="input-wrapper">
+                                <img
+                                    src="http://127.0.0.1:5000/images/svg/emailicon.svg"
+                                />
+                                <input
+                                    id="email-input"
+                                    name="email"
+                                    type="email"
+                                    required
+                                    placeholder="Insira seu E-mail"
+                                />
+                            </div>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="password-input"
+                            >Senha
+                            <div class="input-wrapper">
+                                <img
+                                    src="http://127.0.0.1:5000/images/svg/senhaicon.svg"
+                                />
+                                <input
+                                    id="password-input"
+                                    name="senha"
+                                    type="password"
+                                    required
+                                    placeholder="Insira sua Senha"
+                                />
+                            </div>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="verify-password-input"
+                            >Confirmar senha
+                            <div class="input-wrapper">
+                                <img
+                                    src="http://127.0.0.1:5000/images/svg/confsenhaicon.svg"
+                                />
+                                <input
+                                    id="verify-password-input"
+                                    name="verificarSenha"
+                                    type="password"
+                                    required
+                                    placeholder="Confirme sua senha"
+                                />
+                            </div>
+                        </label>
+                    </div>
+                    <button
+                        id="register-button"
+                        name="submit-button"
+                        type="submit"
+                    >
+                        Cadastre-se
+                    </button>
+                    <small id="form-text"
+                        >ou <a href="/login"> Faça Login</a>
+                    </small>
+                </form>
+            </div>
+        </div>
+    </body>
 </html>

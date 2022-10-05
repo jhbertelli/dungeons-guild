@@ -1,253 +1,287 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mundos</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="styles/template-dashboard.css" />
-    <link rel="stylesheet" href="styles/mundos.css" />
-    <link rel="shortcut icon" href="images/svg/favicon.svg" />
-  </head>
-  <body>
-    <nav class="d-flex flex-nowrap" style="position: fixed">
-      <div
-          class="d-flex flex-column flex-shrink-0 p-3"
-          style="width: 357px; background-color: #161616"
-      >
-          <a
-              href="#"
-              class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
-              style="margin-left: 15px"
-          >
-              <img
-                  src="images/logo.png"
-                  style="width: 292px; height: 92px"
-                  alt=""
-              />
-          </a>
-          <ul class="nav nav-pills flex-column mb-auto">
-              <li>
-                  <a
-                      href="personagens"
-                      class="nav-link text-white"
-                      aria-current="page"
-                  >
-                      <img src="images/svg/personagens.svg" alt="" />
-                      Personagens
-                  </a>
-              </li>
-              <li>
-                  <a href="mundos" class="nav-link text-white" style="font-weight: 700">
-                      <img src="images/svg/mundo.svg" alt="" />
-                      Mundos
-                  </a>
-              </li>
-              <li>
-                  <a href="embreve" class="nav-link text-white">
-                      <img src="images/svg/dado.svg" alt="" />
-                      Dados
-                  </a>
-              </li>
-              <li>
-                  <a href="livros" class="nav-link text-white">
-                      <img src="images/svg/livro.svg" alt="" />
-                      Livros
-                  </a>
-              </li>
-              <li>
-                  <a href="assinaturas" class="nav-link text-white">
-                      <img src="images/svg/money.svg" alt="" />
-                      Assinaturas
-                  </a>
-              </li>
-          </ul>
-          <div class="dropdown">
-              <a
-                  href="perfil"
-                  class="d-flex align-items-center text-white text-decoration-none"
-              >
-                  <img src="images/svg/profile-default-icon.svg" alt="" />
-                  <span>RafaEg</span>
-              </a>
-          </div>
-      </div>
-
-      <div class="b-example-vr"></div>
-    </nav>
-
-    <main>
-      <div class="mundos">
-        <h1>Meus mundos</h1>
-        <hr />
-        <div class="meus-mundos">
-          <div class="card-mundo">
-            <img src="images/Rectangle%20157.png" alt="" />
-            <div class="desc">
-              <h3>Pirate's Life</h3>
-              <hr />
-              <table>
-                <tr>
-                  <th>
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M20.2451 21.75H3.74754C3.09687 21.75 2.61317 22.2539 2.61317 22.8328C2.61317 23.4117 3.09687 24 3.74754 24H20.2033C20.854 24 21.3377 23.4961 21.3377 22.9172C21.3377 22.3383 20.8982 21.75 20.2451 21.75ZM23 10.125C23 9.57094 22.8142 9.02297 22.4559 8.57016C21.9501 7.89563 21.13 7.49766 20.2593 7.49766L13.1737 7.5V4.875H14.7009C15.3491 4.875 15.8824 4.36875 15.8824 3.75C15.8824 3.13125 15.3933 2.625 14.7451 2.625H13.2179V1.08281C13.1737 0.50625 12.6482 0 11.9558 0C11.2634 0 10.8165 0.50625 10.8165 1.08281V2.625H9.24509C8.59687 2.625 8.06799 3.13125 8.06799 3.75C8.06799 4.36875 8.59687 4.875 9.24509 4.875H10.7723V7.5H3.74754C2.21393 7.5 1 8.68594 1 10.1203C1 10.3875 1.04371 10.6594 1.13279 10.9219L4.36138 20.25H6.84129L3.37335 10.2375C3.36156 10.2 3.35616 10.1672 3.35616 10.1297C3.35616 9.95156 3.50103 9.75 3.74754 9.75H20.2426C20.541 9.75 20.6411 10.0075 20.6411 10.1303C20.6412 10.1601 20.6372 10.1899 20.6294 10.2188L17.1464 20.25H19.6322L22.8291 10.9125C22.9607 10.6547 23 10.3922 23 10.125Z"
-                        fill="white"
-                      />
-                    </svg>
-                    <span>Mestre:</span>
-                  </th>
-                  <td>Bianca K</td>
-                </tr>
-                <tr>
-                  <th>
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M16.7191 19.752L16.0791 14.628C15.9884 13.9022 15.6357 13.2346 15.0873 12.7506C14.5388 12.2667 13.8325 11.9997 13.1011 12H10.8971C10.166 12.0002 9.46016 12.2674 8.91217 12.7513C8.36417 13.2352 8.01174 13.9026 7.92108 14.628L7.28008 19.752C7.24491 20.0335 7.27002 20.3193 7.35376 20.5903C7.4375 20.8614 7.57796 21.1116 7.76579 21.3242C7.95362 21.5368 8.18454 21.707 8.44321 21.8235C8.70188 21.94 8.98238 22.0002 9.26608 22H14.7341C15.0177 22.0001 15.2981 21.9398 15.5566 21.8232C15.8152 21.7066 16.046 21.5364 16.2337 21.3238C16.4214 21.1112 16.5618 20.8611 16.6455 20.5901C16.7292 20.3191 16.7543 20.0334 16.7191 19.752V19.752Z"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M12 8C13.6569 8 15 6.65685 15 5C15 3.34315 13.6569 2 12 2C10.3431 2 9 3.34315 9 5C9 6.65685 10.3431 8 12 8Z"
-                        stroke="white"
-                        stroke-width="2"
-                      />
-                      <path
-                        d="M4 11C5.10457 11 6 10.1046 6 9C6 7.89543 5.10457 7 4 7C2.89543 7 2 7.89543 2 9C2 10.1046 2.89543 11 4 11Z"
-                        stroke="white"
-                        stroke-width="2"
-                      />
-                      <path
-                        d="M20 11C21.1046 11 22 10.1046 22 9C22 7.89543 21.1046 7 20 7C18.8954 7 18 7.89543 18 9C18 10.1046 18.8954 11 20 11Z"
-                        stroke="white"
-                        stroke-width="2"
-                      />
-                      <path
-                        d="M20.0001 14H20.3061C20.7795 13.9999 21.2376 14.1678 21.5989 14.4738C21.9602 14.7798 22.2012 15.204 22.2791 15.671L22.6121 17.671C22.6599 17.9575 22.6447 18.2511 22.5675 18.5311C22.4904 18.8112 22.3531 19.0711 22.1654 19.2928C21.9776 19.5144 21.7438 19.6925 21.4802 19.8146C21.2166 19.9368 20.9296 20 20.6391 20H17.0001M4.00009 14H3.69409C3.22065 13.9999 2.76254 14.1678 2.40126 14.4738C2.03998 14.7798 1.79897 15.204 1.72109 15.671L1.38809 17.671C1.3403 17.9575 1.35551 18.2511 1.43265 18.5311C1.5098 18.8112 1.64704 19.0711 1.83481 19.2928C2.02259 19.5144 2.2564 19.6925 2.51998 19.8146C2.78356 19.9368 3.07058 20 3.36109 20H7.00009L4.00009 14Z"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    <span>Integrantes:</span>
-                  </th>
-                  <td>6</td>
-                </tr>
-                <tr>
-                  <th>
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M24 7.2L22.8 6L21 7.8L19.2 6L18 7.2L19.8 9L18 10.8L19.2 12L21 10.2L22.8 12L24 10.8L22.2 9L24 7.2Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M9.00005 21.6C11.3196 21.6 13.2 19.7195 13.2 17.4C13.2 15.0804 11.3196 13.2 9.00005 13.2C6.68045 13.2 4.80005 15.0804 4.80005 17.4C4.80005 19.7195 6.68045 21.6 9.00005 21.6Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M8.4 5.99995C9.72548 5.99995 10.8 4.92543 10.8 3.59995C10.8 2.27447 9.72548 1.19995 8.4 1.19995C7.07452 1.19995 6 2.27447 6 3.59995C6 4.92543 7.07452 5.99995 8.4 5.99995Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M15.5999 9.59995C16.2626 9.59995 16.7999 9.06269 16.7999 8.39995C16.7999 7.73721 16.2626 7.19995 15.5999 7.19995C14.9372 7.19995 14.3999 7.73721 14.3999 8.39995C14.3999 9.06269 14.9372 9.59995 15.5999 9.59995Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M12 8.4C12.6628 8.4 13.2 7.86274 13.2 7.2C13.2 6.53726 12.6628 6 12 6C11.3373 6 10.8 6.53726 10.8 7.2C10.8 7.86274 11.3373 8.4 12 8.4Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M3.5999 4.80002C4.26264 4.80002 4.7999 4.26277 4.7999 3.60002C4.7999 2.93728 4.26264 2.40002 3.5999 2.40002C2.93716 2.40002 2.3999 2.93728 2.3999 3.60002C2.3999 4.26277 2.93716 4.80002 3.5999 4.80002Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M1.2 8.4C1.86274 8.4 2.4 7.86274 2.4 7.2C2.4 6.53726 1.86274 6 1.2 6C0.537258 6 0 6.53726 0 7.2C0 7.86274 0.537258 8.4 1.2 8.4Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M1.2 12C1.86274 12 2.4 11.4627 2.4 10.8C2.4 10.1372 1.86274 9.59998 1.2 9.59998C0.537258 9.59998 0 10.1372 0 10.8C0 11.4627 0.537258 12 1.2 12Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M3.5999 15.6C4.26264 15.6 4.7999 15.0627 4.7999 14.4C4.7999 13.7372 4.26264 13.2 3.5999 13.2C2.93716 13.2 2.3999 13.7372 2.3999 14.4C2.3999 15.0627 2.93716 15.6 3.5999 15.6Z"
-                        fill="white"
-                      />
-                    </svg>
-                    <span>Tema:</span>
-                  </th>
-                  <td>Medieval</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="criar-mundo">
-            <svg
-              width="138"
-              height="137"
-              viewBox="0 0 138 137"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mundos</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="http://127.0.0.1:5000/styles/template-dashboard.css"
+        />
+        <link rel="stylesheet" href="http://127.0.0.1:5000/styles/mundos.css" />
+        <link
+            rel="shortcut icon"
+            href="http://127.0.0.1:5000/images/svg/favicon.svg"
+        />
+    </head>
+    <body>
+        <nav class="d-flex flex-nowrap" style="position: fixed">
+            <div
+                class="d-flex flex-column flex-shrink-0 p-3"
+                style="width: 357px; background-color: #161616"
             >
-              <circle
-                cx="69"
-                cy="68.5"
-                r="65.5"
-                stroke="white"
-                stroke-width="6"
-              />
-              <rect
-                x="64.9707"
-                y="32.2354"
-                width="8.05882"
-                height="72.5294"
-                fill="white"
-              />
-              <rect
-                x="32.7354"
-                y="72.5294"
-                width="8.05882"
-                height="72.5294"
-                transform="rotate(-90 32.7354 72.5294)"
-                fill="white"
-              />
-            </svg>
-            <span>Criar Mundo</span>
-          </div>
-        </div>
-      </div>
-    </main>
+                <a
+                    href="#"
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+                    style="margin-left: 15px"
+                >
+                    <img
+                        src="http://127.0.0.1:5000/images/logo.png"
+                        style="width: 292px; height: 92px"
+                        alt=""
+                    />
+                </a>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li>
+                        <a
+                            href="http://127.0.0.1:5000/personagens"
+                            class="nav-link text-white"
+                            aria-current="page"
+                        >
+                            <img
+                                src="http://127.0.0.1:5000/images/svg/personagens.svg"
+                                alt=""
+                            />
+                            Personagens
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="http://127.0.0.1:5000/mundos"
+                            class="nav-link text-white"
+                            style="font-weight: 700"
+                        >
+                            <img
+                                src="http://127.0.0.1:5000/images/svg/mundo.svg"
+                                alt=""
+                            />
+                            Mundos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://127.0.0.1:5000/embreve" class="nav-link text-white">
+                            <img
+                                src="http://127.0.0.1:5000/images/svg/dado.svg"
+                                alt=""
+                            />
+                            Dados
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="http://127.0.0.1:5000/livros"
+                            class="nav-link text-white"
+                        >
+                            <img
+                                src="http://127.0.0.1:5000/images/svg/livro.svg"
+                                alt=""
+                            />
+                            Livros
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://127.0.0.1:5000/assinaturas" class="nav-link text-white">
+                            <img
+                                src="http://127.0.0.1:5000/images/svg/money.svg"
+                                alt=""
+                            />
+                            Assinaturas
+                        </a>
+                    </li>
+                </ul>
+                <div class="dropdown">
+                    <a
+                        href="http://127.0.0.1:5000/perfil"
+                        class="d-flex align-items-center text-white text-decoration-none"
+                    >
+                        <img
+                            src="http://127.0.0.1:5000/images/svg/profile-default-icon.svg"
+                            alt=""
+                        />
+                        <span>RafaEg</span>
+                    </a>
+                </div>
+            </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+            <div class="b-example-vr"></div>
+        </nav>
+
+        <main>
+            <div class="mundos">
+                <h1>Meus mundos</h1>
+                <hr />
+                <div class="meus-mundos">
+                    <div class="card-mundo">
+                        <img
+                            src="http://127.0.0.1:5000/images/Rectangle%20157.png"
+                            alt=""
+                        />
+                        <div class="desc">
+                            <h3>Pirate's Life</h3>
+                            <hr />
+                            <table>
+                                <tr>
+                                    <th>
+                                        <svg
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M20.2451 21.75H3.74754C3.09687 21.75 2.61317 22.2539 2.61317 22.8328C2.61317 23.4117 3.09687 24 3.74754 24H20.2033C20.854 24 21.3377 23.4961 21.3377 22.9172C21.3377 22.3383 20.8982 21.75 20.2451 21.75ZM23 10.125C23 9.57094 22.8142 9.02297 22.4559 8.57016C21.9501 7.89563 21.13 7.49766 20.2593 7.49766L13.1737 7.5V4.875H14.7009C15.3491 4.875 15.8824 4.36875 15.8824 3.75C15.8824 3.13125 15.3933 2.625 14.7451 2.625H13.2179V1.08281C13.1737 0.50625 12.6482 0 11.9558 0C11.2634 0 10.8165 0.50625 10.8165 1.08281V2.625H9.24509C8.59687 2.625 8.06799 3.13125 8.06799 3.75C8.06799 4.36875 8.59687 4.875 9.24509 4.875H10.7723V7.5H3.74754C2.21393 7.5 1 8.68594 1 10.1203C1 10.3875 1.04371 10.6594 1.13279 10.9219L4.36138 20.25H6.84129L3.37335 10.2375C3.36156 10.2 3.35616 10.1672 3.35616 10.1297C3.35616 9.95156 3.50103 9.75 3.74754 9.75H20.2426C20.541 9.75 20.6411 10.0075 20.6411 10.1303C20.6412 10.1601 20.6372 10.1899 20.6294 10.2188L17.1464 20.25H19.6322L22.8291 10.9125C22.9607 10.6547 23 10.3922 23 10.125Z"
+                                                fill="white"
+                                            />
+                                        </svg>
+                                        <span>Mestre:</span>
+                                    </th>
+                                    <td>Bianca K</td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <svg
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M16.7191 19.752L16.0791 14.628C15.9884 13.9022 15.6357 13.2346 15.0873 12.7506C14.5388 12.2667 13.8325 11.9997 13.1011 12H10.8971C10.166 12.0002 9.46016 12.2674 8.91217 12.7513C8.36417 13.2352 8.01174 13.9026 7.92108 14.628L7.28008 19.752C7.24491 20.0335 7.27002 20.3193 7.35376 20.5903C7.4375 20.8614 7.57796 21.1116 7.76579 21.3242C7.95362 21.5368 8.18454 21.707 8.44321 21.8235C8.70188 21.94 8.98238 22.0002 9.26608 22H14.7341C15.0177 22.0001 15.2981 21.9398 15.5566 21.8232C15.8152 21.7066 16.046 21.5364 16.2337 21.3238C16.4214 21.1112 16.5618 20.8611 16.6455 20.5901C16.7292 20.3191 16.7543 20.0334 16.7191 19.752V19.752Z"
+                                                stroke="white"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                            <path
+                                                d="M12 8C13.6569 8 15 6.65685 15 5C15 3.34315 13.6569 2 12 2C10.3431 2 9 3.34315 9 5C9 6.65685 10.3431 8 12 8Z"
+                                                stroke="white"
+                                                stroke-width="2"
+                                            />
+                                            <path
+                                                d="M4 11C5.10457 11 6 10.1046 6 9C6 7.89543 5.10457 7 4 7C2.89543 7 2 7.89543 2 9C2 10.1046 2.89543 11 4 11Z"
+                                                stroke="white"
+                                                stroke-width="2"
+                                            />
+                                            <path
+                                                d="M20 11C21.1046 11 22 10.1046 22 9C22 7.89543 21.1046 7 20 7C18.8954 7 18 7.89543 18 9C18 10.1046 18.8954 11 20 11Z"
+                                                stroke="white"
+                                                stroke-width="2"
+                                            />
+                                            <path
+                                                d="M20.0001 14H20.3061C20.7795 13.9999 21.2376 14.1678 21.5989 14.4738C21.9602 14.7798 22.2012 15.204 22.2791 15.671L22.6121 17.671C22.6599 17.9575 22.6447 18.2511 22.5675 18.5311C22.4904 18.8112 22.3531 19.0711 22.1654 19.2928C21.9776 19.5144 21.7438 19.6925 21.4802 19.8146C21.2166 19.9368 20.9296 20 20.6391 20H17.0001M4.00009 14H3.69409C3.22065 13.9999 2.76254 14.1678 2.40126 14.4738C2.03998 14.7798 1.79897 15.204 1.72109 15.671L1.38809 17.671C1.3403 17.9575 1.35551 18.2511 1.43265 18.5311C1.5098 18.8112 1.64704 19.0711 1.83481 19.2928C2.02259 19.5144 2.2564 19.6925 2.51998 19.8146C2.78356 19.9368 3.07058 20 3.36109 20H7.00009L4.00009 14Z"
+                                                stroke="white"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                        </svg>
+                                        <span>Integrantes:</span>
+                                    </th>
+                                    <td>6</td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <svg
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M24 7.2L22.8 6L21 7.8L19.2 6L18 7.2L19.8 9L18 10.8L19.2 12L21 10.2L22.8 12L24 10.8L22.2 9L24 7.2Z"
+                                                fill="white"
+                                            />
+                                            <path
+                                                d="M9.00005 21.6C11.3196 21.6 13.2 19.7195 13.2 17.4C13.2 15.0804 11.3196 13.2 9.00005 13.2C6.68045 13.2 4.80005 15.0804 4.80005 17.4C4.80005 19.7195 6.68045 21.6 9.00005 21.6Z"
+                                                fill="white"
+                                            />
+                                            <path
+                                                d="M8.4 5.99995C9.72548 5.99995 10.8 4.92543 10.8 3.59995C10.8 2.27447 9.72548 1.19995 8.4 1.19995C7.07452 1.19995 6 2.27447 6 3.59995C6 4.92543 7.07452 5.99995 8.4 5.99995Z"
+                                                fill="white"
+                                            />
+                                            <path
+                                                d="M15.5999 9.59995C16.2626 9.59995 16.7999 9.06269 16.7999 8.39995C16.7999 7.73721 16.2626 7.19995 15.5999 7.19995C14.9372 7.19995 14.3999 7.73721 14.3999 8.39995C14.3999 9.06269 14.9372 9.59995 15.5999 9.59995Z"
+                                                fill="white"
+                                            />
+                                            <path
+                                                d="M12 8.4C12.6628 8.4 13.2 7.86274 13.2 7.2C13.2 6.53726 12.6628 6 12 6C11.3373 6 10.8 6.53726 10.8 7.2C10.8 7.86274 11.3373 8.4 12 8.4Z"
+                                                fill="white"
+                                            />
+                                            <path
+                                                d="M3.5999 4.80002C4.26264 4.80002 4.7999 4.26277 4.7999 3.60002C4.7999 2.93728 4.26264 2.40002 3.5999 2.40002C2.93716 2.40002 2.3999 2.93728 2.3999 3.60002C2.3999 4.26277 2.93716 4.80002 3.5999 4.80002Z"
+                                                fill="white"
+                                            />
+                                            <path
+                                                d="M1.2 8.4C1.86274 8.4 2.4 7.86274 2.4 7.2C2.4 6.53726 1.86274 6 1.2 6C0.537258 6 0 6.53726 0 7.2C0 7.86274 0.537258 8.4 1.2 8.4Z"
+                                                fill="white"
+                                            />
+                                            <path
+                                                d="M1.2 12C1.86274 12 2.4 11.4627 2.4 10.8C2.4 10.1372 1.86274 9.59998 1.2 9.59998C0.537258 9.59998 0 10.1372 0 10.8C0 11.4627 0.537258 12 1.2 12Z"
+                                                fill="white"
+                                            />
+                                            <path
+                                                d="M3.5999 15.6C4.26264 15.6 4.7999 15.0627 4.7999 14.4C4.7999 13.7372 4.26264 13.2 3.5999 13.2C2.93716 13.2 2.3999 13.7372 2.3999 14.4C2.3999 15.0627 2.93716 15.6 3.5999 15.6Z"
+                                                fill="white"
+                                            />
+                                        </svg>
+                                        <span>Tema:</span>
+                                    </th>
+                                    <td>Medieval</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="criar-mundo">
+                        <svg
+                            width="138"
+                            height="137"
+                            viewBox="0 0 138 137"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <circle
+                                cx="69"
+                                cy="68.5"
+                                r="65.5"
+                                stroke="white"
+                                stroke-width="6"
+                            />
+                            <rect
+                                x="64.9707"
+                                y="32.2354"
+                                width="8.05882"
+                                height="72.5294"
+                                fill="white"
+                            />
+                            <rect
+                                x="32.7354"
+                                y="72.5294"
+                                width="8.05882"
+                                height="72.5294"
+                                transform="rotate(-90 32.7354 72.5294)"
+                                fill="white"
+                            />
+                        </svg>
+                        <span>Criar Mundo</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"
+        ></script>
+    </body>
 </html>

@@ -1,62 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <link rel="stylesheet" href="styles/login.css" />
-  </head>
-  <body>
-  
-    <div id="header">
-      <img id="dgicon" src="images/logo.png" alt="">
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login</title>
+        <link rel="stylesheet" href="http://127.0.0.1:5000/styles/login.css" />
+    </head>
+    <body>
+        <div id="header">
+            <img
+                id="dgicon"
+                src="http://127.0.0.1:5000/images/logo.png"
+                alt=""
+            />
+        </div>
 
-    <div class="loginfundo">
-      <div>
-        <h1>Login</h1>
-        <h2>Hora de voltar para sua jornada!</h2>
-        <hr/>
+        <div class="loginfundo">
+            <div>
+                <h1>Login</h1>
+                <h2>Hora de voltar para sua jornada!</h2>
+                <hr />
 
-        <form class="form-wrapper" method="post">
-          <div>
-            <label for="email-input"
-              >E-mail
-              <div class="input-wrapper">
-                <img src="images/svg/emailicon.svg" />
-                <input
-                  id="email-input"
-                  name="loginemail"
-                  type="email"
-                  required
-                  placeholder="Insira seu E-mail"
-                />
-              </div>
-            </label>
-          </div>
-          <div>
-            <label for="password-input"
-              >Senha
-              <div class="input-wrapper">
-                <img src="images/svg/senhaicon.svg" />
-                <input
-                  id="password-input"
-                  name="loginsenha"
-                  type="password"
-                  required
-                  placeholder="Insira sua Senha"
-                />
-              </div>
-            </label>
-          </div>
-          
-          <button id="register-button" name="submit-button" type="submit">
-            Login
-          </button>
-          <small id="form-text">ou <a href="cadastro"> Cadastre-se</a> </small>
-        </form>
-      </div>
-    </div>
-  </body>
+                <form class="form-wrapper" method="post">
+                    <div>
+                        <label for="email-input"
+                            >E-mail
+                            <div class="input-wrapper">
+                                <img
+                                    src="http://127.0.0.1:5000/images/svg/emailicon.svg"
+                                />
+                                <input
+                                    id="email-input"
+                                    name="loginemail"
+                                    type="email"
+                                    required
+                                    placeholder="Insira seu E-mail"
+                                />
+                            </div>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="password-input"
+                            >Senha
+                            <div class="input-wrapper">
+                                <img
+                                    src="http://127.0.0.1:5000/images/svg/senhaicon.svg"
+                                />
+                                <input
+                                    id="password-input"
+                                    name="loginsenha"
+                                    type="password"
+                                    required
+                                    placeholder="Insira sua Senha"
+                                />
+                            </div>
+                        </label>
+                    </div>
+
+                    <button
+                        id="register-button"
+                        name="submit-button"
+                        type="submit"
+                    >
+                        Login
+                    </button>
+                    <small id="form-text"
+                        >ou <a href="/cadastro"> Cadastre-se</a>
+                    </small>
+                </form>
+            </div>
+        </div>
+    </body>
 </html>
