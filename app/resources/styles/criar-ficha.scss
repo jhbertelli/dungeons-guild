@@ -319,6 +319,15 @@ main {
                 }
                 table {
                     width: 35%;
+
+                    tr, th {
+                        width: 50%;
+                    }
+
+                    input {
+                        height: 30px;
+                        margin: 4px 0;
+                    }
                 }
             }
 
@@ -331,12 +340,24 @@ main {
                     height: 220px;
                 }
             }
-        }
 
+        }
+        
         .detalhesfora {
             p {
                 text-align: justify;
             }
+        }
+        
+        .form-floating {
+            label {
+                color: black;
+            }
+        }
+
+        h5 {
+            font-size: 13pt;
+            margin-top: 8px;
         }
     }
 }

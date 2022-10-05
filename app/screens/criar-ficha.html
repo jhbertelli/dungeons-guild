@@ -53,6 +53,18 @@
                     return `rgb(${r}, ${g}, ${b})`
                 }
             }
+
+            function inputCounterAndMaxLength(element, counterLength) {
+                // altera o contador de caracteres quando o usuário insere no input
+                const counter = element.parentElement.querySelector("h5")
+                counter.textContent = counterLength
+                element.setAttribute("maxLength", counterLength)
+
+                element.addEventListener("input", (e) => {
+                    const inputValue = e.target.value
+                    counter.textContent = counterLength - inputValue.length
+                })
+            }
         </script>
     </head>
     <body>
@@ -402,7 +414,19 @@
                                         stroke-linejoin="round"
                                     />
                                 </svg>
-                                Força: <span>6</span><b id="bonus">-2</b>
+                                Força:
+                                <span>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        placeholder="Força"
+                                        name="nivel-classe"
+                                        min="0"
+                                        max="20"
+                                        style="width: 80px; margin: 0"
+                                    />
+                                </span>
+                                <b id="bonus">-2</b>
                             </p>
                             <p>
                                 <svg
@@ -473,7 +497,18 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                Destreza: <span>20</span><b id="bonus">+5</b>
+                                Destreza:
+                                <span>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        placeholder="Força"
+                                        name="nivel-classe"
+                                        min="0"
+                                        max="20"
+                                        style="width: 80px; margin: 0"
+                                    />
+                                </span><b id="bonus">+5</b>
                             </p>
                             <p>
                                 <svg
@@ -499,7 +534,8 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                Constituição: <span>8</span><b id="bonus">-1</b>
+                                Constituição:
+                                <span>8</span><b id="bonus">-1</b>
                             </p>
                             <p>
                                 <svg
@@ -514,8 +550,8 @@
                                         fill="white"
                                     />
                                 </svg>
-                                Inteligência: <span>15</span
-                                ><b id="bonus">+2</b>
+                                Inteligência:
+                                <span> </span><b id="bonus">+2</b>
                             </p>
                             <p>
                                 <svg
@@ -564,7 +600,8 @@
                                         />
                                     </g>
                                 </svg>
-                                Sabedoria: <span>13</span><b id="bonus">+1</b>
+                                Sabedoria:
+                                <span> </span><b id="bonus">+1</b>
                             </p>
                             <p>
                                 <svg
@@ -598,7 +635,8 @@
                                         stroke="white"
                                     />
                                 </svg>
-                                Carisma: <span>17</span><b id="bonus">+3</b>
+                                Carisma:
+                                <span> </span><b id="bonus">+3</b>
                             </p>
                         </div>
                     </div>
@@ -610,8 +648,7 @@
                                 class="form-check-input"
                                 type="checkbox"
                                 value=""
-                                id="flexCheckDefault forca"
-                                onclick="return false"
+                                id="forca"
                             />
                             <label class="form-check-label" for="forca">
                                 Força: <span>-2</span>
@@ -623,12 +660,10 @@
                                 class="form-check-input"
                                 type="checkbox"
                                 value=""
-                                id="flexCheckChecked destreza"
-                                onclick="return false"
-                                checked
+                                id="destreza"
                             />
                             <label class="form-check-label" for="destreza">
-                                Destreza: <span>+7</span>
+                                Destreza: <span>+5</span>
                             </label>
                         </div>
 
@@ -637,8 +672,7 @@
                                 class="form-check-input"
                                 type="checkbox"
                                 value=""
-                                id="flexCheckDefault constituicao"
-                                onclick="return false"
+                                id="constituicao"
                             />
                             <label class="form-check-label" for="constituicao">
                                 Constituição: <span>-1</span>
@@ -650,8 +684,7 @@
                                 class="form-check-input"
                                 type="checkbox"
                                 value=""
-                                id="flexCheckDefault inteligencia"
-                                onclick="return false"
+                                id="inteligencia"
                             />
                             <label class="form-check-label" for="inteligencia">
                                 Inteligência: <span>+2</span>
@@ -663,8 +696,7 @@
                                 class="form-check-input"
                                 type="checkbox"
                                 value=""
-                                id="flexCheckDefault sabedoria"
-                                onclick="return false"
+                                id="sabedoria"
                             />
                             <label class="form-check-label" for="sabedoria">
                                 Sabedoria: <span>+1</span>
@@ -676,12 +708,10 @@
                                 class="form-check-input"
                                 type="checkbox"
                                 value=""
-                                id="flexCheckChecked carisma"
-                                onclick="return false"
-                                checked
+                                id="carisma"
                             />
                             <label class="form-check-label" for="carisma">
-                                Carisma: <span>+5</span>
+                                Carisma: <span>+3</span>
                             </label>
                         </div>
                     </div>
@@ -690,49 +720,115 @@
                     </div>
                     <div class="idiomas">
                         <h2>Idiomas e Proficiências</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit.
-                        </p>
+                        <div class="form-floating">
+                            <textarea
+                                class="form-control"
+                                placeholder="Insira..."
+                                id="idiomas-proficiencias"
+                                style="height: 320px"
+                                name="idiomas-proficiencias"
+                            ></textarea>
+                            <label for="idiomas-proficiencias"
+                                >Insira os idiomas e proficiências</label
+                            >
+                            <h5 style="text-align: right"></h5>
+                        </div>
                     </div>
                     <div class="equips">
                         <h2>Equipamentos</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit.
-                        </p>
+                        <div class="form-floating">
+                            <textarea
+                                class="form-control"
+                                placeholder="Insira..."
+                                id="equipamentos"
+                                style="height: 320px"
+                                name="equipamentos"
+                            ></textarea>
+                            <label for="equipamentos"
+                                >Insira os equipamentos</label
+                            >
+                            <h5 style="align-self: flex-end"></h5>
+                        </div>
                         <div>
                             <table>
                                 <tr>
                                     <th>PC:</th>
-                                    <td>6</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="PC"
+                                            name="nivel-classe"
+                                            min="0"
+                                        />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>PP:</th>
-                                    <td>15</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="PP"
+                                            name="nivel-classe"
+                                            min="0"
+                                        />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>PE:</th>
-                                    <td>19</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="PE"
+                                            name="nivel-classe"
+                                            min="0"
+                                        />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>PO:</th>
-                                    <td>5</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="PO"
+                                            name="nivel-classe"
+                                            min="0"
+                                        />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>PL:</th>
-                                    <td>21</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="PL"
+                                            name="nivel-classe"
+                                            min="0"
+                                        />
+                                    </td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                     <div class="caracteristicas">
                         <h2>Características e Habilidades</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Curabitur metus odio, laoreet luctus posuere
-                            vitae, hendrerit ut libero.
-                        </p>
+                        <div class="form-floating">
+                            <textarea
+                                class="form-control"
+                                placeholder="Insira..."
+                                id="caracteristicas"
+                                style="height: 320px"
+                                name="caracteristicas"
+                            ></textarea>
+                            <label for="caracteristicas"
+                                >Insira os idiomas e proficiências</label
+                            >
+                            <h5 style="text-align: right"></h5>
+                        </div>
                     </div>
                     <div class="magias">
                         <div class="flex">
@@ -771,31 +867,52 @@
                 </div>
                 <div class="detalhesfora historia">
                     <h2>História</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Curabitur metus odio, laoreet luctus posuere vitae,
-                        hendrerit ut libero. Nunc ornare ex non sapien sodales,
-                        convallis efficitur tortor iaculis. Maecenas nec
-                        imperdiet erat. Sed tempor erat non molestie blandit. Ut
-                        id justo neque. Aenean venenatis risus sit amet nisi
-                        elementum scelerisque. Aenean commodo, nibh et auctor
-                        pretium, sem ex tempus ligula, ac euismod nibh metus sed
-                        nisi.
-                    </p>
+                    <div class="form-floating">
+                        <textarea
+                            class="form-control"
+                            placeholder="Insira..."
+                            id="historia"
+                            style="height: 320px"
+                            name="historia"
+                        ></textarea>
+                        <label for="historia"
+                            >Insira a história do(a) seu(sua) personagem</label
+                        >
+                        <h5 style="text-align: right"></h5>
+                    </div>
                 </div>
                 <div class="detalhesfora aliados">
                     <h2>Aliados e Organizações</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
+                    <div class="form-floating">
+                        <textarea
+                            class="form-control"
+                            placeholder="Insira..."
+                            id="aliados"
+                            style="height: 140px"
+                            name="aliados"
+                        ></textarea>
+                        <label for="aliados"
+                            >Insira os aliados e organizações do(a) seu(sua)
+                            personagem</label
+                        >
+                        <h5 style="text-align: right"></h5>
+                    </div>
                 </div>
                 <div class="detalhesfora tesouro">
                     <h2>Tesouro</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Curabitur metus odio, laoreet luctus posuere vitae,
-                        hendrerit ut libero.
-                    </p>
+                    <div class="form-floating">
+                        <textarea
+                            class="form-control"
+                            placeholder="Insira..."
+                            id="tesouro"
+                            style="height: 140px"
+                            name="tesouro"
+                        ></textarea>
+                        <label for="tesouro"
+                            >Insira o tesouro do(a) seu(sua) personagem</label
+                        >
+                        <h5 style="text-align: right"></h5>
+                    </div>
                 </div>
             </div>
         </main>
@@ -815,7 +932,24 @@
             integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
             crossorigin="anonymous"
         ></script>
+        <script>
+            const inputIdiomas = document.querySelector(
+                "#idiomas-proficiencias"
+            )
+            const inputCaracteristicas =
+                document.querySelector("#caracteristicas")
+            const inputHistoria = document.querySelector("#historia")
+            const inputAliados = document.querySelector("#aliados")
+            const inputTesouro = document.querySelector("#tesouro")
+            const inputEquipamentos = document.querySelector("#equipamentos")
 
+            inputCounterAndMaxLength(inputIdiomas, 300)
+            inputCounterAndMaxLength(inputCaracteristicas, 500)
+            inputCounterAndMaxLength(inputHistoria, 2000)
+            inputCounterAndMaxLength(inputAliados, 200)
+            inputCounterAndMaxLength(inputTesouro, 200)
+            inputCounterAndMaxLength(inputEquipamentos, 500)
+        </script>
         <script src="http://127.0.0.1:5000/js/criarficha.js"></script>
     </body>
 </html>

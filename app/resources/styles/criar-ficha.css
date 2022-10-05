@@ -293,6 +293,13 @@ main .info .detalhes .equips > div {
 main .info .detalhes .equips table {
   width: 35%;
 }
+main .info .detalhes .equips table tr, main .info .detalhes .equips table th {
+  width: 50%;
+}
+main .info .detalhes .equips table input {
+  height: 30px;
+  margin: 4px 0;
+}
 main .info .detalhes .magias h2 {
   margin-right: 10px;
 }
@@ -301,4 +308,11 @@ main .info .detalhes .magias select {
 }
 main .info .detalhesfora p {
   text-align: justify;
+}
+main .info .form-floating label, main .info .form-floating .detalhes p, main .info .detalhes .form-floating p {
+  color: black;
+}
+main .info h5 {
+  font-size: 13pt;
+  margin-top: 8px;
 }

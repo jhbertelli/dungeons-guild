@@ -1,5 +1,8 @@
 from flask import Flask, render_template, send_from_directory, jsonify
 import mysql.connector as mysql
+from flask_mysqldb import MySQL
+import MySQLdb.cursors as cursors
+
 
 app = Flask(__name__, static_folder='app/resources',
             template_folder='app/screens')
@@ -14,14 +17,13 @@ app.config['JSON_AS_ASCII'] = False
 # imagens com: http://127.0.0.1:5000/images/<arquivo>.<extensão> no html ou ../images/<arquivo>.<extensão> dentro do CSS
 # e JavaScript com: http://127.0.0.1:5000/js/<arquivo>.js
 
-db = mysql.connect(
-    host="localhost",
-    port=3307,
-    user="root",
-    password="",
-    database="dungeonsguild"
-)
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_PORT'] = 3307
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'dungeonsguild'
 
+db = MySQL(app)
 
 @app.route("/<path:filename>")
 def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
@@ -30,7 +32,7 @@ def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
 
 def get_from_database(sql):
     # realiza um select do banco de dados e exibe como json
-    cursor = db.cursor(dictionary=True)
+    cursor = db.connection.cursor(cursors.DictCursor)
     try:
         cursor.execute(sql)
         rows = cursor.fetchall()
