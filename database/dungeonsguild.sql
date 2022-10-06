@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 04-Out-2022 às 02:58
+-- Tempo de geração: 06-Out-2022 às 16:05
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -20,6 +20,36 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dungeonsguild`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `antecedentes`
+--
+
+CREATE TABLE `antecedentes` (
+  `id` int(11) NOT NULL,
+  `antecedente` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `antecedentes`
+--
+
+INSERT INTO `antecedentes` (`id`, `antecedente`) VALUES
+(1, 'Acólito'),
+(2, 'Artesão de Guilda'),
+(3, 'Artista'),
+(4, 'Charlatão'),
+(5, 'Criminoso'),
+(6, 'Eremita'),
+(7, 'Forasteiro'),
+(8, 'Herói Popular'),
+(9, 'Marinheiro'),
+(10, 'Morador de Rua'),
+(11, 'Nobre'),
+(12, 'Sábio'),
+(13, 'Soldado');
 
 -- --------------------------------------------------------
 
@@ -196,6 +226,12 @@ INSERT INTO `tendencias` (`id_tendencia`, `nome_tendencia`) VALUES
 --
 
 --
+-- Índices para tabela `antecedentes`
+--
+ALTER TABLE `antecedentes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `cadastro`
 --
 ALTER TABLE `cadastro`
@@ -236,6 +272,12 @@ ALTER TABLE `tendencias`
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `antecedentes`
+--
+ALTER TABLE `antecedentes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `cadastro`

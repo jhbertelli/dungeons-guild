@@ -54,6 +54,9 @@ def api_pericias():
 def api_classes():
     return get_from_database("SELECT * FROM classes")
 
+@app.route("/api/antecedentes/")
+def api_antecedentes():
+    return get_from_database("SELECT * FROM antecedentes")
 
 @app.route("/api/salvaguardas/")
 def api_salvaguardas():
