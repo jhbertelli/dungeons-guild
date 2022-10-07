@@ -1,5 +1,4 @@
 from flask import Flask, render_template, send_from_directory, jsonify
-import mysql.connector as mysql
 from flask_mysqldb import MySQL
 import MySQLdb.cursors as cursors
 
@@ -25,6 +24,7 @@ app.config['MYSQL_DB'] = 'dungeonsguild'
 
 db = MySQL(app)
 
+
 @app.route("/<path:filename>")
 def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
     return send_from_directory(app.static_folder, filename)
@@ -47,7 +47,14 @@ def get_from_database(sql):
 # APIs
 @app.route("/api/pericias/")
 def api_pericias():
-    return get_from_database("SELECT * FROM pericias")
+    return get_from_database(
+        '''
+            SELECT id_pericia, nome_pericia, salvaguardas.id_salvaguardas, salvaguardas.nome_salvaguarda
+            FROM pericias
+            INNER JOIN salvaguardas
+            ON pericias.id_salvaguardas = salvaguardas.id_salvaguardas
+            ORDER BY pericias.id_pericia
+        ''')
 
 
 @app.route("/api/classes/")
@@ -57,14 +64,6 @@ def api_classes():
 @app.route("/api/antecedentes/")
 def api_antecedentes():
     return get_from_database("SELECT * FROM antecedentes")
-
-@app.route("/api/salvaguardas/")
-def api_salvaguardas():
-    return get_from_database('''SELECT id_pericia, nome_pericia, salvaguardas.nome_salvaguarda FROM pericias
-                    INNER JOIN salvaguardas
-                    ON pericias.id_salvaguardas = salvaguardas.id_salvaguardas
-                    ORDER BY pericias.id_pericia''')
-
 
 @app.route("/api/tendencias/")
 def api_tendencias():

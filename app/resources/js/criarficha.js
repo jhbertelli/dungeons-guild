@@ -59,25 +59,26 @@ $.getJSON("http://127.0.0.1:5000/api/tendencias", (json) => {
     }
 })
 
-$.getJSON("http://127.0.0.1:5000/api/salvaguardas", (json) => {
+$.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
     // pega todas as salvaguardas da api
     for (let i = 0; i < json.length; i++) {
         let abv_salvaguarda = json[i].nome_salvaguarda.substring(0, 3) // abrevia a string
-
+        
         document.querySelector(".pericias").innerHTML += `<div class="flex">
                 <input
                     class="form-check-input"
-                    type="checkbox"'
+                    type="checkbox"
                     value="${json[i].id_pericia}"
                     id="pericia-${json[i].id_pericia}"
+                    oninput="addBonusToSkills(this, ${json[i].id_salvaguardas})"
                 />
                 <label
                     class="form-check-label"
                     for="pericia-${json[i].id_pericia}"
                 >
                     ${json[i].nome_pericia}
-                    <span style="margin-left: 5px">(${abv_salvaguarda})</span>:
-                    <span>-2</span>
+                    <span style="margin-left: 5px" salvaguarda="${json[i].id_salvaguardas}">(${abv_salvaguarda})</span>:
+                    <span>0</span>
                 </label>
             </div>`
     }

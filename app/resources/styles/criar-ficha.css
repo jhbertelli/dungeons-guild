@@ -275,7 +275,7 @@ main .info .detalhes p {
   align-items: center;
   text-align: justify;
 }
-main .info .detalhes p svg {
+main .info .detalhes p img {
   margin-right: 20px;
 }
 main .info .detalhes p b,
