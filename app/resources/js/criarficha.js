@@ -73,7 +73,7 @@ $.getJSON("http://127.0.0.1:5000/api/antecedentes", (json) => {
     for (let i = 0; i < json.length; i++) {
         document.querySelector(
             "#antecedentes"
-        ).innerHTML += `<option value=${json[i].antecedente}>${json[i].antecedente}</option>`
+        ).innerHTML += `<option value=${json[i].id}>${json[i].antecedente}</option>`
     }
 })
 
