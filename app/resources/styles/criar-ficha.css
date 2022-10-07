@@ -101,26 +101,26 @@ input[type=number] {
   align-items: center;
 }
 
-main {
+form {
   width: 80%;
   margin: 50px 0 50px 0;
   display: flex;
   color: white;
   height: min-content;
 }
-main td {
+form td {
   text-align: right;
 }
-main .info-principal {
+form .info-principal {
   width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-main .info-principal > div {
+form .info-principal > div {
   margin-bottom: 10px;
 }
-main .info-principal > div > div {
+form .info-principal > div > div {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -130,21 +130,21 @@ main .info-principal > div > div {
   justify-content: center;
   margin-left: 20px;
 }
-main .info-principal input, main .info-principal select {
+form .info-principal input, form .info-principal select {
   display: inline-block;
 }
-main .info-principal > input {
+form .info-principal > input {
   width: 60%;
   margin: 24px 0 24px 0;
 }
-main .info-principal .vida {
+form .info-principal .vida {
   margin: 10px 0 30px 0;
 }
-main .info-principal .vida input {
+form .info-principal .vida input {
   width: 100px;
   height: 32px;
 }
-main .info-principal .img-div {
+form .info-principal .img-div {
   height: 9vw;
   width: 9vw;
   margin: 50px 0 8px 0;
@@ -158,7 +158,7 @@ main .info-principal .img-div {
   white-space: break-spaces;
   overflow: hidden;
 }
-main .info-principal .img-div span {
+form .info-principal .img-div span {
   text-overflow: ellipsis;
   text-align: center;
   padding: 4px;
@@ -169,10 +169,10 @@ main .info-principal .img-div span {
   font-weight: 500;
   line-height: 24px;
 }
-main .info-principal > .flex input {
+form .info-principal > .flex input {
   border-radius: 50%;
 }
-main .info-principal h1 {
+form .info-principal h1 {
   font-family: "Inter";
   font-style: normal;
   font-size: 24px;
@@ -181,7 +181,7 @@ main .info-principal h1 {
   margin: 25px 0 15px 0;
   text-align: center;
 }
-main .info-principal h3 {
+form .info-principal h3 {
   font-family: "Inter";
   font-style: normal;
   font-size: 19px;
@@ -189,7 +189,7 @@ main .info-principal h3 {
   line-height: 27px;
   margin: 0;
 }
-main .info-principal h4 {
+form .info-principal h4 {
   font-family: "Inter";
   font-style: normal;
   font-size: 17px;
@@ -197,7 +197,7 @@ main .info-principal h4 {
   line-height: 27px;
   margin: 0;
 }
-main .info-principal table {
+form .info-principal table {
   font-family: "Inter";
   font-style: normal;
   font-size: 17px;
@@ -208,41 +208,47 @@ main .info-principal table {
   border-collapse: separate;
   border-spacing: 5px;
 }
-main .info-principal table th {
+form .info-principal table th {
   width: 50%;
 }
-main .info-principal table td {
+form .info-principal table td {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-main .info-principal hr {
+form .info-principal hr {
   width: 80%;
   border: 1px solid white;
   opacity: 0.6;
   margin: 16px 0;
 }
-main .info-principal > .form-label {
+form .info-principal > .form-label {
   font-size: 14pt;
   font-weight: 700;
 }
-main .info-principal > #cor-ficha {
+form .info-principal > #cor-ficha {
   margin: 16px 0;
   width: 60%;
   height: 44px;
 }
-main .info {
+form .info-principal button {
+  background-color: #FFF;
+  border: #FFF;
+  color: #000;
+  width: 30%;
+}
+form .info {
   width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-bottom: 20px;
 }
-main .info > div,
-main .info section {
+form .info > div,
+form .info section {
   width: 90%;
 }
-main .info h2 {
+form .info h2 {
   font-family: "Inter";
   font-style: normal;
   font-size: 18px;
@@ -250,75 +256,75 @@ main .info h2 {
   line-height: 29px;
   margin-top: 10px;
 }
-main .info .detalhes {
+form .info .detalhes {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-main .info .detalhes > div {
+form .info .detalhes > div {
   width: 48%;
   padding-bottom: 20px;
 }
-main .info .detalhes input {
+form .info .detalhes input {
   margin: 0 21px 0 3px;
 }
-main .info .detalhes textarea {
+form .info .detalhes textarea {
   width: 100%;
   height: max-content;
 }
-main .info .detalhes label, main .info .detalhes p {
+form .info .detalhes label, form .info .detalhes p {
   font-family: "Inter";
   font-style: normal;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
 }
-main .info .detalhes label span, main .info .detalhes p span {
+form .info .detalhes label span, form .info .detalhes p span {
   margin-left: 10px;
 }
-main .info .detalhes p {
+form .info .detalhes p {
   display: flex;
   align-items: center;
   text-align: justify;
 }
-main .info .detalhes p img {
+form .info .detalhes p img {
   margin-right: 20px;
 }
-main .info .detalhes p b,
-main .info .detalhes p span {
+form .info .detalhes p b,
+form .info .detalhes p span {
   margin-left: 20px;
 }
-main .info .detalhes .salvaguardas > div {
+form .info .detalhes .salvaguardas > div {
   margin-top: 10px;
 }
-main .info .detalhes .equips > div {
+form .info .detalhes .equips > div {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-main .info .detalhes .equips table {
+form .info .detalhes .equips table {
   width: 35%;
 }
-main .info .detalhes .equips table tr, main .info .detalhes .equips table th {
+form .info .detalhes .equips table tr, form .info .detalhes .equips table th {
   width: 50%;
 }
-main .info .detalhes .equips table input {
+form .info .detalhes .equips table input {
   height: 30px;
   margin: 4px 0;
 }
-main .info .detalhes .magias h2 {
+form .info .detalhes .magias h2 {
   margin-right: 10px;
 }
-main .info .detalhes .magias select {
+form .info .detalhes .magias select {
   height: 220px;
 }
-main .info .detalhesfora p {
+form .info .detalhesfora p {
   text-align: justify;
 }
-main .info .form-floating label, main .info .form-floating .detalhes p, main .info .detalhes .form-floating p {
+form .info .form-floating label, form .info .form-floating .detalhes p, form .info .detalhes .form-floating p {
   color: black;
 }
-main .info h5 {
+form .info h5 {
   font-size: 13pt;
   margin-top: 8px;
 }

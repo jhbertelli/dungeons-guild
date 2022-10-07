@@ -159,7 +159,7 @@
         <nav>
             <img src="http://127.0.0.1:5000/images/logo.png" alt="" height="70" />
         </nav>
-        <main>
+        <form method="post">
             <div class="info-principal">
                 <label for="img-personagem">
                     <div class="img-div">
@@ -214,7 +214,7 @@
                     <tr>
                         <th>Antecedente:</th>
                         <td>
-                            <select class="form-select" name="Antecedente" id="antecedentes">
+                            <select class="form-select" name="antecedente" id="antecedentes">
                                 <option selected>Selecione um antecedente</option>
                             </select>
                         </td>
@@ -388,6 +388,7 @@
                     value="#3689A4"
                     title="Escolha sua cor"
                 />
+                <button class="btn btn-primary" type="submit">Enviar</button>
             </div>
             <div class="info">
                 <div id="carouselControls" class="carousel slide" data-interval="false">
@@ -824,7 +825,7 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </form>
 
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

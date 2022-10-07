@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, jsonify
+from flask import Flask, render_template, send_from_directory, jsonify, request, redirect, url_for
 from flask_mysqldb import MySQL
 import MySQLdb.cursors as cursors
 
@@ -134,9 +134,34 @@ def ficha():
     return render_template('ficha.html')
 
 
-@app.route("/ficha/criar/")
+@app.route("/ficha/criar/", methods=['GET', 'POST'])
 def criar_ficha():
-    return render_template('criar-ficha.html')
+    print(request.method)
+    if request.method == 'GET':
+        return render_template('criar-ficha.html')
+    if request.method == 'POST':
+        # nome_personagem = request.form['nome-personagem']
+        # cursor = db.connection.cursor(cursors.DictCursor)
+        # sql = f"INSERT INTO test1 (test) VALUES ('{nome_personagem}')"
+        # cursor.execute(sql)
+        # db.connection.commit()
+        uploaded_img = {}
+        
+        print(request.files)
+        try:
+            uploaded_img = request.files['img-personagem']
+            print('deu')
+        except:
+            uploaded_img['filename'] = ''
+
+        path = ''
+        if type(uploaded_img) != dict:
+            if uploaded_img.filename != '':
+                path = 'images/fichas/' + uploaded_img.filename
+                uploaded_img.save(path)
+
+        return uploaded_img
+        return redirect(url_for('personagens'))
 
 
 if __name__ == "__main__":

@@ -25,6 +25,8 @@ document.getElementById("img-personagem").addEventListener("change", (e) => {
         imageDiv.style.backgroundColor = "rgba(0,0,0,0)"
         imageDiv.style.border = "6px solid white"
         imageDiv.children[0].remove()
+        // document.getElementById('img-personagem').value = event.target.result
+        // console.log(event.target.result)
     })
 
     reader.readAsDataURL(image)

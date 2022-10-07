@@ -121,7 +121,7 @@ input[type="number"] {
     align-items: center;
 }
 
-main {
+form {
     width: 80%;
     margin: 50px 0 50px 0;
     display: flex;
@@ -247,6 +247,13 @@ main {
             margin: 16px 0;
             width: 60%;
             height: 44px;
+        }
+
+        button {
+            background-color: #FFF;
+            border: #FFF;
+            color: #000;
+            width: 30%;
         }
     }
 
