@@ -41,12 +41,39 @@ document.querySelector("#cor-ficha").addEventListener("input", (e) => {
     document.querySelector(".info").style.background = hexToRGB(cor, 0.75)
 })
 
+document.querySelectorAll('[type="number"]').forEach((element) => {
+    element.addEventListener('input', (event) => {
+        let value = event.target.value
+        
+        // previne o usuário a inserir números menores que 0 em todos os inputs de número
+        if (value <= 0) event.target.value = 0
+        // retira o "0" do valor, caso seja maior que 0 (ex: retira o 0 de "04")
+        if (value[0] === "0" && value.length > 1) event.target.value = value.slice(1)
+    })
+})
+
+$(document).ready(() => {
+    // "pop-up" de dica ao passar o mouse por cima
+    $('[data-bs-toggle="tooltip"]').tooltip()
+})
+
+// carregamento das APIs
+
 $.getJSON("http://127.0.0.1:5000/api/classes", (json) => {
     // pega todas as classes da api
     for (let i = 0; i < json.length; i++) {
         document.querySelector(
             "#classes"
         ).innerHTML += `<option value=${json[i].id_classe}>${json[i].nome_classe}</option>`
+    }
+})
+
+$.getJSON("http://127.0.0.1:5000/api/antecedentes", (json) => {
+    // pega todos os antecedentes da api
+    for (let i = 0; i < json.length; i++) {
+        document.querySelector(
+            "#antecedentes"
+        ).innerHTML += `<option value=${json[i].antecedente}>${json[i].antecedente}</option>`
     }
 })
 
@@ -70,7 +97,7 @@ $.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
                     type="checkbox"
                     value="${json[i].id_pericia}"
                     id="pericia-${json[i].id_pericia}"
-                    oninput="addBonusToSkills(this, ${json[i].id_salvaguardas})"
+                    oninput="addBonusToPericias(this, ${json[i].id_salvaguardas})"
                 />
                 <label
                     class="form-check-label"
@@ -91,9 +118,4 @@ $.getJSON("http://127.0.0.1:5000/api/magias", (json) => {
             i + 1
         }>${json[i].name} - NV ${json[i].level}</option>`
     }
-})
-
-$(document).ready(() => {
-    // "pop-up" de dica ao passar o mouse por cima
-    $('[data-bs-toggle="tooltip"]').tooltip()
 })

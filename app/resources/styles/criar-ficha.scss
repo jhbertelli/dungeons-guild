@@ -61,12 +61,14 @@ input {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
+    appearance: none;
     margin: 0;
 }
 
 /* remover setas do input number no navegador Firefox */
 input[type="number"] {
     -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 .carousel {
@@ -184,7 +186,8 @@ main {
                 text-align: center;
                 padding: 4px;
                 color: #000;
-                font-size: 16pt;
+                
+                @include inter(15pt, 500 , 24px)
             }
         }
 

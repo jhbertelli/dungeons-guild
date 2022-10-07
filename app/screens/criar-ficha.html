@@ -66,16 +66,13 @@
                 const text = element.closest("p").lastElementChild
                 const salvaguardaId = element.getAttribute("id-salvaguarda")
 
-                function changeValueInSkills(value) {
+                function changeValueInPericias(value) {
                     const bonus = Number(document.getElementById("bonus-proficiencia").value)
                     const pericias = document.querySelectorAll(`.pericias [salvaguarda="${salvaguardaId}"]`)
                     
                     for (let i = 0; i < pericias.length; i++) {
-                        console.log(pericias[i].closest("div").firstElementChild)
-
                         if (bonus > 0) {
                             if (pericias[i].closest("div").firstElementChild.checked) {
-                                console.log(pericias[i].closest("div").firstElementChild.checked)
                                 return pericias[i].closest("label").lastElementChild.textContent = "+" + (value + bonus)
                             }
                         }
@@ -85,13 +82,8 @@
 
                     document.querySelectorAll(`.testes-resistencia [salvaguarda="${salvaguardaId}"]`).forEach((el) => {
                         if (bonus > 0) {
-                            if (
-                                document
-                                    .querySelector(
-                                        `.testes-resistencia [salvaguarda="${salvaguardaId}"]`
-                                    )
-                                    .closest("div").firstElementChild.checked
-                            ) {
+                            if (document.querySelector(`.testes-resistencia [salvaguarda="${salvaguardaId}"]`)
+                                .closest("div").firstElementChild.checked) {
                                 return el.closest("label").lastElementChild.textContent = "+" + (value + bonus)
                             }
                         }
@@ -102,23 +94,23 @@
                 switch (true) {
                     case testValue <= 4:
                         text.textContent = "+2"
-                        changeValueInSkills(2)
+                        changeValueInPericias(2)
                         break
                     case testValue <= 8:
                         text.textContent = "+3"
-                        changeValueInSkills(3)
+                        changeValueInPericias(3)
                         break
                     case testValue <= 12:
                         text.textContent = "+4"
-                        changeValueInSkills(4)
+                        changeValueInPericias(4)
                         break
                     case testValue <= 16:
                         text.textContent = "+5"
-                        changeValueInSkills(5)
+                        changeValueInPericias(5)
                         break
                     case testValue > 16:
                         text.textContent = "+6"
-                        changeValueInSkills(6)
+                        changeValueInPericias(6)
                         break
                 }
 
@@ -127,7 +119,7 @@
                 if (testValue > 20) return (element.value = 20)
             }
 
-            function addBonusToTests(element, id) {
+            function addBonusToTestes(element, id) {
                 // adiciona o bonus ao clicar na caixa de seleção dos testes de resistência
                 const div = document.querySelector(`.testes-resistencia [salvaguarda="${id}"]`)
                 
@@ -140,24 +132,26 @@
                     return (div.closest("label").lastElementChild.textContent = "+" + previousBonus)
                 }
 
+                if (bonus == 0) return
+
                 div.closest("label").lastElementChild.textContent = "+" + (previousBonus + bonus)
             }
 
-            function addBonusToSkills(element, id) {
-                // adiciona o bonus ao clicar na caixa de seleção dos testes de resistência
-                const div = element.closest('.flex')
+            function addBonusToPericias(element, id) {
+                // adiciona o bonus ao clicar na caixa de seleção das perícias
+                const bonusText = element.closest('.flex').lastElementChild.lastElementChild
                 const bonus = Number(document.getElementById("bonus-proficiencia").value)
                 const previousBonus = Number(document.querySelector(`[id-salvaguarda="${id}"]`).closest("p").lastElementChild.textContent)
                 
                 if (!element.checked) {
-                    if (previousBonus == 0) return (div.lastElementChild.lastElementChild.textContent = "0")
+                    if (previousBonus == 0) return (bonusText.textContent = "0")
 
-                    return (div.lastElementChild.lastElementChild.textContent = "+" + previousBonus)
+                    return (bonusText.textContent = "+" + previousBonus)
                 }
 
                 if (bonus == 0) return
 
-                div.lastElementChild.lastElementChild.textContent = "+" + (previousBonus + bonus)
+                bonusText.textContent = "+" + (previousBonus + bonus)
             }
         </script>
     </head>
@@ -219,7 +213,11 @@
                     </tr>
                     <tr>
                         <th>Antecedente:</th>
-                        <td>Acólito</td>
+                        <td>
+                            <select class="form-select" name="Antecedente" id="antecedentes">
+                                <option selected>Selecione um antecedente</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <th>Nome do jogador:</th>
@@ -565,7 +563,7 @@
                                 type="checkbox"
                                 value=""
                                 id="forca"
-                                oninput="addBonusToTests(this, 1)"
+                                oninput="addBonusToTestes(this, 1)"
                             />
                             <label class="form-check-label" for="forca">
                                 Força: <span salvaguarda="1">0</span>
@@ -578,7 +576,7 @@
                                 type="checkbox"
                                 value=""
                                 id="destreza"
-                                oninput="addBonusToTests(this, 2)"
+                                oninput="addBonusToTestes(this, 2)"
                             />
                             <label class="form-check-label" for="destreza">
                                 Destreza: <span salvaguarda="2">0</span>
@@ -591,7 +589,7 @@
                                 type="checkbox"
                                 value=""
                                 id="constituicao"
-                                oninput="addBonusToTests(this, 3)"
+                                oninput="addBonusToTestes(this, 3)"
                             />
                             <label class="form-check-label" for="constituicao">
                                 Constituição: <span salvaguarda="3">0</span>
@@ -604,7 +602,7 @@
                                 type="checkbox"
                                 value=""
                                 id="inteligencia"
-                                oninput="addBonusToTests(this, 4)"
+                                oninput="addBonusToTestes(this, 4)"
                             />
                             <label class="form-check-label" for="inteligencia">
                                 Inteligência: <span salvaguarda="4">0</span>
@@ -617,7 +615,7 @@
                                 type="checkbox"
                                 value=""
                                 id="sabedoria"
-                                oninput="addBonusToTests(this, 5)"
+                                oninput="addBonusToTestes(this, 5)"
                             />
                             <label class="form-check-label" for="sabedoria">
                                 Sabedoria: <span salvaguarda="5">0</span>
@@ -630,7 +628,7 @@
                                 type="checkbox"
                                 value=""
                                 id="carisma"
-                                oninput="addBonusToTests(this, 6)"
+                                oninput="addBonusToTestes(this, 6)"
                             />
                             <label class="form-check-label" for="carisma">
                                 Carisma: <span salvaguarda="6">0</span>
@@ -863,7 +861,7 @@
                 const bonus = Number(e.target.value)
                 const bonusesArray = document.querySelectorAll("#bonus")
 
-                // previne o usuário a inserir um valor menor que 0
+                // previne que o usuário insira um valor menor que 0
                 if (bonus < 0) return (e.target.value = 0)
 
                 for (let i = 0; i < bonusesArray.length; i++) {
