@@ -66,56 +66,92 @@
                 const text = element.closest("p").lastElementChild
                 const salvaguardaId = element.getAttribute("id-salvaguarda")
 
-                function changeValueInPericias(value) {
+                function changeValueInPericiasAndTestes(value) {
                     const bonus = Number(document.getElementById("bonus-proficiencia").value)
                     const pericias = document.querySelectorAll(`.pericias [salvaguarda="${salvaguardaId}"]`)
                     
                     for (let i = 0; i < pericias.length; i++) {
                         if (bonus > 0) {
                             if (pericias[i].closest("div").firstElementChild.checked) {
+                                if (bonus + value <= 0) return pericias[i].closest("label").lastElementChild.textContent = (value + bonus)
+
                                 return pericias[i].closest("label").lastElementChild.textContent = "+" + (value + bonus)
                             }
                         }
-    
-                        pericias[i].closest("label").lastElementChild.textContent = "+" + value
+
+                        if (value <= 0) {
+                            pericias[i].closest("label").lastElementChild.textContent = value
+                        } else {
+                            pericias[i].closest("label").lastElementChild.textContent = "+" + value
+                        }
                     }
 
                     document.querySelectorAll(`.testes-resistencia [salvaguarda="${salvaguardaId}"]`).forEach((el) => {
                         if (bonus > 0) {
                             if (document.querySelector(`.testes-resistencia [salvaguarda="${salvaguardaId}"]`)
                                 .closest("div").firstElementChild.checked) {
+                                if (bonus + value <= 0) return el.closest("label").lastElementChild.textContent = (value + bonus)
+
                                 return el.closest("label").lastElementChild.textContent = "+" + (value + bonus)
                             }
                         }
-                        el.closest("label").lastElementChild.textContent = "+" + value
+
+                        if (value <= 0) {
+                            el.closest("label").lastElementChild.textContent = value
+                        } else {
+                            el.closest("label").lastElementChild.textContent = "+" + value
+                        }
                     })
                 }
 
                 switch (true) {
-                    case testValue <= 4:
+                    case testValue <= 1:
+                        text.textContent = "-5"
+                        changeValueInPericiasAndTestes(-5)
+                        break
+                    case testValue <= 3:
+                        text.textContent = "-4"
+                        changeValueInPericiasAndTestes(-4)
+                        break
+                    case testValue <= 5:
+                        text.textContent = "-3"
+                        changeValueInPericiasAndTestes(-3)
+                        break
+                    case testValue <= 7:
+                        text.textContent = "-2"
+                        changeValueInPericiasAndTestes(-2)
+                        break
+                    case testValue <= 9:
+                        text.textContent = "-1"
+                        changeValueInPericiasAndTestes(-1)
+                        break
+                    case testValue <= 11:
+                        text.textContent = "0"
+                        changeValueInPericiasAndTestes(0)
+                        break
+                    case testValue <= 13:
+                        text.textContent = "+1"
+                        changeValueInPericiasAndTestes(1)
+                        break
+                    case testValue <= 15:
                         text.textContent = "+2"
-                        changeValueInPericias(2)
+                        changeValueInPericiasAndTestes(2)
                         break
-                    case testValue <= 8:
+                    case testValue <= 17:
                         text.textContent = "+3"
-                        changeValueInPericias(3)
+                        changeValueInPericiasAndTestes(3)
                         break
-                    case testValue <= 12:
+                    case testValue <= 19:
                         text.textContent = "+4"
-                        changeValueInPericias(4)
+                        changeValueInPericiasAndTestes(4)
                         break
-                    case testValue <= 16:
+                    case testValue >= 20:
                         text.textContent = "+5"
-                        changeValueInPericias(5)
-                        break
-                    case testValue > 16:
-                        text.textContent = "+6"
-                        changeValueInPericias(6)
+                        changeValueInPericiasAndTestes(5)
                         break
                 }
 
-                // previne o usuário a inserir um valor menor que 1 ou maior que 20
-                if (testValue < 1) return (element.value = 1)
+                // previne o usuário a inserir um valor maior que 20
                 if (testValue > 20) return (element.value = 20)
             }
 
@@ -129,11 +165,15 @@
                 if (!element.checked) {
                     if (previousBonus == 0) return (div.closest("label").lastElementChild.textContent = "0")
 
+                    if (previousBonus < 0) return div.closest("label").lastElementChild.textContent = previousBonus
+
                     return (div.closest("label").lastElementChild.textContent = "+" + previousBonus)
                 }
 
                 if (bonus == 0) return
 
+                if ((previousBonus + bonus) <= 0) return div.closest("label").lastElementChild.textContent = previousBonus + bonus
+                
                 div.closest("label").lastElementChild.textContent = "+" + (previousBonus + bonus)
             }
 
@@ -145,11 +185,15 @@
                 
                 if (!element.checked) {
                     if (previousBonus == 0) return (bonusText.textContent = "0")
+                    
+                    if (previousBonus < 0) return bonusText.textContent = previousBonus
 
                     return (bonusText.textContent = "+" + previousBonus)
                 }
 
                 if (bonus == 0) return
+
+                if ((previousBonus + bonus) <= 0) return bonusText.textContent = previousBonus + bonus
 
                 bonusText.textContent = "+" + (previousBonus + bonus)
             }
@@ -205,6 +249,7 @@
                                 type="number"
                                 class="form-control"
                                 placeholder="LV"
+                                id="level"
                                 name="nivel-classe"
                                 min="0"
                                 style="width: 45px"
@@ -339,12 +384,23 @@
                 </div>
                 <div class="flex">
                     <h4>Bônus de Proficiência</h4>
+                    <a
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="right"
+                        data-bs-html="true"
+                        data-bs-title="O valor do bônus de proficiência é baseado no nível do(a) seu(sua) personagem"
+                        style="line-height: 0; padding-left: 8px"
+                    >
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.1665 15H10.8332V13.3333H9.1665V15ZM9.99984 1.66666C8.90549 1.66666 7.82185 1.8822 6.81081 2.30099C5.79976 2.71978 4.8811 3.33361 4.10728 4.10743C2.54448 5.67024 1.6665 7.78985 1.6665 9.99999C1.6665 12.2101 2.54448 14.3297 4.10728 15.8925C4.8811 16.6664 5.79976 17.2802 6.81081 17.699C7.82185 18.1178 8.90549 18.3333 9.99984 18.3333C12.21 18.3333 14.3296 17.4553 15.8924 15.8925C17.4552 14.3297 18.3332 12.2101 18.3332 9.99999C18.3332 8.90564 18.1176 7.82201 17.6988 6.81096C17.28 5.79991 16.6662 4.88125 15.8924 4.10743C15.1186 3.33361 14.1999 2.71978 13.1889 2.30099C12.1778 1.8822 11.0942 1.66666 9.99984 1.66666M9.99984 16.6667C6.32484 16.6667 3.33317 13.675 3.33317 9.99999C3.33317 6.32499 6.32484 3.33332 9.99984 3.33332C13.6748 3.33332 16.6665 6.32499 16.6665 9.99999C16.6665 13.675 13.6748 16.6667 9.99984 16.6667ZM9.99984 4.99999C9.11578 4.99999 8.26794 5.35118 7.64281 5.9763C7.01769 6.60142 6.6665 7.44927 6.6665 8.33332H8.33317C8.33317 7.8913 8.50877 7.46737 8.82133 7.15481C9.13389 6.84225 9.55781 6.66666 9.99984 6.66666C10.4419 6.66666 10.8658 6.84225 11.1783 7.15481C11.4909 7.46737 11.6665 7.8913 11.6665 8.33332C11.6665 9.99999 9.1665 9.79166 9.1665 12.5H10.8332C10.8332 10.625 13.3332 10.4167 13.3332 8.33332C13.3332 7.44927 12.982 6.60142 12.3569 5.9763C11.7317 5.35118 10.8839 4.99999 9.99984 4.99999Z" fill="white"/>
+                        </svg>
+                    </a>
                     <div>
                         <input
                             type="number"
                             class="form-control"
-                            name="proficiencia"
                             id="bonus-proficiencia"
+                            readonly
                         />
                     </div>
                 </div>
@@ -453,7 +509,7 @@
                                         class="form-control"
                                         placeholder="For"
                                         name="forca"
-                                        min="1"
+                                        min="0"
                                         max="20"
                                         id-salvaguarda="1"
                                         style="width: 80px; margin: 0"
@@ -471,7 +527,7 @@
                                         class="form-control"
                                         placeholder="Des"
                                         name="destreza"
-                                        min="1"
+                                        min="0"
                                         max="20"
                                         id-salvaguarda="2"
                                         style="width: 80px; margin: 0"
@@ -491,7 +547,7 @@
                                         class="form-control"
                                         placeholder="Cons"
                                         name="constituicao"
-                                        min="1"
+                                        min="0"
                                         max="20"
                                         id-salvaguarda="3"
                                         style="width: 80px; margin: 0"
@@ -511,7 +567,7 @@
                                         class="form-control"
                                         placeholder="Int"
                                         name="inteligencia"
-                                        min="1"
+                                        min="0"
                                         max="20"
                                         id-salvaguarda="4"
                                         style="width: 80px; margin: 0"
@@ -528,7 +584,7 @@
                                         class="form-control"
                                         placeholder="Sab"
                                         name="sabedoria"
-                                        min="1"
+                                        min="0"
                                         max="20"
                                         id-salvaguarda="5"
                                         style="width: 80px; margin: 0"
@@ -545,7 +601,7 @@
                                         class="form-control"
                                         placeholder="Car"
                                         name="carisma"
-                                        min="1"
+                                        min="0"
                                         max="20"
                                         id-salvaguarda="6"
                                         style="width: 80px; margin: 0"
@@ -756,17 +812,8 @@
                                 data-bs-html="true"
                                 data-bs-title="Para selecionar múltiplas opções, segure <b>Ctrl</b> no Windows ou <b>Command</b> no Mac"
                             >
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M4 4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2H18C18.3283 2 18.6534 2.06466 18.9567 2.1903C19.26 2.31594 19.5356 2.50009 19.7678 2.73223C19.9999 2.96438 20.1841 3.23998 20.3097 3.54329C20.4353 3.84661 20.5 4.1717 20.5 4.5V18.75C20.5 18.9489 20.421 19.1397 20.2803 19.2803C20.1397 19.421 19.9489 19.5 19.75 19.5H5.5C5.5 19.7652 5.60536 20.0196 5.79289 20.2071C5.98043 20.3946 6.23478 20.5 6.5 20.5H19.75C19.9489 20.5 20.1397 20.579 20.2803 20.7197C20.421 20.8603 20.5 21.0511 20.5 21.25C20.5 21.4489 20.421 21.6397 20.2803 21.7803C20.1397 21.921 19.9489 22 19.75 22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5ZM12.25 8C12.5152 8 12.7696 7.89464 12.9571 7.70711C13.1446 7.51957 13.25 7.26522 13.25 7C13.25 6.73478 13.1446 6.48043 12.9571 6.29289C12.7696 6.10536 12.5152 6 12.25 6C11.9848 6 11.7304 6.10536 11.5429 6.29289C11.3554 6.48043 11.25 6.73478 11.25 7C11.25 7.26522 11.3554 7.51957 11.5429 7.70711C11.7304 7.89464 11.9848 8 12.25 8ZM11.5 9.75V14.75C11.5 14.9489 11.579 15.1397 11.7197 15.2803C11.8603 15.421 12.0511 15.5 12.25 15.5C12.4489 15.5 12.6397 15.421 12.7803 15.2803C12.921 15.1397 13 14.9489 13 14.75V9.75C13 9.55109 12.921 9.36032 12.7803 9.21967C12.6397 9.07902 12.4489 9 12.25 9C12.0511 9 11.8603 9.07902 11.7197 9.21967C11.579 9.36032 11.5 9.55109 11.5 9.75Z"
-                                        fill="white"
-                                    />
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.1665 15H10.8332V13.3333H9.1665V15ZM9.99984 1.66666C8.90549 1.66666 7.82185 1.8822 6.81081 2.30099C5.79976 2.71978 4.8811 3.33361 4.10728 4.10743C2.54448 5.67024 1.6665 7.78985 1.6665 9.99999C1.6665 12.2101 2.54448 14.3297 4.10728 15.8925C4.8811 16.6664 5.79976 17.2802 6.81081 17.699C7.82185 18.1178 8.90549 18.3333 9.99984 18.3333C12.21 18.3333 14.3296 17.4553 15.8924 15.8925C17.4552 14.3297 18.3332 12.2101 18.3332 9.99999C18.3332 8.90564 18.1176 7.82201 17.6988 6.81096C17.28 5.79991 16.6662 4.88125 15.8924 4.10743C15.1186 3.33361 14.1999 2.71978 13.1889 2.30099C12.1778 1.8822 11.0942 1.66666 9.99984 1.66666M9.99984 16.6667C6.32484 16.6667 3.33317 13.675 3.33317 9.99999C3.33317 6.32499 6.32484 3.33332 9.99984 3.33332C13.6748 3.33332 16.6665 6.32499 16.6665 9.99999C16.6665 13.675 13.6748 16.6667 9.99984 16.6667ZM9.99984 4.99999C9.11578 4.99999 8.26794 5.35118 7.64281 5.9763C7.01769 6.60142 6.6665 7.44927 6.6665 8.33332H8.33317C8.33317 7.8913 8.50877 7.46737 8.82133 7.15481C9.13389 6.84225 9.55781 6.66666 9.99984 6.66666C10.4419 6.66666 10.8658 6.84225 11.1783 7.15481C11.4909 7.46737 11.6665 7.8913 11.6665 8.33332C11.6665 9.99999 9.1665 9.79166 9.1665 12.5H10.8332C10.8332 10.625 13.3332 10.4167 13.3332 8.33332C13.3332 7.44927 12.982 6.60142 12.3569 5.9763C11.7317 5.35118 10.8839 4.99999 9.99984 4.99999Z" fill="white"/>
                                 </svg>
                             </a>
                         </div>
@@ -857,13 +904,34 @@
             inputCounterAndMaxLength(inputTesouro, 200)
             inputCounterAndMaxLength(inputEquipamentos, 500)
 
-            document.querySelector("#bonus-proficiencia").addEventListener("input", (e) => {
-                // altera os valores dos testes e perícias ao mudar o bônus de proficiência
-                const bonus = Number(e.target.value)
-                const bonusesArray = document.querySelectorAll("#bonus")
+            document.getElementById('level').addEventListener('input', (e) => {
+                const bonusProficienciaInput = document.querySelector("#bonus-proficiencia")
+                let level = e.target.value
 
-                // previne que o usuário insira um valor menor que 0
-                if (bonus < 0) return (e.target.value = 0)
+                if (level < 0) e.target.value = 0
+                if (level > 20) e.target.value = 20
+
+                switch (true) {
+                    case level <= 4:
+                        bonusProficienciaInput.value = 2
+                        break
+                    case level <= 8:
+                        bonusProficienciaInput.value = 3
+                        break
+                    case level <= 12:
+                        bonusProficienciaInput.value = 4
+                        break
+                    case level <= 16:
+                        bonusProficienciaInput.value = 5
+                        break
+                    case level > 16:
+                        bonusProficienciaInput.value = 6
+                        break
+                }
+
+                // altera os valores dos testes e perícias ao mudar o bônus de proficiência
+                const bonus = Number(document.querySelector("#bonus-proficiencia").value)
+                const bonusesArray = document.querySelectorAll("#bonus")
 
                 for (let i = 0; i < bonusesArray.length; i++) {
                     const previousBonus = Number(bonusesArray[i].textContent)
@@ -879,7 +947,11 @@
                                 return (el.closest("label").lastElementChild.textContent = "0")
                             }
                             
-                            el.closest("label").lastElementChild.textContent = "+" + (periciasPreviousBonus + bonus)
+                            if (periciasPreviousBonus + bonus <= 0) {
+                                el.closest("label").lastElementChild.textContent = (periciasPreviousBonus + bonus)
+                            } else {
+                                el.closest("label").lastElementChild.textContent = "+" + (periciasPreviousBonus + bonus)
+                            }
                         }
                     })
 
@@ -891,8 +963,12 @@
                             if (previousBonus == 0 && bonus == 0) {
                                 return (el.closest("label").lastElementChild.textContent = "0")
                             }
-                            
-                            el.closest("label").lastElementChild.textContent = "+" + (previousBonus + bonus)
+
+                            if (previousBonus + bonus <= 0) {
+                                el.closest("label").lastElementChild.textContent = previousBonus + bonus
+                            } else {
+                                el.closest("label").lastElementChild.textContent = "+" + (previousBonus + bonus)
+                            }
                         })
                     }
                 }
