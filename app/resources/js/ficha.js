@@ -23,8 +23,8 @@ $.getJSON("http://127.0.0.1:5000/api/magias", (json) => {
     }
 })
 
-$.getJSON("http://127.0.0.1:5000/api/salvaguardas", (json) => {
-    // pega todas as salvaguardas da api
+$.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
+    // pega todas as pericias da api
     for (let i = 0; i < json.length; i++) {
         let abv_salvaguarda = json[i].nome_salvaguarda.substring(0, 3)
 

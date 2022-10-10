@@ -79,6 +79,15 @@ $.getJSON("http://127.0.0.1:5000/api/antecedentes", (json) => {
     }
 })
 
+$.getJSON("http://127.0.0.1:5000/api/racas", (json) => {
+    // pega todas as tendencias da api
+    for (let i = 0; i < json.length; i++) {
+        document.querySelector(
+            "#racas"
+        ).innerHTML += `<option value=${json[i].id_raca}>${json[i].nome_raca}</option>`
+    }
+})
+
 $.getJSON("http://127.0.0.1:5000/api/tendencias", (json) => {
     // pega todas as tendencias da api
     for (let i = 0; i < json.length; i++) {
@@ -98,6 +107,7 @@ $.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
                     class="form-check-input"
                     type="checkbox"
                     value="${json[i].id_pericia}"
+                    name="pericias"
                     id="pericia-${json[i].id_pericia}"
                     oninput="addBonusToPericias(this, ${json[i].id_salvaguardas})"
                 />
