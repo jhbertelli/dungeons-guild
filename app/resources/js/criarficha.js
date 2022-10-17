@@ -36,17 +36,15 @@ document.querySelector("#cor-ficha").addEventListener("input", (e) => {
     // troca a cor da ficha
     const cor = e.target.value
 
-    document.querySelector(
-        ".info-principal, .info-principal > div > div"
-    ).style.background = hexToRGB(cor, 0.85)
+    document.querySelector(".info-principal").style.background = hexToRGB(cor, 0.85)
     document.querySelector(".vida").style.background = cor
     document.querySelector(".info").style.background = hexToRGB(cor, 0.75)
 })
 
 document.querySelectorAll('[type="number"]').forEach((element) => {
-    element.addEventListener('input', (event) => {
+    element.addEventListener("input", (event) => {
         let value = event.target.value
-        
+
         // previne o usuário a inserir números menores que 0 em todos os inputs de número
         if (value <= 0) event.target.value = 0
         // retira o "0" do valor, caso seja maior que 0 (ex: retira o 0 de "04")
@@ -101,7 +99,7 @@ $.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
     // pega todas as salvaguardas da api
     for (let i = 0; i < json.length; i++) {
         let abv_salvaguarda = json[i].nome_salvaguarda.substring(0, 3) // abrevia a string
-        
+
         document.querySelector(".pericias").innerHTML += `<div class="flex">
                 <input
                     class="form-check-input"
@@ -126,8 +124,8 @@ $.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
 $.getJSON("http://127.0.0.1:5000/api/magias", (json) => {
     // pega todas as magias da API
     for (let i = 0; i < json.length; i++) {
-        document.querySelector(".magias select").innerHTML += `<option value=${
-            i + 1
-        }>${json[i].name} - NV ${json[i].level}</option>`
+        document.querySelector(".magias select").innerHTML += `<option value=${i + 1}>${
+            json[i].name
+        } - NV ${json[i].level}</option>`
     }
 })

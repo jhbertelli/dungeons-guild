@@ -71,12 +71,21 @@ def api_tendencias():
 
 @app.route("/api/personagem/<id>")
 def api_personagem(id):
-    return get_one_from_database(f"SELECT * FROM personagem WHERE id_personagem = {id}")
+    return get_one_from_database(f'''SELECT aliados, caracteristicas, cor_ficha, equipamentos, historia, idiomas_proficiencias,
+        lista_aparencia, lista_bonus, lista_dinheiro, magias, nivel_personagem, nome_personagem, pericias, salvaguardas, tesouro,
+        testes_resistencia, url_imagem, vida_atual, vida_total, xp_atual, xp_total, antecedentes.antecedente, classes.nome_classe,
+        racas.nome_raca, tendencias.nome_tendencia, cadastro.apelido_cadastro FROM personagem
+        JOIN antecedentes ON antecedentes.id = personagem.id_antecedente
+        JOIN classes ON classes.id_classe = personagem.id_classe
+        JOIN racas ON racas.id_raca = personagem.id_raca
+        JOIN tendencias on tendencias.id_tendencia = personagem.id_tendencia
+        JOIN cadastro ON cadastro.id_cadastro = personagem.id_usuario
+        WHERE id_personagem = {id}''')
 
 
 @app.route("/api/personagens_usuario/")
 def api_personagens_usuario():
-    return get_from_database(f'''SELECT nome_personagem, classes.nome_classe, nivel_personagem, racas.nome_raca,
+    return get_from_database(f'''SELECT id_personagem, nome_personagem, classes.nome_classe, nivel_personagem, racas.nome_raca,
         antecedentes.antecedente, cor_ficha, url_imagem FROM `personagem`
         JOIN classes ON classes.id_classe = personagem.id_classe
         JOIN racas ON racas.id_raca = personagem.id_raca
@@ -238,8 +247,8 @@ def criar_ficha():
         lista_bonus = {
             "inspiracao" : try_int_conversion(ficha.get("inspiracao")),
             "percepcao": try_int_conversion(ficha.get("percepcao")),
-            "dados-vida":  try_int_conversion(ficha.get("dados-vida")),
-            "classe-armadura":  try_int_conversion(ficha.get("classe-armadura")),
+            "dados_vida":  try_int_conversion(ficha.get("dados-vida")),
+            "classe_armadura":  try_int_conversion(ficha.get("classe-armadura")),
             "iniciativa": try_int_conversion(ficha.get("iniciativa")),
             "deslocamento": try_int_conversion(ficha.get("deslocamento"))
         }
@@ -253,76 +262,74 @@ def criar_ficha():
             "carisma": try_int_conversion(ficha.get("carisma"))
         }
 
-        lista_ficha = {
-            "nome-personagem": ficha.get("nome-personagem"),
-            "url-imagem": url_imagem,
-            "vida-atual": try_int_conversion(ficha.get("vida-atual")),
-            "vida-total": try_int_conversion(ficha.get("vida-total")),
-            "classe": try_int_conversion(ficha.get("classe")),
-            "nivel": try_int_conversion(ficha.get("nivel")),
-            "antecedente": try_int_conversion(ficha.get("antecedente")),
-            "id-jogador": session["usuario"],
-            "raca": try_int_conversion(ficha.get("raca")),
-            "tendencia": try_int_conversion(ficha.get("tendencia")),
-            "xp-atual": try_int_conversion(ficha.get("xp-atual")),
-            "xp-total": try_int_conversion(ficha.get("xp-total")),
-            "lista_aparencia": json.dumps(lista_aparencia),
-            "lista_bonus": json.dumps(lista_bonus),
-            "cor-ficha": ficha.get("cor-ficha"),
-            "salvaguardas": json.dumps(lista_salvaguardas),
-            "pericias": json.dumps(ficha.getlist("pericias")),
-            "testes-resistencia": json.dumps(ficha.getlist("testes-resistencia")),
-            "idiomas-proficiencias": ficha.get("idiomas-proficiencias"),
-            "equipamentos": ficha.get("equipamentos"),
-            "lista_dinheiro": json.dumps(lista_dinheiro),
-            "caracteristicas": ficha.get("caracteristicas"),
-            "magias": json.dumps(ficha.getlist("magias")),
-            "historia": ficha.get("historia"),
-            "tesouro": ficha.get("tesouro"),
-            "aliados": ficha.get("aliados")
-        }
-        
-        print(lista_ficha['lista_aparencia'])
+        lista_ficha = {}
+
+        lista_ficha["nome_personagem"] = ficha.get("nome-personagem")
+        lista_ficha["url_imagem"] = url_imagem
+        lista_ficha["vida_atual"] = try_int_conversion(ficha.get("vida-atual"))
+        lista_ficha["vida_total"] = try_int_conversion(ficha.get("vida-total"))
+        lista_ficha["classe"] = try_int_conversion(ficha.get("classe"))
+        lista_ficha["nivel"] = try_int_conversion(ficha.get("nivel"))
+        lista_ficha["antecedente"] = try_int_conversion(ficha.get("antecedente"))
+        lista_ficha["id_jogador"] = session["usuario"]
+        lista_ficha["raca"] = try_int_conversion(ficha.get("raca"))
+        lista_ficha["tendencia"] = try_int_conversion(ficha.get("tendencia"))
+        lista_ficha["xp_atual"] = try_int_conversion(ficha.get("xp-atual"))
+        lista_ficha["xp_total"] = try_int_conversion(ficha.get("xp-total"))
+        lista_ficha["lista_aparencia"] = lista_aparencia
+        lista_ficha["lista_bonus"] = lista_bonus
+        lista_ficha["cor_ficha"] = ficha.get("cor-ficha")
+        lista_ficha["salvaguardas"] = lista_salvaguardas
+        lista_ficha["pericias"] = ficha.getlist("pericias")
+        lista_ficha["testes_resistencia"] = ficha.getlist("testes-resistencia")
+        lista_ficha["idiomas_proficiencias"] = ficha.get("idiomas-proficiencias").strip()
+        lista_ficha["equipamentos"] = ficha.get("equipamentos").strip()
+        lista_ficha["lista_dinheiro"] = lista_dinheiro
+        lista_ficha["caracteristicas"] = ficha.get("caracteristicas").strip()
+        lista_ficha["magias"] = ficha.getlist("magias")
+        lista_ficha["historia"] = ficha.get("historia").strip()
+        lista_ficha["tesouro"] = ficha.get("tesouro").strip()
+        lista_ficha["aliados"] = ficha.get("aliados").strip()
 
         cursor = db.connection.cursor(cursors.DictCursor)
+
         sql = f'''INSERT INTO `personagem`
-        (`nome_personagem`, `url_imagem` ,`vida_atual`, `vida_total`, `id_classe`, `nivel_personagem`, `antecedente`,
+        (`nome_personagem`, `url_imagem` ,`vida_atual`, `vida_total`, `id_classe`, `nivel_personagem`, `id_antecedente`,
         `id_usuario`, `id_raca`, `id_tendencia`, `xp_atual`, `xp_total`, `lista_aparencia`, `lista_bonus`,
         `cor_ficha`, `salvaguardas`, `pericias`, `testes_resistencia`, `idiomas_proficiencias`, `equipamentos`,
         `lista_dinheiro`, `caracteristicas`, `magias`, `historia`, `tesouro`, `aliados`)
         VALUES (
-        '{lista_ficha['nome-personagem']}',
-        '{lista_ficha['url-imagem']}',
-        '{lista_ficha['vida-atual']}',
-        '{lista_ficha['vida-total']}',
-        '{lista_ficha['classe']}',
-        '{lista_ficha['nivel']}',
-        '{lista_ficha['antecedente']}',
-        '{lista_ficha['id-jogador']}',
-        '{lista_ficha['raca']}',
-        '{lista_ficha['tendencia']}',
-        '{lista_ficha['xp-atual']}',
-        '{lista_ficha['xp-total']}',
-        '{lista_ficha['lista_aparencia']}',
-        '{lista_ficha['lista_bonus']}',
-        '{lista_ficha['cor-ficha']}',
-        '{lista_ficha['salvaguardas']}',
-        '{lista_ficha['pericias']}',
-        '{lista_ficha['testes-resistencia']}',
-        '{lista_ficha['idiomas-proficiencias']}',
-        '{lista_ficha['equipamentos']}',
-        '{lista_ficha['lista_dinheiro']}',
-        '{lista_ficha['caracteristicas']}',
-        '{lista_ficha['magias']}',
-        '{lista_ficha['historia']}',
-        '{lista_ficha['tesouro']}',
-        '{lista_ficha['aliados']}')'''
-
+        "{lista_ficha["nome_personagem"]}",
+        "{lista_ficha["url_imagem"]}",
+        "{lista_ficha["vida_atual"]}",
+        "{lista_ficha["vida_total"]}",
+        "{lista_ficha["classe"]}",
+        "{lista_ficha["nivel"]}",
+        "{lista_ficha["antecedente"]}",
+        "{lista_ficha["id_jogador"]}",
+        "{lista_ficha["raca"]}",
+        "{lista_ficha["tendencia"]}",
+        "{lista_ficha["xp_atual"]}",
+        "{lista_ficha["xp_total"]}",
+        "{lista_ficha["lista_aparencia"]}",
+        "{lista_ficha["lista_bonus"]}",
+        "{lista_ficha["cor_ficha"]}",
+        "{lista_ficha["salvaguardas"]}",
+        "{lista_ficha["pericias"]}",
+        "{lista_ficha["testes_resistencia"]}",
+        "{lista_ficha["idiomas_proficiencias"]}",
+        "{lista_ficha["equipamentos"]}",
+        "{lista_ficha["lista_dinheiro"]}",
+        "{lista_ficha["caracteristicas"]}",
+        "{lista_ficha["magias"]}",
+        "{lista_ficha["historia"]}",
+        "{lista_ficha["tesouro"]}",
+        "{lista_ficha["aliados"]}")'''
+        
         cursor.execute(sql)
         db.connection.commit()
 
         return redirect('/personagens/')
-
 
 
 @app.route("/logout/", methods=['GET', 'POST'])

@@ -17,7 +17,6 @@
                 background: rgba(54, 137, 164, 0.85);
             }
             .info-principal .img-div {
-                background-image: url(http://127.0.0.1:5000/images/example.png);
                 background-position: 50% 50%;
                 background-size: cover;
             }
@@ -49,59 +48,59 @@
         <main>
             <div class="info-principal">
                 <div class="img-div"></div>
-                <h1>Petrus Trannyth</h1>
+                <h1></h1>
                 <h3>Pontos de Vida</h3>
                 <div class="vida"><span>8</span> / <span>10</span></div>
                 <table>
                     <tr>
                         <th>Classe e nível:</th>
-                        <td>Clérigo 1</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>Antecedente:</th>
-                        <td>Acólito</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>Nome do jogador:</th>
-                        <td>Johnny Depp</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>Raça:</th>
-                        <td>Humano</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>Tendência:</th>
-                        <td>Neutro e Bom</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>Pontos de experiência:</th>
-                        <td>50/300</td>
+                        <td></td>
                     </tr>
                 </table>
                 <table>
                     <tr>
                         <th>Idade:</th>
-                        <td>32</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>Altura:</th>
-                        <td>1,84 m</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>Peso:</th>
-                        <td>84,6 kg</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>Cabelo:</th>
-                        <td>Castanho claro</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>Olhos:</th>
-                        <td>Castanho</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>Pele:</th>
-                        <td>Branca</td>
+                        <td></td>
                     </tr>
                 </table>
                 <div class="flex">
@@ -516,23 +515,23 @@
                             <table>
                                 <tr>
                                     <th>PC:</th>
-                                    <td>6</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th>PP:</th>
-                                    <td>15</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th>PE:</th>
-                                    <td>19</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th>PO:</th>
-                                    <td>5</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th>PL:</th>
-                                    <td>21</td>
+                                    <td></td>
                                 </tr>
                             </table>
                         </div>
@@ -628,9 +627,78 @@
         <script>
             $.getJSON("http://127.0.0.1:5000/api/personagem/{{ id }}", (json) => {
                 // pega todas as tendencias da api
+                const cor = json['cor_ficha']
+                const listaInfoPrincipal = document.querySelectorAll('.info-principal td')
+                const numerosInfoPrincipal = document.querySelectorAll('.info-principal .flex h3')
+                const level = json['nivel_personagem']
+
+                document.querySelector(".info-principal").style.background = hexToRGB(cor, 0.85)
+                document.querySelectorAll(".info-principal > div > div").forEach((e) => {
+                    e.style.background = hexToRGB(cor, 0.85)
+                })
+                document.querySelector(".vida").style.background = cor
+                document.querySelector(".info").style.background = hexToRGB(cor, 0.75)
+                
+                document.querySelector(".img-div").style.backgroundImage = `url(${json['url_imagem']}`
+
+                document.querySelector('.info-principal h1').textContent = json['nome_personagem']
+                
+                document.querySelector('.vida').firstElementChild.textContent = json['vida_atual']
+                document.querySelector('.vida').lastElementChild.textContent = json['vida_total']
+
+
+                listaInfoPrincipal[0].textContent = json['nome_classe'] + ' ' + level
+                listaInfoPrincipal[1].textContent = json['antecedente']
+                listaInfoPrincipal[2].textContent = json['apelido_cadastro']
+                listaInfoPrincipal[3].textContent = json['nome_raca']
+                listaInfoPrincipal[4].textContent = json['nome_tendencia']
+                listaInfoPrincipal[5].textContent = json['xp_atual'] + ' / ' + json['xp_total']
+                
+                let listaAparencia = json['lista_aparencia'].replace(/'/g, '"')
+                
+                listaAparencia = JSON.parse(listaAparencia)
+                
+                listaInfoPrincipal[6].textContent = listaAparencia['idade']
+                listaInfoPrincipal[7].textContent = String(listaAparencia['altura']).replace('.', ',') + ' m'
+                listaInfoPrincipal[8].textContent = String(listaAparencia['peso']).replace('.', ',') + ' kg'
+                listaInfoPrincipal[9].textContent = listaAparencia['cabelo']
+                listaInfoPrincipal[10].textContent = listaAparencia['olho']
+                listaInfoPrincipal[11].textContent = listaAparencia['pele']
+                
+                let listaBonus = json['lista_bonus'].replace(/'/g, '"')
+                listaBonus = JSON.parse(listaBonus)
+
+                numerosInfoPrincipal[0].textContent = listaBonus['inspiracao']
+
+                switch (true) {
+                    case level <= 4:
+                        numerosInfoPrincipal[1].textContent = 2
+                        break
+                    case level <= 8:
+                        numerosInfoPrincipal[1].textContent = 3
+                        break
+                    case level <= 12:
+                        numerosInfoPrincipal[1].textContent = 4
+                        break
+                    case level <= 16:
+                        numerosInfoPrincipal[1].textContent = 5
+                        break
+                    case level > 16:
+                        numerosInfoPrincipal[1].textContent = 6
+                        break
+                }
+                
+                numerosInfoPrincipal[2].textContent = listaBonus['percepcao']
+                numerosInfoPrincipal[3].textContent = listaBonus['dados_vida']
+                numerosInfoPrincipal[4].textContent = listaBonus['classe_armadura']
+                numerosInfoPrincipal[5].textContent = listaBonus['iniciativa']
+                numerosInfoPrincipal[6].textContent = listaBonus['deslocamento']
+
+                let listaDinheiro = json['lista_dinheiro'].replace(/'/g, '"')
+                listaDinheiro = JSON.parse(listaDinheiro)
+
                 
             })
-
         </script>
         <script src="http://127.0.0.1:5000/js/ficha.js"></script>
     </body>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 10-Out-2022 às 04:36
+-- Tempo de geração: 17-Out-2022 às 03:27
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -73,8 +73,7 @@ CREATE TABLE `cadastro` (
 INSERT INTO `cadastro` (`id_cadastro`, `nome_cadastro`, `apelido_cadastro`, `email_cadastro`, `senha_cadastro`, `data_conta`) VALUES
 (1, 'Rafael Eduardo Gonçalves', 'RafaEg', 'rafa@gmail.com', '123', '2022-10-02 17:32:58'),
 (2, 'Renato Silva', 'Renatinho123', 'renatosilva@gmail.com', '123123', '2022-10-09 05:27:51'),
-(3, 'asdasd', 'dsaf', 'fsafa@dsadsa', '123', '2022-10-09 05:30:39'),
-(4, 'Gabriel Costa', 'Uhuton', 'gabriel@example.com', 'senhaDaora', '2022-10-09 16:33:03');
+(3, 'Gabriel Costa', 'Uhuton', 'gabriel@example.com', 'senhaDaora', '2022-10-09 16:33:03');
 
 -- --------------------------------------------------------
 
@@ -161,17 +160,17 @@ CREATE TABLE `personagem` (
   `id_tendencia` int(11) NOT NULL,
   `xp_atual` int(11) NOT NULL,
   `xp_total` int(11) NOT NULL,
-  `lista_aparencia` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`lista_aparencia`)),
-  `lista_bonus` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`lista_bonus`)),
+  `lista_aparencia` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `lista_bonus` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `cor_ficha` varchar(10) NOT NULL,
-  `salvaguardas` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`salvaguardas`)),
-  `pericias` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`pericias`)),
-  `testes_resistencia` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`testes_resistencia`)),
+  `salvaguardas` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `pericias` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `testes_resistencia` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `idiomas_proficiencias` varchar(300) NOT NULL,
   `equipamentos` varchar(500) NOT NULL,
-  `lista_dinheiro` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`lista_dinheiro`)),
+  `lista_dinheiro` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `caracteristicas` varchar(500) NOT NULL,
-  `magias` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`magias`)),
+  `magias` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `historia` varchar(2000) NOT NULL,
   `tesouro` varchar(200) NOT NULL,
   `aliados` varchar(200) NOT NULL
@@ -182,7 +181,7 @@ CREATE TABLE `personagem` (
 --
 
 INSERT INTO `personagem` (`id_personagem`, `nome_personagem`, `url_imagem`, `vida_atual`, `vida_total`, `id_classe`, `nivel_personagem`, `id_antecedente`, `id_usuario`, `id_raca`, `id_tendencia`, `xp_atual`, `xp_total`, `lista_aparencia`, `lista_bonus`, `cor_ficha`, `salvaguardas`, `pericias`, `testes_resistencia`, `idiomas_proficiencias`, `equipamentos`, `lista_dinheiro`, `caracteristicas`, `magias`, `historia`, `tesouro`, `aliados`) VALUES
-(1, 'Yggis', '/images/fichas/QLLj64fHbQUjNey.jpg', 174, 180, 8, 6, 7, 4, 2, 3, 105, 300, '{\"idade\": 13, \"altura\": 1.73, \"peso\": 81.3, \"cabelo\": \"Nenhum\", \"olho\": \"Amarelos\", \"pele\": \"Bordu00f4\"}', '{\"inspiracao\": 2, \"percepcao\": 4, \"dados-vida\": 2, \"classe-armadura\": 3, \"iniciativa\": 2, \"deslocamento\": 4}', '#491827', '{\"forca\": 17, \"destreza\": 8, \"constituicao\": 16, \"inteligencia\": 15, \"sabedoria\": 9, \"carisma\": 12}', '[\"4\", \"8\", \"13\"]', '[\"2\"]', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum. Donec iaculis egestas risus, vel molestie ex malesuada at. Donec vitae lacinia turpis. Praesent a eros nisi. Sed finibus efficitur velit non vestibulum. Vivamus mattis malesuada lacinia.', '{\"pc\": \"51\", \"pp\": \"87\", \"pe\": \"41\", \"po\": \"38\", \"pl\": \"102\"}', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum. Donec iaculis egestas risus, vel molestie ex malesuada at. Donec vitae lacinia turpis. Praesent a eros nisi. Sed finibus efficitur velit non vestibulum. Vivamus mattis malesuada lacinia. Vestibulum imperdiet at est et placerat.', '[\"3\", \"20\", \"34\", \"44\"]', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum. Donec iaculis egestas risus, vel molestie ex malesuada at. Donec vitae lacinia turpis. Praesent a eros nisi. Sed finibus efficitur velit non vestibulum. Vivamus mattis malesuada lacinia.\r\n\r\nVestibulum imperdiet at est et placerat. In posuere enim dui, id efficitur libero vestibulum eget. Praesent arcu neque, vulputate quis egestas sed, blandit vel purus. Vivamus in convallis arcu. Ut posuere, lectus eu convallis luctus, diam libero dictum mi, non laoreet massa diam in arcu. Suspendisse tempus, turpis et mattis fringilla, nibh lectus lobortis justo, in tempus tortor metus et turpis. Duis congue, turpis vel semper venenatis, libero lacus sollicitudin ipsum, non pulvinar leo lacus in mi. Vivamus imperdiet odio nec justo tincidunt, nec bibendum libero feugiat. Fusce aliquam nibh vel metus condimentum blandit. Ut et tortor non libero ornare rutrum et ac lacus. Donec elit orci, tincidunt a sollicitudin ut, congue eget ex. Nullam ut mauris congue, facilisis ex at, imperdiet ligula. Aliquam gravida quam diam, sit amet dignissim nisi efficitur sit amet. In pulvinar efficitur bibendum. In aliquet nec purus eget sagittis. Aliquam pulvinar consequat sapien non volutpat.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate.');
+(1, 'Yggis', '/images/fichas/41pZusVfSQOMRb3.jpg', 51, 129, 8, 5, 7, 1, 2, 3, 120, 300, '{\'idade\': 38, \'altura\': 1.77, \'peso\': 75.0, \'cabelo\': \'Nenhum\', \'olho\': \'Amarelos\', \'pele\': \'Bordô\'}', '{\'inspiracao\': 2, \'percepcao\': 3, \'dados_vida\': 2, \'classe_armadura\': 2, \'iniciativa\': 3, \'deslocamento\': 4}', '#d93407', '{\'forca\': 17, \'destreza\': 10, \'constituicao\': 15, \'inteligencia\': 7, \'sabedoria\': 12, \'carisma\': 9}', '[\'5\', \'8\', \'14\']', '[\'2\', \'6\']', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum. Donec iaculis egestas risus, vel molestie ex malesuada at. Donec vitae lacinia turpis. Praesent a eros nisi.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate.\r\n\r\nPraesent eu tempus libero. In at mattis velit, eget luctus ipsum.\r\n\r\nDonec iaculis egestas risus, vel molestie ex malesuada at. \r\n\r\nDonec vitae lacinia turpis. Praesent a eros nisi.\r\n\r\nSed finibus efficitur velit non vestibulum. Vivamus mattis malesuada lacinia.\r\n\r\nVestibulum imperdiet at est et placerat. In posuere enim dui, id efficitur libero vestibulum eget.', '{\'pc\': \'48\', \'pp\': \'17\', \'pe\': \'39\', \'po\': \'92\', \'pl\': \'42\'}', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum. Donec iaculis egestas risus, vel molestie ex malesuada at. Donec vitae lacinia turpis. Praesent a eros nisi. Sed finibus efficitur velit non vestibulum. Vivamus mattis malesuada lacinia.\r\n\r\nVestibulum imperdiet at est et placerat.', '[\'5\', \'44\', \'93\', \'150\']', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum. Donec iaculis egestas risus, vel molestie ex malesuada at. Donec vitae lacinia turpis. Praesent a eros nisi. Sed finibus efficitur velit non vestibulum. Vivamus mattis malesuada lacinia.\r\n\r\nVestibulum imperdiet at est et placerat. In posuere enim dui, id efficitur libero vestibulum eget. Praesent arcu neque, vulputate quis egestas sed, blandit vel purus. Vivamus in convallis arcu. Ut posuere, lectus eu convallis luctus, diam libero dictum mi, non laoreet massa diam in arcu. Suspendisse tempus, turpis et mattis fringilla, nibh lectus lobortis justo, in tempus tortor metus et turpis. Duis congue, turpis vel semper venenatis, libero lacus sollicitudin ipsum, non pulvinar leo lacus in mi. Vivamus imperdiet odio nec justo tincidunt, nec bibendum libero feugiat. Fusce aliquam nibh vel metus condimentum blandit. Ut et tortor non libero ornare rutrum et ac lacus. Donec elit orci, tincidunt a sollicitudin ut, congue eget ex. Nullam ut mauris congue, facilisis ex at, imperdiet ligula. Aliquam gravida quam diam, sit amet dignissim nisi efficitur sit amet. In pulvinar efficitur bibendum. In aliquet nec purus eget sagittis. Aliquam pulvinar consequat sapien non volutpat.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum.');
 
 -- --------------------------------------------------------
 
