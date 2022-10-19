@@ -102,6 +102,9 @@ def personagens():
 def personagensvazio():
     return render_template('personagensvazio.html')
 
+@app.route("/criar/mundo")
+def criar_mundo():
+    return render_template('criar-mundo.html')
 
 @app.route("/mundos/")
 def mundos():

@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Cormorant+Infant&family=Inknut+Antiqua&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+body {
+    background-image: url("../images/criarmundobackground.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1{
+    margin: 0 145px 0  0;
+    margin-left: 120px;
+    font-family: 'Cinzel', serif;
+    font-size: 36px;
+    font-weight: 400;
+}
+
+#header {
+    width: 100%;
+    height: 70px;
+
+    background-color: #161616;
+
+    position: fixed;
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+}
+
+.titulo_informacoes{
+    width: 1500px;
+    height: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 90px;
+    background-color: #121212;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center; 
+}
+
+.informacoes{
+    width: 1500px;
+    height: 780px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+
+.info_mundo{
+    width: 750px;
+    height: 780px;
+    background-color: #161616;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info_sessao{
+    width: 750px;
+    height: 780px;
+    background-color: #1A1A1A;
+    margin-left: auto;
+    margin-right: auto;
+}
+
