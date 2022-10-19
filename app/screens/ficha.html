@@ -500,17 +500,11 @@
                     </div>
                     <div class="idiomas">
                         <h2>Idiomas e Proficiências</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit.
-                        </p>
+                        <pre></pre>
                     </div>
                     <div class="equips">
                         <h2>Equipamentos</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit.
-                        </p>
+                        <pre></pre>
                         <div>
                             <table>
                                 <tr>
@@ -538,11 +532,7 @@
                     </div>
                     <div class="caracteristicas">
                         <h2>Características e Habilidades</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Curabitur metus odio, laoreet luctus posuere
-                            vitae, hendrerit ut libero.
-                        </p>
+                        <pre></pre>
                     </div>
                     <div class="magias">
                         <div class="flex">
@@ -580,31 +570,15 @@
                 </div>
                 <div class="detalhesfora historia">
                     <h2>História</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Curabitur metus odio, laoreet luctus posuere vitae,
-                        hendrerit ut libero. Nunc ornare ex non sapien sodales,
-                        convallis efficitur tortor iaculis. Maecenas nec
-                        imperdiet erat. Sed tempor erat non molestie blandit. Ut
-                        id justo neque. Aenean venenatis risus sit amet nisi
-                        elementum scelerisque. Aenean commodo, nibh et auctor
-                        pretium, sem ex tempus ligula, ac euismod nibh metus sed
-                        nisi.
-                    </p>
+                    <pre></pre>
                 </div>
                 <div class="detalhesfora aliados">
                     <h2>Aliados e Organizações</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
+                    <pre></pre>
                 </div>
                 <div class="detalhesfora tesouro">
                     <h2>Tesouro</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Curabitur metus odio, laoreet luctus posuere vitae,
-                        hendrerit ut libero.
-                    </p>
+                    <pre></pre>
                 </div>
             </div>
         </main>
@@ -625,13 +599,15 @@
             crossorigin="anonymous"
         ></script>
         <script>
-            $.getJSON("http://127.0.0.1:5000/api/personagem/{{ id }}", (json) => {
+            $.getJSON("http://127.0.0.1:5000/api/personagem/{{ id }}/", (json) => {
                 // pega todas as tendencias da api
                 const cor = json['cor_ficha']
                 const listaInfoPrincipal = document.querySelectorAll('.info-principal td')
                 const numerosInfoPrincipal = document.querySelectorAll('.info-principal .flex h3')
+                const listaDinheiroInfo = document.querySelectorAll('.equips td')
                 const level = json['nivel_personagem']
-
+                
+                // cores da ficha
                 document.querySelector(".info-principal").style.background = hexToRGB(cor, 0.85)
                 document.querySelectorAll(".info-principal > div > div").forEach((e) => {
                     e.style.background = hexToRGB(cor, 0.85)
@@ -639,6 +615,9 @@
                 document.querySelector(".vida").style.background = cor
                 document.querySelector(".info").style.background = hexToRGB(cor, 0.75)
                 
+                // informações principais do personagem
+
+                // imagem do personagem
                 document.querySelector(".img-div").style.backgroundImage = `url(${json['url_imagem']}`
 
                 document.querySelector('.info-principal h1').textContent = json['nome_personagem']
@@ -646,7 +625,7 @@
                 document.querySelector('.vida').firstElementChild.textContent = json['vida_atual']
                 document.querySelector('.vida').lastElementChild.textContent = json['vida_total']
 
-
+                // primeira tabela
                 listaInfoPrincipal[0].textContent = json['nome_classe'] + ' ' + level
                 listaInfoPrincipal[1].textContent = json['antecedente']
                 listaInfoPrincipal[2].textContent = json['apelido_cadastro']
@@ -654,6 +633,7 @@
                 listaInfoPrincipal[4].textContent = json['nome_tendencia']
                 listaInfoPrincipal[5].textContent = json['xp_atual'] + ' / ' + json['xp_total']
                 
+                // segunda tabela (aparência)
                 let listaAparencia = json['lista_aparencia'].replace(/'/g, '"')
                 
                 listaAparencia = JSON.parse(listaAparencia)
@@ -665,6 +645,7 @@
                 listaInfoPrincipal[10].textContent = listaAparencia['olho']
                 listaInfoPrincipal[11].textContent = listaAparencia['pele']
                 
+                // lista de bônus
                 let listaBonus = json['lista_bonus'].replace(/'/g, '"')
                 listaBonus = JSON.parse(listaBonus)
 
@@ -694,10 +675,43 @@
                 numerosInfoPrincipal[5].textContent = listaBonus['iniciativa']
                 numerosInfoPrincipal[6].textContent = listaBonus['deslocamento']
 
+                // informações principais do personagem
+
+                // salvaguardas
+
+                // testes de resistência
+
+                // perícias
+
+                // idiomas e proficiências
+                
+                // equipamentos
+                
+                document.querySelector('.equips pre').textContent = json['equipamentos']
+
                 let listaDinheiro = json['lista_dinheiro'].replace(/'/g, '"')
                 listaDinheiro = JSON.parse(listaDinheiro)
-
                 
+
+                listaDinheiroInfo[0].textContent = listaDinheiro['pc']
+                listaDinheiroInfo[1].textContent = listaDinheiro['pp']
+                listaDinheiroInfo[2].textContent = listaDinheiro['pe']
+                listaDinheiroInfo[3].textContent = listaDinheiro['po']
+                listaDinheiroInfo[4].textContent = listaDinheiro['pl']
+
+                // características e habilidades
+
+                document.querySelector('.caracteristicas p').textContent = json['caracteristicas']
+
+                // magias
+
+                // história
+
+                // aliados e organizações
+
+                // tesouro
+
+
             })
         </script>
         <script src="http://127.0.0.1:5000/js/ficha.js"></script>

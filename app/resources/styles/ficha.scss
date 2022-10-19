@@ -211,11 +211,12 @@ main {
                 }
             }
 
-            p {
+            p, pre {
                 @extend label;
                 display: flex;
                 align-items: center;
                 text-align: justify;
+                width: max-content;
 
                 svg {
                     margin-right: $salvaguardas;
@@ -254,7 +255,7 @@ main {
         }
 
         .detalhesfora {
-            p {
+            pre {
                 text-align: justify;
             }
         }

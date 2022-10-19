@@ -1,4 +1,3 @@
-import json
 import os
 from flask import Flask, render_template, send_from_directory, request, redirect, url_for, session
 from flask_mysqldb import MySQL
@@ -69,7 +68,7 @@ def api_tendencias():
     return get_from_database("SELECT * FROM tendencias")
 
 
-@app.route("/api/personagem/<id>")
+@app.route("/api/personagem/<id>/")
 def api_personagem(id):
     return get_one_from_database(f'''SELECT aliados, caracteristicas, cor_ficha, equipamentos, historia, idiomas_proficiencias,
         lista_aparencia, lista_bonus, lista_dinheiro, magias, nivel_personagem, nome_personagem, pericias, salvaguardas, tesouro,
