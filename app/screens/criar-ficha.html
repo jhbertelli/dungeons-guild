@@ -203,7 +203,7 @@
         <nav>
             <img src="http://127.0.0.1:5000/images/logo.png" alt="" height="70" />
         </nav>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="info-principal">
                 <label for="img-personagem">
                     <div class="img-div">
@@ -243,14 +243,14 @@
                         <th>Classe e nível:</th>
                         <td>
                             <select class="form-select" name="classe" id="classes">
-                                <option selected>Selecione uma classe</option>
+                                <option selected disabled>Selecione uma classe</option>
                             </select>
                             <input
                                 type="number"
                                 class="form-control"
-                                placeholder="LV"
+                                placeholder="NV"
                                 id="level"
-                                name="nivel-classe"
+                                name="nivel"
                                 min="0"
                                 style="width: 45px"
                             />
@@ -260,30 +260,27 @@
                         <th>Antecedente:</th>
                         <td>
                             <select class="form-select" name="antecedente" id="antecedentes">
-                                <option selected>Selecione um antecedente</option>
+                                <option selected disabled>Selecione um antecedente</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th>Nome do jogador:</th>
-                        <td>Johnny Depp</td>
+                        <td>{{ usuario }}</td>
                     </tr>
                     <tr>
                         <th>Raça:</th>
                         <td>
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Raça"
-                                name="raca"
-                            />
+                            <select class="form-select" name="raca" id="racas">
+                                <option selected disabled>Selecione uma raça</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <th>Tendência:</th>
                         <td>
                             <select class="form-select" name="tendencia" id="tendencias">
-                                <option selected>Selecione uma tendência</option>
+                                <option selected disabled>Selecione uma tendência</option>
                             </select>
                         </td>
                     </tr>
@@ -323,6 +320,7 @@
                         <td>
                             <input
                                 type="number"
+                                step="0.01"
                                 placeholder="Altura"
                                 class="form-control"
                                 name="altura"
@@ -335,6 +333,7 @@
                         <td>
                             <input
                                 type="number"
+                                step="0.1"
                                 placeholder="Peso"
                                 class="form-control"
                                 name="peso"
@@ -618,7 +617,8 @@
                             <input
                                 class="form-check-input"
                                 type="checkbox"
-                                value=""
+                                name="testes-resistencia"
+                                value="1"
                                 id="forca"
                                 oninput="addBonusToTestes(this, 1)"
                             />
@@ -631,7 +631,8 @@
                             <input
                                 class="form-check-input"
                                 type="checkbox"
-                                value=""
+                                name="testes-resistencia"
+                                value="2"
                                 id="destreza"
                                 oninput="addBonusToTestes(this, 2)"
                             />
@@ -644,7 +645,8 @@
                             <input
                                 class="form-check-input"
                                 type="checkbox"
-                                value=""
+                                name="testes-resistencia"
+                                value="3"
                                 id="constituicao"
                                 oninput="addBonusToTestes(this, 3)"
                             />
@@ -657,7 +659,8 @@
                             <input
                                 class="form-check-input"
                                 type="checkbox"
-                                value=""
+                                name="testes-resistencia"
+                                value="4"
                                 id="inteligencia"
                                 oninput="addBonusToTestes(this, 4)"
                             />
@@ -670,7 +673,8 @@
                             <input
                                 class="form-check-input"
                                 type="checkbox"
-                                value=""
+                                name="testes-resistencia"
+                                value="5"
                                 id="sabedoria"
                                 oninput="addBonusToTestes(this, 5)"
                             />
@@ -683,7 +687,8 @@
                             <input
                                 class="form-check-input"
                                 type="checkbox"
-                                value=""
+                                name="testes-resistencia"
+                                value="6"
                                 id="carisma"
                                 oninput="addBonusToTestes(this, 6)"
                             />
@@ -733,7 +738,7 @@
                                             type="number"
                                             class="form-control"
                                             placeholder="PC"
-                                            name="nivel-classe"
+                                            name="pc"
                                             min="0"
                                         />
                                     </td>
@@ -745,7 +750,7 @@
                                             type="number"
                                             class="form-control"
                                             placeholder="PP"
-                                            name="nivel-classe"
+                                            name="pp"
                                             min="0"
                                         />
                                     </td>
@@ -757,7 +762,7 @@
                                             type="number"
                                             class="form-control"
                                             placeholder="PE"
-                                            name="nivel-classe"
+                                            name="pe"
                                             min="0"
                                         />
                                     </td>
@@ -769,7 +774,7 @@
                                             type="number"
                                             class="form-control"
                                             placeholder="PO"
-                                            name="nivel-classe"
+                                            name="po"
                                             min="0"
                                         />
                                     </td>
@@ -781,7 +786,7 @@
                                             type="number"
                                             class="form-control"
                                             placeholder="PL"
-                                            name="nivel-classe"
+                                            name="pl"
                                             min="0"
                                         />
                                     </td>
@@ -823,7 +828,7 @@
                             multiple
                             aria-label="multiple select example"
                         >
-                            <option selected>Selecione uma ou mais magia(s)</option>
+                            <option selected disabled>Selecione uma ou mais magia(s)</option>
                         </select>
                     </div>
                 </div>

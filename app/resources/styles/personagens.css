@@ -34,30 +34,38 @@ h1 {
 .meus-personagens {
   display: flex;
   flex-wrap: wrap;
+  justify-content: start;
   gap: 1%;
   margin: 0 auto 0 auto;
 }
 
-.card-personagem {
+main a {
   width: 32.666%;
   height: 465px;
   background: #181818;
   margin-bottom: 2%;
+  color: inherit;
+  text-decoration: none;
 }
-.card-personagem .card-color {
+main a .card-color {
   width: 100%;
   height: 104px;
   position: relative;
   display: flex;
   justify-content: center;
 }
-.card-personagem .card-color img {
+main a .card-color img {
   width: 136px;
   height: 136px;
   position: absolute;
   bottom: -68px;
   border: 6px solid #FFFFFF;
   border-radius: 50%;
+  object-fit: cover;
+}
+
+main a:hover {
+  color: inherit;
 }
 
 .criar-personagem {
@@ -72,8 +80,14 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: white;
+  text-decoration: none;
   line-height: 98px;
   text-align: center;
+}
+
+.criar-personagem:hover {
+  color: inherit;
 }
 
 .desc {

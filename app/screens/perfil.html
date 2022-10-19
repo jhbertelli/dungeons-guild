@@ -11,15 +11,9 @@
             integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
             crossorigin="anonymous"
         />
-        <link
-            rel="stylesheet"
-            href="http://127.0.0.1:5000/styles/template-dashboard.css"
-        />
+        <link rel="stylesheet" href="http://127.0.0.1:5000/styles/template-dashboard.css" />
         <link rel="stylesheet" href="http://127.0.0.1:5000/styles/perfil.css" />
-        <link
-            rel="shortcut icon"
-            href="http://127.0.0.1:5000/images/svg/favicon.svg"
-        />
+        <link rel="shortcut icon" href="http://127.0.0.1:5000/images/svg/favicon.svg" />
     </head>
     <body>
         <nav class="d-flex flex-nowrap" style="position: fixed">
@@ -45,49 +39,31 @@
                             class="nav-link text-white"
                             aria-current="page"
                         >
-                            <img
-                                src="http://127.0.0.1:5000/images/svg/personagens.svg"
-                                alt=""
-                            />
+                            <img src="http://127.0.0.1:5000/images/svg/personagens.svg" alt="" />
                             Personagens
                         </a>
                     </li>
                     <li>
                         <a href="http://127.0.0.1:5000/mundos" class="nav-link text-white">
-                            <img
-                                src="http://127.0.0.1:5000/images/svg/mundo.svg"
-                                alt=""
-                            />
+                            <img src="http://127.0.0.1:5000/images/svg/mundo.svg" alt="" />
                             Mundos
                         </a>
                     </li>
                     <li>
                         <a href="http://127.0.0.1:5000/embreve" class="nav-link text-white">
-                            <img
-                                src="http://127.0.0.1:5000/images/svg/dado.svg"
-                                alt=""
-                            />
+                            <img src="http://127.0.0.1:5000/images/svg/dado.svg" alt="" />
                             Dados
                         </a>
                     </li>
                     <li>
-                        <a
-                            href="http://127.0.0.1:5000/livros"
-                            class="nav-link text-white"
-                        >
-                            <img
-                                src="http://127.0.0.1:5000/images/svg/livro.svg"
-                                alt=""
-                            />
+                        <a href="http://127.0.0.1:5000/livros" class="nav-link text-white">
+                            <img src="http://127.0.0.1:5000/images/svg/livro.svg" alt="" />
                             Livros
                         </a>
                     </li>
                     <li>
                         <a href="http://127.0.0.1:5000/assinaturas" class="nav-link text-white">
-                            <img
-                                src="http://127.0.0.1:5000/images/svg/money.svg"
-                                alt=""
-                            />
+                            <img src="http://127.0.0.1:5000/images/svg/money.svg" alt="" />
                             Assinaturas
                         </a>
                     </li>
@@ -101,7 +77,7 @@
                             src="http://127.0.0.1:5000/images/svg/profile-default-icon.svg"
                             alt=""
                         />
-                        <span>RafaEg</span>
+                        <span>{{ apelido }}</span>
                     </a>
                 </div>
             </div>
@@ -113,7 +89,9 @@
             <div class="profile">
                 <div
                     class="cover"
-                    style="background-image: url(http://127.0.0.1:5000/images/cadastrobackgroud.jpg)"
+                    style="
+                        background-image: url(http://127.0.0.1:5000/images/cadastrobackgroud.jpg);
+                    "
                 >
                     <div class="person-icon">
                         <img
@@ -122,7 +100,10 @@
                         />
                     </div>
                 </div>
-                <h1>RafaEg</h1>
+                <h1>{{ apelido }}</h1>
+                <a href="/logout">
+                    <img src="/images/svg/logout.svg" alt="" />
+                </a>
             </div>
         </main>
 

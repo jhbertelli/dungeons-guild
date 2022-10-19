@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 06-Out-2022 às 16:05
+-- Tempo de geração: 17-Out-2022 às 03:27
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -62,7 +62,7 @@ CREATE TABLE `cadastro` (
   `nome_cadastro` varchar(40) NOT NULL,
   `apelido_cadastro` varchar(60) NOT NULL,
   `email_cadastro` varchar(50) NOT NULL,
-  `senha_cadastro` varchar(50) NOT NULL,
+  `senha_cadastro` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `data_conta` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -71,7 +71,9 @@ CREATE TABLE `cadastro` (
 --
 
 INSERT INTO `cadastro` (`id_cadastro`, `nome_cadastro`, `apelido_cadastro`, `email_cadastro`, `senha_cadastro`, `data_conta`) VALUES
-(1, 'Rafael Eduardo Gonçalves', 'RafaEg', 'rafa@gmail.com', '123', '2022-10-02 17:32:58');
+(1, 'Rafael Eduardo Gonçalves', 'RafaEg', 'rafa@gmail.com', '123', '2022-10-02 17:32:58'),
+(2, 'Renato Silva', 'Renatinho123', 'renatosilva@gmail.com', '123123', '2022-10-09 05:27:51'),
+(3, 'Gabriel Costa', 'Uhuton', 'gabriel@example.com', 'senhaDaora', '2022-10-09 16:33:03');
 
 -- --------------------------------------------------------
 
@@ -95,12 +97,12 @@ INSERT INTO `classes` (`id_classe`, `nome_classe`) VALUES
 (4, 'Clérigo'),
 (5, 'Druida'),
 (6, 'Feiticeiro'),
-(7, 'Guardião'),
-(8, 'Guerreiro'),
-(9, 'Ladino'),
-(10, 'Mago'),
-(11, 'Monge'),
-(12, 'Paladino');
+(7, 'Guerreiro'),
+(8, 'Ladino'),
+(9, 'Mago'),
+(10, 'Monge'),
+(11, 'Paladino'),
+(12, 'Patrulheiro');
 
 -- --------------------------------------------------------
 
@@ -147,30 +149,65 @@ INSERT INTO `pericias` (`id_pericia`, `nome_pericia`, `id_salvaguardas`) VALUES
 CREATE TABLE `personagem` (
   `id_personagem` int(11) NOT NULL,
   `nome_personagem` varchar(50) NOT NULL,
-  `pv_atual` int(11) NOT NULL,
-  `pv_total` int(11) NOT NULL,
+  `url_imagem` varchar(70) NOT NULL,
+  `vida_atual` int(11) NOT NULL,
+  `vida_total` int(11) NOT NULL,
   `id_classe` int(11) NOT NULL,
   `nivel_personagem` int(11) NOT NULL,
-  `antecedente` varchar(30) NOT NULL,
+  `id_antecedente` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
-  `raca` varchar(30) NOT NULL,
+  `id_raca` int(11) NOT NULL,
   `id_tendencia` int(11) NOT NULL,
   `xp_atual` int(11) NOT NULL,
   `xp_total` int(11) NOT NULL,
-  `idade` int(11) NOT NULL,
-  `altura` float NOT NULL,
-  `peso` float NOT NULL,
-  `cabelo` varchar(30) NOT NULL,
-  `olhos` int(30) NOT NULL,
-  `pele` int(30) NOT NULL,
-  `inspiracao` int(11) NOT NULL,
-  `bonus_proficiencia` int(11) NOT NULL,
-  `percepcao` int(11) NOT NULL,
-  `dados_vida` int(11) NOT NULL,
-  `classe_armadura` int(11) NOT NULL,
-  `iniciativa` int(11) NOT NULL,
-  `deslocamento` int(11) NOT NULL
+  `lista_aparencia` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `lista_bonus` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `cor_ficha` varchar(10) NOT NULL,
+  `salvaguardas` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `pericias` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `testes_resistencia` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `idiomas_proficiencias` varchar(300) NOT NULL,
+  `equipamentos` varchar(500) NOT NULL,
+  `lista_dinheiro` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `caracteristicas` varchar(500) NOT NULL,
+  `magias` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `historia` varchar(2000) NOT NULL,
+  `tesouro` varchar(200) NOT NULL,
+  `aliados` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `personagem`
+--
+
+INSERT INTO `personagem` (`id_personagem`, `nome_personagem`, `url_imagem`, `vida_atual`, `vida_total`, `id_classe`, `nivel_personagem`, `id_antecedente`, `id_usuario`, `id_raca`, `id_tendencia`, `xp_atual`, `xp_total`, `lista_aparencia`, `lista_bonus`, `cor_ficha`, `salvaguardas`, `pericias`, `testes_resistencia`, `idiomas_proficiencias`, `equipamentos`, `lista_dinheiro`, `caracteristicas`, `magias`, `historia`, `tesouro`, `aliados`) VALUES
+(1, 'Yggis', '/images/fichas/41pZusVfSQOMRb3.jpg', 51, 129, 8, 5, 7, 1, 2, 3, 120, 300, '{\'idade\': 38, \'altura\': 1.77, \'peso\': 75.0, \'cabelo\': \'Nenhum\', \'olho\': \'Amarelos\', \'pele\': \'Bordô\'}', '{\'inspiracao\': 2, \'percepcao\': 3, \'dados_vida\': 2, \'classe_armadura\': 2, \'iniciativa\': 3, \'deslocamento\': 4}', '#d93407', '{\'forca\': 17, \'destreza\': 10, \'constituicao\': 15, \'inteligencia\': 7, \'sabedoria\': 12, \'carisma\': 9}', '[\'5\', \'8\', \'14\']', '[\'2\', \'6\']', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum. Donec iaculis egestas risus, vel molestie ex malesuada at. Donec vitae lacinia turpis. Praesent a eros nisi.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate.\r\n\r\nPraesent eu tempus libero. In at mattis velit, eget luctus ipsum.\r\n\r\nDonec iaculis egestas risus, vel molestie ex malesuada at. \r\n\r\nDonec vitae lacinia turpis. Praesent a eros nisi.\r\n\r\nSed finibus efficitur velit non vestibulum. Vivamus mattis malesuada lacinia.\r\n\r\nVestibulum imperdiet at est et placerat. In posuere enim dui, id efficitur libero vestibulum eget.', '{\'pc\': \'48\', \'pp\': \'17\', \'pe\': \'39\', \'po\': \'92\', \'pl\': \'42\'}', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum. Donec iaculis egestas risus, vel molestie ex malesuada at. Donec vitae lacinia turpis. Praesent a eros nisi. Sed finibus efficitur velit non vestibulum. Vivamus mattis malesuada lacinia.\r\n\r\nVestibulum imperdiet at est et placerat.', '[\'5\', \'44\', \'93\', \'150\']', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum. Donec iaculis egestas risus, vel molestie ex malesuada at. Donec vitae lacinia turpis. Praesent a eros nisi. Sed finibus efficitur velit non vestibulum. Vivamus mattis malesuada lacinia.\r\n\r\nVestibulum imperdiet at est et placerat. In posuere enim dui, id efficitur libero vestibulum eget. Praesent arcu neque, vulputate quis egestas sed, blandit vel purus. Vivamus in convallis arcu. Ut posuere, lectus eu convallis luctus, diam libero dictum mi, non laoreet massa diam in arcu. Suspendisse tempus, turpis et mattis fringilla, nibh lectus lobortis justo, in tempus tortor metus et turpis. Duis congue, turpis vel semper venenatis, libero lacus sollicitudin ipsum, non pulvinar leo lacus in mi. Vivamus imperdiet odio nec justo tincidunt, nec bibendum libero feugiat. Fusce aliquam nibh vel metus condimentum blandit. Ut et tortor non libero ornare rutrum et ac lacus. Donec elit orci, tincidunt a sollicitudin ut, congue eget ex. Nullam ut mauris congue, facilisis ex at, imperdiet ligula. Aliquam gravida quam diam, sit amet dignissim nisi efficitur sit amet. In pulvinar efficitur bibendum. In aliquet nec purus eget sagittis. Aliquam pulvinar consequat sapien non volutpat.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras interdum justo eu metus ornare vulputate. Praesent eu tempus libero. In at mattis velit, eget luctus ipsum.');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `racas`
+--
+
+CREATE TABLE `racas` (
+  `id_raca` int(11) NOT NULL,
+  `nome_raca` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `racas`
+--
+
+INSERT INTO `racas` (`id_raca`, `nome_raca`) VALUES
+(1, 'Anão'),
+(2, 'Draconato'),
+(3, 'Elfo'),
+(4, 'Gnomo'),
+(5, 'Halfling'),
+(6, 'Humano'),
+(7, 'Meio-Elfo'),
+(8, 'Meio-Orc'),
+(9, 'Tiefling');
 
 -- --------------------------------------------------------
 
@@ -255,7 +292,17 @@ ALTER TABLE `pericias`
 --
 ALTER TABLE `personagem`
   ADD PRIMARY KEY (`id_personagem`),
-  ADD KEY `id_classe` (`id_classe`);
+  ADD KEY `id_classe` (`id_classe`),
+  ADD KEY `id_raca` (`id_raca`),
+  ADD KEY `id_tendencia` (`id_tendencia`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_antecedente` (`id_antecedente`);
+
+--
+-- Índices para tabela `racas`
+--
+ALTER TABLE `racas`
+  ADD PRIMARY KEY (`id_raca`);
 
 --
 -- Índices para tabela `salvaguardas`
@@ -283,7 +330,7 @@ ALTER TABLE `antecedentes`
 -- AUTO_INCREMENT de tabela `cadastro`
 --
 ALTER TABLE `cadastro`
-  MODIFY `id_cadastro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_cadastro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `classes`
@@ -301,7 +348,13 @@ ALTER TABLE `pericias`
 -- AUTO_INCREMENT de tabela `personagem`
 --
 ALTER TABLE `personagem`
-  MODIFY `id_personagem` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_personagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `racas`
+--
+ALTER TABLE `racas`
+  MODIFY `id_raca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `salvaguardas`
@@ -329,7 +382,11 @@ ALTER TABLE `pericias`
 -- Limitadores para a tabela `personagem`
 --
 ALTER TABLE `personagem`
-  ADD CONSTRAINT `personagem_ibfk_1` FOREIGN KEY (`id_classe`) REFERENCES `classes` (`id_classe`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `personagem_ibfk_1` FOREIGN KEY (`id_classe`) REFERENCES `classes` (`id_classe`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `personagem_ibfk_2` FOREIGN KEY (`id_raca`) REFERENCES `racas` (`id_raca`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `personagem_ibfk_3` FOREIGN KEY (`id_tendencia`) REFERENCES `tendencias` (`id_tendencia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `personagem_ibfk_4` FOREIGN KEY (`id_usuario`) REFERENCES `cadastro` (`id_cadastro`),
+  ADD CONSTRAINT `personagem_ibfk_5` FOREIGN KEY (`id_antecedente`) REFERENCES `antecedentes` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
