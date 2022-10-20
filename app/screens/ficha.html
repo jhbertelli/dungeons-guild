@@ -36,6 +36,50 @@
             rel="shortcut icon"
             href="http://127.0.0.1:5000/images/svg/favicon.svg"
         />
+        <script>
+            function changeTestBonuses(element) {
+                // altera o bônus das proficiências
+                const testValue = element.textContent
+                const text = element.closest("p").lastElementChild
+                const salvaguardaId = element.getAttribute("id-salvaguarda")
+
+                switch (true) {
+                    case testValue <= 1:
+                        text.textContent = "-5"
+                        break
+                    case testValue <= 3:
+                        text.textContent = "-4"
+                        break
+                    case testValue <= 5:
+                        text.textContent = "-3"
+                        break
+                    case testValue <= 7:
+                        text.textContent = "-2"
+                        break
+                    case testValue <= 9:
+                        text.textContent = "-1"
+                        break
+                    case testValue <= 11:
+                        text.textContent = "0"
+                        break
+                    case testValue <= 13:
+                        text.textContent = "+1"
+                        break
+                    case testValue <= 15:
+                        text.textContent = "+2"
+                        break
+                    case testValue <= 17:
+                        text.textContent = "+3"
+                        break
+                    case testValue <= 19:
+                        text.textContent = "+4"
+                        break
+                    case testValue >= 20:
+                        text.textContent = "+5"
+                        break
+                }
+            }
+        </script>
     </head>
     <body>
         <nav>
@@ -105,31 +149,31 @@
                 </table>
                 <div class="flex">
                     <h4>Inspiração</h4>
-                    <div><h3>2</h3></div>
+                    <div><h3></h3></div>
                 </div>
                 <div class="flex">
                     <h4>Bônus de Proficiência</h4>
-                    <div><h3>4</h3></div>
+                    <div><h3></h3></div>
                 </div>
                 <div class="flex">
                     <h4>Sabedoria Passiva (Percepção)</h4>
-                    <div><h3>8</h3></div>
+                    <div><h3></h3></div>
                 </div>
                 <div class="flex">
                     <h4>Dados de Vida</h4>
-                    <div><h3>2</h3></div>
+                    <div><h3></h3></div>
                 </div>
                 <div class="flex">
                     <h4>Classe de Armadura</h4>
-                    <div><h3>3</h3></div>
+                    <div><h3></h3></div>
                 </div>
                 <div class="flex">
                     <h4>Iniciativa</h4>
-                    <div><h3>3</h3></div>
+                    <div><h3></h3></div>
                 </div>
                 <div class="flex">
                     <h4>Deslocamento</h4>
-                    <div><h3>4</h3></div>
+                    <div><h3></h3></div>
                 </div>
             </div>
             <div class="info">
@@ -212,7 +256,7 @@
                                         stroke-linejoin="round"
                                     />
                                 </svg>
-                                Força: <span>6</span><b id="bonus">-2</b>
+                                Força: <span></span><b id="bonus"></b>
                             </p>
                             <p>
                                 <svg
@@ -283,7 +327,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                Destreza: <span>20</span><b id="bonus">+5</b>
+                                Destreza: <span></span><b id="bonus"></b>
                             </p>
                             <p>
                                 <svg
@@ -309,7 +353,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                Constituição: <span>8</span><b id="bonus">-1</b>
+                                Constituição: <span></span><b id="bonus"></b>
                             </p>
                             <p>
                                 <svg
@@ -324,8 +368,8 @@
                                         fill="white"
                                     />
                                 </svg>
-                                Inteligência: <span>15</span
-                                ><b id="bonus">+2</b>
+                                Inteligência: <span></span
+                                ><b id="bonus"></b>
                             </p>
                             <p>
                                 <svg
@@ -374,7 +418,7 @@
                                         />
                                     </g>
                                 </svg>
-                                Sabedoria: <span>13</span><b id="bonus">+1</b>
+                                Sabedoria: <span></span><b id="bonus"></b>
                             </p>
                             <p>
                                 <svg
@@ -408,7 +452,7 @@
                                         stroke="white"
                                     />
                                 </svg>
-                                Carisma: <span>17</span><b id="bonus">+3</b>
+                                Carisma: <span></span><b id="bonus"></b>
                             </p>
                         </div>
                     </div>
@@ -602,6 +646,7 @@
             $.getJSON("http://127.0.0.1:5000/api/personagem/{{ id }}/", (json) => {
                 // pega todas as tendencias da api
                 const cor = json['cor_ficha']
+                const salvaguardas = document.querySelectorAll('.salvaguardas p span')
                 const listaInfoPrincipal = document.querySelectorAll('.info-principal td')
                 const numerosInfoPrincipal = document.querySelectorAll('.info-principal .flex h3')
                 const listaDinheiroInfo = document.querySelectorAll('.equips td')
@@ -679,12 +724,31 @@
 
                 // salvaguardas
 
+                let listaSalvaguardas = json['salvaguardas'].replace(/'/g, '"')
+                listaSalvaguardas = JSON.parse(listaSalvaguardas)
+
+                salvaguardas[0].textContent = listaSalvaguardas['forca']
+                salvaguardas[1].textContent = listaSalvaguardas['destreza']
+                salvaguardas[2].textContent = listaSalvaguardas['constituicao']
+                salvaguardas[3].textContent = listaSalvaguardas['inteligencia']
+                salvaguardas[4].textContent = listaSalvaguardas['sabedoria']
+                salvaguardas[5].textContent = listaSalvaguardas['carisma']
+                
+                changeTestBonuses(salvaguardas[0])
+                changeTestBonuses(salvaguardas[1])
+                changeTestBonuses(salvaguardas[2])
+                changeTestBonuses(salvaguardas[3])
+                changeTestBonuses(salvaguardas[4])
+                changeTestBonuses(salvaguardas[5])
+
                 // testes de resistência
 
                 // perícias
 
                 // idiomas e proficiências
                 
+                document.querySelector('.idiomas pre').textContent = json['idiomas_proficiencias']
+
                 // equipamentos
                 
                 document.querySelector('.equips pre').textContent = json['equipamentos']
@@ -692,7 +756,6 @@
                 let listaDinheiro = json['lista_dinheiro'].replace(/'/g, '"')
                 listaDinheiro = JSON.parse(listaDinheiro)
                 
-
                 listaDinheiroInfo[0].textContent = listaDinheiro['pc']
                 listaDinheiroInfo[1].textContent = listaDinheiro['pp']
                 listaDinheiroInfo[2].textContent = listaDinheiro['pe']
@@ -701,18 +764,25 @@
 
                 // características e habilidades
 
-                document.querySelector('.caracteristicas p').textContent = json['caracteristicas']
-
+                document.querySelector('.caracteristicas pre').textContent = json['caracteristicas']
+                
                 // magias
-
+                
+                
                 // história
-
+                
+                document.querySelector('.historia pre').textContent = json['historia']
+                
                 // aliados e organizações
-
+                
+                document.querySelector('.aliados pre').textContent = json['aliados']
+                
                 // tesouro
-
+                
+                document.querySelector('.tesouro pre').textContent = json['tesouro']
 
             })
+
         </script>
         <script src="http://127.0.0.1:5000/js/ficha.js"></script>
     </body>

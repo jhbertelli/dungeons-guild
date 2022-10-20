@@ -211,12 +211,11 @@ main {
                 }
             }
 
-            p, pre {
+            p {
                 @extend label;
                 display: flex;
                 align-items: center;
                 text-align: justify;
-                width: max-content;
 
                 svg {
                     margin-right: $salvaguardas;
@@ -226,6 +225,12 @@ main {
                 span {
                     margin-left: $salvaguardas;
                 }
+            }
+
+            pre {
+                @extend p;
+                width: 100%;
+                white-space: break-spaces;
             }
 
             .salvaguardas {
@@ -256,7 +261,10 @@ main {
 
         .detalhesfora {
             pre {
+                @include inter(16px, 400, 24px);
                 text-align: justify;
+                width: 100%;
+                white-space: break-spaces;
             }
         }
     }
