@@ -10,3 +10,5 @@ No PHPMyAdmin ou MySQL Workbench, crie um banco de dados chamado "dungeonsguild"
 Em seguida, rode esse comando para iniciar o aplicativo:
 
 * python app.py
+
+Atualmente, não temos um "índice" pronto para o aplicativo, então, por favor, vá à página http://127.0.0.1:5000/login ou http://127.0.0.1:5000/cadastro.
