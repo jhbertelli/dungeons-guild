@@ -32,49 +32,46 @@
                 background: rgba(54, 137, 164, 0.75);
             }
         </style>
-        <link
-            rel="shortcut icon"
-            href="http://127.0.0.1:5000/images/svg/favicon.svg"
-        />
+        <link rel="shortcut icon" href="http://127.0.0.1:5000/images/svg/favicon.svg" />
         <script>
-            function changeTestBonuses(element) {
+            function changeBonuses(element) {
                 // altera o bônus das proficiências
-                const testValue = element.textContent
+                const value = element.textContent
                 const text = element.closest("p").lastElementChild
                 const salvaguardaId = element.getAttribute("id-salvaguarda")
 
                 switch (true) {
-                    case testValue <= 1:
+                    case value <= 1:
                         text.textContent = "-5"
                         break
-                    case testValue <= 3:
+                    case value <= 3:
                         text.textContent = "-4"
                         break
-                    case testValue <= 5:
+                    case value <= 5:
                         text.textContent = "-3"
                         break
-                    case testValue <= 7:
+                    case value <= 7:
                         text.textContent = "-2"
                         break
-                    case testValue <= 9:
+                    case value <= 9:
                         text.textContent = "-1"
                         break
-                    case testValue <= 11:
+                    case value <= 11:
                         text.textContent = "0"
                         break
-                    case testValue <= 13:
+                    case value <= 13:
                         text.textContent = "+1"
                         break
-                    case testValue <= 15:
+                    case value <= 15:
                         text.textContent = "+2"
                         break
-                    case testValue <= 17:
+                    case value <= 17:
                         text.textContent = "+3"
                         break
-                    case testValue <= 19:
+                    case value <= 19:
                         text.textContent = "+4"
                         break
-                    case testValue >= 20:
+                    case value >= 20:
                         text.textContent = "+5"
                         break
                 }
@@ -83,11 +80,7 @@
     </head>
     <body>
         <nav>
-            <img
-                src="http://127.0.0.1:5000/images/logo.png"
-                alt=""
-                height="70"
-            />
+            <img src="http://127.0.0.1:5000/images/logo.png" alt="" height="70" />
         </nav>
         <main>
             <div class="info-principal">
@@ -177,11 +170,7 @@
                 </div>
             </div>
             <div class="info">
-                <div
-                    id="carouselControls"
-                    class="carousel slide"
-                    data-interval="false"
-                >
+                <div id="carouselControls" class="carousel slide" data-interval="false">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <div class="carrosel-dentro">
@@ -219,10 +208,7 @@
                         data-bs-target="#carouselControls"
                         data-bs-slide="prev"
                     >
-                        <span
-                            class="carousel-control-prev-icon"
-                            aria-hidden="true"
-                        ></span>
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     </button>
                     <button
                         class="carousel-control-next"
@@ -230,10 +216,7 @@
                         data-bs-target="#carouselControls"
                         data-bs-slide="next"
                     >
-                        <span
-                            class="carousel-control-next-icon"
-                            aria-hidden="true"
-                        ></span>
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     </button>
                 </div>
                 <div class="detalhes">
@@ -319,11 +302,7 @@
                                     </g>
                                     <defs>
                                         <clipPath id="clip0_33_36">
-                                            <rect
-                                                width="24"
-                                                height="24"
-                                                fill="white"
-                                            />
+                                            <rect width="24" height="24" fill="white" />
                                         </clipPath>
                                     </defs>
                                 </svg>
@@ -345,11 +324,7 @@
                                     </g>
                                     <defs>
                                         <clipPath id="clip0_30_9">
-                                            <rect
-                                                width="24"
-                                                height="24"
-                                                fill="white"
-                                            />
+                                            <rect width="24" height="24" fill="white" />
                                         </clipPath>
                                     </defs>
                                 </svg>
@@ -368,8 +343,7 @@
                                         fill="white"
                                     />
                                 </svg>
-                                Inteligência: <span></span
-                                ><b id="bonus"></b>
+                                Inteligência: <span></span><b id="bonus"></b>
                             </p>
                             <p>
                                 <svg
@@ -412,10 +386,7 @@
                                         />
                                     </mask>
                                     <g mask="url(#mask0_30_13)">
-                                        <path
-                                            d="M0 0H24V24H0V0Z"
-                                            fill="white"
-                                        />
+                                        <path d="M0 0H24V24H0V0Z" fill="white" />
                                     </g>
                                 </svg>
                                 Sabedoria: <span></span><b id="bonus"></b>
@@ -468,7 +439,7 @@
                                 onclick="return false"
                             />
                             <label class="form-check-label" for="forca">
-                                Força: <span>-2</span>
+                                Força: <span></span>
                             </label>
                         </div>
 
@@ -479,10 +450,9 @@
                                 value=""
                                 id="flexCheckChecked destreza"
                                 onclick="return false"
-                                checked
                             />
                             <label class="form-check-label" for="destreza">
-                                Destreza: <span>+7</span>
+                                Destreza: <span></span>
                             </label>
                         </div>
 
@@ -495,7 +465,7 @@
                                 onclick="return false"
                             />
                             <label class="form-check-label" for="constituicao">
-                                Constituição: <span>-1</span>
+                                Constituição: <span></span>
                             </label>
                         </div>
 
@@ -508,7 +478,7 @@
                                 onclick="return false"
                             />
                             <label class="form-check-label" for="inteligencia">
-                                Inteligência: <span>+2</span>
+                                Inteligência: <span></span>
                             </label>
                         </div>
 
@@ -521,7 +491,7 @@
                                 onclick="return false"
                             />
                             <label class="form-check-label" for="sabedoria">
-                                Sabedoria: <span>+1</span>
+                                Sabedoria: <span></span>
                             </label>
                         </div>
 
@@ -532,10 +502,9 @@
                                 value=""
                                 id="flexCheckChecked carisma"
                                 onclick="return false"
-                                checked
                             />
                             <label class="form-check-label" for="carisma">
-                                Carisma: <span>+5</span>
+                                Carisma: <span></span>
                             </label>
                         </div>
                     </div>
@@ -579,37 +548,8 @@
                         <pre></pre>
                     </div>
                     <div class="magias">
-                        <div class="flex">
-                            <h2>Magias</h2>
-                            <a
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="right"
-                                data-bs-html="true"
-                                data-bs-title="Para selecionar múltiplas opções, segure <b>Ctrl</b> no Windows ou <b>Command</b> no Mac"
-                            >
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M4 4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2H18C18.3283 2 18.6534 2.06466 18.9567 2.1903C19.26 2.31594 19.5356 2.50009 19.7678 2.73223C19.9999 2.96438 20.1841 3.23998 20.3097 3.54329C20.4353 3.84661 20.5 4.1717 20.5 4.5V18.75C20.5 18.9489 20.421 19.1397 20.2803 19.2803C20.1397 19.421 19.9489 19.5 19.75 19.5H5.5C5.5 19.7652 5.60536 20.0196 5.79289 20.2071C5.98043 20.3946 6.23478 20.5 6.5 20.5H19.75C19.9489 20.5 20.1397 20.579 20.2803 20.7197C20.421 20.8603 20.5 21.0511 20.5 21.25C20.5 21.4489 20.421 21.6397 20.2803 21.7803C20.1397 21.921 19.9489 22 19.75 22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5ZM12.25 8C12.5152 8 12.7696 7.89464 12.9571 7.70711C13.1446 7.51957 13.25 7.26522 13.25 7C13.25 6.73478 13.1446 6.48043 12.9571 6.29289C12.7696 6.10536 12.5152 6 12.25 6C11.9848 6 11.7304 6.10536 11.5429 6.29289C11.3554 6.48043 11.25 6.73478 11.25 7C11.25 7.26522 11.3554 7.51957 11.5429 7.70711C11.7304 7.89464 11.9848 8 12.25 8ZM11.5 9.75V14.75C11.5 14.9489 11.579 15.1397 11.7197 15.2803C11.8603 15.421 12.0511 15.5 12.25 15.5C12.4489 15.5 12.6397 15.421 12.7803 15.2803C12.921 15.1397 13 14.9489 13 14.75V9.75C13 9.55109 12.921 9.36032 12.7803 9.21967C12.6397 9.07902 12.4489 9 12.25 9C12.0511 9 11.8603 9.07902 11.7197 9.21967C11.579 9.36032 11.5 9.55109 11.5 9.75Z"
-                                        fill="white"
-                                    />
-                                </svg>
-                            </a>
-                        </div>
-                        <select
-                            class="form-select"
-                            multiple
-                            aria-label="multiple select example"
-                        >
-                            <option selected>
-                                Selecione uma ou mais magia(s)
-                            </option>
-                        </select>
+                        <h2>Magias</h2>
+                        <div></div>
                     </div>
                 </div>
                 <div class="detalhesfora historia">
@@ -642,148 +582,228 @@
             integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
             crossorigin="anonymous"
         ></script>
-        <script>
-            $.getJSON("http://127.0.0.1:5000/api/personagem/{{ id }}/", (json) => {
-                // pega todas as tendencias da api
-                const cor = json['cor_ficha']
-                const salvaguardas = document.querySelectorAll('.salvaguardas p span')
-                const listaInfoPrincipal = document.querySelectorAll('.info-principal td')
-                const numerosInfoPrincipal = document.querySelectorAll('.info-principal .flex h3')
-                const listaDinheiroInfo = document.querySelectorAll('.equips td')
-                const level = json['nivel_personagem']
-                
-                // cores da ficha
-                document.querySelector(".info-principal").style.background = hexToRGB(cor, 0.85)
-                document.querySelectorAll(".info-principal > div > div").forEach((e) => {
-                    e.style.background = hexToRGB(cor, 0.85)
-                })
-                document.querySelector(".vida").style.background = cor
-                document.querySelector(".info").style.background = hexToRGB(cor, 0.75)
-                
-                // informações principais do personagem
-
-                // imagem do personagem
-                document.querySelector(".img-div").style.backgroundImage = `url(${json['url_imagem']}`
-
-                document.querySelector('.info-principal h1').textContent = json['nome_personagem']
-                
-                document.querySelector('.vida').firstElementChild.textContent = json['vida_atual']
-                document.querySelector('.vida').lastElementChild.textContent = json['vida_total']
-
-                // primeira tabela
-                listaInfoPrincipal[0].textContent = json['nome_classe'] + ' ' + level
-                listaInfoPrincipal[1].textContent = json['antecedente']
-                listaInfoPrincipal[2].textContent = json['apelido_cadastro']
-                listaInfoPrincipal[3].textContent = json['nome_raca']
-                listaInfoPrincipal[4].textContent = json['nome_tendencia']
-                listaInfoPrincipal[5].textContent = json['xp_atual'] + ' / ' + json['xp_total']
-                
-                // segunda tabela (aparência)
-                let listaAparencia = json['lista_aparencia'].replace(/'/g, '"')
-                
-                listaAparencia = JSON.parse(listaAparencia)
-                
-                listaInfoPrincipal[6].textContent = listaAparencia['idade']
-                listaInfoPrincipal[7].textContent = String(listaAparencia['altura']).replace('.', ',') + ' m'
-                listaInfoPrincipal[8].textContent = String(listaAparencia['peso']).replace('.', ',') + ' kg'
-                listaInfoPrincipal[9].textContent = listaAparencia['cabelo']
-                listaInfoPrincipal[10].textContent = listaAparencia['olho']
-                listaInfoPrincipal[11].textContent = listaAparencia['pele']
-                
-                // lista de bônus
-                let listaBonus = json['lista_bonus'].replace(/'/g, '"')
-                listaBonus = JSON.parse(listaBonus)
-
-                numerosInfoPrincipal[0].textContent = listaBonus['inspiracao']
-
-                switch (true) {
-                    case level <= 4:
-                        numerosInfoPrincipal[1].textContent = 2
-                        break
-                    case level <= 8:
-                        numerosInfoPrincipal[1].textContent = 3
-                        break
-                    case level <= 12:
-                        numerosInfoPrincipal[1].textContent = 4
-                        break
-                    case level <= 16:
-                        numerosInfoPrincipal[1].textContent = 5
-                        break
-                    case level > 16:
-                        numerosInfoPrincipal[1].textContent = 6
-                        break
-                }
-                
-                numerosInfoPrincipal[2].textContent = listaBonus['percepcao']
-                numerosInfoPrincipal[3].textContent = listaBonus['dados_vida']
-                numerosInfoPrincipal[4].textContent = listaBonus['classe_armadura']
-                numerosInfoPrincipal[5].textContent = listaBonus['iniciativa']
-                numerosInfoPrincipal[6].textContent = listaBonus['deslocamento']
-
-                // informações principais do personagem
-
-                // salvaguardas
-
-                let listaSalvaguardas = json['salvaguardas'].replace(/'/g, '"')
-                listaSalvaguardas = JSON.parse(listaSalvaguardas)
-
-                salvaguardas[0].textContent = listaSalvaguardas['forca']
-                salvaguardas[1].textContent = listaSalvaguardas['destreza']
-                salvaguardas[2].textContent = listaSalvaguardas['constituicao']
-                salvaguardas[3].textContent = listaSalvaguardas['inteligencia']
-                salvaguardas[4].textContent = listaSalvaguardas['sabedoria']
-                salvaguardas[5].textContent = listaSalvaguardas['carisma']
-                
-                changeTestBonuses(salvaguardas[0])
-                changeTestBonuses(salvaguardas[1])
-                changeTestBonuses(salvaguardas[2])
-                changeTestBonuses(salvaguardas[3])
-                changeTestBonuses(salvaguardas[4])
-                changeTestBonuses(salvaguardas[5])
-
-                // testes de resistência
-
-                // perícias
-
-                // idiomas e proficiências
-                
-                document.querySelector('.idiomas pre').textContent = json['idiomas_proficiencias']
-
-                // equipamentos
-                
-                document.querySelector('.equips pre').textContent = json['equipamentos']
-
-                let listaDinheiro = json['lista_dinheiro'].replace(/'/g, '"')
-                listaDinheiro = JSON.parse(listaDinheiro)
-                
-                listaDinheiroInfo[0].textContent = listaDinheiro['pc']
-                listaDinheiroInfo[1].textContent = listaDinheiro['pp']
-                listaDinheiroInfo[2].textContent = listaDinheiro['pe']
-                listaDinheiroInfo[3].textContent = listaDinheiro['po']
-                listaDinheiroInfo[4].textContent = listaDinheiro['pl']
-
-                // características e habilidades
-
-                document.querySelector('.caracteristicas pre').textContent = json['caracteristicas']
-                
-                // magias
-                
-                
-                // história
-                
-                document.querySelector('.historia pre').textContent = json['historia']
-                
-                // aliados e organizações
-                
-                document.querySelector('.aliados pre').textContent = json['aliados']
-                
-                // tesouro
-                
-                document.querySelector('.tesouro pre').textContent = json['tesouro']
-
-            })
-
-        </script>
         <script src="http://127.0.0.1:5000/js/ficha.js"></script>
+        <script>
+            window.addEventListener("load", () => {
+                $.getJSON("http://127.0.0.1:5000/api/personagem/{{ id }}/", (json) => {
+                    // pega todas as tendencias da api
+                    const cor = json["cor_ficha"]
+                    const salvaguardas = document.querySelectorAll(".salvaguardas p span")
+                    const listaInfoPrincipal = document.querySelectorAll(".info-principal td")
+                    const numerosInfoPrincipal = document.querySelectorAll(".info-principal .flex h3")
+                    const listaDinheiroInfo = document.querySelectorAll(".equips td")
+                    const level = json["nivel_personagem"]
+
+                    // cores da ficha
+                    document.querySelector(".info-principal").style.background = hexToRGB(cor, 0.85)
+                    document.querySelectorAll(".info-principal > div > div").forEach((e) => {
+                        e.style.background = hexToRGB(cor, 0.85)
+                    })
+                    document.querySelector(".vida").style.background = cor
+                    document.querySelector(".info").style.background = hexToRGB(cor, 0.75)
+
+                    // informações principais do personagem
+
+                    // imagem do personagem
+                    document.querySelector(
+                        ".img-div"
+                    ).style.backgroundImage = `url(${json["url_imagem"]}`
+
+                    document.querySelector(".info-principal h1").textContent =
+                        json["nome_personagem"]
+
+                    document.querySelector(".vida").firstElementChild.textContent =
+                        json["vida_atual"]
+                    document.querySelector(".vida").lastElementChild.textContent =
+                        json["vida_total"]
+
+                    // primeira tabela
+                    listaInfoPrincipal[0].textContent = json["nome_classe"] + " " + level
+                    listaInfoPrincipal[1].textContent = json["antecedente"]
+                    listaInfoPrincipal[2].textContent = json["apelido_cadastro"]
+                    listaInfoPrincipal[3].textContent = json["nome_raca"]
+                    listaInfoPrincipal[4].textContent = json["nome_tendencia"]
+                    listaInfoPrincipal[5].textContent = json["xp_atual"] + " / " + json["xp_total"]
+
+                    // segunda tabela (aparência)
+                    let listaAparencia = json["lista_aparencia"].replace(/'/g, '"')
+
+                    listaAparencia = JSON.parse(listaAparencia)
+
+                    listaInfoPrincipal[6].textContent = listaAparencia["idade"]
+                    listaInfoPrincipal[7].textContent =
+                        String(listaAparencia["altura"]).replace(".", ",") + " m"
+                    listaInfoPrincipal[8].textContent =
+                        String(listaAparencia["peso"]).replace(".", ",") + " kg"
+                    listaInfoPrincipal[9].textContent = listaAparencia["cabelo"]
+                    listaInfoPrincipal[10].textContent = listaAparencia["olho"]
+                    listaInfoPrincipal[11].textContent = listaAparencia["pele"]
+
+                    // lista de bônus
+                    let listaBonus = json["lista_bonus"].replace(/'/g, '"')
+                    listaBonus = JSON.parse(listaBonus)
+
+                    numerosInfoPrincipal[0].textContent = listaBonus["inspiracao"]
+
+                    switch (true) {
+                        case level <= 4:
+                            numerosInfoPrincipal[1].textContent = 2
+                            break
+                        case level <= 8:
+                            numerosInfoPrincipal[1].textContent = 3
+                            break
+                        case level <= 12:
+                            numerosInfoPrincipal[1].textContent = 4
+                            break
+                        case level <= 16:
+                            numerosInfoPrincipal[1].textContent = 5
+                            break
+                        case level > 16:
+                            numerosInfoPrincipal[1].textContent = 6
+                            break
+                    }
+
+                    // bônus de proficiência
+                    const proficiencyBonus = Number(numerosInfoPrincipal[1].textContent)
+
+                    numerosInfoPrincipal[2].textContent = listaBonus["percepcao"]
+                    numerosInfoPrincipal[3].textContent = listaBonus["dados_vida"]
+                    numerosInfoPrincipal[4].textContent = listaBonus["classe_armadura"]
+                    numerosInfoPrincipal[5].textContent = listaBonus["iniciativa"]
+                    numerosInfoPrincipal[6].textContent = listaBonus["deslocamento"]
+
+                    // informações principais do personagem
+
+                    // salvaguardas
+
+                    let listaSalvaguardas = json["salvaguardas"].replace(/'/g, '"')
+                    listaSalvaguardas = JSON.parse(listaSalvaguardas)
+
+                    salvaguardas[0].textContent = listaSalvaguardas["forca"]
+                    salvaguardas[1].textContent = listaSalvaguardas["destreza"]
+                    salvaguardas[2].textContent = listaSalvaguardas["constituicao"]
+                    salvaguardas[3].textContent = listaSalvaguardas["inteligencia"]
+                    salvaguardas[4].textContent = listaSalvaguardas["sabedoria"]
+                    salvaguardas[5].textContent = listaSalvaguardas["carisma"]
+
+                    changeBonuses(salvaguardas[0])
+                    changeBonuses(salvaguardas[1])
+                    changeBonuses(salvaguardas[2])
+                    changeBonuses(salvaguardas[3])
+                    changeBonuses(salvaguardas[4])
+                    changeBonuses(salvaguardas[5])
+
+                    // testes de resistência
+
+                    let listaTestes = json["testes_resistencia"].replace(/'/g, '"')
+                    listaTestes = JSON.parse(listaTestes)
+                    listaTestes.map((num) => {
+                        const testDiv = document.querySelectorAll(".testes-resistencia .flex")[num - 1]
+                        testDiv.firstElementChild.setAttribute("checked", true)
+                    })
+
+                    let testsArray = document.querySelectorAll(".testes-resistencia .flex")
+
+                    for (let i = 0; i < testsArray.length; i++) {
+                        const input = testsArray[i].firstElementChild
+                        const bonusTag = testsArray[i].lastElementChild.lastElementChild
+                        const salvaguardaBonus =
+                            document.querySelectorAll(".salvaguardas p")[i].lastElementChild.textContent
+
+                        if (input.getAttribute("checked")) {
+                            let totalBonus = Number(salvaguardaBonus) + proficiencyBonus
+
+                            if (totalBonus <= 0) {
+                                bonusTag.textContent = totalBonus
+                            } else {
+                                bonusTag.textContent = "+" + totalBonus
+                            }
+
+                            continue
+                        }
+
+                        bonusTag.textContent = salvaguardaBonus
+                    }
+
+                    // perícias
+                    
+                    const pericias = document.querySelectorAll(".pericias div")
+                    let listaPericias = json['pericias'].replace(/'/g, '"')
+                    listaPericias = JSON.parse(listaPericias)
+                    
+                    listaPericias.map((num) => {
+                        pericias[num - 1].firstElementChild.setAttribute('checked', true)
+                    })
+
+                    for (let i = 0; i < pericias.length; i++) {
+                        const salvaguardaId = pericias[i].lastElementChild.firstElementChild.getAttribute('salvaguarda')
+                        const periciaBonusTag = pericias[i].lastElementChild.lastElementChild
+                        const salvaguardaBonus = document.querySelectorAll(".salvaguardas #bonus")[salvaguardaId - 1].textContent
+                        const periciasInputIsChecked = pericias[i].firstElementChild.getAttribute('checked')
+
+                        if (periciasInputIsChecked) {
+                            let totalBonus = Number(salvaguardaBonus) + proficiencyBonus
+
+                            if (totalBonus <= 0) {
+                                periciaBonusTag.textContent = totalBonus
+                            } else {
+                                periciaBonusTag.textContent = "+" + totalBonus
+                            }
+
+                            continue
+                        }
+
+                        periciaBonusTag.textContent = salvaguardaBonus
+                    }
+
+                    // idiomas e proficiências
+
+                    document.querySelector(".idiomas pre").textContent =
+                        json["idiomas_proficiencias"]
+
+                    // equipamentos
+
+                    document.querySelector(".equips pre").textContent = json["equipamentos"]
+
+                    let listaDinheiro = json["lista_dinheiro"].replace(/'/g, '"')
+                    listaDinheiro = JSON.parse(listaDinheiro)
+
+                    listaDinheiroInfo[0].textContent = listaDinheiro["pc"]
+                    listaDinheiroInfo[1].textContent = listaDinheiro["pp"]
+                    listaDinheiroInfo[2].textContent = listaDinheiro["pe"]
+                    listaDinheiroInfo[3].textContent = listaDinheiro["po"]
+                    listaDinheiroInfo[4].textContent = listaDinheiro["pl"]
+
+                    // características e habilidades
+
+                    document.querySelector(".caracteristicas pre").textContent = json["caracteristicas"]
+
+                    // magias
+
+                    let magiasUsuario = json["magias"].replace(/'/g, '"')
+                    let magiasText = document.querySelector('.magias').lastElementChild
+                    magiasUsuario = JSON.parse(magiasUsuario)
+
+                    $.getJSON("http://127.0.0.1:5000/api/magias", (magias) => {
+                        magiasUsuario.map((id) => {
+                            // adiciona as magias do usuário no campo "Magias"
+                            magiasText.innerHTML += `<li>${magias[id - 1].name} - NV ${magias[id - 1].level}</li>`
+                        })
+                    })
+
+                    // história
+
+                    document.querySelector(".historia pre").textContent = json["historia"]
+
+                    // aliados e organizações
+
+                    document.querySelector(".aliados pre").textContent = json["aliados"]
+
+                    // tesouro
+
+                    document.querySelector(".tesouro pre").textContent = json["tesouro"]
+                })
+            })
+        </script>
     </body>
 </html>

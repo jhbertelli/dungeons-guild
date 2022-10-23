@@ -98,6 +98,7 @@ main .info-principal {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 20px;
 }
 main .info-principal > div {
   margin-bottom: 10px;

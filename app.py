@@ -110,19 +110,14 @@ def cadastro():
         return render_template('cadastro.html')
 
     if request.method == 'POST':
-        cursor = db.connection.cursor(cursors.DictCursor)
-        sql = f'''INSERT INTO cadastro (nome_cadastro, apelido_cadastro, email_cadastro, senha_cadastro)
-        VALUES ('{request.form['nome']}', '{request.form['apelido']}', '{request.form['email']}', '{request.form['senha']}')'''
-        cursor.execute(sql)
-        db.connection.commit()
-        return redirect(url_for('login'))
+        return redirect('http://127.0.0.1/dungeons-guild/register.php')
 
 
 @app.route("/login/", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         return render_template('login.html')
-
+        
     if request.method == 'POST':
         cursor = db.connection.cursor(cursors.DictCursor)
         cursor.execute(f"SELECT * FROM cadastro WHERE email_cadastro = \
@@ -208,6 +203,12 @@ def criar_ficha():
         return render_template('criar-ficha.html', usuario=session['apelido'])
 
     if request.method == 'POST':
+        ficha = request.form
+
+        for key in ficha:
+            if ficha[key] == '':
+                return redirect('/ficha/criar/')
+        
         if 'img-personagem' not in request.files:
             return redirect('/ficha/criar/')
 
@@ -227,8 +228,6 @@ def criar_ficha():
         image.save(os.path.join('app/resources/images/fichas', filename))
         url_imagem = '/images/fichas/' + filename
         
-        ficha = request.form
-
         lista_dinheiro = {
             "pc": ficha.get("pc"),
             "pp": ficha.get("pp"),
@@ -238,46 +237,46 @@ def criar_ficha():
         }
         
         lista_aparencia = {
-            "idade": try_int_conversion(ficha.get("idade")),
-            "altura": try_float_conversion(ficha.get("altura")),
-            "peso": try_float_conversion(ficha.get("peso")),
+            "idade": int(ficha.get("idade")),
+            "altura": float(ficha.get("altura")),
+            "peso": float(ficha.get("peso")),
             "cabelo": ficha.get("cabelo"),
             "olho": ficha.get("olho"),
             "pele": ficha.get("pele")
         }
 
         lista_bonus = {
-            "inspiracao" : try_int_conversion(ficha.get("inspiracao")),
-            "percepcao": try_int_conversion(ficha.get("percepcao")),
-            "dados_vida":  try_int_conversion(ficha.get("dados-vida")),
-            "classe_armadura":  try_int_conversion(ficha.get("classe-armadura")),
-            "iniciativa": try_int_conversion(ficha.get("iniciativa")),
-            "deslocamento": try_int_conversion(ficha.get("deslocamento"))
+            "inspiracao" : int(ficha.get("inspiracao")),
+            "percepcao": int(ficha.get("percepcao")),
+            "dados_vida":  int(ficha.get("dados-vida")),
+            "classe_armadura":  int(ficha.get("classe-armadura")),
+            "iniciativa": int(ficha.get("iniciativa")),
+            "deslocamento": int(ficha.get("deslocamento"))
         }
 
         lista_salvaguardas = {
-            "forca": try_int_conversion(ficha.get("forca")),
-            "destreza": try_int_conversion(ficha.get("destreza")),
-            "constituicao": try_int_conversion(ficha.get("constituicao")),
-            "inteligencia": try_int_conversion(ficha.get("inteligencia")),
-            "sabedoria": try_int_conversion(ficha.get("sabedoria")),
-            "carisma": try_int_conversion(ficha.get("carisma"))
+            "forca": int(ficha.get("forca")),
+            "destreza": int(ficha.get("destreza")),
+            "constituicao": int(ficha.get("constituicao")),
+            "inteligencia": int(ficha.get("inteligencia")),
+            "sabedoria": int(ficha.get("sabedoria")),
+            "carisma": int(ficha.get("carisma"))
         }
 
         lista_ficha = {}
 
         lista_ficha["nome_personagem"] = ficha.get("nome-personagem")
         lista_ficha["url_imagem"] = url_imagem
-        lista_ficha["vida_atual"] = try_int_conversion(ficha.get("vida-atual"))
-        lista_ficha["vida_total"] = try_int_conversion(ficha.get("vida-total"))
-        lista_ficha["classe"] = try_int_conversion(ficha.get("classe"))
-        lista_ficha["nivel"] = try_int_conversion(ficha.get("nivel"))
-        lista_ficha["antecedente"] = try_int_conversion(ficha.get("antecedente"))
+        lista_ficha["vida_atual"] = int(ficha.get("vida-atual"))
+        lista_ficha["vida_total"] = int(ficha.get("vida-total"))
+        lista_ficha["classe"] = int(ficha.get("classe"))
+        lista_ficha["nivel"] = int(ficha.get("nivel"))
+        lista_ficha["antecedente"] = int(ficha.get("antecedente"))
         lista_ficha["id_jogador"] = session["usuario"]
-        lista_ficha["raca"] = try_int_conversion(ficha.get("raca"))
-        lista_ficha["tendencia"] = try_int_conversion(ficha.get("tendencia"))
-        lista_ficha["xp_atual"] = try_int_conversion(ficha.get("xp-atual"))
-        lista_ficha["xp_total"] = try_int_conversion(ficha.get("xp-total"))
+        lista_ficha["raca"] = int(ficha.get("raca"))
+        lista_ficha["tendencia"] = int(ficha.get("tendencia"))
+        lista_ficha["xp_atual"] = int(ficha.get("xp-atual"))
+        lista_ficha["xp_total"] = int(ficha.get("xp-total"))
         lista_ficha["lista_aparencia"] = lista_aparencia
         lista_ficha["lista_bonus"] = lista_bonus
         lista_ficha["cor_ficha"] = ficha.get("cor-ficha")

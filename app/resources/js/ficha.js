@@ -27,14 +27,14 @@ for (let i = 0; i < 7; i++) {
     }
 }
 
-$.getJSON("http://127.0.0.1:5000/api/magias", (json) => {
-    // pega todas as magias da API
-    for (let i = 0; i < json.length; i++) {
-        document.querySelector(".magias select").innerHTML += `<option value=${
-            i + 1
-        }>${json[i].name} - NV ${json[i].level}</option>`
-    }
-})
+// $.getJSON("http://127.0.0.1:5000/api/magias", (json) => {
+//     // pega todas as magias da API
+//     for (let i = 0; i < json.length; i++) {
+//         document.querySelector(".magias select").innerHTML += `<option value=${
+//             i + 1
+//         }>${json[i].name} - NV ${json[i].level}</option>`
+//     }
+// })
 
 $.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
     // pega todas as pericias da api
@@ -45,17 +45,18 @@ $.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
             <input
                 class="form-check-input"
                 type="checkbox"
-                value=""
-                id="flexCheckDefault"
+                value="${json[i].id_pericia}"
+                name="pericias"
+                id="pericia-${json[i].id_pericia}"
                 onclick="return false"
             />
             <label
                 class="form-check-label"
-                for="flexCheckDefault"
+                for="pericia-${json[i].id_pericia}"
             >
                 ${json[i].nome_pericia}
-                <span style="margin-left: 5px">(${abv_salvaguarda})</span>:
-                <span>-2</span>
+                <span style="margin-left: 5px" salvaguarda="${json[i].id_salvaguardas}">(${abv_salvaguarda})</span>:
+                <span>0</span>
             </label>
         </div>`
     }

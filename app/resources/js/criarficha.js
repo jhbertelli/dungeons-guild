@@ -25,8 +25,6 @@ document.getElementById("img-personagem").addEventListener("change", (e) => {
         imageDiv.style.backgroundColor = "rgba(0,0,0,0)"
         imageDiv.style.border = "6px solid white"
         imageDiv.children[0].remove()
-        // document.getElementById('img-personagem').value = event.target.result
-        // console.log(event.target.result)
     })
 
     reader.readAsDataURL(image)
@@ -78,7 +76,7 @@ $.getJSON("http://127.0.0.1:5000/api/antecedentes", (json) => {
 })
 
 $.getJSON("http://127.0.0.1:5000/api/racas", (json) => {
-    // pega todas as tendencias da api
+    // pega todas as racas da api
     for (let i = 0; i < json.length; i++) {
         document.querySelector(
             "#racas"
@@ -101,23 +99,23 @@ $.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
         let abv_salvaguarda = json[i].nome_salvaguarda.substring(0, 3) // abrevia a string
 
         document.querySelector(".pericias").innerHTML += `<div class="flex">
-                <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value="${json[i].id_pericia}"
-                    name="pericias"
-                    id="pericia-${json[i].id_pericia}"
-                    oninput="addBonusToPericias(this, ${json[i].id_salvaguardas})"
-                />
-                <label
-                    class="form-check-label"
-                    for="pericia-${json[i].id_pericia}"
-                >
-                    ${json[i].nome_pericia}
-                    <span style="margin-left: 5px" salvaguarda="${json[i].id_salvaguardas}">(${abv_salvaguarda})</span>:
-                    <span>0</span>
-                </label>
-            </div>`
+            <input
+                class="form-check-input"
+                type="checkbox"
+                value="${json[i].id_pericia}"
+                name="pericias"
+                id="pericia-${json[i].id_pericia}"
+                oninput="addBonusToPericias(this, ${json[i].id_salvaguardas})"
+            />
+            <label
+                class="form-check-label"
+                for="pericia-${json[i].id_pericia}"
+            >
+                ${json[i].nome_pericia}
+                <span style="margin-left: 5px" salvaguarda="${json[i].id_salvaguardas}">(${abv_salvaguarda})</span>:
+                <span>0</span>
+            </label>
+        </div>`
     }
 })
 
