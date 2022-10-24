@@ -92,9 +92,26 @@ def api_personagens_usuario():
         WHERE id_usuario = {session['usuario']}''')
 
 
-@app.route("/api/usuario_logado/")
-def api_usuarios():
-    return get_from_database(f"SELECT id_cadastro, nome_cadastro, apelido_cadastro, email_cadastro FROM cadastro WHERE id_cadastro = {session['usuario']}")
+@app.route("/api/perfil_usuario/")
+def api_perfil_usuario():
+    cursor = db.connection.cursor(cursors.DictCursor)
+    cursor.execute(f'''SELECT nome_cadastro, apelido_cadastro, email_cadastro, data_conta,
+        COUNT(personagem.id_personagem) AS quant_personagem FROM cadastro
+        JOIN personagem ON personagem.id_usuario = cadastro.id_cadastro
+        WHERE id_cadastro = {session['usuario']}''')
+    row = cursor.fetchone()
+    
+    date_account = str(row['data_conta'])
+
+    user = {}
+
+    user['nome'] = row['nome_cadastro']
+    user['apelido'] = row['apelido_cadastro']
+    user['email'] = row['email_cadastro']
+    user['data_conta'] = date_account
+    user['quant_personagem'] = row['quant_personagem']
+
+    return jsonify(user)
 
 
 @app.route("/api/magias/")
@@ -122,11 +139,11 @@ def login():
         cursor = db.connection.cursor(cursors.DictCursor)
         cursor.execute(f"SELECT * FROM cadastro WHERE email_cadastro = \
             '{request.form['loginemail']}' AND senha_cadastro = '{request.form['loginsenha']}'")
-        rows = cursor.fetchone()
+        row = cursor.fetchone()
 
-        if rows:
-            session['usuario'] = rows['id_cadastro']
-            session['apelido'] = rows['apelido_cadastro']
+        if row:
+            session['usuario'] = row['id_cadastro']
+            session['apelido'] = row['apelido_cadastro']
             print('sesion:', session)
             return redirect(url_for('personagens'))
         else:
