@@ -127,3 +127,77 @@ $.getJSON("http://127.0.0.1:5000/api/magias", (json) => {
         } - NV ${json[i].level}</option>`
     }
 })
+
+const form = document.querySelector("form")
+const sendButton = document.querySelector("button")
+
+sendButton.addEventListener("click", (e) => {
+    e.preventDefault()
+    
+    const allInputs = document.querySelectorAll("input, select, textarea")
+
+    function emptyFieldAlert(field) {
+        // rola até o campo vazio
+        field.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "nearest"
+        })
+
+        // cria um alerta e exibe-o
+        let tooltip = new bootstrap.Tooltip(field, {
+            title: "Preencha este campo",
+            trigger: "manual"
+        })
+
+        tooltip.show()
+
+        setTimeout(() => {
+            tooltip.hide()
+        }, 4000)
+    }
+
+    for (let i = 0; i < allInputs.length; i++) {
+        if (allInputs[i].type === "checkbox") continue
+        
+        // verifica se os selects (exceto o de magias) estão vazios
+        if (allInputs[i].name === "magias") continue
+        if (allInputs[i].selectedIndex === 0) {
+            emptyFieldAlert(allInputs[i])
+
+            allInputs[i].focus()
+            return
+        }
+
+        // verifica se os campos de textarea/input (exceto checkboxes) estão vazios
+        if (allInputs[i].value === "") {
+            if (allInputs[i].id === "img-personagem") {
+                const imageDiv = document.querySelector(".img-div")
+
+                imageDiv.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                    inline: "nearest"
+                })
+
+                let tooltip = new bootstrap.Tooltip(imageDiv, {
+                    title: "Insira uma imagem",
+                    trigger: "manual"
+                })
+
+                tooltip.show()
+
+                setTimeout(() => {
+                    tooltip.hide()
+                }, 4000)
+            } else {
+                emptyFieldAlert(allInputs[i])
+            }
+
+            allInputs[i].focus()
+            return
+        }
+    }
+
+    form.submit()
+})

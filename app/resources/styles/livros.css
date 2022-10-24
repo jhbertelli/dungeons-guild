@@ -5,11 +5,19 @@ main {
 }
 
 main > a {
+    width: 33.33333%;
+    height: 100vh;
+
     background-position: 50% 50%;
-    align-items: center;
+    background-size: cover;
+    box-shadow: inset 0px 0px 100px 50px rgba(0, 0, 0, 0.7);
+    
     display: flex;
+    align-items: center;
     justify-content: center;
+
     text-decoration: none;
+    text-align: center;
     color: white;
 }
 
@@ -20,19 +28,6 @@ main > a:hover {
 main > a > h1 {
     flex-direction: column;
     font-family: "IM Fell DW Pica SC", serif;
-}
-
-.livro1 {
-    width: 33.33333%;
-    height: 100vh;
-}
-
-.livro2 {
-    width: 33.33333%;
-    height: 100vh;
-}
-
-.livro3 {
-    width: 33.33333%;
-    height: 100vh;
+    text-shadow: 0px 0px 10px #000000;
+    font-size: 32pt;
 }
