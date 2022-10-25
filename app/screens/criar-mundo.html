@@ -9,6 +9,7 @@
     <link
         rel="shortcut icon"
         href="http://127.0.0.1:5000/images/svg/favicon.svg"
+    >
    
    
 </head>
@@ -21,15 +22,33 @@
         />
     </div>
     <div class="titulo_informacoes">
-        <h1>Informações do Mundo </h1><h1> Informações da Sessão</h1>
+        <h1>Informações do Mundo </h1>
+        <h1> Informações da Sessão</h1>
 
     </div>
     <form class="form-wrapper" method="post">
         <div class="informacoes">
-            <div class="info_mundo">
-                <input type="text" id="nome_mundo" name="nome_mundo" placeholder="Nome do mundo"> <br>
-                
         
+            <div class="info_mundo">
+                <input class="nome_mundo" type="text" name="nome_mundo"   spellcheck="false"   placeholder="Insira o nome do mundo"> <br>
+                
+                    <label for="img-mundo">
+                
+                        <div class="img-div">
+                            <span class="img-helper">Insira uma imagem</span>
+                        </div>
+                    </label>
+                
+                <input
+                    type="file"
+                    name="img-mundo"
+                    id="img-mundo"
+                    style="display: none"
+                />
+                <div class="tema-div">
+                    <label class="tema-label">
+                    Tema</label><input class="tema_mundo" type="text" name="tema_mundo" spellcheck="false" placeholder="Insira o tema">
+                </div>
             </div>
 
             <div class="info_sessao">
@@ -40,4 +59,5 @@
     
 
 </body>
+<script src="/js/criarmundo.js"></script>
 </html>
