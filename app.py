@@ -148,7 +148,6 @@ def login():
         if row:
             session['usuario'] = row['id_cadastro']
             session['apelido'] = row['apelido_cadastro']
-            print('sesion:', session)
             return redirect(url_for('personagens'))
         else:
             return redirect(url_for('login'))
@@ -207,6 +206,32 @@ def perfil():
         return redirect(url_for('login'))
 
     return render_template('perfil.html', apelido=session['apelido'])
+
+@app.route("/account/delete/")
+def excluir_conta():
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    try:
+        delete_mundos = f"DELETE FROM mundos WHERE id_usuario = {session['usuario']}"
+        cursor.execute(delete_mundos)
+        db.connection.commit()
+    except:
+        pass
+
+    try:
+        delete_personagens = f"DELETE FROM personagem WHERE id_usuario = {session['usuario']}"
+        cursor.execute(delete_personagens)
+        db.connection.commit()
+    except:
+        pass
+
+    delete_account = f"DELETE FROM cadastro WHERE id_cadastro = {session['usuario']}"
+    cursor.execute(delete_account)
+    db.connection.commit()
+
+    cursor.close()
+
+    return redirect(url_for('login'))
 
 
 # ficha de criação do personagem
