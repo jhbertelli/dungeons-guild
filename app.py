@@ -120,6 +120,10 @@ def api_magias():
     return json
 
 
+@app.route("/")
+def inicio():
+    return render_template('inicio.html')
+
 # páginas de cadastro e login
 @app.route("/cadastro/", methods=['GET', 'POST'])
 def cadastro():
