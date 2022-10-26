@@ -1,8 +1,16 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
 body {background-color: black;}
 
 .opcoesinicio{
-    flex-direction: row;
+    position: absolute;
+    background-color: black;
+    width: 100%;
     display: flex;
+    flex-direction: row;
 }
 
 .logoinicio{
@@ -47,7 +55,14 @@ a{
     text-align: center;
 }
 
-.imageminicial{
-    width: 1570px;
-    height: 720px;
+.fundoinicio{
+    width: 100%;
+    height: 100vh;
+}
+
+.textoinicio{
+    display:flex;
+    flex-direction: column;
+    text-align: right;
+    margin-top: 500px;
 }
