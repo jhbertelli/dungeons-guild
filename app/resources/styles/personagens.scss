@@ -95,7 +95,7 @@ main a:hover {
 
 .criar-personagem {
     @include card;
-    @include inknut(33px);
+    @include inknut(1.75em);
 
     display: flex;
     flex-direction: column;

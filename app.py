@@ -120,6 +120,10 @@ def api_magias():
     return json
 
 
+@app.route("/")
+def inicio():
+    return render_template('inicio.html')
+
 # páginas de cadastro e login
 @app.route("/cadastro/", methods=['GET', 'POST'])
 def cadastro():
@@ -144,7 +148,6 @@ def login():
         if row:
             session['usuario'] = row['id_cadastro']
             session['apelido'] = row['apelido_cadastro']
-            print('sesion:', session)
             return redirect(url_for('personagens'))
         else:
             return redirect(url_for('login'))
@@ -197,12 +200,101 @@ def livros():
     return render_template('livros.html', apelido=session['apelido'])
 
 
-@app.route("/perfil/")
+@app.route("/perfil/", methods=['GET', 'POST'])
 def perfil():
     if 'usuario' not in session:
         return redirect(url_for('login'))
 
-    return render_template('perfil.html', apelido=session['apelido'])
+    if request.method == 'GET':
+        return render_template('perfil.html', apelido=session['apelido'])
+    
+    if request.method == 'POST':
+        cursor = db.connection.cursor(cursors.DictCursor)
+
+        if 'apelido' in request.form:
+            new_apelido = request.form.get('apelido')
+
+            if new_apelido == '':
+                return redirect(url_for('perfil'))
+            
+            sql = f"UPDATE cadastro SET apelido_cadastro = '{new_apelido}' WHERE id_cadastro = {session['usuario']}"
+            
+            session['apelido'] = new_apelido
+
+            cursor.execute(sql)
+            db.connection.commit()
+
+            return redirect(url_for('perfil'))
+
+        if 'nome' in request.form:
+            new_nome = request.form.get('nome')
+
+            if new_nome == '':
+                return redirect(url_for('perfil'))
+            
+            sql = f"UPDATE cadastro SET nome_cadastro = '{new_nome}' WHERE id_cadastro = {session['usuario']}"
+                        
+            cursor.execute(sql)
+            db.connection.commit()
+
+            return redirect(url_for('perfil'))
+
+        if 'email' in request.form:
+            new_email = request.form.get('email')
+
+            if new_email == '':
+                return redirect(url_for('login'))
+            
+            sql = f"UPDATE cadastro SET email_cadastro = '{new_email}' WHERE id_cadastro = {session['usuario']}"
+                        
+            cursor.execute(sql)
+            db.connection.commit()
+
+            session.clear()
+            
+            return redirect(url_for('perfil'))
+
+        if 'senha' in request.form:
+            new_password = request.form.get('senha')
+
+            if new_password == '':
+                return redirect(url_for('perfil'))
+            
+            sql = f"UPDATE cadastro SET senha_cadastro = '{new_password}' WHERE id_cadastro = {session['usuario']}"
+                        
+            cursor.execute(sql)
+            db.connection.commit()
+
+            session.clear()
+            
+            return redirect(url_for('login'))
+
+
+@app.route("/account/delete/")
+def excluir_conta():
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    try:
+        delete_mundos_sql = f"DELETE FROM mundos WHERE id_usuario = {session['usuario']}"
+        cursor.execute(delete_mundos_sql)
+        db.connection.commit()
+    except:
+        pass
+
+    try:
+        delete_personagens_sql = f"DELETE FROM personagem WHERE id_usuario = {session['usuario']}"
+        cursor.execute(delete_personagens_sql)
+        db.connection.commit()
+    except:
+        pass
+
+    delete_account_sql = f"DELETE FROM cadastro WHERE id_cadastro = {session['usuario']}"
+    cursor.execute(delete_account_sql)
+    db.connection.commit()
+
+    cursor.close()
+
+    return redirect(url_for('login'))
 
 
 # ficha de criação do personagem

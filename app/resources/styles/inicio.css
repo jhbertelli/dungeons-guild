@@ -1,0 +1,53 @@
+body {background-color: black;}
+
+.opcoesinicio{
+    flex-direction: row;
+    display: flex;
+}
+
+.logoinicio{
+    width:200px;
+    height:60px;
+    margin-left: 80px;
+}
+
+.botoesinicio{
+    flex-direction: row;
+    
+    /* margin-left: 400px; */
+    width: 70%;
+}
+
+.botoesinicio > div {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 50%;
+    margin-left: 450px;
+}
+
+.imagem {
+    width: 30%;
+}
+
+a{
+    color: white;
+    background-color: black;
+    font-size: 20px;
+    /* margin-left: 100px; */
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.cadastroinicial{
+    border: white 1px solid;
+    border-radius: 20px;
+    width: 150px;
+    height: 30px;
+    text-align: center;
+}
+
+.imageminicial{
+    width: 1570px;
+    height: 720px;
+}

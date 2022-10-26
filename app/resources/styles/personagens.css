@@ -75,7 +75,7 @@ main a:hover {
   font-family: "Inknut Antiqua";
   font-style: normal;
   font-weight: 400;
-  font-size: 33px;
+  font-size: 1.75em;
   display: flex;
   flex-direction: column;
   align-items: center;

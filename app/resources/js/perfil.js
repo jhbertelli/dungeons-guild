@@ -1,4 +1,5 @@
 function formatTime(time) {
+    // transforma a data da API de YYYY/MM/DD para DD/MM/YYYY
     time = time.split(' ')
     let date = time[0].split('-')
     
@@ -17,3 +18,17 @@ $.getJSON("/api/perfil_usuario/", (json) => {
     myStats[0].textContent = json['quant_personagem']
     myStats[2].textContent = formatTime(json['data_conta'])
 })
+
+const toggleModalArray = document.querySelectorAll('[data-bs-toggle="modal"]')
+
+for (let i = 0; i < toggleModalArray.length; i++) {
+    const toggleModal = toggleModalArray[i]
+    const target = toggleModal.getAttribute('data-bs-target')
+    
+    toggleModalArray[i].addEventListener('click', () => {
+        const modalInput = document.querySelector(target + " input")
+        setTimeout(() => {
+            modalInput.focus()
+        }, 480)
+    })
+}

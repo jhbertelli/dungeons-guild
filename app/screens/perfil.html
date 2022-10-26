@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Template</title>
+        <title>Meu Perfil</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -96,7 +96,27 @@
                             <img src="/images/svg/profile-default-icon.svg" alt="">
                         </div>
                         <span>{{ apelido }}</span>
-                        <img src="/images/svg/pencil.svg" alt="">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#alterarApelido">
+                            <img src="/images/svg/pencil.svg" alt="">
+                        </a>
+
+                        <form method="post" class="modal fade" id="alterarApelido" tabindex="-1" aria-labelledby="alterarApelidoLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="alterarApelidoLabel">Editar seu apelido</h1>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="text" name="apelido" placeholder="Insira seu novo apelido...">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Editar apelido</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
                 <div class="personal-data">
@@ -106,15 +126,51 @@
                             <th>Nome:</th>
                             <td>
                                 <span></span>
-                                <img src="/images/svg/pencil.svg" alt="">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#alterarNome">
+                                    <img src="/images/svg/pencil.svg" alt="">
+                                </a>
+                                <form method="post" class="modal fade" id="alterarNome" tabindex="-1" aria-labelledby="alterarNomeLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="alterarNomeLabel">Editar seu nome</h1>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="text" name="nome" placeholder="Insira seu nome...">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Editar nome</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </td>
                         </tr>
                             
                         <tr>
-                            <th>Email:</th>
+                            <th>E-mail:</th>
                             <td>
                                 <span></span>
-                                <img src="/images/svg/pencil.svg" alt="">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#alterarEmail">
+                                    <img src="/images/svg/pencil.svg" alt="">
+                                </a>
+                                <form method="post" class="modal fade" id="alterarEmail" tabindex="-1" aria-labelledby="alterarEmailLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="alterarEmailLabel">Editar seu e-mail</h1>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="email" name="email" placeholder="Insira seu novo e-mail...">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Editar e-mail</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </td>
                         </tr>
 
@@ -122,19 +178,59 @@
                             <th>Senha:</th>
                             <td>
                                 <span>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
-                                <img src="/images/svg/pencil.svg" alt="">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#alterarSenha">
+                                    <img src="/images/svg/pencil.svg" alt="">
+                                </a>
+                                <form method="post" class="modal fade" id="alterarSenha" tabindex="-1" aria-labelledby="alterarSenhaLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="alterarSenhaLabel">Editar sua senha</h1>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="text" name="senha" placeholder="Insira sua nova senha...">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Editar senha</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </td>
                         </tr>
                     </table>
+
                     <div class="below-data">
                         <a class="flex" href="/logout">
                             <span>Sair</span>
                             <img src="/images/svg/logout.svg" alt="" />
                         </a>
-                        <a class="delete-account flex" href="#">
+                        <a class="delete-account flex" href="#" data-bs-toggle="modal" data-bs-target="#excluirConta">
                             <span>Excluir conta</span>
                             <img src="/images/svg/trash.svg" alt="" />
                         </a>
+
+                        <div class="modal fade" id="excluirConta" tabindex="-1" aria-labelledby="excluirContaLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="excluirContaLabel">Excluir sua conta</h1>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    Tem certeza que deseja excluir sua conta? Você perderá todos os seus personagens e mundos.
+                                    <b style="color: red;">
+                                        Esta ação não pode ser revertida!
+                                    </b>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="/account/delete/" type="button" class="btn btn-primary">Excluir minha conta</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

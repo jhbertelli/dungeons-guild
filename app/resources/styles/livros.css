@@ -16,18 +16,22 @@ main > a {
     align-items: center;
     justify-content: center;
 
+    text-shadow: 0px 0px 10px #000000;
     text-decoration: none;
     text-align: center;
+    font-size: 32pt;
     color: white;
 }
 
 main > a:hover {
     color: inherit;
+    box-shadow: inset 0px 0px 20px 10px rgba(255, 255, 255, 0.6);
+    text-shadow: 0px 0px 10px #FFF;
+    
+    transition: 0.5s ease-out;
 }
 
 main > a > h1 {
     flex-direction: column;
     font-family: "IM Fell DW Pica SC", serif;
-    text-shadow: 0px 0px 10px #000000;
-    font-size: 32pt;
 }

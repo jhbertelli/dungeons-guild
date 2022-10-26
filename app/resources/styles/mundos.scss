@@ -74,7 +74,7 @@ h1 {
 
 .criar-mundo {
     @include card;
-    @include inknut(33px);
+    @include inknut(1.75em);
 
     display: flex;
     flex-direction: column;
