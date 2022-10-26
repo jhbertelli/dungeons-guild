@@ -21,6 +21,9 @@ h1{
     align-self: center;
 }
 
+input:focus, textarea:focus, select:focus{
+    outline: none;
+}
 
 
 #header {
@@ -83,13 +86,13 @@ h1{
     margin: 10px auto 0 auto;
     text-align: center;
     display: block;
-    border: solid white 2px;
+    border: none;
     border-radius: 10px;
     font-family: 'Cormorant Infant', serif;
     font-size: 26px;
     font-weight: 400;
     color: white;
-    background-color: transparent;
+    background-color: #1A1A1A;
     cursor: text;
  
 }
@@ -115,10 +118,40 @@ h1{
 
 
 
+
+
+.tema-div{
+ width: 650px;
+ height: 50px;
+ margin-left: auto;
+ margin-right: auto;
+ font-size: 22px;
+}
+
 .tema-label{
- margin: 0 454px 0 26px;
+    
+    align-self: flex-start;
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
 }
 
 .tema_mundo{
+    width: 130px;
+    height: 30px;
+    margin-top: 10px;
+    padding: 5px;
+    position: relative;
+    left: 10px;
+    color: white;
+    font-family: 'Cormorant Infant', serif;
+    font-weight: 400;
+    font-size: 22px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color:  #1A1A1A;
+    cursor: text;
     
+
 }
+
