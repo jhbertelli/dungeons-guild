@@ -47,14 +47,15 @@ main {
     > hr {
         margin: 20px 0 20px 0;
     }
+
+    > h1 {
+        @include cinzel(35px);
+        line-height: 35px;
+        letter-spacing: 0.15em;
+        margin-top: 35px;
+    }
 }
 
-h1 {
-    @include cinzel(35px);
-    line-height: 35px;
-    letter-spacing: 0.15em;
-    margin-top: 35px;
-}
 
 .meus-personagens {
     display: flex;
@@ -64,11 +65,14 @@ h1 {
     margin: 0 auto 0 auto;
 }
 
-main a {
+.meus-personagens > div {
     @include card;
     margin-bottom: 2%;
     color: inherit;
     text-decoration: none;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
     
     .card-color {
         width: 100%;
@@ -76,6 +80,8 @@ main a {
         position: relative;
         display: flex;
         justify-content: center;
+        border-top-left-radius: 0.5em;
+        border-top-right-radius: 0.5em;
 
         img {
             width: $img-size;
@@ -89,14 +95,11 @@ main a {
     }
 }
 
-main a:hover {
-    color: inherit
-}
-
 .criar-personagem {
     @include card;
     @include inknut(1.75em);
 
+    border-radius: 0.3em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,16 +115,29 @@ main a:hover {
     color: inherit;
 }
 
+.card-personagem {
+    height: 100%;
+}
+
 .desc {
     width: 80%;
-    margin: 85px auto 0 auto;
+    margin: 4em auto 0 auto;
+
+    .buttons {
+        margin: 5em 0 0 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    hr {
+        margin: 0.5em 0;
+    }
 
     h3 {
         @include inknut(21px);
         line-height: 35px;
 
         text-align: center;
-        margin: 20px 0;
     }
 
     table {
@@ -149,4 +165,25 @@ main a:hover {
             }
         }
     }
+}
+
+.modal-content {
+    background-color: #1c1c1c;
+
+    > div {
+        border: none;
+    }
+
+    .modal-footer {
+        button {
+            background-color: #E12323;
+            border: none;
+        }
+        
+        button:focus {
+            box-shadow: 0px 0px 8px #e12323;
+            background-color: #E12323;
+        }
+    }
+    
 }

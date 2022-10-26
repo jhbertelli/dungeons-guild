@@ -27,8 +27,9 @@ for (let i = 0; i < toggleModalArray.length; i++) {
     
     toggleModalArray[i].addEventListener('click', () => {
         const modalInput = document.querySelector(target + " input")
-        setTimeout(() => {
+        
+        modalInput.closest('.modal').addEventListener('shown.bs.modal', () => {
             modalInput.focus()
-        }, 480)
+        })
     })
 }

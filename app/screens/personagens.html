@@ -121,6 +121,27 @@
                     </a>
                 </div>
             </div>
+
+            <form method="post" action="/personagem/excluir/" class="modal fade" id="excluirPersonagem" tabindex="-1" aria-labelledby="excluirPersonagemLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="excluirPersonagemLabel">Excluir personagem</h1>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Tem certeza que deseja excluir o personagem "<span id="nome-personagem"></span>"?
+                        <b style="color: red;">
+                            Esta ação não pode ser revertida!
+                        </b>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="number" name="id-personagem" style="display: none;">
+                            <button type="submit" class="btn btn-primary">Excluir este personagem</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </main>
 
         <script

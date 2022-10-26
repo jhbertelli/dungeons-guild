@@ -164,9 +164,29 @@ def personagens():
     
     return render_template('personagens.html', apelido=session['apelido'])
 
-@app.route("/criar/mundo")
+
+@app.route("/personagem/excluir/", methods=['POST'])
+def excluir_personagem():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+    
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    id_personagem = request.form.get('id-personagem')
+
+    sql = f"DELETE FROM personagem WHERE id_personagem = {id_personagem}"
+    
+    cursor.execute(sql)
+    db.connection.commit()
+    cursor.close()
+
+    return redirect(url_for('personagens'))
+
+
+@app.route("/criar/mundo/")
 def criar_mundo():
     return render_template('criar-mundo.html')
+
 
 @app.route("/mundos/")
 def mundos():
