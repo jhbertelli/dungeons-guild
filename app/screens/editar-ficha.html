@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Personagem - Dungeon's Guild</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+            crossorigin="anonymous"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="http://127.0.0.1:5000/styles/criar-ficha.css" />
+        <style>
+            .info-principal {
+                background: rgba(54, 137, 164, 0.85);
+            }
+            .info-principal .img-div {
+                background-color: #fff;
+                background-position: 50% 50%;
+                background-size: cover;
+            }
+            .info-principal > div > div {
+                background: rgba(54, 137, 164, 0.85);
+            }
+            .vida {
+                padding: 12px 20px 12px 20px;
+                background: rgb(54, 137, 164);
+                border-radius: 25px;
+            }
+            .info {
+                background: rgba(54, 137, 164, 0.75);
+            }
+        </style>
+        <link rel="shortcut icon" href="http://127.0.0.1:5000/images/svg/favicon.svg" />
+        <script>
+            function hexToRGB(hex, alpha) {
+                // função que transforma um valor hexadecimal de cor para rgba
+                const r = parseInt(hex.slice(1, 3), 16),
+                    g = parseInt(hex.slice(3, 5), 16),
+                    b = parseInt(hex.slice(5, 7), 16)
+
+                if (alpha) {
+                    return `rgba(${r}, ${g}, ${b}, ${alpha})`
+                } else {
+                    return `rgb(${r}, ${g}, ${b})`
+                }
+            }
+
+            function inputCounterAndMaxLength(element, counterLength) {
+                // altera o contador de caracteres quando o usuário insere no input
+                const counter = element.parentElement.querySelector("h5")
+                counter.textContent = counterLength
+                element.setAttribute("maxLength", counterLength)
+
+                element.addEventListener("input", (e) => {
+                    const inputValue = e.target.value
+                    counter.textContent = counterLength - inputValue.length
+                })
+            }
+
+            function changeTestBonuses(element) {
+                // altera o bônus das proficiências
+                const testValue = element.value
+                const text = element.closest("p").lastElementChild
+                const salvaguardaId = element.getAttribute("id-salvaguarda")
+
+                function changeValueInPericiasAndTestes(value) {
+                    const bonus = Number(document.getElementById("bonus-proficiencia").value)
+                    const pericias = document.querySelectorAll(`.pericias [salvaguarda="${salvaguardaId}"]`)
+                    
+                    for (let i = 0; i < pericias.length; i++) {
+                        if (bonus > 0) {
+                            if (pericias[i].closest("div").firstElementChild.checked) {
+                                if (bonus + value <= 0) return pericias[i].closest("label").lastElementChild.textContent = (value + bonus)
+
+                                return pericias[i].closest("label").lastElementChild.textContent = "+" + (value + bonus)
+                            }
+                        }
+
+                        if (value <= 0) {
+                            pericias[i].closest("label").lastElementChild.textContent = value
+                        } else {
+                            pericias[i].closest("label").lastElementChild.textContent = "+" + value
+                        }
+                    }
+
+                    document.querySelectorAll(`.testes-resistencia [salvaguarda="${salvaguardaId}"]`).forEach((el) => {
+                        if (bonus > 0) {
+                            if (document.querySelector(`.testes-resistencia [salvaguarda="${salvaguardaId}"]`)
+                                .closest("div").firstElementChild.checked) {
+                                if (bonus + value <= 0) return el.closest("label").lastElementChild.textContent = (value + bonus)
+
+                                return el.closest("label").lastElementChild.textContent = "+" + (value + bonus)
+                            }
+                        }
+
+                        if (value <= 0) {
+                            el.closest("label").lastElementChild.textContent = value
+                        } else {
+                            el.closest("label").lastElementChild.textContent = "+" + value
+                        }
+                    })
+                }
+
+                switch (true) {
+                    case testValue <= 1:
+                        text.textContent = "-5"
+                        changeValueInPericiasAndTestes(-5)
+                        break
+                    case testValue <= 3:
+                        text.textContent = "-4"
+                        changeValueInPericiasAndTestes(-4)
+                        break
+                    case testValue <= 5:
+                        text.textContent = "-3"
+                        changeValueInPericiasAndTestes(-3)
+                        break
+                    case testValue <= 7:
+                        text.textContent = "-2"
+                        changeValueInPericiasAndTestes(-2)
+                        break
+                    case testValue <= 9:
+                        text.textContent = "-1"
+                        changeValueInPericiasAndTestes(-1)
+                        break
+                    case testValue <= 11:
+                        text.textContent = "0"
+                        changeValueInPericiasAndTestes(0)
+                        break
+                    case testValue <= 13:
+                        text.textContent = "+1"
+                        changeValueInPericiasAndTestes(1)
+                        break
+                    case testValue <= 15:
+                        text.textContent = "+2"
+                        changeValueInPericiasAndTestes(2)
+                        break
+                    case testValue <= 17:
+                        text.textContent = "+3"
+                        changeValueInPericiasAndTestes(3)
+                        break
+                    case testValue <= 19:
+                        text.textContent = "+4"
+                        changeValueInPericiasAndTestes(4)
+                        break
+                    case testValue >= 20:
+                        text.textContent = "+5"
+                        changeValueInPericiasAndTestes(5)
+                        break
+                }
+
+                // previne o usuário a inserir um valor maior que 20
+                if (testValue > 20) return (element.value = 20)
+            }
+
+            function addBonusToTestes(element, id) {
+                // adiciona o bonus ao clicar na caixa de seleção dos testes de resistência
+                const div = document.querySelector(`.testes-resistencia [salvaguarda="${id}"]`)
+                
+                const bonus = Number(document.getElementById("bonus-proficiencia").value)
+                const previousBonus = Number(document.querySelector(`[id-salvaguarda="${id}"]`).closest("p").lastElementChild.textContent)
+
+                if (!element.checked) {
+                    if (previousBonus == 0) return (div.closest("label").lastElementChild.textContent = "0")
+
+                    if (previousBonus < 0) return div.closest("label").lastElementChild.textContent = previousBonus
+
+                    return (div.closest("label").lastElementChild.textContent = "+" + previousBonus)
+                }
+
+                if (bonus == 0) return
+
+                if ((previousBonus + bonus) <= 0) return div.closest("label").lastElementChild.textContent = previousBonus + bonus
+                
+                div.closest("label").lastElementChild.textContent = "+" + (previousBonus + bonus)
+            }
+
+            function addBonusToPericias(element, id) {
+                // adiciona o bonus ao clicar na caixa de seleção das perícias
+                const bonusText = element.closest('.flex').lastElementChild.lastElementChild
+                const bonus = Number(document.getElementById("bonus-proficiencia").value)
+                const previousBonus = Number(document.querySelector(`[id-salvaguarda="${id}"]`).closest("p").lastElementChild.textContent)
+                
+                if (!element.checked) {
+                    if (previousBonus == 0) return (bonusText.textContent = "0")
+                    
+                    if (previousBonus < 0) return bonusText.textContent = previousBonus
+
+                    return (bonusText.textContent = "+" + previousBonus)
+                }
+
+                if (bonus == 0) return
+
+                if ((previousBonus + bonus) <= 0) return bonusText.textContent = previousBonus + bonus
+
+                bonusText.textContent = "+" + (previousBonus + bonus)
+            }
+
+            function changeBonuses(element) {
+                // altera o bônus das proficiências
+                const value = element.textContent
+                const text = element.closest("p").lastElementChild
+                const salvaguardaId = element.getAttribute("id-salvaguarda")
+
+                switch (true) {
+                    case value <= 1:
+                        text.textContent = "-5"
+                        break
+                    case value <= 3:
+                        text.textContent = "-4"
+                        break
+                    case value <= 5:
+                        text.textContent = "-3"
+                        break
+                    case value <= 7:
+                        text.textContent = "-2"
+                        break
+                    case value <= 9:
+                        text.textContent = "-1"
+                        break
+                    case value <= 11:
+                        text.textContent = "0"
+                        break
+                    case value <= 13:
+                        text.textContent = "+1"
+                        break
+                    case value <= 15:
+                        text.textContent = "+2"
+                        break
+                    case value <= 17:
+                        text.textContent = "+3"
+                        break
+                    case value <= 19:
+                        text.textContent = "+4"
+                        break
+                    case value >= 20:
+                        text.textContent = "+5"
+                        break
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <nav>
+            <a href="/personagens">
+                <img src="/images/svg/back-icon.svg" alt="" class="back-icon">
+            </a>
+            <img src="/images/logo.png" alt="" height="70" />
+        </nav>
+        <form method="post" enctype="multipart/form-data">
+            <div class="info-principal">
+                <label for="img-personagem">
+                    <div class="img-div" style="border: 6px solid white"></div>
+                </label>
+                <input
+                    type="file"
+                    name="img-personagem"
+                    id="img-personagem"
+                    style="display: none"
+                />
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nome do seu personagem"
+                    name="nome-personagem"
+                />
+                <h3>Pontos de Vida</h3>
+                <div class="vida">
+                    <input
+                        type="number"
+                        placeholder="Vida atual"
+                        class="form-control"
+                        name="vida-atual"
+                    />
+                    /
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Vida total"
+                        name="vida-total"
+                    />
+                </div>
+                <table>
+                    <tr>
+                        <th>Classe e nível:</th>
+                        <td>
+                            <select class="form-select" name="classe" id="classes">
+                                <option selected disabled>Selecione uma classe</option>
+                            </select>
+                            <input
+                                type="number"
+                                class="form-control"
+                                placeholder="NV"
+                                id="level"
+                                name="nivel"
+                                min="0"
+                                style="width: 45px"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Antecedente:</th>
+                        <td>
+                            <select class="form-select" name="antecedente" id="antecedentes">
+                                <option selected disabled>Selecione um antecedente</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Nome do jogador:</th>
+                        <td>{{ usuario }}</td>
+                    </tr>
+                    <tr>
+                        <th>Raça:</th>
+                        <td>
+                            <select class="form-select" name="raca" id="racas">
+                                <option selected disabled>Selecione uma raça</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tendência:</th>
+                        <td>
+                            <select class="form-select" name="tendencia" id="tendencias">
+                                <option selected disabled>Selecione uma tendência</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Pontos de experiência:</th>
+                        <td>
+                            <input
+                                type="number"
+                                placeholder="XP atual"
+                                class="form-control"
+                                name="xp-atual"
+                            />
+                            <span style="margin: 0 4px 0 4px">/</span>
+                            <input
+                                type="number"
+                                placeholder="XP total"
+                                class="form-control"
+                                name="xp-total"
+                            />
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>Idade:</th>
+                        <td>
+                            <input
+                                type="number"
+                                placeholder="Idade"
+                                class="form-control"
+                                name="idade"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Altura:</th>
+                        <td>
+                            <input
+                                type="number"
+                                step="0.01"
+                                placeholder="Altura"
+                                class="form-control"
+                                name="altura"
+                            />
+                            <span style="margin-left: 8px">m</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Peso:</th>
+                        <td>
+                            <input
+                                type="number"
+                                step="0.1"
+                                placeholder="Peso"
+                                class="form-control"
+                                name="peso"
+                            />
+                            <span style="margin-left: 8px">kg</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Cabelo:</th>
+                        <td>
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Cor do cabelo"
+                                name="cabelo"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Olhos:</th>
+                        <td>
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Cor dos olhos"
+                                name="olho"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Pele:</th>
+                        <td>
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Cor da pele"
+                                name="pele"
+                            />
+                        </td>
+                    </tr>
+                </table>
+                <div class="flex">
+                    <h4>Inspiração</h4>
+                    <div>
+                        <input type="number" class="form-control" name="inspiracao" />
+                    </div>
+                </div>
+                <div class="flex">
+                    <h4>Bônus de Proficiência</h4>
+                    <a
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="right"
+                        data-bs-html="true"
+                        data-bs-title="O valor do bônus de proficiência é baseado no nível do(a) seu(sua) personagem"
+                        style="line-height: 0; padding-left: 8px"
+                    >
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.1665 15H10.8332V13.3333H9.1665V15ZM9.99984 1.66666C8.90549 1.66666 7.82185 1.8822 6.81081 2.30099C5.79976 2.71978 4.8811 3.33361 4.10728 4.10743C2.54448 5.67024 1.6665 7.78985 1.6665 9.99999C1.6665 12.2101 2.54448 14.3297 4.10728 15.8925C4.8811 16.6664 5.79976 17.2802 6.81081 17.699C7.82185 18.1178 8.90549 18.3333 9.99984 18.3333C12.21 18.3333 14.3296 17.4553 15.8924 15.8925C17.4552 14.3297 18.3332 12.2101 18.3332 9.99999C18.3332 8.90564 18.1176 7.82201 17.6988 6.81096C17.28 5.79991 16.6662 4.88125 15.8924 4.10743C15.1186 3.33361 14.1999 2.71978 13.1889 2.30099C12.1778 1.8822 11.0942 1.66666 9.99984 1.66666M9.99984 16.6667C6.32484 16.6667 3.33317 13.675 3.33317 9.99999C3.33317 6.32499 6.32484 3.33332 9.99984 3.33332C13.6748 3.33332 16.6665 6.32499 16.6665 9.99999C16.6665 13.675 13.6748 16.6667 9.99984 16.6667ZM9.99984 4.99999C9.11578 4.99999 8.26794 5.35118 7.64281 5.9763C7.01769 6.60142 6.6665 7.44927 6.6665 8.33332H8.33317C8.33317 7.8913 8.50877 7.46737 8.82133 7.15481C9.13389 6.84225 9.55781 6.66666 9.99984 6.66666C10.4419 6.66666 10.8658 6.84225 11.1783 7.15481C11.4909 7.46737 11.6665 7.8913 11.6665 8.33332C11.6665 9.99999 9.1665 9.79166 9.1665 12.5H10.8332C10.8332 10.625 13.3332 10.4167 13.3332 8.33332C13.3332 7.44927 12.982 6.60142 12.3569 5.9763C11.7317 5.35118 10.8839 4.99999 9.99984 4.99999Z" fill="white"/>
+                        </svg>
+                    </a>
+                    <div>
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="bonus-proficiencia"
+                            readonly
+                        />
+                    </div>
+                </div>
+                <div class="flex">
+                    <h4>Sabedoria Passiva (Percepção)</h4>
+                    <div>
+                        <input type="number" class="form-control" name="percepcao" />
+                    </div>
+                </div>
+                <div class="flex">
+                    <h4>Dados de Vida</h4>
+                    <div>
+                        <input type="number" class="form-control" name="dados-vida" />
+                    </div>
+                </div>
+                <div class="flex">
+                    <h4>Classe de Armadura</h4>
+                    <div>
+                        <input type="number" class="form-control" name="classe-armadura" />
+                    </div>
+                </div>
+                <div class="flex">
+                    <h4>Iniciativa</h4>
+                    <div>
+                        <input type="number" class="form-control" name="iniciativa" />
+                    </div>
+                </div>
+                <div class="flex">
+                    <h4>Deslocamento</h4>
+                    <div>
+                        <input type="number" class="form-control" name="deslocamento" />
+                    </div>
+                </div>
+                <hr />
+                <label for="cor-ficha" class="form-label">Cor da ficha</label>
+                <input
+                    type="color"
+                    class="form-control form-control-color"
+                    id="cor-ficha"
+                    name="cor-ficha"
+                    value="#3689A4"
+                    title="Escolha sua cor"
+                />
+                <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+            <div class="info">
+                <div id="carouselControls" class="carousel slide" data-interval="false">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="carrosel-dentro">
+                                <!-- informações de dentro do carrosel -->
+                                <ul>
+                                    <li>Salvaguardas</li>
+                                    <li>Testes de Resistência</li>
+                                    <li>Perícias</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carrosel-dentro">
+                                <ul>
+                                    <li>Idiomas e Proficiências</li>
+                                    <li>Equipamentos</li>
+                                    <li>Características e Habilidades</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carrosel-dentro">
+                                <ul>
+                                    <li>Magias</li>
+                                    <li>História</li>
+                                    <li>Aliados</li>
+                                    <li>Tesouro</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        class="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#carouselControls"
+                        data-bs-slide="prev"
+                    >
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button
+                        class="carousel-control-next"
+                        type="button"
+                        data-bs-target="#carouselControls"
+                        data-bs-slide="next"
+                    >
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="detalhes">
+                    <div class="salvaguardas">
+                        <h2>Salvaguardas</h2>
+                        <div>
+                            <p>
+                                <img src="http://127.0.0.1:5000/images/svg/strength.svg" alt="" />
+                                Força:
+                                <span>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        placeholder="For"
+                                        name="forca"
+                                        min="0"
+                                        max="20"
+                                        id-salvaguarda="1"
+                                        style="width: 80px; margin: 0"
+                                        oninput="changeTestBonuses(this)"
+                                    />
+                                </span>
+                                <b id="bonus">0</b>
+                            </p>
+                            <p>
+                                <img src="http://127.0.0.1:5000/images/svg/dexterity.svg" alt="" />
+                                Destreza:
+                                <span>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        placeholder="Des"
+                                        name="destreza"
+                                        min="0"
+                                        max="20"
+                                        id-salvaguarda="2"
+                                        style="width: 80px; margin: 0"
+                                        oninput="changeTestBonuses(this)"
+                                    /> </span
+                                ><b id="bonus">0</b>
+                            </p>
+                            <p>
+                                <img
+                                    src="http://127.0.0.1:5000/images/svg/constitution.svg"
+                                    alt=""
+                                />
+                                Constituição:
+                                <span>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        placeholder="Cons"
+                                        name="constituicao"
+                                        min="0"
+                                        max="20"
+                                        id-salvaguarda="3"
+                                        style="width: 80px; margin: 0"
+                                        oninput="changeTestBonuses(this)"
+                                    /> </span
+                                ><b id="bonus">0</b>
+                            </p>
+                            <p>
+                                <img
+                                    src="http://127.0.0.1:5000/images/svg/intelligence.svg"
+                                    alt=""
+                                />
+                                Inteligência:
+                                <span>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        placeholder="Int"
+                                        name="inteligencia"
+                                        min="0"
+                                        max="20"
+                                        id-salvaguarda="4"
+                                        style="width: 80px; margin: 0"
+                                        oninput="changeTestBonuses(this)"
+                                    /> </span
+                                ><b id="bonus">0</b>
+                            </p>
+                            <p>
+                                <img src="http://127.0.0.1:5000/images/svg/wisdom.svg" alt="" />
+                                Sabedoria:
+                                <span>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        placeholder="Sab"
+                                        name="sabedoria"
+                                        min="0"
+                                        max="20"
+                                        id-salvaguarda="5"
+                                        style="width: 80px; margin: 0"
+                                        oninput="changeTestBonuses(this)"
+                                    /> </span
+                                ><b id="bonus">0</b>
+                            </p>
+                            <p>
+                                <img src="http://127.0.0.1:5000/images/svg/charisma.svg" alt="" />
+                                Carisma:
+                                <span>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        placeholder="Car"
+                                        name="carisma"
+                                        min="0"
+                                        max="20"
+                                        id-salvaguarda="6"
+                                        style="width: 80px; margin: 0"
+                                        oninput="changeTestBonuses(this)"
+                                    /> </span
+                                ><b id="bonus">0</b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="testes-resistencia">
+                        <h2>Testes de Resistência</h2>
+
+                        <div class="flex">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="testes-resistencia"
+                                value="1"
+                                id="forca"
+                                oninput="addBonusToTestes(this, 1)"
+                            />
+                            <label class="form-check-label" for="forca">
+                                Força: <span salvaguarda="1">0</span>
+                            </label>
+                        </div>
+
+                        <div class="flex">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="testes-resistencia"
+                                value="2"
+                                id="destreza"
+                                oninput="addBonusToTestes(this, 2)"
+                            />
+                            <label class="form-check-label" for="destreza">
+                                Destreza: <span salvaguarda="2">0</span>
+                            </label>
+                        </div>
+
+                        <div class="flex">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="testes-resistencia"
+                                value="3"
+                                id="constituicao"
+                                oninput="addBonusToTestes(this, 3)"
+                            />
+                            <label class="form-check-label" for="constituicao">
+                                Constituição: <span salvaguarda="3">0</span>
+                            </label>
+                        </div>
+
+                        <div class="flex">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="testes-resistencia"
+                                value="4"
+                                id="inteligencia"
+                                oninput="addBonusToTestes(this, 4)"
+                            />
+                            <label class="form-check-label" for="inteligencia">
+                                Inteligência: <span salvaguarda="4">0</span>
+                            </label>
+                        </div>
+
+                        <div class="flex">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="testes-resistencia"
+                                value="5"
+                                id="sabedoria"
+                                oninput="addBonusToTestes(this, 5)"
+                            />
+                            <label class="form-check-label" for="sabedoria">
+                                Sabedoria: <span salvaguarda="5">0</span>
+                            </label>
+                        </div>
+
+                        <div class="flex">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="testes-resistencia"
+                                value="6"
+                                id="carisma"
+                                oninput="addBonusToTestes(this, 6)"
+                            />
+                            <label class="form-check-label" for="carisma">
+                                Carisma: <span salvaguarda="6">0</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="pericias">
+                        <h2>Perícias</h2>
+                    </div>
+                    <div class="idiomas">
+                        <h2>Idiomas e Proficiências</h2>
+                        <div class="form-floating">
+                            <textarea
+                                class="form-control"
+                                placeholder="Insira..."
+                                id="idiomas-proficiencias"
+                                style="height: 320px"
+                                name="idiomas-proficiencias"
+                            ></textarea>
+                            <label for="idiomas-proficiencias"
+                                >Insira os idiomas e proficiências</label
+                            >
+                            <h5 style="text-align: right"></h5>
+                        </div>
+                    </div>
+                    <div class="equips">
+                        <h2>Equipamentos</h2>
+                        <div class="form-floating">
+                            <textarea
+                                class="form-control"
+                                placeholder="Insira..."
+                                id="equipamentos"
+                                style="height: 320px"
+                                name="equipamentos"
+                            ></textarea>
+                            <label for="equipamentos">Insira os equipamentos</label>
+                            <h5 style="align-self: flex-end"></h5>
+                        </div>
+                        <div>
+                            <table>
+                                <tr>
+                                    <th>PC:</th>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="PC"
+                                            name="pc"
+                                            min="0"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>PP:</th>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="PP"
+                                            name="pp"
+                                            min="0"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>PE:</th>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="PE"
+                                            name="pe"
+                                            min="0"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>PO:</th>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="PO"
+                                            name="po"
+                                            min="0"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>PL:</th>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="PL"
+                                            name="pl"
+                                            min="0"
+                                        />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="caracteristicas">
+                        <h2>Características e Habilidades</h2>
+                        <div class="form-floating">
+                            <textarea
+                                class="form-control"
+                                placeholder="Insira..."
+                                id="caracteristicas"
+                                style="height: 320px"
+                                name="caracteristicas"
+                            ></textarea>
+                            <label for="caracteristicas">Insira os idiomas e proficiências</label>
+                            <h5 style="text-align: right"></h5>
+                        </div>
+                    </div>
+                    <div class="magias">
+                        <div class="flex">
+                            <h2>Magias</h2>
+                            <a
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="right"
+                                data-bs-html="true"
+                                data-bs-title="Para selecionar múltiplas opções, segure <b>Ctrl</b> no Windows ou <b>Command</b> no Mac"
+                            >
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.1665 15H10.8332V13.3333H9.1665V15ZM9.99984 1.66666C8.90549 1.66666 7.82185 1.8822 6.81081 2.30099C5.79976 2.71978 4.8811 3.33361 4.10728 4.10743C2.54448 5.67024 1.6665 7.78985 1.6665 9.99999C1.6665 12.2101 2.54448 14.3297 4.10728 15.8925C4.8811 16.6664 5.79976 17.2802 6.81081 17.699C7.82185 18.1178 8.90549 18.3333 9.99984 18.3333C12.21 18.3333 14.3296 17.4553 15.8924 15.8925C17.4552 14.3297 18.3332 12.2101 18.3332 9.99999C18.3332 8.90564 18.1176 7.82201 17.6988 6.81096C17.28 5.79991 16.6662 4.88125 15.8924 4.10743C15.1186 3.33361 14.1999 2.71978 13.1889 2.30099C12.1778 1.8822 11.0942 1.66666 9.99984 1.66666M9.99984 16.6667C6.32484 16.6667 3.33317 13.675 3.33317 9.99999C3.33317 6.32499 6.32484 3.33332 9.99984 3.33332C13.6748 3.33332 16.6665 6.32499 16.6665 9.99999C16.6665 13.675 13.6748 16.6667 9.99984 16.6667ZM9.99984 4.99999C9.11578 4.99999 8.26794 5.35118 7.64281 5.9763C7.01769 6.60142 6.6665 7.44927 6.6665 8.33332H8.33317C8.33317 7.8913 8.50877 7.46737 8.82133 7.15481C9.13389 6.84225 9.55781 6.66666 9.99984 6.66666C10.4419 6.66666 10.8658 6.84225 11.1783 7.15481C11.4909 7.46737 11.6665 7.8913 11.6665 8.33332C11.6665 9.99999 9.1665 9.79166 9.1665 12.5H10.8332C10.8332 10.625 13.3332 10.4167 13.3332 8.33332C13.3332 7.44927 12.982 6.60142 12.3569 5.9763C11.7317 5.35118 10.8839 4.99999 9.99984 4.99999Z" fill="white"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <select
+                            class="form-select"
+                            name="magias"
+                            multiple
+                            aria-label="multiple select example"
+                        >
+                            <option selected disabled>Selecione uma ou mais magia(s)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="detalhesfora historia">
+                    <h2>História</h2>
+                    <div class="form-floating">
+                        <textarea
+                            class="form-control"
+                            placeholder="Insira..."
+                            id="historia"
+                            style="height: 320px"
+                            name="historia"
+                        ></textarea>
+                        <label for="historia">Insira a história do(a) seu(sua) personagem</label>
+                        <h5 style="text-align: right"></h5>
+                    </div>
+                </div>
+                <div class="detalhesfora aliados">
+                    <h2>Aliados e Organizações</h2>
+                    <div class="form-floating">
+                        <textarea
+                            class="form-control"
+                            placeholder="Insira..."
+                            id="aliados"
+                            style="height: 140px"
+                            name="aliados"
+                        ></textarea>
+                        <label for="aliados"
+                            >Insira os aliados e organizações do(a) seu(sua) personagem</label
+                        >
+                        <h5 style="text-align: right"></h5>
+                    </div>
+                </div>
+                <div class="detalhesfora tesouro">
+                    <h2>Tesouro</h2>
+                    <div class="form-floating">
+                        <textarea
+                            class="form-control"
+                            placeholder="Insira..."
+                            id="tesouro"
+                            style="height: 140px"
+                            name="tesouro"
+                        ></textarea>
+                        <label for="tesouro">Insira o tesouro do(a) seu(sua) personagem</label>
+                        <h5 style="text-align: right"></h5>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            const inputIdiomas = document.querySelector("#idiomas-proficiencias")
+            const inputCaracteristicas = document.querySelector("#caracteristicas")
+            const inputHistoria = document.querySelector("#historia")
+            const inputAliados = document.querySelector("#aliados")
+            const inputTesouro = document.querySelector("#tesouro")
+            const inputEquipamentos = document.querySelector("#equipamentos")
+
+            inputCounterAndMaxLength(inputIdiomas, 300)
+            inputCounterAndMaxLength(inputCaracteristicas, 500)
+            inputCounterAndMaxLength(inputHistoria, 2000)
+            inputCounterAndMaxLength(inputAliados, 200)
+            inputCounterAndMaxLength(inputTesouro, 200)
+            inputCounterAndMaxLength(inputEquipamentos, 500)
+
+            document.getElementById('level').addEventListener('input', (e) => {
+                const bonusProficienciaInput = document.querySelector("#bonus-proficiencia")
+                let level = e.target.value
+
+                if (level < 0) e.target.value = 0
+                if (level > 20) e.target.value = 20
+
+                switch (true) {
+                    case level <= 4:
+                        bonusProficienciaInput.value = 2
+                        break
+                    case level <= 8:
+                        bonusProficienciaInput.value = 3
+                        break
+                    case level <= 12:
+                        bonusProficienciaInput.value = 4
+                        break
+                    case level <= 16:
+                        bonusProficienciaInput.value = 5
+                        break
+                    case level > 16:
+                        bonusProficienciaInput.value = 6
+                        break
+                }
+
+                // altera os valores dos testes e perícias ao mudar o bônus de proficiência
+                const bonus = Number(document.querySelector("#bonus-proficiencia").value)
+                const bonusesArray = document.querySelectorAll("#bonus")
+
+                for (let i = 0; i < bonusesArray.length; i++) {
+                    const previousBonus = Number(bonusesArray[i].textContent)
+                    const test = document.querySelectorAll(`.testes-resistencia div`)[i]
+                    const pericias = document.querySelectorAll(`.pericias [salvaguarda="${[i + 1]}"]`)
+                    
+                    pericias.forEach((el) => {
+                        let periciasPreviousBonus = Number(bonusesArray[el.getAttribute('salvaguarda') - 1].textContent)
+                        
+                        if (el.closest('div').firstElementChild.checked) {
+                            // altera o valor da perícia com o bônus de proficiência caso esteja marcado
+                            if (periciasPreviousBonus == 0 && bonus == 0) {
+                                return (el.closest("label").lastElementChild.textContent = "0")
+                            }
+                            
+                            if (periciasPreviousBonus + bonus <= 0) {
+                                el.closest("label").lastElementChild.textContent = (periciasPreviousBonus + bonus)
+                            } else {
+                                el.closest("label").lastElementChild.textContent = "+" + (periciasPreviousBonus + bonus)
+                            }
+                        }
+                    })
+
+                    if (test.firstElementChild.checked) {
+                        let idSalvaguarda = test.lastElementChild.lastElementChild.getAttribute('salvaguarda')
+                        
+                        document.querySelectorAll(`.testes-resistencia [salvaguarda="${idSalvaguarda}"]`).forEach((el) => {
+                            // altera o valor do teste de resistência com o bônus de proficiência caso esteja marcado
+                            if (previousBonus == 0 && bonus == 0) {
+                                return (el.closest("label").lastElementChild.textContent = "0")
+                            }
+
+                            if (previousBonus + bonus <= 0) {
+                                el.closest("label").lastElementChild.textContent = previousBonus + bonus
+                            } else {
+                                el.closest("label").lastElementChild.textContent = "+" + (previousBonus + bonus)
+                            }
+                        })
+                    }
+                }
+            })
+        </script>
+        <script>
+            window.addEventListener("load", () => {
+                $.getJSON("http://127.0.0.1:5000/api/personagem/{{ id }}/", (json) => {
+                    console.log(json)
+                    // pega todas as tendencias da api
+                    const cor = json["cor_ficha"]
+                    const salvaguardas = document.querySelectorAll(".salvaguardas p span")
+                    const listaInfoPrincipal = document.querySelectorAll(".info-principal td")
+                    const numerosInfoPrincipal = document.querySelectorAll(".info-principal .flex h3")
+                    const listaDinheiroInfo = document.querySelectorAll(".equips td")
+                    const level = json["nivel_personagem"]
+
+                    // cores da ficha
+                    document.querySelector(".info-principal").style.background = hexToRGB(cor, 0.85)
+                    document.querySelectorAll(".info-principal > div > div").forEach((e) => {
+                        e.style.background = hexToRGB(cor, 0.85)
+                    })
+                    document.querySelector(".vida").style.background = cor
+                    document.querySelector("#cor-ficha").value = cor
+                    document.querySelector(".info").style.background = hexToRGB(cor, 0.75)
+
+                    // informações principais do personagem
+
+                    // imagem do personagem
+                    document.querySelector(
+                        ".img-div"
+                    ).style.backgroundImage = `url(${json["url_imagem"]}`
+
+                    document.querySelector('.info-principal [name="nome-personagem"]').value =
+                        json["nome_personagem"]
+
+                    document.querySelector('.vida [name="vida-atual"]').value = json["vida_atual"]
+                    document.querySelector('.vida [name="vida-total"]').value = json["vida_total"]
+
+                    // primeira tabela
+                    console.log(listaInfoPrincipal[0])
+                    listaInfoPrincipal[0].textContent = json["nome_classe"] + " " + level
+                    listaInfoPrincipal[1].textContent = json["antecedente"]
+                    listaInfoPrincipal[2].textContent = json["apelido_cadastro"]
+                    listaInfoPrincipal[3].textContent = json["nome_raca"]
+                    listaInfoPrincipal[4].textContent = json["nome_tendencia"]
+                    listaInfoPrincipal[5].textContent = json["xp_atual"] + " / " + json["xp_total"]
+
+                    // segunda tabela (aparência)
+                    let listaAparencia = json["lista_aparencia"].replace(/'/g, '"')
+
+                    listaAparencia = JSON.parse(listaAparencia)
+
+                    listaInfoPrincipal[6].textContent = listaAparencia["idade"]
+                    listaInfoPrincipal[7].textContent =
+                        String(listaAparencia["altura"]).replace(".", ",") + " m"
+                    listaInfoPrincipal[8].textContent =
+                        String(listaAparencia["peso"]).replace(".", ",") + " kg"
+                    listaInfoPrincipal[9].textContent = listaAparencia["cabelo"]
+                    listaInfoPrincipal[10].textContent = listaAparencia["olho"]
+                    listaInfoPrincipal[11].textContent = listaAparencia["pele"]
+
+                    // lista de bônus
+                    let listaBonus = json["lista_bonus"].replace(/'/g, '"')
+                    listaBonus = JSON.parse(listaBonus)
+
+                    numerosInfoPrincipal[0].textContent = listaBonus["inspiracao"]
+
+                    switch (true) {
+                        case level <= 4:
+                            numerosInfoPrincipal[1].textContent = 2
+                            break
+                        case level <= 8:
+                            numerosInfoPrincipal[1].textContent = 3
+                            break
+                        case level <= 12:
+                            numerosInfoPrincipal[1].textContent = 4
+                            break
+                        case level <= 16:
+                            numerosInfoPrincipal[1].textContent = 5
+                            break
+                        case level > 16:
+                            numerosInfoPrincipal[1].textContent = 6
+                            break
+                    }
+
+                    // bônus de proficiência
+                    const proficiencyBonus = Number(numerosInfoPrincipal[1].textContent)
+
+                    numerosInfoPrincipal[2].textContent = listaBonus["percepcao"]
+                    numerosInfoPrincipal[3].textContent = listaBonus["dados_vida"]
+                    numerosInfoPrincipal[4].textContent = listaBonus["classe_armadura"]
+                    numerosInfoPrincipal[5].textContent = listaBonus["iniciativa"]
+                    numerosInfoPrincipal[6].textContent = listaBonus["deslocamento"]
+
+                    // informações principais do personagem
+
+                    // salvaguardas
+
+                    let listaSalvaguardas = json["salvaguardas"].replace(/'/g, '"')
+                    listaSalvaguardas = JSON.parse(listaSalvaguardas)
+
+                    salvaguardas[0].textContent = listaSalvaguardas["forca"]
+                    salvaguardas[1].textContent = listaSalvaguardas["destreza"]
+                    salvaguardas[2].textContent = listaSalvaguardas["constituicao"]
+                    salvaguardas[3].textContent = listaSalvaguardas["inteligencia"]
+                    salvaguardas[4].textContent = listaSalvaguardas["sabedoria"]
+                    salvaguardas[5].textContent = listaSalvaguardas["carisma"]
+
+                    changeBonuses(salvaguardas[0])
+                    changeBonuses(salvaguardas[1])
+                    changeBonuses(salvaguardas[2])
+                    changeBonuses(salvaguardas[3])
+                    changeBonuses(salvaguardas[4])
+                    changeBonuses(salvaguardas[5])
+
+                    // testes de resistência
+
+                    let listaTestes = json["testes_resistencia"].replace(/'/g, '"')
+                    listaTestes = JSON.parse(listaTestes)
+                    listaTestes.map((num) => {
+                        const testDiv = document.querySelectorAll(".testes-resistencia .flex")[num - 1]
+                        testDiv.firstElementChild.setAttribute("checked", true)
+                    })
+
+                    let testsArray = document.querySelectorAll(".testes-resistencia .flex")
+
+                    for (let i = 0; i < testsArray.length; i++) {
+                        const input = testsArray[i].firstElementChild
+                        const bonusTag = testsArray[i].lastElementChild.lastElementChild
+                        const salvaguardaBonus =
+                            document.querySelectorAll(".salvaguardas p")[i].lastElementChild.textContent
+
+                        if (input.getAttribute("checked")) {
+                            let totalBonus = Number(salvaguardaBonus) + proficiencyBonus
+
+                            if (totalBonus <= 0) {
+                                bonusTag.textContent = totalBonus
+                            } else {
+                                bonusTag.textContent = "+" + totalBonus
+                            }
+
+                            continue
+                        }
+
+                        bonusTag.textContent = salvaguardaBonus
+                    }
+
+                    // perícias
+                    
+                    const pericias = document.querySelectorAll(".pericias div")
+                    let listaPericias = json['pericias'].replace(/'/g, '"')
+                    listaPericias = JSON.parse(listaPericias)
+                    
+                    listaPericias.map((num) => {
+                        pericias[num - 1].firstElementChild.setAttribute('checked', true)
+                    })
+
+                    for (let i = 0; i < pericias.length; i++) {
+                        const salvaguardaId = pericias[i].lastElementChild.firstElementChild.getAttribute('salvaguarda')
+                        const periciaBonusTag = pericias[i].lastElementChild.lastElementChild
+                        const salvaguardaBonus = document.querySelectorAll(".salvaguardas #bonus")[salvaguardaId - 1].textContent
+                        const periciasInputIsChecked = pericias[i].firstElementChild.getAttribute('checked')
+
+                        if (periciasInputIsChecked) {
+                            let totalBonus = Number(salvaguardaBonus) + proficiencyBonus
+
+                            if (totalBonus <= 0) {
+                                periciaBonusTag.textContent = totalBonus
+                            } else {
+                                periciaBonusTag.textContent = "+" + totalBonus
+                            }
+
+                            continue
+                        }
+
+                        periciaBonusTag.textContent = salvaguardaBonus
+                    }
+
+                    // idiomas e proficiências
+
+                    document.querySelector(".idiomas pre").textContent =
+                        json["idiomas_proficiencias"]
+
+                    // equipamentos
+
+                    document.querySelector(".equips pre").textContent = json["equipamentos"]
+
+                    let listaDinheiro = json["lista_dinheiro"].replace(/'/g, '"')
+                    listaDinheiro = JSON.parse(listaDinheiro)
+
+                    listaDinheiroInfo[0].textContent = listaDinheiro["pc"]
+                    listaDinheiroInfo[1].textContent = listaDinheiro["pp"]
+                    listaDinheiroInfo[2].textContent = listaDinheiro["pe"]
+                    listaDinheiroInfo[3].textContent = listaDinheiro["po"]
+                    listaDinheiroInfo[4].textContent = listaDinheiro["pl"]
+
+                    // características e habilidades
+
+                    document.querySelector(".caracteristicas pre").textContent = json["caracteristicas"]
+
+                    // magias
+
+                    let magiasUsuario = json["magias"].replace(/'/g, '"')
+                    let magiasText = document.querySelector('.magias').lastElementChild
+                    magiasUsuario = JSON.parse(magiasUsuario)
+
+                    $.getJSON("http://127.0.0.1:5000/api/magias", (magias) => {
+                        magiasUsuario.map((id) => {
+                            // adiciona as magias do usuário no campo "Magias"
+                            magiasText.innerHTML += `<li>${magias[id - 1].name} - NV ${magias[id - 1].level}</li>`
+                        })
+                    })
+
+                    // história
+
+                    document.querySelector(".historia pre").textContent = json["historia"]
+
+                    // aliados e organizações
+
+                    document.querySelector(".aliados pre").textContent = json["aliados"]
+
+                    // tesouro
+
+                    document.querySelector(".tesouro pre").textContent = json["tesouro"]
+                })
+            })
+        </script>
+        <script src="/js/criarficha.js"></script>
+    </body>
+</html>

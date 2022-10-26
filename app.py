@@ -462,6 +462,13 @@ def criar_ficha():
         return redirect('/personagens/')
 
 
+@app.route("/ficha/<id>/editar/", methods=['GET', 'POST'])
+def editar_ficha(id):
+    if request.method == 'GET':
+        return render_template('editar-ficha.html', usuario=session['apelido'], id=id)
+
+    return
+
 @app.route("/logout/", methods=['GET', 'POST'])
 def logout():
     session.pop('usuario', None)

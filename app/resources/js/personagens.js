@@ -21,7 +21,7 @@ $.getJSON("/api/personagens_usuario/", (json) => {
                 </div>
                 <div class="desc">
                     <div class="buttons">
-                        <a href="#" class="edit-button">
+                        <a href="/ficha/${json[i].id_personagem}/editar" class="edit-button">
                             <img src="/images/svg/pencil.svg" alt="">
                         </a>
                         <h3>${json[i].nome_personagem}</h3>
@@ -81,24 +81,28 @@ $.getJSON("/api/personagens_usuario/", (json) => {
         const thisCard = document.querySelector(".meus-personagens").children[1]
 
         thisCard.addEventListener("click", (e) => {
-            const editButton = thisCard.querySelector(".edit-button")
             const deleteButton = thisCard.querySelector(".delete-button")
-
-            // caso o usuário clicar no botão de editar, ele será redirecionado para a página de edição
-            if (e.target === editButton || e.target === editButton.children[0]) {
-                window.location = "/ficha/" + json[i].id_personagem + "/editar"
-                return
-            }
-
+            
             // caso o usuário clicar no botão de excluir, um pop-up aparecerá
             if (e.target === deleteButton || e.target === deleteButton.children[0]) {
                 modalCharacterValue.value = json[i].id_personagem
                 modalCharacterNameTag.textContent = json[i].nome_personagem
-
                 return
             }
 
             window.location = "/ficha/" + json[i].id_personagem
+        })
+
+        // evento para botões secundários do mouse
+        thisCard.addEventListener("auxclick", (e) => {
+            const editButton = thisCard.querySelector(".edit-button")
+            
+            // apenas abre a página de editar ficha em outra página,
+            // caso o ícone de editar for clicado com o botão do meio
+            if (e.target === editButton || e.target === editButton.children[0]) return
+
+            // abre a ficha em outra guia caso o usuário clique no botão do meio do mouse
+            if (e.which == 2) window.open("/ficha/" + json[i].id_personagem, "_blank")
         })
     }
 })
