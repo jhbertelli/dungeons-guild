@@ -938,6 +938,7 @@
             integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
             crossorigin="anonymous"
         ></script>
+
         <script>
             const inputIdiomas = document.querySelector("#idiomas-proficiencias")
             const inputCaracteristicas = document.querySelector("#caracteristicas")
@@ -1025,14 +1026,13 @@
         </script>
         <script>
             window.addEventListener("load", () => {
-                $.getJSON("http://127.0.0.1:5000/api/personagem/{{ id }}/", (json) => {
-                    console.log(json)
+                $.getJSON("http://127.0.0.1:5000/api/personagem/{{ id }}/editar/", (json) => {
                     // pega todas as tendencias da api
                     const cor = json["cor_ficha"]
-                    const salvaguardas = document.querySelectorAll(".salvaguardas p span")
+                    const salvaguardas = document.querySelectorAll(".salvaguardas p input")
                     const listaInfoPrincipal = document.querySelectorAll(".info-principal td")
-                    const numerosInfoPrincipal = document.querySelectorAll(".info-principal .flex h3")
-                    const listaDinheiroInfo = document.querySelectorAll(".equips td")
+                    const numerosInfoPrincipal = document.querySelectorAll(".info-principal .flex input")
+                    const listaDinheiroInfo = document.querySelectorAll(".equips input")
                     const level = json["nivel_personagem"]
 
                     // cores da ficha
@@ -1058,60 +1058,64 @@
                     document.querySelector('.vida [name="vida-total"]').value = json["vida_total"]
 
                     // primeira tabela
-                    console.log(listaInfoPrincipal[0])
-                    listaInfoPrincipal[0].textContent = json["nome_classe"] + " " + level
-                    listaInfoPrincipal[1].textContent = json["antecedente"]
-                    listaInfoPrincipal[2].textContent = json["apelido_cadastro"]
-                    listaInfoPrincipal[3].textContent = json["nome_raca"]
-                    listaInfoPrincipal[4].textContent = json["nome_tendencia"]
-                    listaInfoPrincipal[5].textContent = json["xp_atual"] + " / " + json["xp_total"]
+
+                    listaInfoPrincipal[0].children[0].value = json["id_classe"]
+                    listaInfoPrincipal[0].children[1].value = json["nivel_personagem"]
+                    listaInfoPrincipal[1].children[0].value = json["id_antecedente"]
+                    
+                    listaInfoPrincipal[3].children[0].value = json["id_raca"]
+                    listaInfoPrincipal[4].children[0].value = json["id_tendencia"]
+                    listaInfoPrincipal[5].children[0].value = json["xp_atual"]
+                    listaInfoPrincipal[5].children[2].value = json["xp_total"]
 
                     // segunda tabela (aparência)
+
                     let listaAparencia = json["lista_aparencia"].replace(/'/g, '"')
-
                     listaAparencia = JSON.parse(listaAparencia)
+                    
+                    listaInfoPrincipal[6].children[0].value = listaAparencia["idade"]
+                    listaInfoPrincipal[7].children[0].value = listaAparencia["altura"]
+                    listaInfoPrincipal[8].children[0].value = listaAparencia["peso"]
+                    listaInfoPrincipal[9].children[0].value = listaAparencia["cabelo"]
+                    listaInfoPrincipal[10].children[0].value = listaAparencia["olho"]
+                    listaInfoPrincipal[11].children[0].value = listaAparencia["pele"]
 
-                    listaInfoPrincipal[6].textContent = listaAparencia["idade"]
-                    listaInfoPrincipal[7].textContent =
-                        String(listaAparencia["altura"]).replace(".", ",") + " m"
-                    listaInfoPrincipal[8].textContent =
-                        String(listaAparencia["peso"]).replace(".", ",") + " kg"
-                    listaInfoPrincipal[9].textContent = listaAparencia["cabelo"]
-                    listaInfoPrincipal[10].textContent = listaAparencia["olho"]
-                    listaInfoPrincipal[11].textContent = listaAparencia["pele"]
 
                     // lista de bônus
                     let listaBonus = json["lista_bonus"].replace(/'/g, '"')
                     listaBonus = JSON.parse(listaBonus)
-
-                    numerosInfoPrincipal[0].textContent = listaBonus["inspiracao"]
+                    console.log(listaBonus)
+                    console.log(numerosInfoPrincipal)
+                    
+                    numerosInfoPrincipal[0].value = listaBonus["inspiracao"]
 
                     switch (true) {
                         case level <= 4:
-                            numerosInfoPrincipal[1].textContent = 2
+                            numerosInfoPrincipal[1].value = 2
                             break
                         case level <= 8:
-                            numerosInfoPrincipal[1].textContent = 3
+                            numerosInfoPrincipal[1].value = 3
                             break
                         case level <= 12:
-                            numerosInfoPrincipal[1].textContent = 4
+                            numerosInfoPrincipal[1].value = 4
                             break
                         case level <= 16:
-                            numerosInfoPrincipal[1].textContent = 5
+                            numerosInfoPrincipal[1].value = 5
                             break
                         case level > 16:
-                            numerosInfoPrincipal[1].textContent = 6
+                            numerosInfoPrincipal[1].value = 6
                             break
                     }
 
                     // bônus de proficiência
-                    const proficiencyBonus = Number(numerosInfoPrincipal[1].textContent)
-
-                    numerosInfoPrincipal[2].textContent = listaBonus["percepcao"]
-                    numerosInfoPrincipal[3].textContent = listaBonus["dados_vida"]
-                    numerosInfoPrincipal[4].textContent = listaBonus["classe_armadura"]
-                    numerosInfoPrincipal[5].textContent = listaBonus["iniciativa"]
-                    numerosInfoPrincipal[6].textContent = listaBonus["deslocamento"]
+                    const proficiencyBonus = Number(numerosInfoPrincipal[1].value)
+                    console.log(proficiencyBonus)
+                    
+                    numerosInfoPrincipal[2].value = listaBonus["percepcao"]
+                    numerosInfoPrincipal[3].value = listaBonus["dados_vida"]
+                    numerosInfoPrincipal[4].value = listaBonus["classe_armadura"]
+                    numerosInfoPrincipal[5].value = listaBonus["iniciativa"]
+                    numerosInfoPrincipal[6].value = listaBonus["deslocamento"]
 
                     // informações principais do personagem
 
@@ -1119,13 +1123,13 @@
 
                     let listaSalvaguardas = json["salvaguardas"].replace(/'/g, '"')
                     listaSalvaguardas = JSON.parse(listaSalvaguardas)
-
-                    salvaguardas[0].textContent = listaSalvaguardas["forca"]
-                    salvaguardas[1].textContent = listaSalvaguardas["destreza"]
-                    salvaguardas[2].textContent = listaSalvaguardas["constituicao"]
-                    salvaguardas[3].textContent = listaSalvaguardas["inteligencia"]
-                    salvaguardas[4].textContent = listaSalvaguardas["sabedoria"]
-                    salvaguardas[5].textContent = listaSalvaguardas["carisma"]
+                    console.log(salvaguardas)
+                    salvaguardas[0].value = listaSalvaguardas["forca"]
+                    salvaguardas[1].value = listaSalvaguardas["destreza"]
+                    salvaguardas[2].value = listaSalvaguardas["constituicao"]
+                    salvaguardas[3].value = listaSalvaguardas["inteligencia"]
+                    salvaguardas[4].value = listaSalvaguardas["sabedoria"]
+                    salvaguardas[5].value = listaSalvaguardas["carisma"]
 
                     changeBonuses(salvaguardas[0])
                     changeBonuses(salvaguardas[1])
@@ -1199,50 +1203,58 @@
 
                     // idiomas e proficiências
 
-                    document.querySelector(".idiomas pre").textContent =
+                    document.querySelector(".idiomas textarea").value =
                         json["idiomas_proficiencias"]
 
                     // equipamentos
 
-                    document.querySelector(".equips pre").textContent = json["equipamentos"]
+                    document.querySelector(".equips textarea").value = json["equipamentos"]
 
                     let listaDinheiro = json["lista_dinheiro"].replace(/'/g, '"')
                     listaDinheiro = JSON.parse(listaDinheiro)
 
-                    listaDinheiroInfo[0].textContent = listaDinheiro["pc"]
-                    listaDinheiroInfo[1].textContent = listaDinheiro["pp"]
-                    listaDinheiroInfo[2].textContent = listaDinheiro["pe"]
-                    listaDinheiroInfo[3].textContent = listaDinheiro["po"]
-                    listaDinheiroInfo[4].textContent = listaDinheiro["pl"]
+                    listaDinheiroInfo[0].value = listaDinheiro["pc"]
+                    listaDinheiroInfo[1].value = listaDinheiro["pp"]
+                    listaDinheiroInfo[2].value = listaDinheiro["pe"]
+                    listaDinheiroInfo[3].value = listaDinheiro["po"]
+                    listaDinheiroInfo[4].value = listaDinheiro["pl"]
 
                     // características e habilidades
 
-                    document.querySelector(".caracteristicas pre").textContent = json["caracteristicas"]
+                    document.querySelector(".caracteristicas textarea").value = json["caracteristicas"]
 
                     // magias
 
                     let magiasUsuario = json["magias"].replace(/'/g, '"')
-                    let magiasText = document.querySelector('.magias').lastElementChild
+                    let magiasSelect = document.querySelector('.magias select')
+                    console.log(magiasSelect)
                     magiasUsuario = JSON.parse(magiasUsuario)
 
+                    
                     $.getJSON("http://127.0.0.1:5000/api/magias", (magias) => {
-                        magiasUsuario.map((id) => {
-                            // adiciona as magias do usuário no campo "Magias"
-                            magiasText.innerHTML += `<li>${magias[id - 1].name} - NV ${magias[id - 1].level}</li>`
-                        })
+                        // adiciona as magias do usuário no campo "Magias"
+                        for (let i = 1; i <= magiasSelect.children.length; i++) {
+                            // console.log(magiasSelect.children[i])
+                            if (magiasUsuario.includes(String(i))) {
+                                console.log(magiasSelect.children[i])
+                                magiasSelect.selectedIndex += i
+                                // magiasSelect.children[i].style.backgroundColor = "dodgerblue"
+                                // magiasSelect.children[i].style.color = "white"
+                            }
+                        }
                     })
 
                     // história
 
-                    document.querySelector(".historia pre").textContent = json["historia"]
+                    document.querySelector(".historia textarea").value = json["historia"]
 
                     // aliados e organizações
 
-                    document.querySelector(".aliados pre").textContent = json["aliados"]
+                    document.querySelector(".aliados textarea").value = json["aliados"]
 
                     // tesouro
 
-                    document.querySelector(".tesouro pre").textContent = json["tesouro"]
+                    document.querySelector(".tesouro textarea").value = json["tesouro"]
                 })
             })
         </script>

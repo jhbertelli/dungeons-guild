@@ -82,6 +82,11 @@ def api_personagem(id):
         WHERE id_personagem = {id}''')
 
 
+@app.route("/api/personagem/<id>/editar/")
+def api_editar_personagem(id):
+    return get_one_from_database(f'''SELECT * FROM personagem WHERE id_personagem = {id}''')
+
+
 @app.route("/api/personagens_usuario/")
 def api_personagens_usuario():
     return get_from_database(f'''SELECT id_personagem, nome_personagem, classes.nome_classe, nivel_personagem, racas.nome_raca,
