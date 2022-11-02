@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Assinaturas</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="/styles/template-dashboard.css" />
+        <link rel="stylesheet" href="/styles/assinaturas.css" />
+        <link rel="shortcut icon" href="/images/svg/favicon.svg" />
+    </head>
+    <body>
+        <nav class="d-flex flex-nowrap" style="position: fixed">
+            <div
+                class="d-flex flex-column flex-shrink-0 p-3"
+                style="width: 357px; background-color: #161616"
+            >
+                <a
+                    href="#"
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+                    style="margin-left: 15px"
+                >
+                    <img src="/images/logo.png" style="width: 292px; height: 92px" alt="" />
+                </a>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li>
+                        <a href="/personagens" class="nav-link text-white" aria-current="page">
+                            <img src="/images/svg/personagens.svg" alt="" />
+                            Personagens
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/mundos" class="nav-link text-white">
+                            <img src="/images/svg/mundo.svg" alt="" />
+                            Mundos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/livros" class="nav-link text-white">
+                            <img src="/images/svg/livro.svg" alt="" />
+                            Livros
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/assinaturas" class="nav-link text-white">
+                            <img src="/images/svg/money.svg" alt="" />
+                            Assinaturas
+                        </a>
+                    </li>
+                </ul>
+                <div class="dropdown">
+                    <a
+                        href="/perfil"
+                        class="d-flex align-items-center text-white text-decoration-none"
+                    >
+                        <img src="/images/svg/profile-default-icon.svg" alt="" />
+                        <span>{{ apelido }}</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="b-example-vr"></div>
+        </nav>
+
+        <main>
+            <!-- insira o conteúdo da página aqui -->
+            <a href="#" class="signature-card">
+                <div class="card-inside">
+                    <img src="/images/mimic.jpg" alt="" />
+                    <h2>Versão Gratuita</h2>
+                    <div class="vertical-line">
+                        <div class="square" style="left: 0"></div>
+                        <div class="square" style="right: 0"></div>
+                    </div>
+                    <ul>
+                        <li>Criação de até 3 personagens</li>
+                        <li>Criação de 1 mundo público</li>
+                    </ul>
+                </div>
+                <div class="button">Já Adquirido</div>
+            </a>
+            </div>
+            <a href="#" class="signature-card">
+                <div class="card-inside">
+                    <img src="/images/open-treasure.png" alt="" />
+                    <h2>Versão Paga</h2>
+                    <div class="vertical-line">
+                        <div class="square" style="left: 0"></div>
+                        <div class="square" style="right: 0"></div>
+                    </div>
+                    <ul>
+                        <li>Personagens ilimitados</li>
+                        <li>Criação de mundos ilimitados</li>
+                        <li>Criação de mundos privados</li>
+                    </ul>
+                </div>
+                <div class="button">R$6,99</div>
+            </a>
+        </main>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"
+        ></script>
+
+        <script>
+            const cards = document.querySelectorAll('.signature-card')
+
+            cards.forEach((el) => {
+                el.addEventListener('mouseover', () => {
+                    el.style.width = "31em"
+                    el.style.height = "85%"
+                })
+
+                el.addEventListener('mouseleave', () => {
+                    el.style.width = "27.5em"
+                    el.style.height = "80%"
+                })
+            })
+        </script>
+    </body>
+</html>

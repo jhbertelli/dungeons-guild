@@ -127,6 +127,10 @@ main hr {
   line-height: 35px;
   padding-bottom: 5px;
   text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 65px;
 }
 .desc table th {
   display: flex;

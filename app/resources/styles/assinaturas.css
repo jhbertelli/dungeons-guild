@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@500;700&display=swap");
+
+main {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100vh;
+}
+
+main::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    z-index: -1;
+    background: url("../images/tavern.jpg");
+    background-size: cover;
+}
+
+.signature-card {
+    width: 27.5em;
+    background-color: #161616;
+    height: 80%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: "Lora";
+    text-decoration: none;
+    color: inherit;
+
+    transition: 0.2s;
+}
+
+.signature-card:hover {
+    color: inherit;
+}
+
+.signature-card .card-inside {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signature-card .card-inside > img {
+    width: 100%;
+    height: 13em;
+    object-fit: cover;
+}
+
+.signature-card .card-inside > h2 {
+    margin: 0.75em 0;
+    text-align: center;
+    font-weight: 700;
+}
+
+.signature-card .card-inside > .vertical-line {
+    width: 80%;
+    height: 1px;
+    margin: 0;
+    opacity: 1;
+    background-color: white;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 0.5em;
+}
+
+.signature-card .card-inside .square {
+    width: 6px;
+    height: 6px;
+    rotate: 45deg;
+    background-color: white;
+    position: absolute;
+}
+
+.signature-card .card-inside ul {
+    font-weight: 500;
+    text-align: center;
+    list-style-position: inside;
+    padding: 0;
+    font-size: 14pt;
+}
+
+.signature-card .card-inside ul li {
+    margin-top: 1.25em;
+}
+
+.signature-card .button {
+    width: 80%;
+    margin-bottom: 2em;
+    padding: 1em;
+    border: none;
+    background-color: #232323;
+    color: white;
+    font-family: "Lora";
+    font-weight: 500;
+    text-align: center;
+}

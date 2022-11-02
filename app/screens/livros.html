@@ -50,12 +50,6 @@
                         </a>
                     </li>
                     <li>
-                        <a href="http://127.0.0.1:5000/embreve" class="nav-link text-white">
-                            <img src="http://127.0.0.1:5000/images/svg/dado.svg" alt="" />
-                            Dados
-                        </a>
-                    </li>
-                    <li>
                         <a
                             href="http://127.0.0.1:5000/livros"
                             class="nav-link text-white"
@@ -118,5 +112,23 @@
             integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
             crossorigin="anonymous"
         ></script>
+
+        <script>
+            const livros = document.querySelectorAll('main a')
+
+            livros.forEach((el) => {
+                const text = el.children[0]
+
+                el.addEventListener('mouseover', () => {
+                    text.style.fontSize = "38pt"
+                    text.style.textShadow = "0px 0px 10px #FFF"
+                })
+                
+                el.addEventListener('mouseleave', () => {
+                    text.style.fontSize = "32pt"
+                    text.style.textShadow = "0px 0px 10px #000000"
+                })
+            })
+        </script>
     </body>
 </html>

@@ -225,6 +225,14 @@ def livros():
     return render_template('livros.html', apelido=session['apelido'])
 
 
+@app.route("/assinaturas/")
+def assinaturas():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
+    return render_template('assinaturas.html', apelido=session['apelido'])
+
+
 @app.route("/perfil/", methods=['GET', 'POST'])
 def perfil():
     if 'usuario' not in session:
