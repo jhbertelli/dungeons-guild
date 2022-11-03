@@ -52,12 +52,15 @@ main::before {
     width: 100%;
     height: 13em;
     object-fit: cover;
+    transition: 0.2s;
 }
 
 .signature-card .card-inside > h2 {
     margin: 0.75em 0;
     text-align: center;
     font-weight: 700;
+    transition: 0.2s;
+    font-size: 2rem;
 }
 
 .signature-card .card-inside > .vertical-line {
@@ -92,6 +95,8 @@ main::before {
 
 .signature-card .card-inside ul li {
     margin-top: 1.25em;
+    font-size: 14pt;
+    transition: 0.2s;
 }
 
 .signature-card .button {
@@ -104,4 +109,6 @@ main::before {
     font-family: "Lora";
     font-weight: 500;
     text-align: center;
+    font-size: 16px;
+    transition: 0.2s;
 }
