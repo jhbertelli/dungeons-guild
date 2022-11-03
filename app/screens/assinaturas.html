@@ -86,7 +86,7 @@
                 <div class="button">Já Adquirido</div>
             </a>
             </div>
-            <a href="#" class="signature-card">
+            <a href="#" class="signature-card" data-bs-toggle="modal" data-bs-target="#pagamento">
                 <div class="card-inside">
                     <img src="/images/open-treasure.png" alt="" />
                     <h2>Versão Paga</h2>
@@ -103,6 +103,34 @@
                 <div class="button">R$6,99</div>
             </a>
         </main>
+
+        <form method="post" class="modal fade" id="pagamento" tabindex="-1" aria-labelledby="pagamentoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="pagamentoLabel">Pagamento</h1>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="num-cartao">Número do cartão</label>
+                        <input type="text" name="num-cartao" id="num-cartao" placeholder="Insira o número do seu cartão..." maxlength="16">
+                        <div class="flex" style="gap: 1em;">
+                            <div>
+                                <label for="num-cartao">Número do cartão</label>
+                                <input type="text" name="num-cartao" id="num-cartao" placeholder="Insira o número do seu cartão..." maxlength="16">
+                            </div>
+                            <div>
+                                <label for="num-cartao">Número do cartão</label>
+                                <input type="text" name="num-cartao" id="num-cartao" placeholder="Insira o número do seu cartão..." maxlength="16">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Aprimorar conta</button>
+                    </div>
+                </div>
+            </div>
+        </form>
 
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
