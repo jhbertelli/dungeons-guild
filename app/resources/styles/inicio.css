@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Trirong:wght@300;600&display=swap');
-
-*{
+@import url('https://fonts.googleapis.com/css2?family=Maitree&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
     margin: 0px;
     padding: 0px;
 }
@@ -95,7 +95,7 @@ a{
 .iniciorpg{
     width: 100%;
     height: 450px;
-    background-color: #1D1D1D;
+    background-color: #232323;
     position: relative;
 }
 
@@ -129,6 +129,8 @@ hr {
 
 .iniciorpg2 {
     position: relative;
+    display: flex;
+    align-items: center;
     z-index: 1;
     width: 1583px;
     height: 600px;
@@ -136,4 +138,128 @@ hr {
 
 .iniciorpg3 {
     color: white;
+    max-width: 668px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-left: 850px;
+    font-family: 'Trirong';
+    font-size: 25px;
+}
+
+.iniciorpg4 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 25px;
+    color: white;
+    align-items: center;
+    background-color: #232323;
+}
+
+.iniciorpg4 img {
+    width: 400px;
+}
+
+.iniciorpg5{
+    background-color: #232323;
+    width: 100%;
+    height: 2800px;
+}
+
+.iniciorpg6{
+    width: 1200px;
+    height: 880px;
+    background-color: #1D1D1D;
+    margin-left: 200px;
+}
+
+.iniciorpg6 img{
+    width: 800px;
+    margin-left: 220px;
+    margin-top: 50px;
+}
+
+.iniciorpg6 h1{
+    color:white;
+    display: flex;
+    justify-content: center;
+    font-family: 'Maitree', serif;
+}
+
+.iniciotexto1 {
+    margin-bottom: 30px;
+    margin-top: 30px;
+    font-family: 'Maitree', serif;
+    font-size: 20px;
+}
+
+.iniciotexto2{
+    max-width: 800px;
+    margin-left: 200px;
+    font-family: 'Lora', serif;
+    font-size: 20px;
+}
+
+.iniciotexto3{
+    margin-top: 30px;
+    max-width: 800px;
+    margin-top: 40px;
+    margin-left: 200px;
+    font-size: 20px;
+    font-family: 'Lora', serif;
+}
+
+.iniciorpg7{
+    width: 1200px;
+    height: 880px;
+    margin-top: 100px;
+    background-color: #1D1D1D;
+    margin-left: 200px;
+}
+
+.iniciorpg7 img{
+    width: 800px;
+    margin-left: 220px;
+    margin-top: 50px;
+}
+
+.iniciorpg7 h1{
+    color:white;
+    display: flex;
+    justify-content: center;
+    font-family: 'Maitree', serif;
+    max-width: 800px;
+    margin-left: 220px;
+    font-size: 20px;
+}
+
+.iniciorpg8{
+    width: 1200px;
+    height: 780px;
+    margin-top: 100px;
+    background-color: #1D1D1D;
+    margin-left: 200px;
+}
+
+.iniciorpg8 img{
+    width: 800px;
+    margin-left: 220px;
+    margin-top: 50px;
+}
+
+
+.iniciorpg8 h1{
+    color:white;
+    display: flex;
+    justify-content: center;
+    font-family: 'Maitree', serif;
+    max-width: 800px;
+    margin-left: 220px;
+    font-size: 20px;
+}
+
+.fucker{
+    color: black;
+    height: 30px;
 }
