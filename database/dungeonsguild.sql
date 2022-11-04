@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 17-Out-2022 às 03:27
+-- Tempo de geração: 04-Nov-2022 às 14:30
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -54,6 +54,25 @@ INSERT INTO `antecedentes` (`id`, `antecedente`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `assinaturas`
+--
+
+CREATE TABLE `assinaturas` (
+  `id_assinatura` int(11) NOT NULL,
+  `nome_assinatura` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `assinaturas`
+--
+
+INSERT INTO `assinaturas` (`id_assinatura`, `nome_assinatura`) VALUES
+(1, 'Versão Gratuita'),
+(2, 'Versão Paga');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `cadastro`
 --
 
@@ -63,17 +82,19 @@ CREATE TABLE `cadastro` (
   `apelido_cadastro` varchar(60) NOT NULL,
   `email_cadastro` varchar(50) NOT NULL,
   `senha_cadastro` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
-  `data_conta` timestamp NOT NULL DEFAULT current_timestamp()
+  `data_conta` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id_assinatura` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `cadastro`
 --
 
-INSERT INTO `cadastro` (`id_cadastro`, `nome_cadastro`, `apelido_cadastro`, `email_cadastro`, `senha_cadastro`, `data_conta`) VALUES
-(1, 'Rafael Eduardo Gonçalves', 'RafaEg', 'rafa@gmail.com', '123', '2022-10-02 17:32:58'),
-(2, 'Renato Silva', 'Renatinho123', 'renatosilva@gmail.com', '123123', '2022-10-09 05:27:51'),
-(3, 'Gabriel Costa', 'Uhuton', 'gabriel@example.com', 'senhaDaora', '2022-10-09 16:33:03');
+INSERT INTO `cadastro` (`id_cadastro`, `nome_cadastro`, `apelido_cadastro`, `email_cadastro`, `senha_cadastro`, `data_conta`, `id_assinatura`) VALUES
+(1, 'Rafael Eduardo Gonçalves', 'RafaEg', 'rafa@gmail.com', '123123', '2022-10-02 17:32:58', 1),
+(2, 'Renato Silva', 'Renatinho123', 'renatosilva@gmail.com', '123123', '2022-10-09 05:27:51', 1),
+(3, 'Gabriel Fernandes da Costa', 'Uhuton', 'gabriel@example.com', 'senhaDaora', '2022-10-09 16:33:03', 2),
+(4, 'João Henrique Bertelli', 'bertelli', 'joao_h_bertelli@estudante.sc.senai.br', '123', '2022-11-04 13:25:00', 1);
 
 -- --------------------------------------------------------
 
@@ -269,10 +290,17 @@ ALTER TABLE `antecedentes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `assinaturas`
+--
+ALTER TABLE `assinaturas`
+  ADD PRIMARY KEY (`id_assinatura`);
+
+--
 -- Índices para tabela `cadastro`
 --
 ALTER TABLE `cadastro`
-  ADD PRIMARY KEY (`id_cadastro`);
+  ADD PRIMARY KEY (`id_cadastro`),
+  ADD KEY `id_assinatura` (`id_assinatura`);
 
 --
 -- Índices para tabela `classes`
@@ -327,6 +355,12 @@ ALTER TABLE `antecedentes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT de tabela `assinaturas`
+--
+ALTER TABLE `assinaturas`
+  MODIFY `id_assinatura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de tabela `cadastro`
 --
 ALTER TABLE `cadastro`
@@ -371,6 +405,12 @@ ALTER TABLE `tendencias`
 --
 -- Restrições para despejos de tabelas
 --
+
+--
+-- Limitadores para a tabela `cadastro`
+--
+ALTER TABLE `cadastro`
+  ADD CONSTRAINT `cadastro_ibfk_1` FOREIGN KEY (`id_assinatura`) REFERENCES `assinaturas` (`id_assinatura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `pericias`

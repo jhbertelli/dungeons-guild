@@ -101,7 +101,7 @@ def api_personagens_usuario():
 def api_perfil_usuario():
     cursor = db.connection.cursor(cursors.DictCursor)
     cursor.execute(f'''SELECT nome_cadastro, apelido_cadastro, email_cadastro, data_conta,
-        COUNT(personagem.id_personagem) AS quant_personagem FROM cadastro
+        COUNT(personagem.id_personagem) AS quant_personagem, id_assinatura FROM cadastro
         JOIN personagem ON personagem.id_usuario = cadastro.id_cadastro
         WHERE id_cadastro = {session['usuario']}''')
     row = cursor.fetchone()
@@ -115,6 +115,7 @@ def api_perfil_usuario():
     user['email'] = row['email_cadastro']
     user['data_conta'] = date_account
     user['quant_personagem'] = row['quant_personagem']
+    user['assinatura'] = row['id_assinatura']
 
     return jsonify(user)
 
@@ -341,6 +342,15 @@ def ficha(id):
 
 @app.route("/ficha/criar/", methods=['GET', 'POST'])
 def criar_ficha():
+    sql = f"SELECT COUNT(id_personagem) AS quant_personagem FROM `personagem` WHERE id_usuario = {session['usuario']}"
+
+    cursor = db.connection.cursor(cursors.DictCursor)
+    cursor.execute(sql)
+    row = cursor.fetchone()
+
+    if row['quant_personagem'] >= 3:
+        return redirect('/personagens/')
+
     if request.method == 'GET':
         return render_template('criar-ficha.html', usuario=session['apelido'])
 
@@ -434,7 +444,6 @@ def criar_ficha():
         lista_ficha["tesouro"] = ficha.get("tesouro").strip()
         lista_ficha["aliados"] = ficha.get("aliados").strip()
 
-        cursor = db.connection.cursor(cursors.DictCursor)
 
         sql = f'''INSERT INTO `personagem`
         (`nome_personagem`, `url_imagem` ,`vida_atual`, `vida_total`, `id_classe`, `nivel_personagem`, `id_antecedente`,

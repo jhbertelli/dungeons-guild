@@ -107,8 +107,13 @@ main {
 
     color: white;
     text-decoration: none;
-    line-height: 98px;
-    text-align: center;
+    
+    span {
+        line-height: 32px;
+        font-size: 20pt;
+        text-align: center;
+        margin: 2rem 0 0 0;
+    }
 }
 
 .criar-personagem:hover {

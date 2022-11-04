@@ -19,8 +19,8 @@
     }
 
     $sql = "INSERT INTO `cadastro`
-    (`nome_cadastro`, `apelido_cadastro`, `email_cadastro`, `senha_cadastro`)
-    VALUES ('$nome', '$apelido', '$email', '$senha')";
+    (`nome_cadastro`, `apelido_cadastro`, `email_cadastro`, `senha_cadastro`, `id_assinatura`)
+    VALUES ('$nome', '$apelido', '$email', '$senha', 1)";
 
     $insert = mysqli_query($con, $sql); # realiza a inserção do cadastro no banco
     

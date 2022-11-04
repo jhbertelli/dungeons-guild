@@ -6,9 +6,9 @@ signatureCards.forEach((el) => {
         el.style.width = "31em"
         el.style.height = "85%"
         el.querySelector("img").style.height = "15em"
-        el.querySelector("h2").style.fontSize = "2.25rem"
+        el.querySelector("h2").style.fontSize = "2rem"
         el.querySelectorAll("li").forEach((li) => {
-            li.style.fontSize = "16pt"
+            li.style.fontSize = "15pt"
         })
         el.querySelector(".button").style.fontSize = "18px"
     })
@@ -17,9 +17,9 @@ signatureCards.forEach((el) => {
         el.style.width = "27.5em"
         el.style.height = "80%"
         el.querySelector("img").style.height = "13em"
-        el.querySelector("h2").style.fontSize = "2rem"
+        el.querySelector("h2").style.fontSize = "1.75rem"
         el.querySelectorAll("li").forEach((li) => {
-            li.style.fontSize = "14pt"
+            li.style.fontSize = "13pt"
         })
         el.querySelector(".button").style.fontSize = "16px"
     })
@@ -27,9 +27,20 @@ signatureCards.forEach((el) => {
 
 const modalInputs = document.querySelectorAll(".modal-body input")
 
-for (let i = 0; i < 3; i++) {
-    modalInputs[i].addEventListener("input", () => {
-        const numberRegex = /^\d+$/
-        
-    })
+const validateNumber = (el) => {
+    // previne o usuário a inserir letra no input de nº do cartão e cód. segurança
+    const value = el.target.value
+    const numberRegex = /^\d+$/
+    let newValue = ''
+    
+    for (let i = 0; i < value.length; i++) {
+        if (!numberRegex.test(value[i])) continue
+
+        newValue += value[i]
+    }
+
+    el.target.value = newValue
 }
+
+modalInputs[0].addEventListener("input", validateNumber)
+modalInputs[2].addEventListener("input", validateNumber)

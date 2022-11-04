@@ -10,7 +10,19 @@ modal.addEventListener("hide.bs.modal", () => {
 })
 
 $.getJSON("/api/personagens_usuario/", (json) => {
-    // pega todas as tendencias da api
+    // adiciona os cards dos personagens
+    const cardsDiv = document.querySelector(".meus-personagens")
+    console.log(json.length)
+    
+    if (json.length < 3) {
+        cardsDiv.innerHTML = `<a href="/ficha/criar" class="criar-personagem">
+            <img src="/images/svg/plus-icon.svg" alt="">
+            <span>Criar Personagem</span>
+        </a>`
+    } else {
+        cardsDiv.innerHTML = `<div class="criar-personagem" style="display: none;"></div>`
+    }
+
     for (let i = 0; i < json.length; i++) {
         document.querySelector(".criar-personagem").insertAdjacentHTML(
             "afterend",
