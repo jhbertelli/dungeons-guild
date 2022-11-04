@@ -109,23 +109,28 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="pagamentoLabel">Pagamento</h1>
+                        <img src="/images/svg/credit-card.svg" alt="">
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <label for="num-cartao">Número do cartão</label>
-                        <input type="text" name="num-cartao" id="num-cartao" placeholder="Insira o número do seu cartão..." maxlength="16">
+                        <input type="number" name="num-cartao" id="num-cartao" placeholder="Insira o número do seu cartão..." maxlength="16">
                         <div class="flex" style="gap: 1em;">
                             <div>
-                                <label for="num-cartao">Número do cartão</label>
-                                <input type="text" name="num-cartao" id="num-cartao" placeholder="Insira o número do seu cartão..." maxlength="16">
+                                <label for="data-vencimento">Data de vencimento</label>
+                                <input type="text" name="data-vencimento" id="data-vencimento" placeholder="MM/AA" maxlength="4">
                             </div>
                             <div>
-                                <label for="num-cartao">Número do cartão</label>
-                                <input type="text" name="num-cartao" id="num-cartao" placeholder="Insira o número do seu cartão..." maxlength="16">
+                                <label for="cod-seguranca">Código de segurança</label>
+                                <input type="text" name="cod-seguranca" id="cod-seguranca" placeholder="Código..." maxlength="3">
                             </div>
                         </div>
+                        <label for="nome-cartao">Nome no cartão</label>
+                        <input type="text" name="nome-cartao" id="nome-cartao" placeholder="Insira o nome no seu cartão...">
                     </div>
                     <div class="modal-footer">
+                        <span>Total: R$6,99</span>
+                        <img src="/images/svg/single-money.svg" alt="">
                         <button type="submit" class="btn btn-primary">Aprimorar conta</button>
                     </div>
                 </div>
@@ -138,32 +143,6 @@
             crossorigin="anonymous"
         ></script>
 
-        <script>
-            const cards = document.querySelectorAll('.signature-card')
-
-            cards.forEach((el) => {
-                el.addEventListener('mouseover', () => {
-                    el.style.width = "31em"
-                    el.style.height = "85%"
-                    el.querySelector('img').style.height = "15em"
-                    el.querySelector('h2').style.fontSize = "2.25rem"
-                    el.querySelectorAll('li').forEach((li) => {
-                        li.style.fontSize = "16pt"
-                    })
-                    el.querySelector('.button').style.fontSize = "18px"
-                })
-                
-                el.addEventListener('mouseleave', () => {
-                    el.style.width = "27.5em"
-                    el.style.height = "80%"
-                    el.querySelector('img').style.height = "13em"
-                    el.querySelector('h2').style.fontSize = "2rem"
-                    el.querySelectorAll('li').forEach((li) => {
-                        li.style.fontSize = "14pt"
-                    })
-                    el.querySelector('.button').style.fontSize = "16px"
-                })
-            })
-        </script>
+        <script src="/js/assinaturas.js"></script>
     </body>
 </html>
