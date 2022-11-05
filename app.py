@@ -226,12 +226,23 @@ def livros():
     return render_template('livros.html', apelido=session['apelido'])
 
 
-@app.route("/assinaturas/")
+@app.route("/assinaturas/", methods=['GET', 'POST'])
 def assinaturas():
     if 'usuario' not in session:
         return redirect(url_for('login'))
+    
+    if request.method == 'GET':
+        return render_template('assinaturas.html', apelido=session['apelido'])
+    
+    if request.method == 'POST':
+        cursor = db.connection.cursor(cursors.DictCursor)
 
-    return render_template('assinaturas.html', apelido=session['apelido'])
+        sql = f"UPDATE cadastro SET id_assinatura = 2 WHERE id_cadastro = {session['usuario']}"
+        
+        cursor.execute(sql)
+        db.connection.commit()
+
+        return render_template('assinaturas.html', apelido=session['apelido'])
 
 
 @app.route("/perfil/", methods=['GET', 'POST'])
@@ -342,13 +353,15 @@ def ficha(id):
 
 @app.route("/ficha/criar/", methods=['GET', 'POST'])
 def criar_ficha():
-    sql = f"SELECT COUNT(id_personagem) AS quant_personagem FROM `personagem` WHERE id_usuario = {session['usuario']}"
+    sql_count_personagens_assinatura = f'''SELECT cadastro.id_assinatura, COUNT(id_personagem) AS quant_personagem
+        FROM personagem JOIN cadastro ON personagem.id_usuario = cadastro.id_cadastro
+        WHERE id_usuario = {session['usuario']}'''
 
     cursor = db.connection.cursor(cursors.DictCursor)
-    cursor.execute(sql)
-    row = cursor.fetchone()
+    cursor.execute(sql_count_personagens_assinatura)
+    row_personagens_assinatura = cursor.fetchone()
 
-    if row['quant_personagem'] >= 3:
+    if row_personagens_assinatura['quant_personagem'] >= 3 and row_personagens_assinatura["id_assinatura"] == 1:
         return redirect('/personagens/')
 
     if request.method == 'GET':

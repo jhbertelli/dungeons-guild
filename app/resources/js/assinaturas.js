@@ -1,3 +1,17 @@
+$.getJSON("/api/perfil_usuario/", (json) => {
+    const paidVersionCard = document.getElementsByClassName("signature-card")[1]
+
+    if (json["assinatura"] === 1) {
+        paidVersionCard.setAttribute("data-bs-toggle", "modal")
+        paidVersionCard.setAttribute("data-bs-target", "#pagamento")
+
+        return
+    }
+
+    document.querySelector("form").remove()
+    paidVersionCard.lastElementChild.textContent = "Já Adquirido"
+})
+
 const signatureCards = document.querySelectorAll(".signature-card")
 
 signatureCards.forEach((el) => {
@@ -31,8 +45,8 @@ const validateNumber = (el) => {
     // previne o usuário a inserir letra no input de nº do cartão e cód. segurança
     const value = el.target.value
     const numberRegex = /^\d+$/
-    let newValue = ''
-    
+    let newValue = ""
+
     for (let i = 0; i < value.length; i++) {
         if (!numberRegex.test(value[i])) continue
 

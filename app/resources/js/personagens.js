@@ -9,19 +9,28 @@ modal.addEventListener("hide.bs.modal", () => {
     }, 150)
 })
 
-$.getJSON("/api/personagens_usuario/", (json) => {
+$.getJSON("/api/personagens_usuario/", async (json) => {
     // adiciona os cards dos personagens
     const cardsDiv = document.querySelector(".meus-personagens")
     console.log(json.length)
-    
-    if (json.length < 3) {
-        cardsDiv.innerHTML = `<a href="/ficha/criar" class="criar-personagem">
-            <img src="/images/svg/plus-icon.svg" alt="">
-            <span>Criar Personagem</span>
-        </a>`
-    } else {
-        cardsDiv.innerHTML = `<div class="criar-personagem" style="display: none;"></div>`
-    }
+
+    await $.getJSON("/api/perfil_usuario/", (usuario) => {
+        if (usuario["assinatura"] === 1) {
+            if (json.length < 3) {
+                cardsDiv.innerHTML = `<a href="/ficha/criar" class="criar-personagem">
+                    <img src="/images/svg/plus-icon.svg" alt="">
+                    <span>Criar Personagem</span>
+                </a>`
+            } else {
+                cardsDiv.innerHTML = `<div class="criar-personagem" style="display: none;"></div>`
+            }
+        } else {
+            cardsDiv.innerHTML = `<a href="/ficha/criar" class="criar-personagem">
+                <img src="/images/svg/plus-icon.svg" alt="">
+                <span>Criar Personagem</span>
+            </a>`
+        }
+    })
 
     for (let i = 0; i < json.length; i++) {
         document.querySelector(".criar-personagem").insertAdjacentHTML(
@@ -94,7 +103,7 @@ $.getJSON("/api/personagens_usuario/", (json) => {
 
         thisCard.addEventListener("click", (e) => {
             const deleteButton = thisCard.querySelector(".delete-button")
-            
+
             // caso o usuário clicar no botão de excluir, um pop-up aparecerá
             if (e.target === deleteButton || e.target === deleteButton.children[0]) {
                 modalCharacterValue.value = json[i].id_personagem
@@ -108,7 +117,7 @@ $.getJSON("/api/personagens_usuario/", (json) => {
         // evento para botões secundários do mouse
         thisCard.addEventListener("auxclick", (e) => {
             const editButton = thisCard.querySelector(".edit-button")
-            
+
             // apenas abre a página de editar ficha em outra página,
             // caso o ícone de editar for clicado com o botão do meio
             if (e.target === editButton || e.target === editButton.children[0]) return
