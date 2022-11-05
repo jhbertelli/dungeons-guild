@@ -200,7 +200,7 @@
 
             function changeBonuses(element) {
                 // altera o bônus das proficiências
-                const value = element.textContent
+                const value = element.value
                 const text = element.closest("p").lastElementChild
                 const salvaguardaId = element.getAttribute("id-salvaguarda")
 
@@ -939,91 +939,7 @@
             crossorigin="anonymous"
         ></script>
 
-        <script>
-            const inputIdiomas = document.querySelector("#idiomas-proficiencias")
-            const inputCaracteristicas = document.querySelector("#caracteristicas")
-            const inputHistoria = document.querySelector("#historia")
-            const inputAliados = document.querySelector("#aliados")
-            const inputTesouro = document.querySelector("#tesouro")
-            const inputEquipamentos = document.querySelector("#equipamentos")
-
-            inputCounterAndMaxLength(inputIdiomas, 300)
-            inputCounterAndMaxLength(inputCaracteristicas, 500)
-            inputCounterAndMaxLength(inputHistoria, 2000)
-            inputCounterAndMaxLength(inputAliados, 200)
-            inputCounterAndMaxLength(inputTesouro, 200)
-            inputCounterAndMaxLength(inputEquipamentos, 500)
-
-            document.getElementById('level').addEventListener('input', (e) => {
-                const bonusProficienciaInput = document.querySelector("#bonus-proficiencia")
-                let level = e.target.value
-
-                if (level < 0) e.target.value = 0
-                if (level > 20) e.target.value = 20
-
-                switch (true) {
-                    case level <= 4:
-                        bonusProficienciaInput.value = 2
-                        break
-                    case level <= 8:
-                        bonusProficienciaInput.value = 3
-                        break
-                    case level <= 12:
-                        bonusProficienciaInput.value = 4
-                        break
-                    case level <= 16:
-                        bonusProficienciaInput.value = 5
-                        break
-                    case level > 16:
-                        bonusProficienciaInput.value = 6
-                        break
-                }
-
-                // altera os valores dos testes e perícias ao mudar o bônus de proficiência
-                const bonus = Number(document.querySelector("#bonus-proficiencia").value)
-                const bonusesArray = document.querySelectorAll("#bonus")
-
-                for (let i = 0; i < bonusesArray.length; i++) {
-                    const previousBonus = Number(bonusesArray[i].textContent)
-                    const test = document.querySelectorAll(`.testes-resistencia div`)[i]
-                    const pericias = document.querySelectorAll(`.pericias [salvaguarda="${[i + 1]}"]`)
-                    
-                    pericias.forEach((el) => {
-                        let periciasPreviousBonus = Number(bonusesArray[el.getAttribute('salvaguarda') - 1].textContent)
-                        
-                        if (el.closest('div').firstElementChild.checked) {
-                            // altera o valor da perícia com o bônus de proficiência caso esteja marcado
-                            if (periciasPreviousBonus == 0 && bonus == 0) {
-                                return (el.closest("label").lastElementChild.textContent = "0")
-                            }
-                            
-                            if (periciasPreviousBonus + bonus <= 0) {
-                                el.closest("label").lastElementChild.textContent = (periciasPreviousBonus + bonus)
-                            } else {
-                                el.closest("label").lastElementChild.textContent = "+" + (periciasPreviousBonus + bonus)
-                            }
-                        }
-                    })
-
-                    if (test.firstElementChild.checked) {
-                        let idSalvaguarda = test.lastElementChild.lastElementChild.getAttribute('salvaguarda')
-                        
-                        document.querySelectorAll(`.testes-resistencia [salvaguarda="${idSalvaguarda}"]`).forEach((el) => {
-                            // altera o valor do teste de resistência com o bônus de proficiência caso esteja marcado
-                            if (previousBonus == 0 && bonus == 0) {
-                                return (el.closest("label").lastElementChild.textContent = "0")
-                            }
-
-                            if (previousBonus + bonus <= 0) {
-                                el.closest("label").lastElementChild.textContent = previousBonus + bonus
-                            } else {
-                                el.closest("label").lastElementChild.textContent = "+" + (previousBonus + bonus)
-                            }
-                        })
-                    }
-                }
-            })
-        </script>
+        <script src="/js/editarficha.js"></script>
         <script>
             window.addEventListener("load", () => {
                 $.getJSON("http://127.0.0.1:5000/api/personagem/{{ id }}/editar/", (json) => {
@@ -1084,8 +1000,6 @@
                     // lista de bônus
                     let listaBonus = json["lista_bonus"].replace(/'/g, '"')
                     listaBonus = JSON.parse(listaBonus)
-                    console.log(listaBonus)
-                    console.log(numerosInfoPrincipal)
                     
                     numerosInfoPrincipal[0].value = listaBonus["inspiracao"]
 
@@ -1109,7 +1023,6 @@
 
                     // bônus de proficiência
                     const proficiencyBonus = Number(numerosInfoPrincipal[1].value)
-                    console.log(proficiencyBonus)
                     
                     numerosInfoPrincipal[2].value = listaBonus["percepcao"]
                     numerosInfoPrincipal[3].value = listaBonus["dados_vida"]
@@ -1123,7 +1036,7 @@
 
                     let listaSalvaguardas = json["salvaguardas"].replace(/'/g, '"')
                     listaSalvaguardas = JSON.parse(listaSalvaguardas)
-                    console.log(salvaguardas)
+
                     salvaguardas[0].value = listaSalvaguardas["forca"]
                     salvaguardas[1].value = listaSalvaguardas["destreza"]
                     salvaguardas[2].value = listaSalvaguardas["constituicao"]
@@ -1226,20 +1139,15 @@
                     // magias
 
                     let magiasUsuario = json["magias"].replace(/'/g, '"')
-                    let magiasSelect = document.querySelector('.magias select')
-                    console.log(magiasSelect)
                     magiasUsuario = JSON.parse(magiasUsuario)
-
                     
                     $.getJSON("http://127.0.0.1:5000/api/magias", (magias) => {
                         // adiciona as magias do usuário no campo "Magias"
-                        for (let i = 1; i <= magiasSelect.children.length; i++) {
-                            // console.log(magiasSelect.children[i])
+                        for (let i = 1; i < magiasSelect.children.length; i++) {
                             if (magiasUsuario.includes(String(i))) {
-                                console.log(magiasSelect.children[i])
-                                magiasSelect.selectedIndex += i
-                                // magiasSelect.children[i].style.backgroundColor = "dodgerblue"
-                                // magiasSelect.children[i].style.color = "white"
+                                magiasSelect.children[i].selected = true
+                                magiasSelect.children[i].style.backgroundColor = "dodgerblue"
+                                magiasSelect.children[i].style.color = "white"
                             }
                         }
                     })
@@ -1258,6 +1166,5 @@
                 })
             })
         </script>
-        <script src="/js/criarficha.js"></script>
     </body>
 </html>

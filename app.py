@@ -38,14 +38,9 @@ def send_file(filename):  # torna disponível os arquivos da pasta 'assets'
 # APIs
 @app.route("/api/pericias/")
 def api_pericias():
-    return get_from_database(
-        '''
-            SELECT id_pericia, nome_pericia, salvaguardas.id_salvaguardas, salvaguardas.nome_salvaguarda
-            FROM pericias
-            INNER JOIN salvaguardas
-            ON pericias.id_salvaguardas = salvaguardas.id_salvaguardas
-            ORDER BY pericias.id_pericia
-        ''')
+    return get_from_database('''SELECT id_pericia, nome_pericia, salvaguardas.id_salvaguardas, salvaguardas.nome_salvaguarda
+            FROM pericias INNER JOIN salvaguardas ON pericias.id_salvaguardas = salvaguardas.id_salvaguardas
+            ORDER BY pericias.id_pericia''')
 
 
 @app.route("/api/classes/")
@@ -105,7 +100,7 @@ def api_perfil_usuario():
         JOIN personagem ON personagem.id_usuario = cadastro.id_cadastro
         WHERE id_cadastro = {session['usuario']}''')
     row = cursor.fetchone()
-    
+
     date_account = str(row['data_conta'])
 
     user = {}
@@ -131,6 +126,7 @@ def inicio():
     return render_template('inicio.html')
 
 # páginas de cadastro e login
+
 @app.route("/cadastro/", methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'GET':
@@ -144,7 +140,7 @@ def cadastro():
 def login():
     if request.method == 'GET':
         return render_template('login.html')
-        
+
     if request.method == 'POST':
         cursor = db.connection.cursor(cursors.DictCursor)
         cursor.execute(f"SELECT * FROM cadastro WHERE email_cadastro = \
@@ -164,10 +160,10 @@ def login():
 def personagens():
     if 'usuario' not in session:
         return redirect(url_for('login'))
-    
+
     if len(api_personagens_usuario().json) == 0:
         return render_template('personagensvazio.html', apelido=session['apelido'])
-    
+
     return render_template('personagens.html', apelido=session['apelido'])
 
 
@@ -175,13 +171,13 @@ def personagens():
 def excluir_personagem():
     if 'usuario' not in session:
         return redirect(url_for('login'))
-    
+
     cursor = db.connection.cursor(cursors.DictCursor)
 
     id_personagem = request.form.get('id-personagem')
 
     sql = f"DELETE FROM personagem WHERE id_personagem = {id_personagem}"
-    
+
     cursor.execute(sql)
     db.connection.commit()
     cursor.close()
@@ -230,15 +226,15 @@ def livros():
 def assinaturas():
     if 'usuario' not in session:
         return redirect(url_for('login'))
-    
+
     if request.method == 'GET':
         return render_template('assinaturas.html', apelido=session['apelido'])
-    
+
     if request.method == 'POST':
         cursor = db.connection.cursor(cursors.DictCursor)
 
         sql = f"UPDATE cadastro SET id_assinatura = 2 WHERE id_cadastro = {session['usuario']}"
-        
+
         cursor.execute(sql)
         db.connection.commit()
 
@@ -252,7 +248,7 @@ def perfil():
 
     if request.method == 'GET':
         return render_template('perfil.html', apelido=session['apelido'])
-    
+
     if request.method == 'POST':
         cursor = db.connection.cursor(cursors.DictCursor)
 
@@ -261,9 +257,9 @@ def perfil():
 
             if new_apelido == '':
                 return redirect(url_for('perfil'))
-            
+
             sql = f"UPDATE cadastro SET apelido_cadastro = '{new_apelido}' WHERE id_cadastro = {session['usuario']}"
-            
+
             session['apelido'] = new_apelido
 
             cursor.execute(sql)
@@ -276,9 +272,9 @@ def perfil():
 
             if new_nome == '':
                 return redirect(url_for('perfil'))
-            
+
             sql = f"UPDATE cadastro SET nome_cadastro = '{new_nome}' WHERE id_cadastro = {session['usuario']}"
-                        
+
             cursor.execute(sql)
             db.connection.commit()
 
@@ -289,14 +285,14 @@ def perfil():
 
             if new_email == '':
                 return redirect(url_for('login'))
-            
+
             sql = f"UPDATE cadastro SET email_cadastro = '{new_email}' WHERE id_cadastro = {session['usuario']}"
-                        
+
             cursor.execute(sql)
             db.connection.commit()
 
             session.clear()
-            
+
             return redirect(url_for('perfil'))
 
         if 'senha' in request.form:
@@ -304,14 +300,14 @@ def perfil():
 
             if new_password == '':
                 return redirect(url_for('perfil'))
-            
+
             sql = f"UPDATE cadastro SET senha_cadastro = '{new_password}' WHERE id_cadastro = {session['usuario']}"
-                        
+
             cursor.execute(sql)
             db.connection.commit()
 
             session.clear()
-            
+
             return redirect(url_for('login'))
 
 
@@ -373,7 +369,7 @@ def criar_ficha():
         for key in ficha:
             if ficha[key] == '':
                 return redirect('/ficha/criar/')
-        
+
         if 'img-personagem' not in request.files:
             return redirect('/ficha/criar/')
 
@@ -393,41 +389,8 @@ def criar_ficha():
         image.save(os.path.join('app/resources/images/fichas', filename))
         url_imagem = '/images/fichas/' + filename
         
-        lista_dinheiro = {
-            "pc": ficha.get("pc"),
-            "pp": ficha.get("pp"),
-            "pe": ficha.get("pe"),
-            "po": ficha.get("po"),
-            "pl": ficha.get("pl")
-        }
+        all_lists = get_lists_from_ficha(ficha)
         
-        lista_aparencia = {
-            "idade": int(ficha.get("idade")),
-            "altura": float(ficha.get("altura")),
-            "peso": float(ficha.get("peso")),
-            "cabelo": ficha.get("cabelo"),
-            "olho": ficha.get("olho"),
-            "pele": ficha.get("pele")
-        }
-
-        lista_bonus = {
-            "inspiracao" : int(ficha.get("inspiracao")),
-            "percepcao": int(ficha.get("percepcao")),
-            "dados_vida":  int(ficha.get("dados-vida")),
-            "classe_armadura":  int(ficha.get("classe-armadura")),
-            "iniciativa": int(ficha.get("iniciativa")),
-            "deslocamento": int(ficha.get("deslocamento"))
-        }
-
-        lista_salvaguardas = {
-            "forca": int(ficha.get("forca")),
-            "destreza": int(ficha.get("destreza")),
-            "constituicao": int(ficha.get("constituicao")),
-            "inteligencia": int(ficha.get("inteligencia")),
-            "sabedoria": int(ficha.get("sabedoria")),
-            "carisma": int(ficha.get("carisma"))
-        }
-
         lista_ficha = {}
 
         lista_ficha["nome_personagem"] = ficha.get("nome-personagem")
@@ -442,15 +405,15 @@ def criar_ficha():
         lista_ficha["tendencia"] = int(ficha.get("tendencia"))
         lista_ficha["xp_atual"] = int(ficha.get("xp-atual"))
         lista_ficha["xp_total"] = int(ficha.get("xp-total"))
-        lista_ficha["lista_aparencia"] = lista_aparencia
-        lista_ficha["lista_bonus"] = lista_bonus
+        lista_ficha["lista_aparencia"] = all_lists["lista_aparencia"]
+        lista_ficha["lista_bonus"] = all_lists["lista_bonus"]
         lista_ficha["cor_ficha"] = ficha.get("cor-ficha")
-        lista_ficha["salvaguardas"] = lista_salvaguardas
+        lista_ficha["salvaguardas"] = all_lists["lista_salvaguardas"]
         lista_ficha["pericias"] = ficha.getlist("pericias")
         lista_ficha["testes_resistencia"] = ficha.getlist("testes-resistencia")
         lista_ficha["idiomas_proficiencias"] = ficha.get("idiomas-proficiencias").strip()
         lista_ficha["equipamentos"] = ficha.get("equipamentos").strip()
-        lista_ficha["lista_dinheiro"] = lista_dinheiro
+        lista_ficha["lista_dinheiro"] = all_lists["lista_dinheiro"]
         lista_ficha["caracteristicas"] = ficha.get("caracteristicas").strip()
         lista_ficha["magias"] = ficha.getlist("magias")
         lista_ficha["historia"] = ficha.get("historia").strip()
@@ -490,7 +453,7 @@ def criar_ficha():
         "{lista_ficha["historia"]}",
         "{lista_ficha["tesouro"]}",
         "{lista_ficha["aliados"]}")'''
-        
+
         cursor.execute(sql)
         db.connection.commit()
 
@@ -499,10 +462,130 @@ def criar_ficha():
 
 @app.route("/ficha/<id>/editar/", methods=['GET', 'POST'])
 def editar_ficha(id):
+    cursor = db.connection.cursor(cursors.DictCursor)
+    
+    sql_verify_owner = f"SELECT `id_usuario` FROM `personagem` WHERE `id_personagem` = {id}"
+
+    cursor.execute(sql_verify_owner)
+    row_verify_owner = cursor.fetchone()
+
+    if row_verify_owner['id_usuario'] != session['usuario']:
+        return redirect('/personagens/')
+
     if request.method == 'GET':
         return render_template('editar-ficha.html', usuario=session['apelido'], id=id)
 
-    return
+    if request.method == 'POST':
+        ficha = request.form
+
+        for key in ficha:
+            if ficha[key] == '':
+                return redirect(f'/ficha/{id}/editar/')
+        
+        all_lists = get_lists_from_ficha(ficha)
+        
+        lista_ficha = {}
+
+        lista_ficha["nome_personagem"] = ficha.get("nome-personagem")
+        lista_ficha["vida_atual"] = int(ficha.get("vida-atual"))
+        lista_ficha["vida_total"] = int(ficha.get("vida-total"))
+        lista_ficha["classe"] = int(ficha.get("classe"))
+        lista_ficha["nivel"] = int(ficha.get("nivel"))
+        lista_ficha["antecedente"] = int(ficha.get("antecedente"))
+        lista_ficha["id_jogador"] = session["usuario"]
+        lista_ficha["raca"] = int(ficha.get("raca"))
+        lista_ficha["tendencia"] = int(ficha.get("tendencia"))
+        lista_ficha["xp_atual"] = int(ficha.get("xp-atual"))
+        lista_ficha["xp_total"] = int(ficha.get("xp-total"))
+        lista_ficha["lista_aparencia"] = all_lists["lista_aparencia"]
+        lista_ficha["lista_bonus"] = all_lists["lista_bonus"]
+        lista_ficha["cor_ficha"] = ficha.get("cor-ficha")
+        lista_ficha["salvaguardas"] = all_lists["lista_salvaguardas"]
+        lista_ficha["pericias"] = ficha.getlist("pericias")
+        lista_ficha["testes_resistencia"] = ficha.getlist("testes-resistencia")
+        lista_ficha["idiomas_proficiencias"] = ficha.get("idiomas-proficiencias").strip()
+        lista_ficha["equipamentos"] = ficha.get("equipamentos").strip()
+        lista_ficha["lista_dinheiro"] = all_lists["lista_dinheiro"]
+        lista_ficha["caracteristicas"] = ficha.get("caracteristicas").strip()
+        lista_ficha["magias"] = ficha.getlist("magias")
+        lista_ficha["historia"] = ficha.get("historia").strip()
+        lista_ficha["tesouro"] = ficha.get("tesouro").strip()
+        lista_ficha["aliados"] = ficha.get("aliados").strip()
+        
+        if 'img-personagem' not in request.files or request.files['img-personagem'].filename == '':
+            sql = f'''UPDATE personagem
+                SET nome_personagem="{lista_ficha["nome_personagem"]}",
+                vida_atual="{lista_ficha["vida_atual"]}",
+                vida_total="{lista_ficha["vida_total"]}",
+                id_classe="{lista_ficha["classe"]}",
+                nivel_personagem="{lista_ficha["nivel"]}",
+                id_antecedente="{lista_ficha["antecedente"]}",
+                id_raca="{lista_ficha["raca"]}",
+                id_tendencia="{lista_ficha["tendencia"]}",
+                xp_atual="{lista_ficha["xp_atual"]}",
+                xp_total="{lista_ficha["xp_total"]}",
+                lista_aparencia="{lista_ficha["lista_aparencia"]}",
+                lista_bonus="{lista_ficha["lista_bonus"]}",
+                cor_ficha="{lista_ficha["cor_ficha"]}",
+                salvaguardas="{lista_ficha["salvaguardas"]}",
+                pericias="{lista_ficha["pericias"]}",
+                testes_resistencia="{lista_ficha["testes_resistencia"]}",
+                idiomas_proficiencias="{lista_ficha["idiomas_proficiencias"]}",
+                equipamentos="{lista_ficha["equipamentos"]}",
+                lista_dinheiro="{lista_ficha["lista_dinheiro"]}",
+                caracteristicas="{lista_ficha["caracteristicas"]}",
+                magias="{lista_ficha["magias"]}",
+                historia="{lista_ficha["historia"]}",
+                tesouro="{lista_ficha["tesouro"]}",
+                aliados="{lista_ficha["aliados"]}"
+                WHERE id_personagem = {id}'''
+        else:
+            image = request.files['img-personagem']
+
+            # cria um nome diferente para o arquivo e salva
+            image.filename = create_file_name() + os.path.splitext(image.filename)[1]
+
+            # se por algum acaso o nome já existir na pasta
+            while image.filename in os.listdir('app/resources/images/fichas'):
+                image.filename = create_file_name() + os.path.splitext(image.filename)[1]
+
+            filename = secure_filename(image.filename)
+            image.save(os.path.join('app/resources/images/fichas', filename))
+            url_imagem = '/images/fichas/' + filename
+
+            sql = f'''UPDATE personagem
+                SET nome_personagem="{lista_ficha["nome_personagem"]}",
+                url_imagem="{url_imagem}",
+                vida_atual="{lista_ficha["vida_atual"]}",
+                vida_total="{lista_ficha["vida_total"]}",
+                id_classe="{lista_ficha["classe"]}",
+                nivel_personagem="{lista_ficha["nivel"]}",
+                id_antecedente="{lista_ficha["antecedente"]}",
+                id_raca="{lista_ficha["raca"]}",
+                id_tendencia="{lista_ficha["tendencia"]}",
+                xp_atual="{lista_ficha["xp_atual"]}",
+                xp_total="{lista_ficha["xp_total"]}",
+                lista_aparencia="{lista_ficha["lista_aparencia"]}",
+                lista_bonus="{lista_ficha["lista_bonus"]}",
+                cor_ficha="{lista_ficha["cor_ficha"]}",
+                salvaguardas="{lista_ficha["salvaguardas"]}",
+                pericias="{lista_ficha["pericias"]}",
+                testes_resistencia="{lista_ficha["testes_resistencia"]}",
+                idiomas_proficiencias="{lista_ficha["idiomas_proficiencias"]}",
+                equipamentos="{lista_ficha["equipamentos"]}",
+                lista_dinheiro="{lista_ficha["lista_dinheiro"]}",
+                caracteristicas="{lista_ficha["caracteristicas"]}",
+                magias="{lista_ficha["magias"]}",
+                historia="{lista_ficha["historia"]}",
+                tesouro="{lista_ficha["tesouro"]}",
+                aliados="{lista_ficha["aliados"]}"
+                WHERE id_personagem = {id}'''
+
+        cursor.execute(sql)
+        db.connection.commit()
+
+        return redirect('/personagens/')
+
 
 @app.route("/logout/", methods=['GET', 'POST'])
 def logout():

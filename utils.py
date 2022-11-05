@@ -44,3 +44,49 @@ def create_file_name():
         file_name += choice(numbers_letters)
 
     return file_name
+
+
+def get_lists_from_ficha(ficha):
+    lista_dinheiro = {
+        "pc": ficha.get("pc"),
+        "pp": ficha.get("pp"),
+        "pe": ficha.get("pe"),
+        "po": ficha.get("po"),
+        "pl": ficha.get("pl")
+    }
+
+    lista_aparencia = {
+        "idade": int(ficha.get("idade")),
+        "altura": float(ficha.get("altura")),
+        "peso": float(ficha.get("peso")),
+        "cabelo": ficha.get("cabelo"),
+        "olho": ficha.get("olho"),
+        "pele": ficha.get("pele")
+    }
+
+    lista_bonus = {
+        "inspiracao": int(ficha.get("inspiracao")),
+        "percepcao": int(ficha.get("percepcao")),
+        "dados_vida":  int(ficha.get("dados-vida")),
+        "classe_armadura":  int(ficha.get("classe-armadura")),
+        "iniciativa": int(ficha.get("iniciativa")),
+        "deslocamento": int(ficha.get("deslocamento"))
+    }
+
+    lista_salvaguardas = {
+        "forca": int(ficha.get("forca")),
+        "destreza": int(ficha.get("destreza")),
+        "constituicao": int(ficha.get("constituicao")),
+        "inteligencia": int(ficha.get("inteligencia")),
+        "sabedoria": int(ficha.get("sabedoria")),
+        "carisma": int(ficha.get("carisma"))
+    }
+
+    all_lists = {}
+    all_lists["lista_dinheiro"] = lista_dinheiro
+    all_lists["lista_aparencia"] = lista_aparencia
+    all_lists["lista_bonus"] = lista_bonus
+    all_lists["lista_salvaguardas"] = lista_salvaguardas
+
+    return all_lists
+
