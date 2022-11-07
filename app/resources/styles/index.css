@@ -1,0 +1,337 @@
+/* 
+
+Fontes:
+
+Inknut Antiqua 500
+Trirong 400, 700
+Lora 400, 700
+Maitree 600
+Lusitana 700
+
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@500&family=Lora:wght@400;700&family=Lusitana:wght@700&family=Maitree:wght@600&family=Trirong:wght@400;700&display=swap");
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #232323;
+}
+
+nav {
+    position: fixed;
+    background-color: #161616;
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    z-index: 999;
+}
+
+nav img {
+    height: 90%;
+    margin-left: 6.45%;
+}
+
+img {
+    /* previne o usuário de selecionar imagens */
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+nav ul {
+    margin-right: 4.85%;
+    width: 100%;
+    gap: 4rem;
+
+    font-family: "Inknut Antiqua", serif;
+    font-weight: 500;
+    line-height: 0;
+
+    list-style-type: none;
+
+    display: flex;
+    justify-content: end;
+}
+
+nav ul li a {
+    font-size: 12pt;
+}
+
+.botao-cadastro {
+    padding: 0.25em 3em;
+    border: white 1px solid;
+    border-radius: 10px;
+    width: 150px;
+    height: 30px;
+    text-align: center;
+}
+
+a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.start {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    background-size: cover;
+    align-items: center;
+    color: white;
+    align-content: space-between;
+    z-index: 1;
+    position: relative;
+}
+
+.start h1 {
+    width: 100%;
+    text-align: right;
+    margin-right: 30px;
+    font-family: "Trirong";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 44px;
+    line-height: 60px;
+    justify-self: right;
+    margin-top: 40vh;
+}
+
+.start h1 span {
+    font-weight: 600;
+    font-size: 50px;
+}
+
+.start > a {
+    justify-self: center;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.start > a img {
+    height: 20px;
+}
+
+.start > a p {
+    font-family: "Lusitana";
+    font-style: normal;
+    width: 180px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    letter-spacing: 0.075em;
+
+    margin-bottom: 12px;
+}
+
+.explicacao {
+    width: 100%;
+    height: 450px;
+    background-color: #232323;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.explicacao > img {
+    position: absolute;
+    top: -70%;
+    left: 15%;
+    z-index: 0;
+    mix-blend-mode: overlay;
+}
+
+.explicacao > .title {
+    display: flex;
+    color: white;
+    font-family: "Trirong";
+    padding: 0 0 20px 60px;
+}
+
+.explicacao > .title > h2 {
+    font-size: 24pt;
+}
+
+.explicacao > .title > img {
+    width: 3em;
+    margin-left: 20px;
+}
+
+.explicacao p {
+    padding: 30px 0 0 60px;
+    color: white;
+    font-size: 16pt;
+    max-width: 600px;
+    font-family: "Trirong";
+}
+
+.explicacao p span {
+    font-weight: 700;
+}
+
+.explicacao .dashed-line {
+    width: 670px;
+    position: relative;
+    border-top: 1px dashed white;
+    border-bottom: 1px dashed white;
+    display: flex;
+    align-items: center;
+}
+
+.explicacao .dashed-line div {
+    position: absolute;
+    right: 0;
+
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid white;
+}
+
+.explicacao-dois {
+    width: 100%;
+    height: 600px;
+
+    position: relative;
+    z-index: 1;
+
+    background-size: cover;
+
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.explicacao-dois p {
+    color: white;
+    max-width: 668px;
+    font-family: "Trirong";
+    font-size: 25px;
+    text-align: right;
+    margin-right: 60px;
+}
+
+.explicacao-dois p span {
+    font-weight: 700;
+    font-size: 28px;
+}
+
+.bottom {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url(../images/index-wallpaper.png);
+    background-size: cover;
+}
+
+.resources-title {
+    margin: 2rem 0 2rem 0;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.resources-title h3 {
+    color: white;
+    font-family: "Lusitana";
+    font-style: normal;
+    font-weight: 700;
+    text-shadow: 1px 4px 8px rgba(0, 0, 0, 0.85);
+
+    text-align: center;
+    letter-spacing: 0.1em;
+    font-size: 48px;
+}
+
+.resources-title img {
+    width: 340px;
+    margin-top: 16px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.95));
+}
+
+.bottom > .card {
+    width: 70%;
+    background-color: #1d1d1d;
+    margin-bottom: 40px;
+    color: #ffffff;
+    border-radius: 0.5em;
+    box-shadow: 0px 4px 20px 8px rgba(0, 0, 0, 0.35);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bottom > .card h4 {
+    width: 65%;
+    padding-top: 12px;
+    margin-bottom: 24px;
+    font-family: "Maitree";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 59px;
+    text-align: center;
+    letter-spacing: 0.075em;
+    border-bottom: white 1px solid;
+}
+
+.bottom > .card img {
+    width: 90%;
+    border-radius: 0.5em;
+}
+
+.bottom > .card p {
+    width: 90%;
+    padding: 24px 0 28px 0;
+    font-family: "Lora";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 31px;
+    text-align: justify;
+    letter-spacing: 0.075em;
+}
+
+footer {
+    height: 148px;
+    background-color: #0d0d0d;
+
+    color: white;
+    font-family: "Lusitana";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 30px;
+    letter-spacing: 0.075em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+footer img {
+    height: 68px;
+}

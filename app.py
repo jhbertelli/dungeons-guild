@@ -123,7 +123,7 @@ def api_magias():
 
 @app.route("/")
 def inicio():
-    return render_template('inicio.html')
+    return render_template('index.html')
 
 # páginas de cadastro e login
 
