@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Cormorant+Infant&family=Inknut+Antiqua&display=swap');
+/* Fontes:
+
+Cinzel 400
+Inknut Antiqua 400
+Cormorant Infant 400
+
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Cormorant+Infant&family=Inknut+Antiqua&display=swap");
 
 * {
     margin: 0;
@@ -12,19 +20,20 @@ body {
     background-repeat: no-repeat;
 }
 
-h1{
-    margin: 0 145px 0  0;
+h1 {
+    margin: 0 145px 0 0;
     margin-left: 120px;
-    font-family: 'Cinzel', serif;
+    font-family: "Cinzel", serif;
     font-size: 28px;
     font-weight: 400;
     align-self: center;
 }
 
-input:focus, textarea:focus, select:focus{
+input:focus,
+textarea:focus,
+select:focus {
     outline: none;
 }
-
 
 #header {
     width: 100%;
@@ -43,7 +52,23 @@ input:focus, textarea:focus, select:focus{
     margin-top: 6px;
 }
 
-.titulo_informacoes{
+nav a {
+    position: absolute;
+    left: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+nav .back-icon {
+    height: 30%;
+}
+
+.flex {
+    display: flex;
+}
+
+.titulo_informacoes {
     width: 1400px;
     height: 80px;
     margin-left: auto;
@@ -55,32 +80,25 @@ input:focus, textarea:focus, select:focus{
     background-color: #121212;
 }
 
-.informacoes{
+.informacoes {
     width: 1400px;
-    height: 780px;
     display: grid;
     grid-template-columns: 700px 700px;
-    margin-left: auto;
-    margin-right: auto;
-    
-    
-   
+    margin: 0 auto 20px auto;
+    height: fit-content;
 }
 
-.info_mundo{
+.info_mundo {
     width: 700px;
-    height: 600px;
     background-color: #161616;
 }
 
-.info_sessao{
+.info_sessao {
     width: 700px;
-    height: 600px;
-    background-color: #1A1A1A;
-   
+    background-color: #1a1a1a;
 }
 
-.nome_mundo{
+.nome_mundo {
     width: 350px;
     height: 30px;
     margin: 10px auto 0 auto;
@@ -88,54 +106,51 @@ input:focus, textarea:focus, select:focus{
     display: block;
     border: none;
     border-radius: 10px;
-    font-family: 'Cormorant Infant', serif;
+    font-family: "Cormorant Infant", serif;
     font-size: 26px;
     font-weight: 400;
     color: white;
-    background-color: #1A1A1A;
+    background-color: #1a1a1a;
     cursor: text;
- 
 }
 
-.nome_mundo::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.nome_mundo::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white;
     opacity: 0.7;
-  }
+}
 
-.img-div{
+.img-div {
     width: 650px;
     height: 300px;
     text-align: center;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
     background-repeat: no-repeat;
-    background-color: #1A1A1A;
+    background-color: #1a1a1a;
     background-size: contain;
     background-position: 50% 50%;
-    cursor:pointer;
-    
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-
-
-
-
-.tema-div{
- width: 650px;
- height: 50px;
- margin-left: auto;
- margin-right: auto;
- font-size: 22px;
+.tema-div {
+    width: 650px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 22px;
 }
 
-.tema-label{
-    
+.tema-label {
     align-self: flex-start;
-    font-family: 'Cinzel', serif;
+    font-family: "Cinzel", serif;
     font-weight: 400;
 }
 
-.tema-input{
+.tema-input {
     width: 130px;
     height: 30px;
     margin-top: 10px;
@@ -143,44 +158,74 @@ input:focus, textarea:focus, select:focus{
     position: relative;
     left: 10px;
     color: white;
-    font-family: 'Cormorant Infant', serif;
+    font-family: "Cormorant Infant", serif;
     font-weight: 400;
     font-size: 22px;
     border: none;
     border-radius: 10px;
     color: white;
-    background-color:  #1A1A1A;
+    background-color: #1a1a1a;
     cursor: text;
-    
-
 }
 
-.descricao-div{
+.descricao-div {
     width: 650px;
     height: 200px;
     margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
     font-size: 22px;
+    padding-bottom: 8px;
 }
 
-.descricao-label{
+.descricao-label {
     align-self: flex-start;
-    font-family: 'Cinzel', serif;
+    font-family: "Cinzel", serif;
     font-weight: 400;
-
 }
 
-.descricao-textarea{
+.descricao-textarea {
     width: 650px;
     height: 150px;
     border-radius: 10px;
     text-align: initial;
     word-break: break-all;
-    font-family: 'Cormorant Infant', serif;
+    font-family: "Cormorant Infant", serif;
     font-weight: 400;
     font-size: 22px;
-    background-color:#1A1A1A;
+    background-color: #1a1a1a;
     border: none;
-    resize:none;
+    resize: none;
+}
+
+.info-dentro {
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    margin: 8px auto 0 auto;
+}
+
+.info-dentro > div {
+    width: 48%;
+}
+
+.info-dentro label {
+    font-family: "Inknut Antiqua";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 35px;
+}
+
+.first-column input {
+    width: 100%;
+}
+
+.info-dentro p,
+#label-input {
+    font-family: "Cormorant Infant";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
 }

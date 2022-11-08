@@ -15,9 +15,12 @@
     />
   </head>
   <body>
-    <div id="header">
+    <nav id="header">
+      <a href="/mundos">
+        <img src="/images/svg/back-icon.svg" alt="" class="back-icon" />
+      </a>
       <img id="dgicon" src="http://127.0.0.1:5000/images/logo.png" alt="" />
-    </div>
+    </nav>
     <div class="titulo_informacoes">
       <h1>Informações do Mundo</h1>
       <h1>Informações da Sessão</h1>
@@ -59,10 +62,39 @@
           <div class="descricao-div">
             <label class="descricao-label">Descrição</label><br/>
             <textarea class="descricao-textarea" name="descricao_mundo" rows="5" cols="10" wrap="soft" maxlength="600"></textarea>
+            <hr>
           </div>
         </div>
 
-        <div class="info_sessao"></div>
+        <div class="info_sessao">
+          <div class="info-dentro">
+
+            <div class="first-column">
+
+              <div>
+                <label>Mestre</label>
+                <p>{{ apelido }}</p>
+              </div>
+              <div>
+                <label>Participantes</label>
+                <input type="text">
+              </div>
+
+            </div>
+
+            <div class="second-column">
+              <label>Privacidade</label>
+              <div class="flex">
+                <input type="radio" name="privacidade" id="publico">
+                <label id="label-input" for="publico">Público</label>
+              </div>
+              <div class="flex">
+                <input type="radio" name="privacidade" id="privado">
+                <label id="label-input" for="privado">Privado</label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
   </body>

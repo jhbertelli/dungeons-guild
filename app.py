@@ -187,7 +187,7 @@ def excluir_personagem():
 
 @app.route("/criar/mundo/")
 def criar_mundo():
-    return render_template('criar-mundo.html')
+    return render_template('criar-mundo.html', apelido=session['apelido'])
 
 
 @app.route("/mundos/")

@@ -13,6 +13,13 @@ main {
 main hr {
   opacity: 1;
 }
+main a {
+  color: inherit;
+  text-decoration: none;
+}
+main a:hover {
+  color: inherit;
+}
 
 .mundos {
   width: 90%;
