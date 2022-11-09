@@ -75,11 +75,28 @@
                 <label>Mestre</label>
                 <p>{{ apelido }}</p>
               </div>
-              <div>
-                <label>Participantes</label>
-                <input type="text">
-              </div>
 
+              <div>
+                <label>Sistema</label>
+                <input type="text" name="sistema" id="sistema" maxlength="25">
+              </div>
+             
+              <div>
+                <label>Frequência</label>
+                <input type="text" name="frequencia" id="frequencia" maxlength="25">
+              </div>
+             
+              <div>
+                <label>Data Sessão</label>
+                <input type="date" name="data_sessao" id="data_sessao" >
+              </div>
+              
+              <div>
+                <label>Jogadores necessários</label>
+                <input type="text" name="jogadores_necessarios" id="jogadores_necessarios" maxlength="2">
+              </div>
+              
+            
             </div>
 
             <div class="second-column">
@@ -94,6 +111,10 @@
               </div>
             </div>
           </div>
+          <div class="criar-mundo">
+            <input type="submit" value="Criar Mundo">
+          </div>
+
         </div>
       </div>
     </form>
