@@ -27,15 +27,6 @@ for (let i = 0; i < 7; i++) {
     }
 }
 
-// $.getJSON("http://127.0.0.1:5000/api/magias", (json) => {
-//     // pega todas as magias da API
-//     for (let i = 0; i < json.length; i++) {
-//         document.querySelector(".magias select").innerHTML += `<option value=${
-//             i + 1
-//         }>${json[i].name} - NV ${json[i].level}</option>`
-//     }
-// })
-
 $.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
     // pega todas as pericias da api
     for (let i = 0; i < json.length; i++) {

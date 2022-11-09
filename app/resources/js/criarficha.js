@@ -76,7 +76,7 @@ $.getJSON("http://127.0.0.1:5000/api/antecedentes", (json) => {
 })
 
 $.getJSON("http://127.0.0.1:5000/api/racas", (json) => {
-    // pega todas as racas da api
+    // pega todas as raças da api
     for (let i = 0; i < json.length; i++) {
         document.querySelector(
             "#racas"
@@ -85,7 +85,7 @@ $.getJSON("http://127.0.0.1:5000/api/racas", (json) => {
 })
 
 $.getJSON("http://127.0.0.1:5000/api/tendencias", (json) => {
-    // pega todas as tendencias da api
+    // pega todas as tendências da api
     for (let i = 0; i < json.length; i++) {
         document.querySelector(
             "#tendencias"
@@ -94,7 +94,7 @@ $.getJSON("http://127.0.0.1:5000/api/tendencias", (json) => {
 })
 
 $.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
-    // pega todas as salvaguardas da api
+    // pega todas as perícias da api
     for (let i = 0; i < json.length; i++) {
         let abv_salvaguarda = json[i].nome_salvaguarda.substring(0, 3) // abrevia a string
 
@@ -158,13 +158,11 @@ sendButton.addEventListener("click", (e) => {
     }
 
     for (let i = 0; i < allInputs.length; i++) {
-        if (allInputs[i].type === "checkbox") continue
+        if (allInputs[i].type === "checkbox" || allInputs[i].name === "magias") continue
         
         // verifica se os selects (exceto o de magias) estão vazios
-        if (allInputs[i].name === "magias") continue
         if (allInputs[i].selectedIndex === 0) {
             emptyFieldAlert(allInputs[i])
-
             allInputs[i].focus()
             return
         }

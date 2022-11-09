@@ -61,17 +61,20 @@
             }
 
             function changeTestBonuses(element) {
-                // altera o bônus das proficiências
+                // altera o bônus dos salvaguardas
                 const testValue = element.value
                 const text = element.closest("p").lastElementChild
                 const salvaguardaId = element.getAttribute("id-salvaguarda")
 
                 function changeValueInPericiasAndTestes(value) {
+                    // altera os valores das perícias e dos testes
                     const bonus = Number(document.getElementById("bonus-proficiencia").value)
                     const pericias = document.querySelectorAll(`.pericias [salvaguarda="${salvaguardaId}"]`)
                     
                     for (let i = 0; i < pericias.length; i++) {
+                        // ciclo para cada perícia existente
                         if (bonus > 0) {
+                            // adiciona o valor do bônus de proficiência, caso esteja marcado
                             if (pericias[i].closest("div").firstElementChild.checked) {
                                 if (bonus + value <= 0) return pericias[i].closest("label").lastElementChild.textContent = (value + bonus)
 
@@ -87,7 +90,9 @@
                     }
 
                     document.querySelectorAll(`.testes-resistencia [salvaguarda="${salvaguardaId}"]`).forEach((el) => {
+                        // ciclo para cada teste de resistência
                         if (bonus > 0) {
+                            // adiciona o valor do bônus de proficiência, caso esteja marcado
                             if (document.querySelector(`.testes-resistencia [salvaguarda="${salvaguardaId}"]`)
                                 .closest("div").firstElementChild.checked) {
                                 if (bonus + value <= 0) return el.closest("label").lastElementChild.textContent = (value + bonus)
@@ -151,7 +156,7 @@
                         break
                 }
 
-                // previne o usuário a inserir um valor maior que 20
+                // previne o usuário de inserir um valor maior que 20
                 if (testValue > 20) return (element.value = 20)
             }
 
@@ -199,7 +204,7 @@
             }
 
             function changeBonuses(element) {
-                // altera o bônus das proficiências
+                // altera o bônus dos salvaguardas
                 const value = element.value
                 const text = element.closest("p").lastElementChild
                 const salvaguardaId = element.getAttribute("id-salvaguarda")

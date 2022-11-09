@@ -4,7 +4,7 @@ const inputHistoria = document.querySelector("#historia")
 const inputAliados = document.querySelector("#aliados")
 const inputTesouro = document.querySelector("#tesouro")
 const inputEquipamentos = document.querySelector("#equipamentos")
-const magiasSelect = document.querySelector('.magias select')
+const magiasSelect = document.querySelector(".magias select")
 
 inputCounterAndMaxLength(inputIdiomas, 300)
 inputCounterAndMaxLength(inputCaracteristicas, 500)
@@ -13,25 +13,27 @@ inputCounterAndMaxLength(inputAliados, 200)
 inputCounterAndMaxLength(inputTesouro, 200)
 inputCounterAndMaxLength(inputEquipamentos, 500)
 
-magiasSelect.addEventListener('input', (e) => {
+magiasSelect.addEventListener("input", () => {
     for (let i = 1; i < magiasSelect.children.length; i++) {
         if (magiasSelect.children[i].selected) {
             magiasSelect.children[i].style.backgroundColor = "dodgerblue"
             magiasSelect.children[i].style.color = "white"
-        } else {                        
+        } else {
             magiasSelect.children[i].style.backgroundColor = "white"
             magiasSelect.children[i].style.color = "#212529"
         }
     }
 })
 
-document.getElementById('level').addEventListener('input', (e) => {
+document.getElementById("level").addEventListener("input", (e) => {
+    // evento que pega o valor do campo "nível"
     const bonusProficienciaInput = document.querySelector("#bonus-proficiencia")
     let level = e.target.value
 
     if (level < 0) e.target.value = 0
     if (level > 20) e.target.value = 20
 
+    // verifica o nível do personagem e transforma no bônus de proficiência
     switch (true) {
         case level <= 4:
             bonusProficienciaInput.value = 2
@@ -50,47 +52,63 @@ document.getElementById('level').addEventListener('input', (e) => {
             break
     }
 
-    // altera os valores dos testes e perícias ao mudar o bônus de proficiência
     const bonus = Number(document.querySelector("#bonus-proficiencia").value)
     const bonusesArray = document.querySelectorAll("#bonus")
-
+    
+    // altera os valores dos testes e perícias quando bônus de proficiência mudar, se estes estiverem marcados
     for (let i = 0; i < bonusesArray.length; i++) {
+        // ciclo para as perícias e testes de cada salvaguarda
         const previousBonus = Number(bonusesArray[i].textContent)
         const test = document.querySelectorAll(`.testes-resistencia div`)[i]
         const pericias = document.querySelectorAll(`.pericias [salvaguarda="${[i + 1]}"]`)
-        
+
         pericias.forEach((el) => {
-            let periciasPreviousBonus = Number(bonusesArray[el.getAttribute('salvaguarda') - 1].textContent)
-            
-            if (el.closest('div').firstElementChild.checked) {
+            let periciasPreviousBonus = Number(
+                bonusesArray[el.getAttribute("salvaguarda") - 1].textContent
+            )
+
+            if (el.closest("div").firstElementChild.checked) {
                 // altera o valor da perícia com o bônus de proficiência caso esteja marcado
                 if (periciasPreviousBonus == 0 && bonus == 0) {
-                    return (el.closest("label").lastElementChild.textContent = "0")
+                    return el.closest("label").lastElementChild.textContent = "0"
                 }
-                
+
                 if (periciasPreviousBonus + bonus <= 0) {
-                    el.closest("label").lastElementChild.textContent = (periciasPreviousBonus + bonus)
+                    el.closest("label").lastElementChild.textContent =
+                        periciasPreviousBonus + bonus
                 } else {
-                    el.closest("label").lastElementChild.textContent = "+" + (periciasPreviousBonus + bonus)
+                    el.closest("label").lastElementChild.textContent =
+                        "+" + (periciasPreviousBonus + bonus)
                 }
             }
         })
 
         if (test.firstElementChild.checked) {
-            let idSalvaguarda = test.lastElementChild.lastElementChild.getAttribute('salvaguarda')
-            
-            document.querySelectorAll(`.testes-resistencia [salvaguarda="${idSalvaguarda}"]`).forEach((el) => {
-                // altera o valor do teste de resistência com o bônus de proficiência caso esteja marcado
-                if (previousBonus == 0 && bonus == 0) {
-                    return (el.closest("label").lastElementChild.textContent = "0")
-                }
+            let idSalvaguarda =
+                test.lastElementChild.lastElementChild.getAttribute(
+                    "salvaguarda"
+                )
 
-                if (previousBonus + bonus <= 0) {
-                    el.closest("label").lastElementChild.textContent = previousBonus + bonus
-                } else {
-                    el.closest("label").lastElementChild.textContent = "+" + (previousBonus + bonus)
-                }
-            })
+            document
+                .querySelectorAll(
+                    `.testes-resistencia [salvaguarda="${idSalvaguarda}"]`
+                )
+                .forEach((el) => {
+                    // altera o valor do teste de resistência com o bônus de proficiência caso esteja marcado
+                    if (previousBonus == 0 && bonus == 0) {
+                        return (el.closest(
+                            "label"
+                        ).lastElementChild.textContent = "0")
+                    }
+
+                    if (previousBonus + bonus <= 0) {
+                        el.closest("label").lastElementChild.textContent =
+                            previousBonus + bonus
+                    } else {
+                        el.closest("label").lastElementChild.textContent =
+                            "+" + (previousBonus + bonus)
+                    }
+                })
         }
     }
 })
@@ -143,7 +161,8 @@ document.querySelectorAll('[type="number"]').forEach((element) => {
         // previne o usuário a inserir números menores que 0 em todos os inputs de número
         if (value <= 0) event.target.value = 0
         // retira o "0" do valor, caso seja maior que 0 (ex: retira o 0 de "04")
-        if (value[0] === "0" && value.length > 1) event.target.value = value.slice(1)
+        if (value[0] === "0" && value.length > 1)
+            event.target.value = value.slice(1)
     })
 })
 
@@ -173,7 +192,7 @@ $.getJSON("http://127.0.0.1:5000/api/antecedentes", (json) => {
 })
 
 $.getJSON("http://127.0.0.1:5000/api/racas", (json) => {
-    // pega todas as racas da api
+    // pega todas as raças da api
     for (let i = 0; i < json.length; i++) {
         document.querySelector(
             "#racas"
@@ -182,7 +201,7 @@ $.getJSON("http://127.0.0.1:5000/api/racas", (json) => {
 })
 
 $.getJSON("http://127.0.0.1:5000/api/tendencias", (json) => {
-    // pega todas as tendencias da api
+    // pega todas as tendências da api
     for (let i = 0; i < json.length; i++) {
         document.querySelector(
             "#tendencias"
@@ -191,7 +210,7 @@ $.getJSON("http://127.0.0.1:5000/api/tendencias", (json) => {
 })
 
 $.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
-    // pega todas as salvaguardas da api
+    // pega todas as perícias da api
     for (let i = 0; i < json.length; i++) {
         let abv_salvaguarda = json[i].nome_salvaguarda.substring(0, 3) // abrevia a string
 
@@ -219,9 +238,9 @@ $.getJSON("http://127.0.0.1:5000/api/pericias", (json) => {
 $.getJSON("http://127.0.0.1:5000/api/magias", (json) => {
     // pega todas as magias da API
     for (let i = 0; i < json.length; i++) {
-        document.querySelector(".magias select").innerHTML += `<option value=${i + 1}>${
-            json[i].name
-        } - NV ${json[i].level}</option>`
+        document.querySelector(".magias select").innerHTML += `<option value=${
+            i + 1
+        }>${json[i].name} - NV ${json[i].level}</option>`
     }
 })
 
@@ -230,7 +249,7 @@ const sendButton = document.querySelector("button")
 
 sendButton.addEventListener("click", (e) => {
     e.preventDefault()
-    
+
     const allInputs = document.querySelectorAll("input, select, textarea")
 
     function emptyFieldAlert(field) {
@@ -255,19 +274,15 @@ sendButton.addEventListener("click", (e) => {
     }
 
     for (let i = 0; i < allInputs.length; i++) {
-        if (allInputs[i].id === "img-personagem") continue
-        if (allInputs[i].type === "checkbox") continue
-        
-        // verifica se os selects (exceto o de magias) estão vazios
-        if (allInputs[i].name === "magias") continue
-        if (allInputs[i].selectedIndex === 0) {
-            emptyFieldAlert(allInputs[i])
-            allInputs[i].focus()
-            return
-        }
+        if (
+            allInputs[i].id === "img-personagem" ||
+            allInputs[i].type === "checkbox" ||
+            allInputs[i].name === "magias"
+        ) continue
 
-        // verifica se os campos de textarea/input (exceto checkboxes) estão vazios
-        if (allInputs[i].value === "") {
+        // verifica se os selects (exceto o de magias) estão vazios
+        // e se os campos de textarea/input (exceto checkboxes) estão vazios
+        if (allInputs[i].selectedIndex === 0 || allInputs[i].value === "") {
             emptyFieldAlert(allInputs[i])
             allInputs[i].focus()
             return

@@ -49,6 +49,18 @@ label {
     margin-top: 6px;
 }
 
+nav a {
+    position: absolute;
+    left: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+nav .back-icon {
+    height: 30%;
+}
+
 .loginfundo {
     margin: 100px auto 20px auto;
     height: 890px;
@@ -186,10 +198,12 @@ input:-webkit-autofill {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
+    appearance: none;
 }
 
 input[type="number"] {
     -moz-appearance: textfield;
+    appearance: none;
 }
 
 @media (max-width: 300px) {
