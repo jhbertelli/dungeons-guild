@@ -3,6 +3,7 @@ from flask import Flask, render_template, send_from_directory, request, redirect
 from flask_mysqldb import MySQL
 import MySQLdb.cursors as cursors
 from werkzeug.utils import secure_filename
+from email_confirmation import *
 from utils import *
 
 app = Flask(__name__, static_folder='app/resources',
@@ -121,6 +122,25 @@ def api_magias():
     return json
 
 
+@app.route("/api/usuarios/<apelido>")
+def api_usuarios(apelido):
+    return get_from_database(f"SELECT apelido_cadastro, id_cadastro FROM cadastro WHERE apelido_cadastro LIKE '%{apelido}%'")
+
+
+@app.route("/api/cadastro/", methods=['GET', 'POST'])
+def api_cadastro():
+    if request.method == "POST":
+        form = request.form
+
+        if "email" not in form or form["email"] == "":
+            return ""
+        
+        code = verification_code()
+        send_confirmation(form["email"], code)
+
+        return form["email"]
+        
+
 @app.route("/")
 def inicio():
     return render_template('index.html')
@@ -204,14 +224,6 @@ def mundosvazio():
         return redirect(url_for('login'))
 
     return render_template('mundosvazio.html', apelido=session['apelido'])
-
-
-@app.route("/embreve/")
-def embreve():
-    if 'usuario' not in session:
-        return redirect(url_for('login'))
-
-    return render_template('embreve.html', apelido=session['apelido'])
 
 
 @app.route("/livros/")

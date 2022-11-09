@@ -1,8 +1,10 @@
 import smtplib
 import ssl
+import os
 from email.message import EmailMessage
 from string import ascii_uppercase, digits
 from random import choice
+from dotenv import load_dotenv
 
 
 def verification_code():
@@ -17,8 +19,9 @@ def verification_code():
 
 def send_confirmation(recipient, code):
     # e-mail e senha do remetente
-    sender = ''
-    password = ''
+    load_dotenv()
+    sender = os.getenv("EMAIL")
+    password = os.getenv("PASSWORD")
 
     msg = EmailMessage()
 
