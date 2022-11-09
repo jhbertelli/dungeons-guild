@@ -1,1747 +1,1753 @@
 [
 	{
 		"index": "acid-splash",
-		"name": "Acid Splash",
+		"name": "Espirro Ácido",
 		"level": 0,
 		"url": "/api/spells/acid-splash"
 	},
 	{
 		"index": "chill-touch",
-		"name": "Chill Touch",
+		"name": "Toque Arrepiante",
 		"level": 0,
 		"url": "/api/spells/chill-touch"
 	},
 	{
 		"index": "dancing-lights",
-		"name": "Dancing Lights",
+		"name": "Globos de Luz",
 		"level": 0,
 		"url": "/api/spells/dancing-lights"
 	},
 	{
 		"index": "druidcraft",
-		"name": "Druidcraft",
+		"name": "Druidismo",
 		"level": 0,
 		"url": "/api/spells/druidcraft"
 	},
 	{
 		"index": "eldritch-blast",
-		"name": "Eldritch Blast",
+		"name": "Rajada Mística",
 		"level": 0,
 		"url": "/api/spells/eldritch-blast"
 	},
 	{
 		"index": "fire-bolt",
-		"name": "Fire Bolt",
+		"name": "Raio de Fogo",
 		"level": 0,
 		"url": "/api/spells/fire-bolt"
 	},
 	{
 		"index": "guidance",
-		"name": "Guidance",
+		"name": "Orientação",
 		"level": 0,
 		"url": "/api/spells/guidance"
 	},
 	{
 		"index": "light",
-		"name": "Light",
+		"name": "Luz",
 		"level": 0,
 		"url": "/api/spells/light"
 	},
 	{
 		"index": "mage-hand",
-		"name": "Mage Hand",
+		"name": "Mãos Mágicas",
 		"level": 0,
 		"url": "/api/spells/mage-hand"
 	},
 	{
 		"index": "mending",
-		"name": "Mending",
+		"name": "Consertar",
 		"level": 0,
 		"url": "/api/spells/mending"
 	},
 	{
 		"index": "message",
-		"name": "Message",
+		"name": "Mensagem",
 		"level": 0,
 		"url": "/api/spells/message"
 	},
 	{
 		"index": "minor-illusion",
-		"name": "Minor Illusion",
+		"name": "Ilusão Menor",
 		"level": 0,
 		"url": "/api/spells/minor-illusion"
 	},
 	{
 		"index": "poison-spray",
-		"name": "Poison Spray",
+		"name": "Rajada de Veneno",
 		"level": 0,
 		"url": "/api/spells/poison-spray"
 	},
 	{
 		"index": "prestidigitation",
-		"name": "Prestidigitation",
+		"name": "Prestidigitação",
 		"level": 0,
 		"url": "/api/spells/prestidigitation"
 	},
 	{
 		"index": "produce-flame",
-		"name": "Produce Flame",
+		"name": "Criar Chamas",
 		"level": 0,
 		"url": "/api/spells/produce-flame"
 	},
 	{
 		"index": "ray-of-frost",
-		"name": "Ray of Frost",
+		"name": "Raio de Gelo",
 		"level": 0,
 		"url": "/api/spells/ray-of-frost"
 	},
 	{
 		"index": "resistance",
-		"name": "Resistance",
+		"name": "Resistência",
 		"level": 0,
 		"url": "/api/spells/resistance"
 	},
 	{
 		"index": "sacred-flame",
-		"name": "Sacred Flame",
+		"name": "Chama Sagrada",
 		"level": 0,
 		"url": "/api/spells/sacred-flame"
 	},
 	{
 		"index": "shillelagh",
-		"name": "Shillelagh",
+		"name": "Bordão Místico",
 		"level": 0,
 		"url": "/api/spells/shillelagh"
 	},
 	{
 		"index": "shocking-grasp",
-		"name": "Shocking Grasp",
+		"name": "Toque Chocante",
 		"level": 0,
 		"url": "/api/spells/shocking-grasp"
 	},
 	{
 		"index": "spare-the-dying",
-		"name": "Spare the Dying",
+		"name": "Soar os Mortos",
 		"level": 0,
 		"url": "/api/spells/spare-the-dying"
 	},
 	{
 		"index": "thaumaturgy",
-		"name": "Thaumaturgy",
+		"name": "Taumaturgia",
 		"level": 0,
 		"url": "/api/spells/thaumaturgy"
 	},
 	{
 		"index": "true-strike",
-		"name": "True Strike",
+		"name": "Ataque Certeiro",
 		"level": 0,
 		"url": "/api/spells/true-strike"
 	},
 	{
 		"index": "vicious-mockery",
-		"name": "Vicious Mockery",
+		"name": "Zombaria Viciosa",
 		"level": 0,
 		"url": "/api/spells/vicious-mockery"
 	},
 	{
 		"index": "alarm",
-		"name": "Alarm",
+		"name": "Alarme",
 		"level": 1,
 		"url": "/api/spells/alarm"
 	},
 	{
 		"index": "animal-friendship",
-		"name": "Animal Friendship",
+		"name": "Amizade Animal",
 		"level": 1,
 		"url": "/api/spells/animal-friendship"
 	},
 	{
 		"index": "bane",
-		"name": "Bane",
+		"name": "Perdição",
 		"level": 1,
 		"url": "/api/spells/bane"
 	},
 	{
 		"index": "bless",
-		"name": "Bless",
+		"name": "Benção",
 		"level": 1,
 		"url": "/api/spells/bless"
 	},
 	{
 		"index": "burning-hands",
-		"name": "Burning Hands",
+		"name": "Mãos Flamejantes",
 		"level": 1,
 		"url": "/api/spells/burning-hands"
 	},
 	{
 		"index": "charm-person",
-		"name": "Charm Person",
+		"name": "Enfeitiçar Pessoa",
 		"level": 1,
 		"url": "/api/spells/charm-person"
 	},
 	{
 		"index": "color-spray",
-		"name": "Color Spray",
+		"name": "Leque Cromático",
 		"level": 1,
 		"url": "/api/spells/color-spray"
 	},
 	{
 		"index": "command",
-		"name": "Command",
+		"name": "Comando",
 		"level": 1,
 		"url": "/api/spells/command"
 	},
 	{
 		"index": "comprehend-languages",
-		"name": "Comprehend Languages",
+		"name": "Compreender Idiomas",
 		"level": 1,
 		"url": "/api/spells/comprehend-languages"
 	},
 	{
 		"index": "create-or-destroy-water",
-		"name": "Create or Destroy Water",
+		"name": "Criar ou Destruir Água",
 		"level": 1,
 		"url": "/api/spells/create-or-destroy-water"
 	},
 	{
 		"index": "cure-wounds",
-		"name": "Cure Wounds",
+		"name": "Curar Ferimentos",
 		"level": 1,
 		"url": "/api/spells/cure-wounds"
 	},
 	{
 		"index": "detect-evil-and-good",
-		"name": "Detect Evil and Good",
+		"name": "Detectar o Bem e Mal",
 		"level": 1,
 		"url": "/api/spells/detect-evil-and-good"
 	},
 	{
 		"index": "detect-magic",
-		"name": "Detect Magic",
+		"name": "Detectar Magia",
 		"level": 1,
 		"url": "/api/spells/detect-magic"
 	},
 	{
 		"index": "detect-poison-and-disease",
-		"name": "Detect Poison and Disease",
+		"name": "Detectar Veneno e Doença",
 		"level": 1,
 		"url": "/api/spells/detect-poison-and-disease"
 	},
 	{
 		"index": "disguise-self",
-		"name": "Disguise Self",
+		"name": "Disfarçar-se",
 		"level": 1,
 		"url": "/api/spells/disguise-self"
 	},
 	{
 		"index": "divine-favor",
-		"name": "Divine Favor",
+		"name": "Auxílio Divino",
 		"level": 1,
 		"url": "/api/spells/divine-favor"
 	},
 	{
 		"index": "entangle",
-		"name": "Entangle",
+		"name": "Constrição",
 		"level": 1,
 		"url": "/api/spells/entangle"
 	},
 	{
 		"index": "expeditious-retreat",
-		"name": "Expeditious Retreat",
+		"name": "Recuo Acelerado",
 		"level": 1,
 		"url": "/api/spells/expeditious-retreat"
 	},
 	{
 		"index": "faerie-fire",
-		"name": "Faerie Fire",
+		"name": "Fogo das Fadas",
 		"level": 1,
 		"url": "/api/spells/faerie-fire"
 	},
 	{
 		"index": "false-life",
-		"name": "False Life",
+		"name": "Vitalidade Falsa",
 		"level": 1,
 		"url": "/api/spells/false-life"
 	},
 	{
 		"index": "feather-fall",
-		"name": "Feather Fall",
+		"name": "Queda Suave",
 		"level": 1,
 		"url": "/api/spells/feather-fall"
 	},
 	{
 		"index": "find-familiar",
-		"name": "Find Familiar",
+		"name": "Convocar Familiar",
 		"level": 1,
 		"url": "/api/spells/find-familiar"
 	},
 	{
 		"index": "floating-disk",
-		"name": "Floating Disk",
+		"name": "Disco Flutuante de Tenser",
 		"level": 1,
 		"url": "/api/spells/floating-disk"
 	},
 	{
 		"index": "fog-cloud",
-		"name": "Fog Cloud",
+		"name": "Névoa Obscurecente",
 		"level": 1,
 		"url": "/api/spells/fog-cloud"
 	},
 	{
 		"index": "goodberry",
-		"name": "Goodberry",
+		"name": "Bom Fruto",
 		"level": 1,
 		"url": "/api/spells/goodberry"
 	},
 	{
 		"index": "grease",
-		"name": "Grease",
+		"name": "Área Escorregadia",
 		"level": 1,
 		"url": "/api/spells/grease"
 	},
 	{
 		"index": "guiding-bolt",
-		"name": "Guiding Bolt",
+		"name": "Raio Guiador",
 		"level": 1,
 		"url": "/api/spells/guiding-bolt"
 	},
 	{
 		"index": "healing-word",
-		"name": "Healing Word",
+		"name": "Palavra Curativa",
 		"level": 1,
 		"url": "/api/spells/healing-word"
 	},
 	{
 		"index": "hellish-rebuke",
-		"name": "Hellish Rebuke",
+		"name": "Repreensão Infernal",
 		"level": 1,
 		"url": "/api/spells/hellish-rebuke"
 	},
 	{
 		"index": "heroism",
-		"name": "Heroism",
+		"name": "Heroísmo",
 		"level": 1,
 		"url": "/api/spells/heroism"
 	},
 	{
 		"index": "hideous-laughter",
-		"name": "Hideous Laughter",
+		"name": "Riso Histérico",
 		"level": 1,
 		"url": "/api/spells/hideous-laughter"
 	},
 	{
 		"index": "hunters-mark",
-		"name": "Hunter's Mark",
+		"name": "Marca do Caçador",
 		"level": 1,
 		"url": "/api/spells/hunters-mark"
 	},
 	{
 		"index": "identify",
-		"name": "Identify",
+		"name": "Identificação",
 		"level": 1,
 		"url": "/api/spells/identify"
 	},
 	{
 		"index": "illusory-script",
-		"name": "Illusory Script",
+		"name": "Escrita Ilusória",
 		"level": 1,
 		"url": "/api/spells/illusory-script"
 	},
 	{
 		"index": "inflict-wounds",
-		"name": "Inflict Wounds",
+		"name": "Inflingir Ferimentos",
 		"level": 1,
 		"url": "/api/spells/inflict-wounds"
 	},
 	{
 		"index": "jump",
-		"name": "Jump",
+		"name": "Salto",
 		"level": 1,
 		"url": "/api/spells/jump"
 	},
 	{
 		"index": "longstrider",
-		"name": "Longstrider",
+		"name": "Passos Longos",
 		"level": 1,
 		"url": "/api/spells/longstrider"
 	},
 	{
 		"index": "mage-armor",
-		"name": "Mage Armor",
+		"name": "Armadura Arcana",
 		"level": 1,
 		"url": "/api/spells/mage-armor"
 	},
 	{
 		"index": "magic-missile",
-		"name": "Magic Missile",
+		"name": "Mísseis Mágicos",
 		"level": 1,
 		"url": "/api/spells/magic-missile"
 	},
 	{
 		"index": "protection-from-evil-and-good",
-		"name": "Protection from Evil and Good",
+		"name": "Proteção Contra o Bem e Mal",
 		"level": 1,
 		"url": "/api/spells/protection-from-evil-and-good"
 	},
 	{
 		"index": "purify-food-and-drink",
-		"name": "Purify Food and Drink",
+		"name": "Purificar Alimentos",
 		"level": 1,
 		"url": "/api/spells/purify-food-and-drink"
 	},
 	{
 		"index": "sanctuary",
-		"name": "Sanctuary",
+		"name": "Santuário",
 		"level": 1,
 		"url": "/api/spells/sanctuary"
 	},
 	{
 		"index": "shield",
-		"name": "Shield",
+		"name": "Escudo Arcano",
 		"level": 1,
 		"url": "/api/spells/shield"
 	},
 	{
 		"index": "shield-of-faith",
-		"name": "Shield of Faith",
+		"name": "Escudo da Fé",
 		"level": 1,
 		"url": "/api/spells/shield-of-faith"
 	},
 	{
 		"index": "silent-image",
-		"name": "Silent Image",
+		"name": "Imagem Silenciosa",
 		"level": 1,
 		"url": "/api/spells/silent-image"
 	},
 	{
 		"index": "sleep",
-		"name": "Sleep",
+		"name": "Sono",
 		"level": 1,
 		"url": "/api/spells/sleep"
 	},
 	{
 		"index": "speak-with-animals",
-		"name": "Speak with Animals",
+		"name": "Falar com Animais",
 		"level": 1,
 		"url": "/api/spells/speak-with-animals"
 	},
 	{
 		"index": "thunderwave",
-		"name": "Thunderwave",
+		"name": "Onda Trovejante",
 		"level": 1,
 		"url": "/api/spells/thunderwave"
 	},
 	{
 		"index": "unseen-servant",
-		"name": "Unseen Servant",
+		"name": "Servo Invisível",
 		"level": 1,
 		"url": "/api/spells/unseen-servant"
 	},
 	{
 		"index": "acid-arrow",
-		"name": "Acid Arrow",
+		"name": "Flecha Ácida",
 		"level": 2,
 		"url": "/api/spells/acid-arrow"
 	},
 	{
 		"index": "aid",
-		"name": "Aid",
+		"name": "Ajuda",
 		"level": 2,
 		"url": "/api/spells/aid"
 	},
 	{
 		"index": "alter-self",
-		"name": "Alter Self",
+		"name": "Alterar-se",
 		"level": 2,
 		"url": "/api/spells/alter-self"
 	},
 	{
 		"index": "animal-messenger",
-		"name": "Animal Messenger",
+		"name": "Mensageiro Animal",
 		"level": 2,
 		"url": "/api/spells/animal-messenger"
 	},
 	{
 		"index": "arcane-lock",
-		"name": "Arcane Lock",
+		"name": "Tranca Arcana",
 		"level": 2,
 		"url": "/api/spells/arcane-lock"
 	},
 	{
 		"index": "arcanists-magic-aura",
-		"name": "Arcanist's Magic Aura",
+		"name": "Aura Mágica do Arcanista",
 		"level": 2,
 		"url": "/api/spells/arcanists-magic-aura"
 	},
 	{
 		"index": "augury",
-		"name": "Augury",
+		"name": "Augúrio",
 		"level": 2,
 		"url": "/api/spells/augury"
 	},
 	{
 		"index": "barkskin",
-		"name": "Barkskin",
+		"name": "Pele de Árvore",
 		"level": 2,
 		"url": "/api/spells/barkskin"
 	},
 	{
 		"index": "blindness-deafness",
-		"name": "Blindness/Deafness",
+		"name": "Cegueira/Surdez",
 		"level": 2,
 		"url": "/api/spells/blindness-deafness"
 	},
 	{
 		"index": "blur",
-		"name": "Blur",
+		"name": "Nublar",
 		"level": 2,
 		"url": "/api/spells/blur"
 	},
 	{
 		"index": "branding-smite",
-		"name": "Branding Smite",
+		"name": "Marca da Punição",
 		"level": 2,
 		"url": "/api/spells/branding-smite"
 	},
 	{
 		"index": "calm-emotions",
-		"name": "Calm Emotions",
+		"name": "Acalmar Emoções",
 		"level": 2,
 		"url": "/api/spells/calm-emotions"
 	},
 	{
 		"index": "continual-flame",
-		"name": "Continual Flame",
+		"name": "Chama Contínua",
 		"level": 2,
 		"url": "/api/spells/continual-flame"
 	},
 	{
 		"index": "darkness",
-		"name": "Darkness",
+		"name": "Escuridão",
 		"level": 2,
 		"url": "/api/spells/darkness"
 	},
 	{
 		"index": "darkvision",
-		"name": "Darkvision",
+		"name": "Visão no Escuro",
 		"level": 2,
 		"url": "/api/spells/darkvision"
 	},
 	{
 		"index": "detect-thoughts",
-		"name": "Detect Thoughts",
+		"name": "Detectar Pensamentos",
 		"level": 2,
 		"url": "/api/spells/detect-thoughts"
 	},
 	{
 		"index": "enhance-ability",
-		"name": "Enhance Ability",
+		"name": "Aprimorar Habilidade",
 		"level": 2,
 		"url": "/api/spells/enhance-ability"
 	},
 	{
 		"index": "enlarge-reduce",
-		"name": "Enlarge/Reduce",
+		"name": "Aumentar/Reduzir",
 		"level": 2,
 		"url": "/api/spells/enlarge-reduce"
 	},
 	{
 		"index": "enthrall",
-		"name": "Enthrall",
+		"name": "Cativar",
 		"level": 2,
 		"url": "/api/spells/enthrall"
 	},
 	{
 		"index": "find-steed",
-		"name": "Find Steed",
+		"name": "Convocar Montaria",
 		"level": 2,
 		"url": "/api/spells/find-steed"
 	},
 	{
 		"index": "find-traps",
-		"name": "Find Traps",
+		"name": "Encontrar Armadilhas",
 		"level": 2,
 		"url": "/api/spells/find-traps"
 	},
 	{
 		"index": "flame-blade",
-		"name": "Flame Blade",
+		"name": "Lâmina Flamejante",
 		"level": 2,
 		"url": "/api/spells/flame-blade"
 	},
 	{
 		"index": "flaming-sphere",
-		"name": "Flaming Sphere",
+		"name": "Esfera Flamejante",
 		"level": 2,
 		"url": "/api/spells/flaming-sphere"
 	},
 	{
 		"index": "gentle-repose",
-		"name": "Gentle Repose",
+		"name": "Repouso Tranquilo",
 		"level": 2,
 		"url": "/api/spells/gentle-repose"
 	},
 	{
 		"index": "gust-of-wind",
-		"name": "Gust of Wind",
+		"name": "Lufada de Vento",
 		"level": 2,
 		"url": "/api/spells/gust-of-wind"
 	},
 	{
 		"index": "heat-metal",
-		"name": "Heat Metal",
+		"name": "Esquentar Metal",
 		"level": 2,
 		"url": "/api/spells/heat-metal"
 	},
 	{
 		"index": "hold-person",
-		"name": "Hold Person",
+		"name": "Imobilizar Pessoa",
 		"level": 2,
 		"url": "/api/spells/hold-person"
 	},
 	{
 		"index": "invisibility",
-		"name": "Invisibility",
+		"name": "Invisibilidade",
 		"level": 2,
 		"url": "/api/spells/invisibility"
 	},
 	{
 		"index": "knock",
-		"name": "Knock",
+		"name": "Arrombar",
 		"level": 2,
 		"url": "/api/spells/knock"
 	},
 	{
 		"index": "lesser-restoration",
-		"name": "Lesser Restoration",
+		"name": "Restauração Menor",
 		"level": 2,
 		"url": "/api/spells/lesser-restoration"
 	},
 	{
 		"index": "levitate",
-		"name": "Levitate",
+		"name": "Levitar",
 		"level": 2,
 		"url": "/api/spells/levitate"
 	},
 	{
 		"index": "locate-animals-or-plants",
-		"name": "Locate Animals or Plants",
+		"name": "Localizar Animais ou Plantas",
 		"level": 2,
 		"url": "/api/spells/locate-animals-or-plants"
 	},
 	{
 		"index": "locate-object",
-		"name": "Locate Object",
+		"name": "Localizar Objeto",
 		"level": 2,
 		"url": "/api/spells/locate-object"
 	},
 	{
 		"index": "magic-mouth",
-		"name": "Magic Mouth",
+		"name": "Boca Encantada",
 		"level": 2,
 		"url": "/api/spells/magic-mouth"
 	},
 	{
 		"index": "magic-weapon",
-		"name": "Magic Weapon",
+		"name": "Arma Mágica",
 		"level": 2,
 		"url": "/api/spells/magic-weapon"
 	},
 	{
 		"index": "mirror-image",
-		"name": "Mirror Image",
+		"name": "Reflexos",
 		"level": 2,
 		"url": "/api/spells/mirror-image"
 	},
 	{
 		"index": "misty-step",
-		"name": "Misty Step",
+		"name": "Passo Nebuloso",
 		"level": 2,
 		"url": "/api/spells/misty-step"
 	},
 	{
 		"index": "moonbeam",
-		"name": "Moonbeam",
+		"name": "Raio Lunar",
 		"level": 2,
 		"url": "/api/spells/moonbeam"
 	},
 	{
 		"index": "pass-without-trace",
-		"name": "Pass Without Trace",
+		"name": "Passos Sem Pegadas",
 		"level": 2,
 		"url": "/api/spells/pass-without-trace"
 	},
 	{
 		"index": "prayer-of-healing",
-		"name": "Prayer of Healing",
+		"name": "Oração Curativa",
 		"level": 2,
 		"url": "/api/spells/prayer-of-healing"
 	},
 	{
 		"index": "protection-from-poison",
-		"name": "Protection from Poison",
+		"name": "Proteção Contra Veneno",
 		"level": 2,
 		"url": "/api/spells/protection-from-poison"
 	},
 	{
 		"index": "ray-of-enfeeblement",
-		"name": "Ray of Enfeeblement",
+		"name": "Raio de Enfraquecimento",
 		"level": 2,
 		"url": "/api/spells/ray-of-enfeeblement"
 	},
 	{
 		"index": "rope-trick",
-		"name": "Rope Trick",
+		"name": "Truque de Corda",
 		"level": 2,
 		"url": "/api/spells/rope-trick"
 	},
 	{
 		"index": "scorching-ray",
-		"name": "Scorching Ray",
+		"name": "Raio Ardente",
 		"level": 2,
 		"url": "/api/spells/scorching-ray"
 	},
 	{
 		"index": "see-invisibility",
-		"name": "See Invisibility",
+		"name": "Ver o Invisível",
 		"level": 2,
 		"url": "/api/spells/see-invisibility"
 	},
 	{
 		"index": "shatter",
-		"name": "Shatter",
+		"name": "Despedaçar",
 		"level": 2,
 		"url": "/api/spells/shatter"
 	},
 	{
 		"index": "silence",
-		"name": "Silence",
+		"name": "Silêncio",
 		"level": 2,
 		"url": "/api/spells/silence"
 	},
 	{
 		"index": "spider-climb",
-		"name": "Spider Climb",
+		"name": "Patas de Aranha",
 		"level": 2,
 		"url": "/api/spells/spider-climb"
 	},
 	{
 		"index": "spike-growth",
-		"name": "Spike Growth",
+		"name": "Crescer Espinhos",
 		"level": 2,
 		"url": "/api/spells/spike-growth"
 	},
 	{
 		"index": "spiritual-weapon",
-		"name": "Spiritual Weapon",
+		"name": "Arma Espiritual",
 		"level": 2,
 		"url": "/api/spells/spiritual-weapon"
 	},
 	{
 		"index": "suggestion",
-		"name": "Suggestion",
+		"name": "Sugestão",
 		"level": 2,
 		"url": "/api/spells/suggestion"
 	},
 	{
 		"index": "warding-bond",
-		"name": "Warding Bond",
+		"name": "Vínculo Protetor",
 		"level": 2,
 		"url": "/api/spells/warding-bond"
 	},
 	{
 		"index": "web",
-		"name": "Web",
+		"name": "Teia",
 		"level": 2,
 		"url": "/api/spells/web"
 	},
 	{
 		"index": "zone-of-truth",
-		"name": "Zone of Truth",
+		"name": "Zona da Verdade",
 		"level": 2,
 		"url": "/api/spells/zone-of-truth"
 	},
 	{
 		"index": "animate-dead",
-		"name": "Animate Dead",
+		"name": "Animar Mortos",
 		"level": 3,
 		"url": "/api/spells/animate-dead"
 	},
 	{
 		"index": "beacon-of-hope",
-		"name": "Beacon of Hope",
+		"name": "Sinal de Esperança",
 		"level": 3,
 		"url": "/api/spells/beacon-of-hope"
 	},
 	{
 		"index": "bestow-curse",
-		"name": "Bestow Curse",
+		"name": "Rogar Maldição",
 		"level": 3,
 		"url": "/api/spells/bestow-curse"
 	},
 	{
 		"index": "blink",
-		"name": "Blink",
+		"name": "Piscar",
 		"level": 3,
 		"url": "/api/spells/blink"
 	},
 	{
 		"index": "call-lightning",
-		"name": "Call Lightning",
+		"name": "Convocar Relâmpagos",
 		"level": 3,
 		"url": "/api/spells/call-lightning"
 	},
 	{
 		"index": "clairvoyance",
-		"name": "Clairvoyance",
+		"name": "Clarividência",
 		"level": 3,
 		"url": "/api/spells/clairvoyance"
 	},
 	{
 		"index": "conjure-animals",
-		"name": "Conjure Animals",
+		"name": "Conjurar Animais",
 		"level": 3,
 		"url": "/api/spells/conjure-animals"
 	},
 	{
 		"index": "counterspell",
-		"name": "Counterspell",
+		"name": "Contramágica",
 		"level": 3,
 		"url": "/api/spells/counterspell"
 	},
 	{
 		"index": "create-food-and-water",
-		"name": "Create Food and Water",
+		"name": "Criar Alimentos",
 		"level": 3,
 		"url": "/api/spells/create-food-and-water"
 	},
 	{
 		"index": "daylight",
-		"name": "Daylight",
+		"name": "Luz do Dia",
 		"level": 3,
 		"url": "/api/spells/daylight"
 	},
 	{
 		"index": "dispel-magic",
-		"name": "Dispel Magic",
+		"name": "Dissipar Magia",
 		"level": 3,
 		"url": "/api/spells/dispel-magic"
 	},
 	{
 		"index": "fear",
-		"name": "Fear",
+		"name": "Medo",
 		"level": 3,
 		"url": "/api/spells/fear"
 	},
 	{
 		"index": "fireball",
-		"name": "Fireball",
+		"name": "Bola de Fogo",
 		"level": 3,
 		"url": "/api/spells/fireball"
 	},
 	{
 		"index": "fly",
-		"name": "Fly",
+		"name": "Voo",
 		"level": 3,
 		"url": "/api/spells/fly"
 	},
 	{
 		"index": "gaseous-form",
-		"name": "Gaseous Form",
+		"name": "Forma Gasosa",
 		"level": 3,
 		"url": "/api/spells/gaseous-form"
 	},
 	{
 		"index": "glyph-of-warding",
-		"name": "Glyph of Warding",
+		"name": "Glifo de Vigilância",
 		"level": 3,
 		"url": "/api/spells/glyph-of-warding"
 	},
 	{
 		"index": "haste",
-		"name": "Haste",
+		"name": "velocidade",
 		"level": 3,
 		"url": "/api/spells/haste"
 	},
 	{
 		"index": "hypnotic-pattern",
-		"name": "Hypnotic Pattern",
+		"name": "Padrão Hipnótico",
 		"level": 3,
 		"url": "/api/spells/hypnotic-pattern"
 	},
 	{
 		"index": "lightning-bolt",
-		"name": "Lightning Bolt",
+		"name": "Relâmpago",
 		"level": 3,
 		"url": "/api/spells/lightning-bolt"
 	},
 	{
 		"index": "magic-circle",
-		"name": "Magic Circle",
+		"name": "Círculo Mágico",
 		"level": 3,
 		"url": "/api/spells/magic-circle"
 	},
 	{
 		"index": "major-image",
-		"name": "Major Image",
+		"name": "Imagem Maior",
 		"level": 3,
 		"url": "/api/spells/major-image"
 	},
 	{
 		"index": "mass-healing-word",
-		"name": "Mass Healing Word",
+		"name": "Palavra Curativa em Massa",
 		"level": 3,
 		"url": "/api/spells/mass-healing-word"
 	},
 	{
 		"index": "meld-into-stone",
-		"name": "Meld Into Stone",
+		"name": "Fundir em Pedra",
 		"level": 3,
 		"url": "/api/spells/meld-into-stone"
 	},
 	{
 		"index": "nondetection",
-		"name": "Nondetection",
+		"name": "Dificultar Detectação",
 		"level": 3,
 		"url": "/api/spells/nondetection"
 	},
 	{
 		"index": "phantom-steed",
-		"name": "Phantom Steed",
+		"name": "Montaria Fantasmagórica",
 		"level": 3,
 		"url": "/api/spells/phantom-steed"
 	},
 	{
 		"index": "plant-growth",
-		"name": "Plant Growth",
+		"name": "Ampliar Plantas",
 		"level": 3,
 		"url": "/api/spells/plant-growth"
 	},
 	{
 		"index": "protection-from-energy",
-		"name": "Protection From Energy",
+		"name": "Proteção Contra Energia",
 		"level": 3,
 		"url": "/api/spells/protection-from-energy"
 	},
 	{
 		"index": "remove-curse",
-		"name": "Remove Curse",
+		"name": "Remover Maldição",
 		"level": 3,
 		"url": "/api/spells/remove-curse"
 	},
 	{
 		"index": "revivify",
-		"name": "Revivify",
+		"name": "Revivificar",
 		"level": 3,
 		"url": "/api/spells/revivify"
 	},
 	{
 		"index": "sending",
-		"name": "Sending",
+		"name": "Enviar Mensagem",
 		"level": 3,
 		"url": "/api/spells/sending"
 	},
 	{
 		"index": "sleet-storm",
-		"name": "Sleet Storm",
+		"name": "Nevasca",
 		"level": 3,
 		"url": "/api/spells/sleet-storm"
 	},
 	{
 		"index": "slow",
-		"name": "Slow",
+		"name": "Lentidão",
 		"level": 3,
 		"url": "/api/spells/slow"
 	},
 	{
 		"index": "speak-with-dead",
-		"name": "Speak with Dead",
+		"name": "Falar com os Mortos",
 		"level": 3,
 		"url": "/api/spells/speak-with-dead"
 	},
 	{
 		"index": "speak-with-plants",
-		"name": "Speak with Plants",
+		"name": "Falar com Plantas",
 		"level": 3,
 		"url": "/api/spells/speak-with-plants"
 	},
 	{
 		"index": "spirit-guardians",
-		"name": "Spirit Guardians",
+		"name": "Espíritos Guardiões",
 		"level": 3,
 		"url": "/api/spells/spirit-guardians"
 	},
 	{
 		"index": "stinking-cloud",
-		"name": "Stinking Cloud",
+		"name": "Névoa Fétida",
 		"level": 3,
 		"url": "/api/spells/stinking-cloud"
 	},
 	{
 		"index": "tiny-hut",
-		"name": "Tiny Hut",
+		"name": "Pequena Cabana",
 		"level": 3,
 		"url": "/api/spells/tiny-hut"
 	},
 	{
 		"index": "tongues",
-		"name": "Tongues",
+		"name": "Idiomas",
 		"level": 3,
 		"url": "/api/spells/tongues"
 	},
 	{
 		"index": "vampiric-touch",
-		"name": "Vampiric Touch",
+		"name": "Toque Vampírico",
 		"level": 3,
 		"url": "/api/spells/vampiric-touch"
 	},
 	{
 		"index": "water-breathing",
-		"name": "Water Breathing",
+		"name": "Respirar na Água",
 		"level": 3,
 		"url": "/api/spells/water-breathing"
 	},
 	{
 		"index": "water-walk",
-		"name": "Water Walk",
+		"name": "Andar na Água",
 		"level": 3,
 		"url": "/api/spells/water-walk"
 	},
 	{
 		"index": "wind-wall",
-		"name": "Wind Wall",
+		"name": "Muralha de Vento",
 		"level": 3,
 		"url": "/api/spells/wind-wall"
 	},
 	{
 		"index": "arcane-eye",
-		"name": "Arcane Eye",
+		"name": "Olho Arcano",
 		"level": 4,
 		"url": "/api/spells/arcane-eye"
 	},
 	{
 		"index": "banishment",
-		"name": "Banishment",
+		"name": "Banimento",
 		"level": 4,
 		"url": "/api/spells/banishment"
 	},
 	{
 		"index": "black-tentacles",
-		"name": "Black Tentacles",
+		"name": "Tentáculos Negros",
 		"level": 4,
 		"url": "/api/spells/black-tentacles"
 	},
 	{
 		"index": "blight",
-		"name": "Blight",
+		"name": "Malogro",
 		"level": 4,
 		"url": "/api/spells/blight"
 	},
 	{
 		"index": "compulsion",
-		"name": "Compulsion",
+		"name": "Compulsão",
 		"level": 4,
 		"url": "/api/spells/compulsion"
 	},
 	{
 		"index": "confusion",
-		"name": "Confusion",
+		"name": "Confusão",
 		"level": 4,
 		"url": "/api/spells/confusion"
 	},
 	{
 		"index": "conjure-minor-elementals",
-		"name": "Conjure Minor Elementals",
+		"name": "Conjurar Elementais Menores",
 		"level": 4,
 		"url": "/api/spells/conjure-minor-elementals"
 	},
 	{
 		"index": "conjure-woodland-beings",
-		"name": "Conjure Woodland Beings",
+		"name": "Conjurar Seres da Floresta",
 		"level": 4,
 		"url": "/api/spells/conjure-woodland-beings"
 	},
 	{
 		"index": "control-water",
-		"name": "Control Water",
+		"name": "Controlar a Água",
 		"level": 4,
 		"url": "/api/spells/control-water"
 	},
 	{
 		"index": "death-ward",
-		"name": "Death Ward",
+		"name": "Proteção Contra a Morte",
 		"level": 4,
 		"url": "/api/spells/death-ward"
 	},
 	{
 		"index": "dimension-door",
-		"name": "Dimension Door",
+		"name": "Porta Dimensional",
 		"level": 4,
 		"url": "/api/spells/dimension-door"
 	},
 	{
 		"index": "divination",
-		"name": "Divination",
+		"name": "Adivinhação",
 		"level": 4,
 		"url": "/api/spells/divination"
 	},
 	{
 		"index": "dominate-beast",
-		"name": "Dominate Beast",
+		"name": "Dominar Besta",
 		"level": 4,
 		"url": "/api/spells/dominate-beast"
 	},
 	{
 		"index": "fabricate",
-		"name": "Fabricate",
+		"name": "Fabricar",
 		"level": 4,
 		"url": "/api/spells/fabricate"
 	},
 	{
 		"index": "faithful-hound",
-		"name": "Faithful Hound",
+		"name": "Cão Fiel",
 		"level": 4,
 		"url": "/api/spells/faithful-hound"
 	},
 	{
 		"index": "fire-shield",
-		"name": "Fire Shield",
+		"name": "Escudo de Fogo",
 		"level": 4,
 		"url": "/api/spells/fire-shield"
 	},
 	{
 		"index": "freedom-of-movement",
-		"name": "Freedom of Movement",
+		"name": "Movimentação Livre",
 		"level": 4,
 		"url": "/api/spells/freedom-of-movement"
 	},
 	{
 		"index": "giant-insect",
-		"name": "Giant Insect",
+		"name": "Inseto Gigante",
 		"level": 4,
 		"url": "/api/spells/giant-insect"
 	},
 	{
 		"index": "greater-invisibility",
-		"name": "Greater Invisibility",
+		"name": "Invisibilidade Maior",
 		"level": 4,
 		"url": "/api/spells/greater-invisibility"
 	},
 	{
 		"index": "guardian-of-faith",
-		"name": "Guardian of Faith",
+		"name": "Guardião da Fé",
 		"level": 4,
 		"url": "/api/spells/guardian-of-faith"
 	},
 	{
 		"index": "hallucinatory-terrain",
-		"name": "Hallucinatory Terrain",
+		"name": "Terreno Alucinógeno",
 		"level": 4,
 		"url": "/api/spells/hallucinatory-terrain"
 	},
 	{
 		"index": "ice-storm",
-		"name": "Ice Storm",
+		"name": "Tempestade de Gelo",
 		"level": 4,
 		"url": "/api/spells/ice-storm"
 	},
 	{
 		"index": "locate-creature",
-		"name": "Locate Creature",
+		"name": "Localizar Criatura",
 		"level": 4,
 		"url": "/api/spells/locate-creature"
 	},
 	{
 		"index": "phantasmal-killer",
-		"name": "Phantasmal Killer",
+		"name": "Assassino Fantasmagórico",
 		"level": 4,
 		"url": "/api/spells/phantasmal-killer"
 	},
 	{
 		"index": "polymorph",
-		"name": "Polymorph",
+		"name": "Metamorfose",
 		"level": 4,
 		"url": "/api/spells/polymorph"
 	},
 	{
 		"index": "private-sanctum",
-		"name": "Private Sanctum",
+		"name": "Santuário Particular",
 		"level": 4,
 		"url": "/api/spells/private-sanctum"
 	},
 	{
 		"index": "resilient-sphere",
-		"name": "Resilient Sphere",
+		"name": "Esfera Resiliente",
 		"level": 4,
 		"url": "/api/spells/resilient-sphere"
 	},
 	{
 		"index": "secret-chest",
-		"name": "Secret Chest",
+		"name": "Arca Secreta",
 		"level": 4,
 		"url": "/api/spells/secret-chest"
 	},
 	{
 		"index": "stone-shape",
-		"name": "Stone Shape",
+		"name": "Moldar Rochas",
 		"level": 4,
 		"url": "/api/spells/stone-shape"
 	},
 	{
 		"index": "stoneskin",
-		"name": "Stoneskin",
+		"name": "Pele de Pedra",
 		"level": 4,
 		"url": "/api/spells/stoneskin"
 	},
 	{
 		"index": "wall-of-fire",
-		"name": "Wall of Fire",
+		"name": "Muralha de Fogo",
 		"level": 4,
 		"url": "/api/spells/wall-of-fire"
 	},
 	{
 		"index": "animate-objects",
-		"name": "Animate Objects",
+		"name": "Animar Objetos",
 		"level": 5,
 		"url": "/api/spells/animate-objects"
 	},
 	{
 		"index": "antilife-shell",
-		"name": "Antilife Shell",
+		"name": "Cúpula Antivida",
 		"level": 5,
 		"url": "/api/spells/antilife-shell"
 	},
 	{
 		"index": "arcane-hand",
-		"name": "Arcane Hand",
+		"name": "Mão Arcana",
 		"level": 5,
 		"url": "/api/spells/arcane-hand"
 	},
 	{
 		"index": "awaken",
-		"name": "Awaken",
+		"name": "Despertar",
 		"level": 5,
 		"url": "/api/spells/awaken"
 	},
 	{
 		"index": "cloudkill",
-		"name": "Cloudkill",
+		"name": "Névoa Mortal",
 		"level": 5,
 		"url": "/api/spells/cloudkill"
 	},
 	{
 		"index": "commune",
-		"name": "Commune",
+		"name": "Comunhão",
 		"level": 5,
 		"url": "/api/spells/commune"
 	},
 	{
 		"index": "commune-with-nature",
-		"name": "Commune With Nature",
+		"name": "Comunhão com a Natureza",
 		"level": 5,
 		"url": "/api/spells/commune-with-nature"
 	},
 	{
 		"index": "cone-of-cold",
-		"name": "Cone of Cold",
+		"name": "Cone de Frio",
 		"level": 5,
 		"url": "/api/spells/cone-of-cold"
 	},
 	{
 		"index": "conjure-elemental",
-		"name": "Conjure Elemental",
+		"name": "Conjurar Elemental",
 		"level": 5,
 		"url": "/api/spells/conjure-elemental"
 	},
 	{
 		"index": "contact-other-plane",
-		"name": "Contact Other Plane",
+		"name": "Contato Extraplanar",
 		"level": 5,
 		"url": "/api/spells/contact-other-plane"
 	},
 	{
 		"index": "contagion",
-		"name": "Contagion",
+		"name": "Praga",
 		"level": 5,
 		"url": "/api/spells/contagion"
 	},
 	{
 		"index": "creation",
-		"name": "Creation",
+		"name": "Criação",
 		"level": 5,
 		"url": "/api/spells/creation"
 	},
 	{
 		"index": "dispel-evil-and-good",
-		"name": "Dispel Evil and Good",
+		"name": "Dissipar o Bem e Mal",
 		"level": 5,
 		"url": "/api/spells/dispel-evil-and-good"
 	},
 	{
 		"index": "dominate-person",
-		"name": "Dominate Person",
+		"name": "Dominar Pessoa",
 		"level": 5,
 		"url": "/api/spells/dominate-person"
 	},
 	{
 		"index": "dream",
-		"name": "Dream",
+		"name": "Sonho",
 		"level": 5,
 		"url": "/api/spells/dream"
 	},
 	{
 		"index": "flame-strike",
-		"name": "Flame Strike",
+		"name": "Coluna de Chamas",
 		"level": 5,
 		"url": "/api/spells/flame-strike"
 	},
 	{
 		"index": "geas",
-		"name": "Geas",
+		"name": "Missão",
 		"level": 5,
 		"url": "/api/spells/geas"
 	},
 	{
 		"index": "greater-restoration",
-		"name": "Greater Restoration",
+		"name": "Restauração Maior",
 		"level": 5,
 		"url": "/api/spells/greater-restoration"
 	},
 	{
 		"index": "hallow",
-		"name": "Hallow",
+		"name": "Consagrar",
 		"level": 5,
 		"url": "/api/spells/hallow"
 	},
 	{
 		"index": "hold-monster",
-		"name": "Hold Monster",
+		"name": "Imobilizar Monstro",
 		"level": 5,
 		"url": "/api/spells/hold-monster"
 	},
 	{
 		"index": "insect-plague",
-		"name": "Insect Plague",
+		"name": "Praga de Insetos",
 		"level": 5,
 		"url": "/api/spells/insect-plague"
 	},
 	{
 		"index": "legend-lore",
-		"name": "Legend Lore",
+		"name": "Conhecimento Lendário",
 		"level": 5,
 		"url": "/api/spells/legend-lore"
 	},
 	{
 		"index": "mass-cure-wounds",
-		"name": "Mass Cure Wounds",
+		"name": "Curar Ferimentos em Massa",
 		"level": 5,
 		"url": "/api/spells/mass-cure-wounds"
 	},
 	{
 		"index": "mislead",
-		"name": "Mislead",
+		"name": "Despistar",
 		"level": 5,
 		"url": "/api/spells/mislead"
 	},
 	{
 		"index": "modify-memory",
-		"name": "Modify Memory",
+		"name": "Modificar Memória",
 		"level": 5,
 		"url": "/api/spells/modify-memory"
 	},
 	{
 		"index": "passwall",
-		"name": "Passwall",
+		"name": "Criar Passagem",
 		"level": 5,
 		"url": "/api/spells/passwall"
 	},
 	{
 		"index": "planar-binding",
-		"name": "Planar Binding",
+		"name": "Âncora Planar",
 		"level": 5,
 		"url": "/api/spells/planar-binding"
 	},
 	{
 		"index": "raise-dead",
-		"name": "Raise Dead",
+		"name": "Reviver os Mortos",
 		"level": 5,
 		"url": "/api/spells/raise-dead"
 	},
 	{
 		"index": "reincarnate",
-		"name": "Reincarnate",
+		"name": "Reencarnação",
 		"level": 5,
 		"url": "/api/spells/reincarnate"
 	},
 	{
 		"index": "scrying",
-		"name": "Scrying",
+		"name": "Vidência",
 		"level": 5,
 		"url": "/api/spells/scrying"
 	},
 	{
 		"index": "seeming",
-		"name": "Seeming",
+		"name": "Similaridade",
 		"level": 5,
 		"url": "/api/spells/seeming"
 	},
 	{
 		"index": "telekinesis",
-		"name": "Telekinesis",
+		"name": "Telecinésia",
 		"level": 5,
 		"url": "/api/spells/telekinesis"
 	},
 	{
 		"index": "telepathic-bond",
-		"name": "Telepathic Bond",
+		"name": "Ligação Telepática",
 		"level": 5,
 		"url": "/api/spells/telepathic-bond"
 	},
 	{
 		"index": "teleportation-circle",
-		"name": "Teleportation Circle",
+		"name": "Círculo de Teletransporte",
 		"level": 5,
 		"url": "/api/spells/teleportation-circle"
 	},
 	{
 		"index": "tree-stride",
-		"name": "Tree Stride",
+		"name": "Caminhar em Árvores",
 		"level": 5,
 		"url": "/api/spells/tree-stride"
 	},
 	{
 		"index": "wall-of-force",
-		"name": "Wall of Force",
+		"name": "Muralha de Energia",
 		"level": 5,
 		"url": "/api/spells/wall-of-force"
 	},
 	{
 		"index": "wall-of-stone",
-		"name": "Wall of Stone",
+		"name": "Muralha de Pedra",
 		"level": 5,
 		"url": "/api/spells/wall-of-stone"
 	},
 	{
+		"index": "glibness",
+		"name": "Loquacidade",
+		"level": 5,
+		"url": "/api/spells/glibness"
+	},
+	{
 		"index": "blade-barrier",
-		"name": "Blade Barrier",
+		"name": "Barreira de Lâminas",
 		"level": 6,
 		"url": "/api/spells/blade-barrier"
 	},
 	{
 		"index": "chain-lightning",
-		"name": "Chain Lightning",
+		"name": "Corrente de Relâmpagos",
 		"level": 6,
 		"url": "/api/spells/chain-lightning"
 	},
 	{
 		"index": "circle-of-death",
-		"name": "Circle of Death",
+		"name": "Círculo da Morte",
 		"level": 6,
 		"url": "/api/spells/circle-of-death"
 	},
 	{
 		"index": "conjure-fey",
-		"name": "Conjure Fey",
+		"name": "Conjurar Fada",
 		"level": 6,
 		"url": "/api/spells/conjure-fey"
 	},
 	{
 		"index": "contingency",
-		"name": "Contingency",
+		"name": "Contingência",
 		"level": 6,
 		"url": "/api/spells/contingency"
 	},
 	{
 		"index": "create-undead",
-		"name": "Create Undead",
+		"name": "Criar Mortos",
 		"level": 6,
 		"url": "/api/spells/create-undead"
 	},
 	{
 		"index": "disintegrate",
-		"name": "Disintegrate",
+		"name": "Desintegrar",
 		"level": 6,
 		"url": "/api/spells/disintegrate"
 	},
 	{
 		"index": "eyebite",
-		"name": "Eyebite",
+		"name": "Ataque Visual",
 		"level": 6,
 		"url": "/api/spells/eyebite"
 	},
 	{
 		"index": "find-the-path",
-		"name": "Find the Path",
+		"name": "Encontrar o Caminho",
 		"level": 6,
 		"url": "/api/spells/find-the-path"
 	},
 	{
 		"index": "flesh-to-stone",
-		"name": "Flesh to Stone",
+		"name": "Carne para Pedra",
 		"level": 6,
 		"url": "/api/spells/flesh-to-stone"
 	},
 	{
 		"index": "forbiddance",
-		"name": "Forbiddance",
+		"name": "Proibição",
 		"level": 6,
 		"url": "/api/spells/forbiddance"
 	},
 	{
 		"index": "freezing-sphere",
-		"name": "Freezing Sphere",
+		"name": "Esfera Congelante",
 		"level": 6,
 		"url": "/api/spells/freezing-sphere"
 	},
 	{
 		"index": "globe-of-invulnerability",
-		"name": "Globe of Invulnerability",
+		"name": "Globo de Invulnerabilidade",
 		"level": 6,
 		"url": "/api/spells/globe-of-invulnerability"
 	},
 	{
 		"index": "guards-and-wards",
-		"name": "Guards and Wards",
+		"name": "Proteger Fortaleza",
 		"level": 6,
 		"url": "/api/spells/guards-and-wards"
 	},
 	{
 		"index": "harm",
-		"name": "Harm",
+		"name": "Doença Plena",
 		"level": 6,
 		"url": "/api/spells/harm"
 	},
 	{
 		"index": "heal",
-		"name": "Heal",
+		"name": "Cura Completa",
 		"level": 6,
 		"url": "/api/spells/heal"
 	},
 	{
 		"index": "heroes-feast",
-		"name": "Heroes' Feast",
+		"name": "Banquete de Heróis",
 		"level": 6,
 		"url": "/api/spells/heroes-feast"
 	},
 	{
 		"index": "instant-summons",
-		"name": "Instant Summons",
+		"name": "Invocação Instantânea",
 		"level": 6,
 		"url": "/api/spells/instant-summons"
 	},
 	{
 		"index": "irresistible-dance",
-		"name": "Irresistible Dance",
+		"name": "Dança Irresistível",
 		"level": 6,
 		"url": "/api/spells/irresistible-dance"
 	},
 	{
 		"index": "magic-jar",
-		"name": "Magic Jar",
+		"name": "Recipiente Arcano",
 		"level": 6,
 		"url": "/api/spells/magic-jar"
 	},
 	{
 		"index": "mass-suggestion",
-		"name": "Mass Suggestion",
+		"name": "Sugestão em Massa",
 		"level": 6,
 		"url": "/api/spells/mass-suggestion"
 	},
 	{
 		"index": "move-earth",
-		"name": "Move Earth",
+		"name": "Mover Terra",
 		"level": 6,
 		"url": "/api/spells/move-earth"
 	},
 	{
 		"index": "planar-ally",
-		"name": "Planar Ally",
+		"name": "Aliado Planar",
 		"level": 6,
 		"url": "/api/spells/planar-ally"
 	},
 	{
 		"index": "programmed-illusion",
-		"name": "Programmed Illusion",
+		"name": "Ilusão Programada",
 		"level": 6,
 		"url": "/api/spells/programmed-illusion"
 	},
 	{
 		"index": "sunbeam",
-		"name": "Sunbeam",
+		"name": "Raio Solar",
 		"level": 6,
 		"url": "/api/spells/sunbeam"
 	},
 	{
 		"index": "transport-via-plants",
-		"name": "Transport via Plants",
+		"name": "Teletransporte por Árvores",
 		"level": 6,
 		"url": "/api/spells/transport-via-plants"
 	},
 	{
 		"index": "true-seeing",
-		"name": "True Seeing",
+		"name": "Visão da Verdade",
 		"level": 6,
 		"url": "/api/spells/true-seeing"
 	},
 	{
 		"index": "wall-of-ice",
-		"name": "Wall of Ice",
+		"name": "Muralha de Gelo",
 		"level": 6,
 		"url": "/api/spells/wall-of-ice"
 	},
 	{
 		"index": "wall-of-thorns",
-		"name": "Wall of Thorns",
+		"name": "Muralha de Espinhos",
 		"level": 6,
 		"url": "/api/spells/wall-of-thorns"
 	},
 	{
 		"index": "wind-walk",
-		"name": "Wind Walk",
+		"name": "Caminhar no Vento",
 		"level": 6,
 		"url": "/api/spells/wind-walk"
 	},
 	{
 		"index": "word-of-recall",
-		"name": "Word of Recall",
+		"name": "Palavra de Recordação",
 		"level": 6,
 		"url": "/api/spells/word-of-recall"
 	},
 	{
 		"index": "arcane-sword",
-		"name": "Arcane Sword",
+		"name": "Espada Arcana",
 		"level": 7,
 		"url": "/api/spells/arcane-sword"
 	},
 	{
 		"index": "conjure-celestial",
-		"name": "Conjure Celestial",
+		"name": "Conjurar Celestial",
 		"level": 7,
 		"url": "/api/spells/conjure-celestial"
 	},
 	{
 		"index": "delayed-blast-fireball",
-		"name": "Delayed Blast Fireball",
+		"name": "Bola de Fogo Controlável",
 		"level": 7,
 		"url": "/api/spells/delayed-blast-fireball"
 	},
 	{
 		"index": "divine-word",
-		"name": "Divine Word",
+		"name": "Palavra Divina",
 		"level": 7,
 		"url": "/api/spells/divine-word"
 	},
 	{
 		"index": "etherealness",
-		"name": "Etherealness",
+		"name": "Forma Etérea",
 		"level": 7,
 		"url": "/api/spells/etherealness"
 	},
 	{
 		"index": "finger-of-death",
-		"name": "Finger of Death",
+		"name": "Dedo da Morte",
 		"level": 7,
 		"url": "/api/spells/finger-of-death"
 	},
 	{
 		"index": "fire-storm",
-		"name": "Fire Storm",
+		"name": "Tempestade de Fogo",
 		"level": 7,
 		"url": "/api/spells/fire-storm"
 	},
 	{
 		"index": "forcecage",
-		"name": "Forcecage",
+		"name": "Prisão de Energia",
 		"level": 7,
 		"url": "/api/spells/forcecage"
 	},
 	{
 		"index": "magnificent-mansion",
-		"name": "Magnificent Mansion",
+		"name": "Mansão Magnífica",
 		"level": 7,
 		"url": "/api/spells/magnificent-mansion"
 	},
 	{
 		"index": "mirage-arcane",
-		"name": "Mirage Arcane",
+		"name": "Miragem",
 		"level": 7,
 		"url": "/api/spells/mirage-arcane"
 	},
 	{
 		"index": "plane-shift",
-		"name": "Plane Shift",
+		"name": "Viagem Planar",
 		"level": 7,
 		"url": "/api/spells/plane-shift"
 	},
 	{
 		"index": "prismatic-spray",
-		"name": "Prismatic Spray",
+		"name": "Rajada Prismática",
 		"level": 7,
 		"url": "/api/spells/prismatic-spray"
 	},
 	{
 		"index": "project-image",
-		"name": "Project Image",
+		"name": "Projetar Imagem",
 		"level": 7,
 		"url": "/api/spells/project-image"
 	},
 	{
 		"index": "regenerate",
-		"name": "Regenerate",
+		"name": "Regeneração",
 		"level": 7,
 		"url": "/api/spells/regenerate"
 	},
 	{
 		"index": "resurrection",
-		"name": "Resurrection",
+		"name": "Ressureição",
 		"level": 7,
 		"url": "/api/spells/resurrection"
 	},
 	{
 		"index": "reverse-gravity",
-		"name": "Reverse Gravity",
+		"name": "Inverter a Gravidade",
 		"level": 7,
 		"url": "/api/spells/reverse-gravity"
 	},
 	{
 		"index": "sequester",
-		"name": "Sequester",
+		"name": "Isolamento",
 		"level": 7,
 		"url": "/api/spells/sequester"
 	},
 	{
 		"index": "simulacrum",
-		"name": "Simulacrum",
+		"name": "Simulacro",
 		"level": 7,
 		"url": "/api/spells/simulacrum"
 	},
 	{
 		"index": "symbol",
-		"name": "Symbol",
+		"name": "Símbolo",
 		"level": 7,
 		"url": "/api/spells/symbol"
 	},
 	{
 		"index": "teleport",
-		"name": "Teleport",
+		"name": "Teletransporte",
 		"level": 7,
 		"url": "/api/spells/teleport"
 	},
 	{
 		"index": "animal-shapes",
-		"name": "Animal Shapes",
+		"name": "Formas Animais",
 		"level": 8,
 		"url": "/api/spells/animal-shapes"
 	},
 	{
 		"index": "antimagic-field",
-		"name": "Antimagic Field",
+		"name": "Campo Antimagia",
 		"level": 8,
 		"url": "/api/spells/antimagic-field"
 	},
 	{
 		"index": "antipathy-sympathy",
-		"name": "Antipathy/Sympathy",
+		"name": "Antipatia/Simpatia",
 		"level": 8,
 		"url": "/api/spells/antipathy-sympathy"
 	},
@@ -1753,163 +1759,157 @@
 	},
 	{
 		"index": "control-weather",
-		"name": "Control Weather",
+		"name": "Controlar o Clima",
 		"level": 8,
 		"url": "/api/spells/control-weather"
 	},
 	{
 		"index": "demiplane",
-		"name": "Demiplane",
+		"name": "Semiplano",
 		"level": 8,
 		"url": "/api/spells/demiplane"
 	},
 	{
 		"index": "dominate-monster",
-		"name": "Dominate Monster",
+		"name": "Dominar Monstro",
 		"level": 8,
 		"url": "/api/spells/dominate-monster"
 	},
 	{
 		"index": "earthquake",
-		"name": "Earthquake",
+		"name": "Terremoto",
 		"level": 8,
 		"url": "/api/spells/earthquake"
 	},
 	{
 		"index": "feeblemind",
-		"name": "Feeblemind",
+		"name": "Enfraquecer Intelecto",
 		"level": 8,
 		"url": "/api/spells/feeblemind"
 	},
 	{
-		"index": "glibness",
-		"name": "Glibness",
-		"level": 8,
-		"url": "/api/spells/glibness"
-	},
-	{
 		"index": "holy-aura",
-		"name": "Holy Aura",
+		"name": "Aura Sagrada",
 		"level": 8,
 		"url": "/api/spells/holy-aura"
 	},
 	{
 		"index": "incendiary-cloud",
-		"name": "Incendiary Cloud",
+		"name": "Nuvem Incendiária",
 		"level": 8,
 		"url": "/api/spells/incendiary-cloud"
 	},
 	{
 		"index": "maze",
-		"name": "Maze",
+		"name": "Labirinto",
 		"level": 8,
 		"url": "/api/spells/maze"
 	},
 	{
 		"index": "mind-blank",
-		"name": "Mind Blank",
+		"name": "Limpar a Mente",
 		"level": 8,
 		"url": "/api/spells/mind-blank"
 	},
 	{
 		"index": "power-word-stun",
-		"name": "Power Word Stun",
+		"name": "Palavra de Poder Atordoar",
 		"level": 8,
 		"url": "/api/spells/power-word-stun"
 	},
 	{
 		"index": "sunburst",
-		"name": "Sunburst",
+		"name": "Explosão Solar",
 		"level": 8,
 		"url": "/api/spells/sunburst"
 	},
 	{
 		"index": "astral-projection",
-		"name": "Astral Projection",
+		"name": "Projeção Astral",
 		"level": 9,
 		"url": "/api/spells/astral-projection"
 	},
 	{
 		"index": "foresight",
-		"name": "Foresight",
+		"name": "Sexto Sentido",
 		"level": 9,
 		"url": "/api/spells/foresight"
 	},
 	{
 		"index": "gate",
-		"name": "Gate",
+		"name": "Portal",
 		"level": 9,
 		"url": "/api/spells/gate"
 	},
 	{
 		"index": "imprisonment",
-		"name": "Imprisonment",
+		"name": "Aprisionamento",
 		"level": 9,
 		"url": "/api/spells/imprisonment"
 	},
 	{
 		"index": "mass-heal",
-		"name": "Mass Heal",
+		"name": "Cura Completa em Massa",
 		"level": 9,
 		"url": "/api/spells/mass-heal"
 	},
 	{
 		"index": "meteor-swarm",
-		"name": "Meteor Swarm",
+		"name": "Chuva de Meteoros",
 		"level": 9,
 		"url": "/api/spells/meteor-swarm"
 	},
 	{
 		"index": "power-word-kill",
-		"name": "Power Word Kill",
+		"name": "Palavra de Poder Matar",
 		"level": 9,
 		"url": "/api/spells/power-word-kill"
 	},
 	{
 		"index": "prismatic-wall",
-		"name": "Prismatic Wall",
+		"name": "Muralha Prismática",
 		"level": 9,
 		"url": "/api/spells/prismatic-wall"
 	},
 	{
 		"index": "shapechange",
-		"name": "Shapechange",
+		"name": "Alterar Forma",
 		"level": 9,
 		"url": "/api/spells/shapechange"
 	},
 	{
 		"index": "storm-of-vengeance",
-		"name": "Storm of Vengeance",
+		"name": "Tempestade de Vingança",
 		"level": 9,
 		"url": "/api/spells/storm-of-vengeance"
 	},
 	{
 		"index": "time-stop",
-		"name": "Time Stop",
+		"name": "Parar o Tempo",
 		"level": 9,
 		"url": "/api/spells/time-stop"
 	},
 	{
 		"index": "true-polymorph",
-		"name": "True Polymorph",
+		"name": "Metamorfose Verdadeira",
 		"level": 9,
 		"url": "/api/spells/true-polymorph"
 	},
 	{
 		"index": "true-resurrection",
-		"name": "True Resurrection",
+		"name": "Ressureição Verdadeira",
 		"level": 9,
 		"url": "/api/spells/true-resurrection"
 	},
 	{
 		"index": "weird",
-		"name": "Weird",
+		"name": "Encarnação Fantasmagórica",
 		"level": 9,
 		"url": "/api/spells/weird"
 	},
 	{
 		"index": "wish",
-		"name": "Wish",
+		"name": "Desejo",
 		"level": 9,
 		"url": "/api/spells/wish"
 	}
