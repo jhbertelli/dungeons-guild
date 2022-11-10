@@ -5,8 +5,8 @@ const registerForm = document.querySelector("form")
 
 signUpButton.addEventListener("click", (e) => {
     e.preventDefault()
-
-    const inputsArray = registerForm.querySelectorAll('input')
+    
+    const inputsArray = registerForm.querySelectorAll('.input-wrapper input')
     
     function showAlert(field, text) {
         field.scrollIntoView({

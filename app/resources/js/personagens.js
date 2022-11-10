@@ -12,7 +12,6 @@ modal.addEventListener("hide.bs.modal", () => {
 $.getJSON("/api/personagens_usuario/", async (json) => {
     // adiciona os cards dos personagens
     const cardsDiv = document.querySelector(".meus-personagens")
-    console.log(json.length)
 
     await $.getJSON("/api/perfil_usuario/", (usuario) => {
         if (usuario["assinatura"] === 1) {

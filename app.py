@@ -135,9 +135,12 @@ def api_cadastro():
         if "email" not in form or form["email"] == "":
             return ""
 
+        # cria o código de verificação
         code = verification_code()
         session['verification_code'] = code
         session['signup_email'] = form['email']
+        
+        # envia para o e-mail
         send_confirmation(form["email"], code)
         
         return form["email"]
@@ -162,6 +165,34 @@ def verify_code():
     response['sucess'] = False
 
     return response
+
+@app.route("/api/send_to_login/", methods=['POST'])
+def send_to_login():
+    # prepara o cadastro para ser enviado ao PHP
+    register_json = {}
+    fields = ['apelido', 'email', 'nome', 'senha', 'verificarSenha', 'verification-code']
+
+    form = request.form
+
+    def create_json(key):
+        register_json[key] = form[key]
+
+    for key in fields:
+        if key not in form or form[key] == '':
+            return redirect('/cadastro')
+
+        create_json(key)
+
+    if register_json['email'] != session['signup_email'] or register_json['verification-code'] != session['verification_code']:
+        return redirect('/cadastro')
+
+    register_json['server_verification_code'] = session['verification_code']
+    register_json['registered_email'] = session['signup_email']
+    
+    session.pop('verification_code', None)
+    session.pop('signup_email', None)
+
+    return register_json
 
 
 @app.route("/")
@@ -235,7 +266,7 @@ def excluir_personagem():
 
     if row_verify_owner['id_usuario'] != session['usuario']:
         return redirect('/personagens/')
-        
+
 
     sql = f"DELETE FROM personagem WHERE id_personagem = {id_personagem}"
     
