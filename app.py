@@ -127,19 +127,44 @@ def api_usuarios(apelido):
     return get_from_database(f"SELECT apelido_cadastro, id_cadastro FROM cadastro WHERE apelido_cadastro LIKE '%{apelido}%'")
 
 
-@app.route("/api/cadastro/", methods=['GET', 'POST'])
+@app.route("/api/cadastro/", methods=['POST'])
 def api_cadastro():
     if request.method == "POST":
         form = request.form
 
         if "email" not in form or form["email"] == "":
             return ""
-        
-        code = verification_code()
-        send_confirmation(form["email"], code)
 
+        code = verification_code()
+        session['verification_code'] = code
+        session['signup-email'] = form['email']
+        # send_confirmation(form["email"], code)
+        print(session)
+        
         return form["email"]
         
+
+@app.route("/api/verify_code/", methods=['POST'])
+def verify_code():
+    user_sent_form = request.form
+
+    json = {}
+
+    if "verification-code" not in user_sent_form or user_sent_form['verification-code'] == '':
+        json["sucess"] = False
+        return json
+    
+    user_sent_code = user_sent_form['verification-code']
+
+    if user_sent_code == session['verification_code']:
+        json['sucess'] = True
+        return json
+
+    json['sucess'] = False
+
+    return json
+
+
 
 @app.route("/")
 def inicio():
@@ -150,6 +175,12 @@ def inicio():
 @app.route("/cadastro/", methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'GET':
+        if 'verification_code' in session:
+            session.pop('verification_code', None)
+        
+        if 'signup-email' in session:
+            session.pop('signup-email', None)
+        
         return render_template('cadastro.html')
 
     if request.method == 'POST':

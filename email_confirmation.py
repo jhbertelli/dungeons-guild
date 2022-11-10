@@ -26,7 +26,7 @@ def send_confirmation(recipient, code):
     msg = EmailMessage()
 
     # conteudo do e-mail
-    msg.set_content(f"""Seu código de verificação do Daymeals é:
+    msg.set_content(f"""Seu código de verificação do Dungeon's Guild é:
 
     {code}""")
     msg['Subject'] = "Código de Verificação - Dungeon's Guild"

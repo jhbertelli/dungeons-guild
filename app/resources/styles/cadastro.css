@@ -21,6 +21,14 @@ body {
 
 hr {
     width: 520px;
+    margin: 0;
+    opacity: 1;
+    border-style: inset;
+    border-width: 1px;
+}
+
+a, a:hover {
+    color: inherit;
 }
 
 label {
@@ -40,6 +48,7 @@ label {
 
     position: fixed;
     top: 0;
+    z-index: 1;
 
     display: flex;
     justify-content: center;
@@ -95,6 +104,7 @@ h1 {
     font-weight: 600;
     margin: 70px 0 0 0;
     color: white;
+    line-height: inherit;
 }
 
 h2 {
@@ -106,7 +116,7 @@ h2 {
     color: white;
 }
 
-input {
+.cadastrofundo input {
     height: 20px;
     width: 400px;
     font-family: "Jost", sans-serif;
@@ -176,7 +186,7 @@ small {
     font-size: 16px;
 }
 
-button {
+.cadastrofundo button {
     margin-top: 7px;
     width: 200px;
     height: 50px;
@@ -220,6 +230,24 @@ input[type="number"] {
     }
 }
 
-/* #cadastroForm{
-    background-image: url('../images/moldura.png');
-} */
+.tooltip {
+    z-index: 0;
+}
+
+.modal-content {
+    background-color: #1c1c1c;
+    color: white;
+}
+
+.modal-content > .modal-body {
+    padding-top: 0.5rem;
+}
+
+.modal-content > div {
+    border: none;
+}
+
+.modal-content input {
+    height: 2rem;
+    margin-top: 1rem;
+}
