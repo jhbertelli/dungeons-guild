@@ -118,8 +118,8 @@ def api_perfil_usuario():
 
 @app.route("/api/magias/")
 def api_magias():
-    json = open("app/resources/json/spells_sorted.json")
-    return json
+    magics_json = open("app/resources/json/spells_sorted.json", encoding="UTF-8")
+    return magics_json
 
 
 @app.route("/api/usuarios/<apelido>")
@@ -137,9 +137,8 @@ def api_cadastro():
 
         code = verification_code()
         session['verification_code'] = code
-        session['signup-email'] = form['email']
-        # send_confirmation(form["email"], code)
-        print(session)
+        session['signup_email'] = form['email']
+        send_confirmation(form["email"], code)
         
         return form["email"]
         
@@ -148,22 +147,21 @@ def api_cadastro():
 def verify_code():
     user_sent_form = request.form
 
-    json = {}
+    response = {}
 
     if "verification-code" not in user_sent_form or user_sent_form['verification-code'] == '':
-        json["sucess"] = False
-        return json
+        response["sucess"] = False
+        return response
     
     user_sent_code = user_sent_form['verification-code']
 
     if user_sent_code == session['verification_code']:
-        json['sucess'] = True
-        return json
+        response['sucess'] = True
+        return response
 
-    json['sucess'] = False
+    response['sucess'] = False
 
-    return json
-
+    return response
 
 
 @app.route("/")
@@ -178,8 +176,8 @@ def cadastro():
         if 'verification_code' in session:
             session.pop('verification_code', None)
         
-        if 'signup-email' in session:
-            session.pop('signup-email', None)
+        if 'signup_email' in session:
+            session.pop('signup_email', None)
         
         return render_template('cadastro.html')
 
@@ -226,9 +224,21 @@ def excluir_personagem():
     cursor = db.connection.cursor(cursors.DictCursor)
 
     id_personagem = request.form.get('id-personagem')
+    
+    sql_verify_owner = f"SELECT `id_usuario` FROM `personagem` WHERE `id_personagem` = {id_personagem}"
+
+    cursor.execute(sql_verify_owner)
+    row_verify_owner = cursor.fetchone()
+
+    if row_verify_owner is None:
+        return redirect('/personagens/')
+
+    if row_verify_owner['id_usuario'] != session['usuario']:
+        return redirect('/personagens/')
+        
 
     sql = f"DELETE FROM personagem WHERE id_personagem = {id_personagem}"
-
+    
     cursor.execute(sql)
     db.connection.commit()
     cursor.close()
@@ -387,11 +397,28 @@ def ficha(id):
     if 'usuario' not in session:
         return redirect(url_for('login'))
 
+    cursor = db.connection.cursor(cursors.DictCursor)
+    
+    sql_verify_owner = f"SELECT `id_usuario` FROM `personagem` WHERE `id_personagem` = {id}"
+
+    cursor.execute(sql_verify_owner)
+    row_verify_owner = cursor.fetchone()
+
+    if row_verify_owner is None:
+        return redirect('/personagens/')
+
+    if row_verify_owner['id_usuario'] != session['usuario']:
+        return redirect('/personagens/')
+
+
     return render_template('ficha.html', id=id)
 
 
 @app.route("/ficha/criar/", methods=['GET', 'POST'])
 def criar_ficha():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
     sql_count_personagens_assinatura = f'''SELECT cadastro.id_assinatura, COUNT(id_personagem) AS quant_personagem
         FROM personagem JOIN cadastro ON personagem.id_usuario = cadastro.id_cadastro
         WHERE id_usuario = {session['usuario']}'''
@@ -511,6 +538,9 @@ def editar_ficha(id):
 
     cursor.execute(sql_verify_owner)
     row_verify_owner = cursor.fetchone()
+
+    if row_verify_owner is None:
+        return redirect('/personagens/')
 
     if row_verify_owner['id_usuario'] != session['usuario']:
         return redirect('/personagens/')
