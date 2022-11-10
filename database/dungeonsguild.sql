@@ -95,7 +95,7 @@ INSERT INTO `cadastro` (`id_cadastro`, `nome_cadastro`, `apelido_cadastro`, `ema
 (2, 'Renato Silva', 'Renatinho123', 'renatosilva@gmail.com', '123123', '2022-10-09 05:27:51', 1),
 (3, 'Gabriel Fernandes da Costa', 'Uhuton', 'gabriel@example.com', 'senhaDaora', '2022-10-09 16:33:03', 2),
 (4, 'João Henrique Bertelli', 'bertelli', 'joao_h_bertelli@estudante.sc.senai.br', '123', '2022-11-04 13:25:00', 1),
-(5, 'Nicolas Valdevino Coelho', 'Yuta', 'nicolas_v_coelho@estudante.sc.senai.br', 'quemlerégay', '2022-11-10 13:37:49', 1);
+(5, 'Nicolas Valdevino Coelho', 'Yuta', 'nicolas_v_coelho@estudante.sc.senai.br', 'abcabc', '2022-11-10 13:37:49', 1);
 
 -- --------------------------------------------------------
 

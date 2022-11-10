@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, send_from_directory, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors as cursors
+import requests
 from werkzeug.utils import secure_filename
 from email_confirmation import *
 from utils import *
@@ -14,9 +15,9 @@ app = Flask(__name__, static_folder='app/resources',
 # template_folder é a pasta que contém os htmls
 
 # para referenciar tais arquivos no HTML em suas respectivas pastas:
-# referencie o CSS com: http://127.0.0.1:5000/styles/<arquivo>.css
-# imagens com: http://127.0.0.1:5000/images/<arquivo>.<extensão> no html ou ../images/<arquivo>.<extensão> dentro do CSS
-# e JavaScript com: http://127.0.0.1:5000/js/<arquivo>.js
+# referencie o CSS com: /styles/<arquivo>.css
+# imagens com: /images/<arquivo>.<extensão> no html ou ../images/<arquivo>.<extensão> dentro do CSS
+# e JavaScript com: /js/<arquivo>.js
 
 app.secret_key = 'secret_key'
 
@@ -118,7 +119,7 @@ def api_perfil_usuario():
 
 @app.route("/api/magias/")
 def api_magias():
-    magics_json = open("app/resources/json/spells_sorted.json", encoding="UTF-8")
+    magics_json = requests.get('http://localhost/dungeons-guild/magias.php').json()
     return magics_json
 
 
@@ -139,15 +140,16 @@ def api_cadastro():
         code = verification_code()
         session['verification_code'] = code
         session['signup_email'] = form['email']
-        
+
         # envia para o e-mail
         send_confirmation(form["email"], code)
-        
+
         return form["email"]
-        
+
 
 @app.route("/api/verify_code/", methods=['POST'])
 def verify_code():
+    # verifica se o código inserido está correto e retorna como um valor booleano
     user_sent_form = request.form
 
     response = {}
@@ -155,7 +157,7 @@ def verify_code():
     if "verification-code" not in user_sent_form or user_sent_form['verification-code'] == '':
         response["sucess"] = False
         return response
-    
+
     user_sent_code = user_sent_form['verification-code']
 
     if user_sent_code == session['verification_code']:
@@ -166,34 +168,7 @@ def verify_code():
 
     return response
 
-@app.route("/api/send_to_login/", methods=['POST'])
-def send_to_login():
-    # prepara o cadastro para ser enviado ao PHP
-    register_json = {}
-    fields = ['apelido', 'email', 'nome', 'senha', 'verificarSenha', 'verification-code']
-
-    form = request.form
-
-    def create_json(key):
-        register_json[key] = form[key]
-
-    for key in fields:
-        if key not in form or form[key] == '':
-            return redirect('/cadastro')
-
-        create_json(key)
-
-    if register_json['email'] != session['signup_email'] or register_json['verification-code'] != session['verification_code']:
-        return redirect('/cadastro')
-
-    register_json['server_verification_code'] = session['verification_code']
-    register_json['registered_email'] = session['signup_email']
-    
-    session.pop('verification_code', None)
-    session.pop('signup_email', None)
-
-    return register_json
-
+# fim das APIs
 
 @app.route("/")
 def inicio():
@@ -206,14 +181,38 @@ def cadastro():
     if request.method == 'GET':
         if 'verification_code' in session:
             session.pop('verification_code', None)
-        
+
         if 'signup_email' in session:
             session.pop('signup_email', None)
-        
+
         return render_template('cadastro.html')
 
     if request.method == 'POST':
-        return redirect('http://127.0.0.1/dungeons-guild/register.php')
+        form = request.form
+        fields = ['apelido', 'email', 'nome', 'senha',
+                  'verificarSenha', 'verification-code']
+
+        for key in fields:
+            if key not in form or form[key] == '':
+                return redirect('/cadastro/')
+
+        if form['email'] != session['signup_email'] \
+                or form['verification-code'] != session['verification_code'] \
+                or form['senha'] != form['verificarSenha']:
+
+            return redirect('/cadastro/')
+
+        session.pop('verification_code', None)
+        session.pop('signup_email', None)
+
+        cursor = db.connection.cursor(cursors.DictCursor)
+        sql = f'''INSERT INTO `cadastro`
+        (`nome_cadastro`, `apelido_cadastro`, `email_cadastro`, `senha_cadastro`, `id_assinatura`)
+        VALUES ('{form['nome']}', '{form['apelido']}', '{form['email']}', '{form['senha']}', 1)'''
+        cursor.execute(sql)
+        db.connection.commit()
+
+        return redirect('/login/')
 
 
 @app.route("/login/", methods=['GET', 'POST'])
@@ -255,7 +254,7 @@ def excluir_personagem():
     cursor = db.connection.cursor(cursors.DictCursor)
 
     id_personagem = request.form.get('id-personagem')
-    
+
     sql_verify_owner = f"SELECT `id_usuario` FROM `personagem` WHERE `id_personagem` = {id_personagem}"
 
     cursor.execute(sql_verify_owner)
@@ -267,9 +266,8 @@ def excluir_personagem():
     if row_verify_owner['id_usuario'] != session['usuario']:
         return redirect('/personagens/')
 
-
     sql = f"DELETE FROM personagem WHERE id_personagem = {id_personagem}"
-    
+
     cursor.execute(sql)
     db.connection.commit()
     cursor.close()
@@ -429,7 +427,7 @@ def ficha(id):
         return redirect(url_for('login'))
 
     cursor = db.connection.cursor(cursors.DictCursor)
-    
+
     sql_verify_owner = f"SELECT `id_usuario` FROM `personagem` WHERE `id_personagem` = {id}"
 
     cursor.execute(sql_verify_owner)
@@ -440,7 +438,6 @@ def ficha(id):
 
     if row_verify_owner['id_usuario'] != session['usuario']:
         return redirect('/personagens/')
-
 
     return render_template('ficha.html', id=id)
 
@@ -480,18 +477,20 @@ def criar_ficha():
             return redirect('/ficha/criar/')
 
         # cria um nome diferente para o arquivo e salva
-        image.filename = create_file_name() + os.path.splitext(image.filename)[1]
+        image.filename = create_file_name(
+        ) + os.path.splitext(image.filename)[1]
 
         # se por algum acaso o nome já existir na pasta
         while image.filename in os.listdir('app/resources/images/fichas'):
-            image.filename = create_file_name() + os.path.splitext(image.filename)[1]
+            image.filename = create_file_name(
+            ) + os.path.splitext(image.filename)[1]
 
         filename = secure_filename(image.filename)
         image.save(os.path.join('app/resources/images/fichas', filename))
         url_imagem = '/images/fichas/' + filename
-        
+
         all_lists = get_lists_from_ficha(ficha)
-        
+
         lista_ficha = {}
 
         lista_ficha["nome_personagem"] = ficha.get("nome-personagem")
@@ -512,7 +511,8 @@ def criar_ficha():
         lista_ficha["salvaguardas"] = all_lists["lista_salvaguardas"]
         lista_ficha["pericias"] = ficha.getlist("pericias")
         lista_ficha["testes_resistencia"] = ficha.getlist("testes-resistencia")
-        lista_ficha["idiomas_proficiencias"] = ficha.get("idiomas-proficiencias").strip()
+        lista_ficha["idiomas_proficiencias"] = ficha.get(
+            "idiomas-proficiencias").strip()
         lista_ficha["equipamentos"] = ficha.get("equipamentos").strip()
         lista_ficha["lista_dinheiro"] = all_lists["lista_dinheiro"]
         lista_ficha["caracteristicas"] = ficha.get("caracteristicas").strip()
@@ -520,7 +520,6 @@ def criar_ficha():
         lista_ficha["historia"] = ficha.get("historia").strip()
         lista_ficha["tesouro"] = ficha.get("tesouro").strip()
         lista_ficha["aliados"] = ficha.get("aliados").strip()
-
 
         sql = f'''INSERT INTO `personagem`
         (`nome_personagem`, `url_imagem` ,`vida_atual`, `vida_total`, `id_classe`, `nivel_personagem`, `id_antecedente`,
@@ -564,7 +563,7 @@ def criar_ficha():
 @app.route("/ficha/<id>/editar/", methods=['GET', 'POST'])
 def editar_ficha(id):
     cursor = db.connection.cursor(cursors.DictCursor)
-    
+
     sql_verify_owner = f"SELECT `id_usuario` FROM `personagem` WHERE `id_personagem` = {id}"
 
     cursor.execute(sql_verify_owner)
@@ -585,9 +584,9 @@ def editar_ficha(id):
         for key in ficha:
             if ficha[key] == '':
                 return redirect(f'/ficha/{id}/editar/')
-        
+
         all_lists = get_lists_from_ficha(ficha)
-        
+
         lista_ficha = {}
 
         lista_ficha["nome_personagem"] = ficha.get("nome-personagem")
@@ -607,7 +606,8 @@ def editar_ficha(id):
         lista_ficha["salvaguardas"] = all_lists["lista_salvaguardas"]
         lista_ficha["pericias"] = ficha.getlist("pericias")
         lista_ficha["testes_resistencia"] = ficha.getlist("testes-resistencia")
-        lista_ficha["idiomas_proficiencias"] = ficha.get("idiomas-proficiencias").strip()
+        lista_ficha["idiomas_proficiencias"] = ficha.get(
+            "idiomas-proficiencias").strip()
         lista_ficha["equipamentos"] = ficha.get("equipamentos").strip()
         lista_ficha["lista_dinheiro"] = all_lists["lista_dinheiro"]
         lista_ficha["caracteristicas"] = ficha.get("caracteristicas").strip()
@@ -615,7 +615,7 @@ def editar_ficha(id):
         lista_ficha["historia"] = ficha.get("historia").strip()
         lista_ficha["tesouro"] = ficha.get("tesouro").strip()
         lista_ficha["aliados"] = ficha.get("aliados").strip()
-        
+
         if 'img-personagem' not in request.files or request.files['img-personagem'].filename == '':
             sql = f'''UPDATE personagem
                 SET nome_personagem="{lista_ficha["nome_personagem"]}",
@@ -647,11 +647,13 @@ def editar_ficha(id):
             image = request.files['img-personagem']
 
             # cria um nome diferente para o arquivo e salva
-            image.filename = create_file_name() + os.path.splitext(image.filename)[1]
+            image.filename = create_file_name(
+            ) + os.path.splitext(image.filename)[1]
 
             # se por algum acaso o nome já existir na pasta
             while image.filename in os.listdir('app/resources/images/fichas'):
-                image.filename = create_file_name() + os.path.splitext(image.filename)[1]
+                image.filename = create_file_name(
+                ) + os.path.splitext(image.filename)[1]
 
             filename = secure_filename(image.filename)
             image.save(os.path.join('app/resources/images/fichas', filename))
@@ -694,6 +696,7 @@ def editar_ficha(id):
 @app.route("/logout/", methods=['GET', 'POST'])
 def logout():
     session.pop('usuario', None)
+    session.pop('apelido', None)
     return redirect(url_for('login'))
 
 
