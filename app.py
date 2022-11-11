@@ -437,6 +437,9 @@ def excluir_conta():
 
     cursor.close()
 
+    session.pop('usuario', None)
+    session.pop('apelido', None)
+    
     return redirect(url_for('login'))
 
 

@@ -6,7 +6,8 @@ const registerForm = document.querySelector("form")
 signUpButton.addEventListener("click", (e) => {
     e.preventDefault()
 
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g // deve conter caracteres antes do @, depois do @, pelo menos um ponto e entre 2 a 4 caracteres depois do ponto
+    // const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,25}$/g // deve conter entre 8 a 25 caracteres, letras maiúsculas e minúsculas, números e pode ter caracteres especiais
     const inputsArray = registerForm.querySelectorAll('.input-wrapper input')
     const passwordInput = registerForm.querySelector('#password-input')
     const verifyPasswordInput = registerForm.querySelector('#verify-password-input')
@@ -47,6 +48,11 @@ signUpButton.addEventListener("click", (e) => {
         showAlert(email, "Insira um e-mail válido")
         return
     }
+
+    // if (!passwordRegex.test(passwordInput.value)) {
+    //     showAlert(passwordInput, "Sua senha deve conter entre 8 a 25 caracteres, letras maiúsculas e minúsculas, números e pode ter caracteres especiais")
+    //     return
+    // }
 
     if (passwordInput.value !== verifyPasswordInput.value) {
         showAlert(passwordInput, "As senhas não correspondem")
