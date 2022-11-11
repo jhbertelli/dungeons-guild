@@ -96,6 +96,9 @@ nav .back-icon {
 .info_sessao {
     width: 700px;
     background-color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .nome_mundo {
@@ -246,9 +249,16 @@ nav .back-icon {
 }
 
 .criar-mundo{
-    width: 650px;
-    height: 100px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 500px;
+    height: 60px;
+    margin-top: 180px;
+    line-height:50%;
+    font-family: "Inknut Antiqua";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    color: white;
+    background-color: transparent;
+    border-radius: 10px;
+    border-color: white;
 }
-
