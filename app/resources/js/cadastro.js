@@ -5,9 +5,13 @@ const registerForm = document.querySelector("form")
 
 signUpButton.addEventListener("click", (e) => {
     e.preventDefault()
-    
+
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
     const inputsArray = registerForm.querySelectorAll('.input-wrapper input')
-    
+    const passwordInput = registerForm.querySelector('#password-input')
+    const verifyPasswordInput = registerForm.querySelector('#verify-password-input')
+    const email = document.querySelector("#email-input")
+
     function showAlert(field, text) {
         field.scrollIntoView({
             behavior: "smooth",
@@ -38,9 +42,11 @@ signUpButton.addEventListener("click", (e) => {
             return
         }
     }
-
-    const passwordInput = registerForm.querySelector('#password-input')
-    const verifyPasswordInput = registerForm.querySelector('#verify-password-input')
+    
+    if (!emailRegex.test(email.value)) {
+        showAlert(email, "Insira um e-mail válido")
+        return
+    }
 
     if (passwordInput.value !== verifyPasswordInput.value) {
         showAlert(passwordInput, "As senhas não correspondem")
@@ -49,14 +55,13 @@ signUpButton.addEventListener("click", (e) => {
         return
     }
 
-    const email = document.querySelector("#email-input")
     const form = {
         email: email.value
     }
 
     $.post("/api/cadastro/", form, (data, status) => {
         // exibe o modal de preencher o código de verificação
-        if (data) {
+        if (data.sucess) {
             const modalEmailSpanTag = modal.querySelector(".modal-body > span")
 
             modalEmailSpanTag.textContent = form.email
@@ -66,15 +71,24 @@ signUpButton.addEventListener("click", (e) => {
     })
 })
 
-modalButton.addEventListener("click", () => {
-    const verificationCode = modal.querySelector("#verification-code-input").value
-    const form = {
-        "verification-code": verificationCode
-    }
+modalButton.addEventListener("click", (e) => {
+    e.preventDefault()
 
+    const verificationCodeInput = modal.querySelector("#verification-code-input")
+    const form = {
+        "verification-code": verificationCodeInput.value
+    }
+    const modalErrorText = document.querySelector('.modal-content #modal-error-text')
+
+    modalErrorText.textContent = ''
+    verificationCodeInput.style.boxShadow = "none"
+    
     $.post("/api/verify_code/", form, (data, status) => {
         if (data.sucess) {
-            registerForm.submit()
+            return registerForm.submit()
         }
+
+        verificationCodeInput.style.boxShadow = "0px 0px 8px red"
+        modalErrorText.textContent = 'O código que você inseriu está incorreto. Por favor, tente novamente.'
     })
 })

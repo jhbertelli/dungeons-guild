@@ -157,10 +157,6 @@ small {
     margin-left: 6px;
 }
 
-/* input:focus {
-    outline: 1px rgb(255, 255, 255) solid;
-} */
-
 .form-wrapper {
     margin-top: 22px;
     margin-right: 50%;
@@ -250,4 +246,15 @@ input[type="number"] {
 .modal-content input {
     height: 2rem;
     margin-top: 1rem;
+}
+
+.modal-content #modal-error-text {
+    display: block;
+    margin-top: 0.5rem;
+
+    color: red;
+    font-family: inherit;
+    font-size: 11pt;
+    font-weight: 500;
+    line-height: 20px;
 }

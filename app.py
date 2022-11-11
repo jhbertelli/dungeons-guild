@@ -132,9 +132,12 @@ def api_usuarios(apelido):
 def api_cadastro():
     if request.method == "POST":
         form = request.form
+        
+        response = {}
 
         if "email" not in form or form["email"] == "":
-            return ""
+            response['sucess'] = False
+            return response
 
         # cria o código de verificação
         code = verification_code()
@@ -143,8 +146,8 @@ def api_cadastro():
 
         # envia para o e-mail
         send_confirmation(form["email"], code)
-
-        return form["email"]
+        response['sucess'] = True
+        return response
 
 
 @app.route("/api/verify_code/", methods=['POST'])
@@ -178,6 +181,9 @@ def inicio():
 
 @app.route("/cadastro/", methods=['GET', 'POST'])
 def cadastro():
+    if 'usuario' in session:
+        return redirect('/personagens/')
+
     if request.method == 'GET':
         if 'verification_code' in session:
             session.pop('verification_code', None)
@@ -192,13 +198,24 @@ def cadastro():
         fields = ['apelido', 'email', 'nome', 'senha',
                   'verificarSenha', 'verification-code']
 
+        signup = {}
+
         for key in fields:
             if key not in form or form[key] == '':
                 return redirect('/cadastro/')
+            signup[key] = form[key].strip()
 
-        if form['email'] != session['signup_email'] \
-                or form['verification-code'] != session['verification_code'] \
-                or form['senha'] != form['verificarSenha']:
+        if form['senha'] != form['senha'].strip():
+            return redirect('/cadastro/')
+        
+        # previne o cadastro caso se o usuário não inserir o código correto
+        # se as senhas forem diferentes,
+        # se o usuário inserir uma senha com espaços
+        # ou se o usuário inserir um e-mail diferente da qual o código de verificação foi enviada
+        if signup['senha'] != form['verificarSenha'] \
+                or signup['verification-code'] != session['verification_code'] \
+                or ' ' in form['senha'] \
+                or signup['email'] != session['signup_email']:
 
             return redirect('/cadastro/')
 
@@ -208,7 +225,7 @@ def cadastro():
         cursor = db.connection.cursor(cursors.DictCursor)
         sql = f'''INSERT INTO `cadastro`
         (`nome_cadastro`, `apelido_cadastro`, `email_cadastro`, `senha_cadastro`, `id_assinatura`)
-        VALUES ('{form['nome']}', '{form['apelido']}', '{form['email']}', '{form['senha']}', 1)'''
+        VALUES ('{signup['nome']}', '{signup['apelido']}', '{signup['email']}', '{signup['senha']}', 1)'''
         cursor.execute(sql)
         db.connection.commit()
 
@@ -217,6 +234,9 @@ def cadastro():
 
 @app.route("/login/", methods=['GET', 'POST'])
 def login():
+    if 'usuario' in session:
+        return redirect('/personagens/')
+
     if request.method == 'GET':
         return render_template('login.html')
 
