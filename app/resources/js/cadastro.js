@@ -22,7 +22,6 @@ signUpButton.addEventListener("click", (e) => {
                 (?!.*\s)              // Não pode conter espaço
                 {8,25}                // deve conter entre 8 a 25 caracteres
             $/
-            
         */  
     function showAlert(field, text) {
         field.scrollIntoView({

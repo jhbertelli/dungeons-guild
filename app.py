@@ -295,9 +295,57 @@ def excluir_personagem():
     return redirect(url_for('personagens'))
 
 
-@app.route("/criar/mundo/")
+@app.route("/criar/mundo/", methods=['GET', 'POST'])
 def criar_mundo():
-    return render_template('criar-mundo.html', apelido=session['apelido'])
+    if request.method == 'GET':
+        return render_template('criar-mundo.html', apelido=session['apelido'])
+
+    if request.method == 'POST':
+        form = request.form
+
+        if 'img-mundo' not in request.files:
+            return redirect('/criar/mundo/')
+
+        image = request.files['img-mundo']
+
+        if image.filename == '':
+            return redirect('/criar/mundo/')
+
+        # cria um nome diferente para o arquivo e salva
+        image.filename = create_file_name() + os.path.splitext(image.filename)[1]
+
+        # se por algum acaso o nome já existir na pasta
+        while image.filename in os.listdir('app/resources/images/mundos'):
+            image.filename = create_file_name() + os.path.splitext(image.filename)[1]
+
+        filename = secure_filename(image.filename)
+        image.save(os.path.join('app/resources/images/mundos', filename))
+
+        path = '/images/mundos/' + image.filename
+
+        cursor = db.connection.cursor(cursors.DictCursor)
+        codigo = ''
+        
+        if form['privacidade'] == 'privado':
+            # comando para gerar um código...
+            codigo = ''
+
+        sql = f'''INSERT INTO `mundo`
+            (`nome_mundo`, `imagem_mundo`, `tema_mundo`, `descricao_mundo`, `participantes_mundo`,
+            `sistema_mundo`, `frequencia_mundo`, `data_mundo`, `jgdorNeces_mundo`, `codigo_mundo`,
+            `privacidade_mundo`, `id_cadastro`)
+            VALUES
+            ('{form['nome_mundo']}','{path}','{form}',
+            '{form}','{form}','{form}','{form}',
+            '{form}','{form}','{codigo}','{form}','{session['usuario']}')'''
+        
+        # executa o comando SQL
+        cursor.execute(sql)
+        # para comandos com insert, update ou delete é necessário fazer o commit abaixo:
+        # (este commando não é necessário para comandos com select)
+        db.connection.commit()
+        
+        return form
 
 
 @app.route("/mundos/")
@@ -397,8 +445,8 @@ def perfil():
 
             return redirect(url_for('perfil'))
 
-        if 'senha' in request.form:
-            new_password = request.form.get('senha')
+        if 'senha-nova' in request.form:
+            new_password = request.form.get('senha-nova')
 
             if new_password == '':
                 return redirect(url_for('perfil'))

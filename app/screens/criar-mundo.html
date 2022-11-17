@@ -25,7 +25,7 @@
       <h1>Informações do Mundo</h1>
       <h1>Informações da Sessão</h1>
     </div>
-    <form class="form-wrapper" method="post">
+    <form class="form-wrapper" method="post" enctype="multipart/form-data">
       <div class="informacoes">
         <div class="info_mundo">
           <input
@@ -101,11 +101,11 @@
             <div class="second-column">
               <label>Privacidade</label>
               <div class="flex">
-                <input type="radio" name="privacidade" id="publico">
+                <input type="radio" name="privacidade" value="publico" id="publico">
                 <label id="label-input" for="publico">Público</label>
               </div>
               <div class="flex">
-                <input type="radio" name="privacidade" id="privado">
+                <input type="radio" name="privacidade" value="privado" id="privado">
                 <label id="label-input" for="privado">Privado</label>
               </div>
             </div>

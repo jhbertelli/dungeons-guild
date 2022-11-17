@@ -1,3 +1,7 @@
+const toggleModalArray = document.querySelectorAll('[data-bs-toggle="modal"]')
+const changeEmailForm = document.querySelector('#alterarEmail')
+const changeEmailButton = changeEmailForm.querySelector('button')
+
 function formatTime(time) {
     // transforma a data da API de YYYY/MM/DD para DD/MM/YYYY
     time = time.split(' ')
@@ -19,7 +23,6 @@ $.getJSON("/api/perfil_usuario/", (json) => {
     myStats[2].textContent = formatTime(json['data_conta'])
 })
 
-const toggleModalArray = document.querySelectorAll('[data-bs-toggle="modal"]')
 
 for (let i = 0; i < toggleModalArray.length; i++) {
     const toggleModal = toggleModalArray[i]
@@ -33,3 +36,9 @@ for (let i = 0; i < toggleModalArray.length; i++) {
         })
     })
 }
+
+changeEmailButton.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    const email = changeEmailForm.querySelector('')
+})
