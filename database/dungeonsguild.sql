@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 10-Nov-2022 às 15:21
--- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.1.2
+-- Tempo de geração: 17-Nov-2022 às 22:31
+-- Versão do servidor: 10.4.24-MariaDB
+-- versão do PHP: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -125,6 +125,28 @@ INSERT INTO `classes` (`id_classe`, `nome_classe`) VALUES
 (10, 'Monge'),
 (11, 'Paladino'),
 (12, 'Patrulheiro');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `mundo`
+--
+
+CREATE TABLE `mundo` (
+  `id_mundo` int(11) NOT NULL,
+  `nome_mundo` varchar(50) NOT NULL,
+  `imagem_mundo` varchar(70) NOT NULL,
+  `tema_mundo` varchar(50) NOT NULL,
+  `descricao_mundo` varchar(200) NOT NULL,
+  `participantes_mundo` varchar(50) NOT NULL,
+  `sistema_mundo` varchar(50) NOT NULL,
+  `frequencia_mundo` varchar(50) NOT NULL,
+  `data_mundo` date NOT NULL,
+  `jgdorNeces_mundo` int(11) NOT NULL,
+  `codigo_mundo` varchar(6) NOT NULL,
+  `privacidade_mundo` tinyint(1) NOT NULL,
+  `id_cadastro` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -311,6 +333,13 @@ ALTER TABLE `classes`
   ADD PRIMARY KEY (`id_classe`);
 
 --
+-- Índices para tabela `mundo`
+--
+ALTER TABLE `mundo`
+  ADD PRIMARY KEY (`id_mundo`),
+  ADD KEY `id_cadastro` (`id_cadastro`);
+
+--
 -- Índices para tabela `pericias`
 --
 ALTER TABLE `pericias`
@@ -375,6 +404,12 @@ ALTER TABLE `classes`
   MODIFY `id_classe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT de tabela `mundo`
+--
+ALTER TABLE `mundo`
+  MODIFY `id_mundo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `pericias`
 --
 ALTER TABLE `pericias`
@@ -413,6 +448,12 @@ ALTER TABLE `tendencias`
 --
 ALTER TABLE `cadastro`
   ADD CONSTRAINT `cadastro_ibfk_1` FOREIGN KEY (`id_assinatura`) REFERENCES `assinaturas` (`id_assinatura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `mundo`
+--
+ALTER TABLE `mundo`
+  ADD CONSTRAINT `id_cadastro` FOREIGN KEY (`id_cadastro`) REFERENCES `cadastro` (`id_cadastro`);
 
 --
 -- Limitadores para a tabela `pericias`
