@@ -13,16 +13,17 @@ signUpButton.addEventListener("click", (e) => {
     const verifyPasswordInput = registerForm.querySelector('#verify-password-input')
     const email = document.querySelector("#email-input")
 
-     /* 
-            /^
-                (?=.*\d)              // deve conter ao menos um dígito
-                (?=.*[a-z])           // deve conter ao menos uma letra minúscula
-                (?=.*[A-Z])           // deve conter ao menos uma letra maiúscula
-                (?=.*[$*&@#._/;!+-])  // deve conter ao menos um caractere especial
-                (?!.*\s)              // Não pode conter espaço
-                {8,25}                // deve conter entre 8 a 25 caracteres
-            $/
-        */  
+    /* 
+        /^
+            (?=.*\d)              // deve conter ao menos um dígito
+            (?=.*[a-z])           // deve conter ao menos uma letra minúscula
+            (?=.*[A-Z])           // deve conter ao menos uma letra maiúscula
+            (?=.*[$*&@#._/;!+-])  // deve conter ao menos um caractere especial
+            (?!.*\s)              // Não pode conter espaço
+            {8,25}                // deve conter entre 8 a 25 caracteres
+        $/
+    */
+
     function showAlert(field, text) {
         field.scrollIntoView({
             behavior: "smooth",
@@ -59,14 +60,11 @@ signUpButton.addEventListener("click", (e) => {
         return
     }
 
-     if (!passwordRegex.test(passwordInput.value)) {
+    if (!passwordRegex.test(passwordInput.value)) {
         showAlert(passwordInput, "Sua senha deve conter entre 8 a 25 caracteres, letras maiúsculas e minúsculas, números e deve possuir caracteres especiais")
         return
-     }
+    }
     
-    
-    
-
     if (passwordInput.value !== verifyPasswordInput.value) {
         showAlert(passwordInput, "As senhas não correspondem")
         showAlert(verifyPasswordInput, "As senhas não correspondem")
@@ -95,7 +93,7 @@ modalButton.addEventListener("click", (e) => {
 
     const verificationCodeInput = modal.querySelector("#verification-code-input")
     const form = {
-        "verification-code": verificationCodeInput.value
+        verification-code: verificationCodeInput.value
     }
     const modalErrorText = document.querySelector('.modal-content #modal-error-text')
 

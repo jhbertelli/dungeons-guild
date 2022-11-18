@@ -39,16 +39,25 @@ a:hover {
     opacity: 0.8;
 }
 
+.modal-body {
+    padding: 0 1rem 1rem 1rem;
+}
+
 .modal-body input {
     width: 100%;
     padding: 0.45em;
+    margin-top: 1rem;
     border-radius: 0.5em;
     border: 1px rgba(30, 30, 30, 0.6) solid;
     outline: none;
 }
 
-.modal-body input:focus {
-    outline: 2px rgba(21, 74, 117, 0.8) solid;
+.modal-body small {
+    color: red;
+    font-weight: 700;
+    display: block;
+    margin-top: 0.25rem;
+    float: right;
 }
 
 .modal-footer button {

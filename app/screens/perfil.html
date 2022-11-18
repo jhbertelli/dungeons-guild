@@ -102,7 +102,8 @@
                                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <input type="text" name="apelido" placeholder="Insira seu novo apelido...">
+                                        <input type="text" name="apelido" required placeholder="Insira seu novo apelido...">
+                                        <small></small>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary">Editar apelido</button>
@@ -131,7 +132,8 @@
                                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <input type="text" name="nome" placeholder="Insira seu nome...">
+                                                <input type="text" name="nome" required placeholder="Insira seu nome...">
+                                                <small></small>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-primary">Editar nome</button>
@@ -157,8 +159,14 @@
                                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <input type="email" name="email" placeholder="Insira seu novo e-mail...">
-                                                <input type="password" name="senha-atual" placeholder="Insira sua senha atual...">
+                                                <div>
+                                                    <input type="email" name="email" placeholder="Insira seu novo e-mail...">
+                                                    <small></small>
+                                                </div>
+                                                <div>
+                                                    <input type="password" name="senha-atual" placeholder="Insira sua senha atual...">
+                                                    <small></small>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-primary">Editar e-mail</button>

@@ -171,6 +171,28 @@ def verify_code():
 
     return response
 
+
+@app.route("/api/verify_password/", methods=["POST"])
+def verify_password():
+    user_sent_form = request.form
+    response = {}
+
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    sql = f"SELECT senha_cadastro FROM cadastro WHERE id_cadastro = {session['usuario']}"
+    cursor.execute(sql)
+    row = cursor.fetchone()
+
+    if user_sent_form['password'] == row['senha_cadastro']:
+        response['sucess'] = True
+
+        return response
+
+    response['sucess'] = False
+
+    return response
+
+
 # fim das APIs
 
 @app.route("/")
