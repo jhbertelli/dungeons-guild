@@ -1,15 +1,11 @@
 const toggleModalArray = document.querySelectorAll('[data-bs-toggle="modal"]')
-
-const changeNicknameForm = document.querySelector("#alterarApelido")
-const nicknameInput = changeNicknameForm.querySelector(".modal-body input")
-
-const changeNameForm = document.querySelector("#alterarNome")
-const nameInput = changeNameForm.querySelector(".modal-body input")
+const forms = document.querySelectorAll("form")
 
 const changeEmailForm = document.querySelector("#alterarEmail")
 const changeEmailButton = changeEmailForm.querySelector(".modal-footer button")
-const emailInput = changeEmailForm.querySelectorAll(".modal-body input")[0]
-const passwordInput = changeEmailForm.querySelectorAll(".modal-body input")[1]
+
+const changePasswordForm = document.querySelector("#alterarSenha")
+const changePasswordButton = changePasswordForm.querySelector(".modal-footer button")
 
 const validateInputValue = (e) => {
     // verifica se o valor do input está vazio e deixa o input vermelho com uma mensagem abaixo
@@ -27,6 +23,60 @@ const validateInputValue = (e) => {
     }
 }
 
+const handleFormSubmit = (e) => {
+    e.preventDefault()
+
+    const form = e.target.closest("form")
+    const formInputs = form.querySelectorAll(".modal-body input")
+    const currentPassword = form.querySelector("#senha-atual")
+
+    function validateInput(input) {
+        // previne de enviar o formulário se o usuário clicou diretamente no botão de enviar, sem inserir dados
+        const smallText = input.parentElement.lastElementChild
+
+        smallText.textContent = ""
+        input.style.boxShadow = "none"
+        input.style.outline = "none"
+
+        if (input.value === "") {
+            input.style.boxShadow = "0px 0px 8px red"
+            input.style.outline = "solid 1px red"
+            smallText.textContent = "Preencha este campo"
+
+            return true
+        }
+
+        return false
+    }
+
+    const request = {
+        password: currentPassword.value
+    }
+
+    const smallTexts = form.querySelectorAll("small")
+
+    let emptyForm = false
+
+    for (let i = 0; i < formInputs.length; i++) {
+        // se algum input estiver vazio, o formulário não será enviado
+        if (validateInput(formInputs[i])) emptyForm = true
+    }
+
+    if (emptyForm) return
+
+    $.post("/api/verify_password/", request, (data, status) => {
+        if (data.sucess) {
+            return form.submit()
+        }
+
+        currentPassword.style.boxShadow = "0px 0px 8px red"
+        currentPassword.style.outline = "solid 1px red"
+        currentPassword.parentElement.lastElementChild.textContent =
+            "A senha que você inseriu está incorreta"
+        return
+    })
+}
+
 function formatTime(time) {
     // transforma a data da API de YYYY/MM/DD para DD/MM/YYYY
     time = time.split(" ")
@@ -36,10 +86,16 @@ function formatTime(time) {
     return date
 }
 
-nicknameInput.addEventListener("input", validateInputValue)
-nameInput.addEventListener("input", validateInputValue)
-emailInput.addEventListener("input", validateInputValue)
-passwordInput.addEventListener("input", validateInputValue)
+changeEmailButton.addEventListener("click", handleFormSubmit)
+changePasswordButton.addEventListener("click", handleFormSubmit)
+
+for (let i = 0; i < forms.length; i++) {
+    const inputs = forms[i].querySelectorAll('.modal-body input')
+    for (let j = 0; j < inputs.length; j++) {
+        // adiciona o validateInputValue para cada input dos formulários
+        inputs[j].addEventListener("input", validateInputValue)   
+    }
+}
 
 $.getJSON("/api/perfil_usuario/", (json) => {
     // preenche os dados do usuário
@@ -65,54 +121,3 @@ for (let i = 0; i < toggleModalArray.length; i++) {
         })
     })
 }
-
-changeEmailButton.addEventListener("click", (e) => {
-    e.preventDefault()
-
-    function validateInput(input) {
-        // previne de enviar o formulário se o usuário clicou diretamente no botão de enviar, sem inserir dados
-        const smallText = input.parentElement.lastElementChild
-
-        smallText.textContent = ""
-        input.style.boxShadow = "none"
-        input.style.outline = "none"
-
-        if (input.value === "") {
-            input.style.boxShadow = "0px 0px 8px red"
-            input.style.outline = "solid 1px red"
-            smallText.textContent = "Preencha este campo"
-
-            return true
-        }
-
-        return false
-    }
-
-    const form = {
-        password: passwordInput.value
-    }
-    const smallTexts = changeEmailForm.querySelectorAll("small")
-    let emptyForm = false
-
-    if (validateInput(passwordInput)) {
-        emptyForm = true
-    }
-
-    if (validateInput(emailInput)) {
-        emptyForm = true
-    }
-
-    if (emptyForm) return
-
-    $.post("/api/verify_password/", form, (data, status) => {
-        if (data.sucess) {
-            return changeEmailForm.submit()
-        }
-
-        passwordInput.style.boxShadow = "0px 0px 8px red"
-        passwordInput.style.outline = "solid 1px red"
-        passwordInput.parentElement.lastElementChild.textContent =
-            "A senha que você inseriu está incorreta"
-        return
-    })
-})

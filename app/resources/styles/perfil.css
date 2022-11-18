@@ -50,6 +50,7 @@ a:hover {
     border-radius: 0.5em;
     border: 1px rgba(30, 30, 30, 0.6) solid;
     outline: none;
+    transition: 0.25s;
 }
 
 .modal-body small {
