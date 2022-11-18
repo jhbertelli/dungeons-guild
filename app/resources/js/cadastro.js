@@ -7,7 +7,7 @@ signUpButton.addEventListener("click", (e) => {
     e.preventDefault()
 
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g // deve conter caracteres antes do @, depois do @, pelo menos um ponto e entre 2 a 4 caracteres depois do ponto
-    const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[$*&@#._/;!+-])(?!.*\s){8,25}/ // deve conter entre 8 a 25 caracteres, letras maiúsculas e minúsculas, números e pode ter caracteres especiais
+    const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[$*&@#._/;!+-])(?!.*\s).{8,25}$/  // deve conter entre 8 a 25 caracteres, letras maiúsculas e minúsculas, números e pode ter caracteres especiais
     const inputsArray = registerForm.querySelectorAll('.input-wrapper input')
     const passwordInput = registerForm.querySelector('#password-input')
     const verifyPasswordInput = registerForm.querySelector('#verify-password-input')
@@ -93,7 +93,7 @@ modalButton.addEventListener("click", (e) => {
 
     const verificationCodeInput = modal.querySelector("#verification-code-input")
     const form = {
-        verification-code: verificationCodeInput.value
+        "verification-code": verificationCodeInput.value
     }
     const modalErrorText = document.querySelector('.modal-content #modal-error-text')
 
