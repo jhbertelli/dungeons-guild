@@ -67,7 +67,7 @@ def get_lists_from_ficha(ficha):
     lista_bonus = {
         "inspiracao": int(ficha.get("inspiracao")),
         "percepcao": int(ficha.get("percepcao")),
-        "dados_vida":  int(ficha.get("dados-vida")),
+        "dados_vida":  ficha.get("dados-vida"),
         "classe_armadura":  int(ficha.get("classe-armadura")),
         "iniciativa": int(ficha.get("iniciativa")),
         "deslocamento": int(ficha.get("deslocamento"))
