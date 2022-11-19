@@ -28,7 +28,7 @@
                 você criar seus próprios <span>mundos</span><br />
                 e <span>personagens</span> de <span>RPG</span>
             </h1>
-            <a href="#explicacao">
+            <a href="#explicacao" style="transition: 1s;">
                 <p>Role para baixo para saber mais</p>
                 <img src="/images/svg/down-arrow.svg" alt="" />
             </a>
@@ -107,5 +107,16 @@
             <img src="images/logo.png" />
             <p>Todos os direitos reservados.</p>
         </footer>
+        <script>
+            const scrollBelowTag = document.querySelector('.start a')
+            
+            setInterval(() => {
+                scrollBelowTag.style.transform = "translateY(-8px)"
+                
+                setTimeout(() => {
+                    scrollBelowTag.style.transform = "translateY(8px)"
+                }, 500)
+            }, 1000)
+        </script>
     </body>
 </html>
