@@ -1,3 +1,95 @@
+const formButton = document.querySelector("button")
+const playersAmountInput = document.querySelector('#jogadores_necessarios')
+
+playersAmountInput.addEventListener("input", (e) => {
+    const value = e.target.value
+    const numberRegex = /^\d+$/
+    let newValue = ""
+
+    for (let i = 0; i < value.length; i++) {
+        if (!numberRegex.test(value[i])) continue
+
+        newValue += value[i]
+    }
+
+    if (Number(value) > 20) {
+        return e.target.value = 20
+    }
+    
+    e.target.value = newValue
+})
+
+formButton.addEventListener("click", (e) => {
+    const form = document.querySelector("form")
+    const inputsArray = document.querySelectorAll("input, textarea")
+    const radioButtons = document.querySelectorAll("[type='radio']")
+
+    function emptyFieldAlert(field) {
+        // rola até o campo vazio
+        field.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "nearest",
+        })
+
+        // cria um alerta e exibe-o
+        let tooltip = new bootstrap.Tooltip(field, {
+            title: "Preencha este campo",
+            trigger: "manual",
+        })
+
+        tooltip.show()
+
+        setTimeout(() => {
+            tooltip.hide()
+        }, 4000)
+    }
+
+    e.preventDefault()
+
+    for (let i = 0; i < inputsArray.length; i++) {
+        const input = inputsArray[i]
+
+        if (input.type === "radio") continue
+
+        if (input.value === "") {
+            // se o campo de imagem estiver vazio
+            if (input.type === "file") {
+                const imageDiv = document.querySelector(".img-div")
+
+                imageDiv.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                    inline: "nearest",
+                })
+
+                let tooltip = new bootstrap.Tooltip(imageDiv, {
+                    title: "Insira uma imagem",
+                    trigger: "manual",
+                })
+
+                tooltip.show()
+
+                setTimeout(() => {
+                    tooltip.hide()
+                }, 4000)
+
+                return
+            }
+
+            emptyFieldAlert(input)
+            return
+        }
+    }
+
+    if (!radioButtons[0].checked && !radioButtons[1].checked) {
+        emptyFieldAlert(document.querySelector(".second-column"))
+        return
+    }
+
+    form.submit()
+})
+
 document.getElementById("img-mundo").addEventListener("change", (e) => {
     // exibe a imagem que o usuário enviou
     const image = e.target.files[0]
@@ -16,14 +108,8 @@ document.getElementById("img-mundo").addEventListener("change", (e) => {
     reader.readAsDataURL(image)
 })
 
-document.querySelector("#participantes").addEventListener("input", (e) => {
-    const apelido = e.target.value
-    const xhttp = new XMLHttpRequest()
-
-    if (apelido === '') return
-
-    xhttp.open("GET", "/api/usuarios/" + apelido, false)
-    xhttp.send()
-    console.log(JSON.parse(xhttp.responseText))
-    // document.getElementById("demo").innerHTML = xhttp.responseText
+$.getJSON("/api/perfil_usuario/", (json) => {
+    if (json.assinatura === 1) {
+        document.querySelector("#privado").setAttribute("disabled", true)
+    }
 })

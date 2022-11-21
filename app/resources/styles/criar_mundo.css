@@ -91,6 +91,10 @@ nav .back-icon {
 .info_mundo {
     width: 700px;
     background-color: #161616;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
 }
 
 .info_sessao {
@@ -99,6 +103,7 @@ nav .back-icon {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 20px;
 }
 
 .nome_mundo {
@@ -133,6 +138,8 @@ nav .back-icon {
     background-color: #1a1a1a;
     background-size: contain;
     background-position: 50% 50%;
+    font-family: "Cormorant Infant", serif;
+    font-size: 19pt;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -233,7 +240,7 @@ nav .back-icon {
 
 }
 
-.info-dentro p,input{
+.info-dentro p, input{
     font-family: "Cormorant Infant";
     font-style: normal;
     font-weight: 400;
@@ -243,7 +250,9 @@ nav .back-icon {
     border: none;
     border-radius: 10px;
     padding: 5px;
+    margin-bottom: 8px';
 }
+
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
