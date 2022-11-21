@@ -3,6 +3,7 @@ from flask import Flask, render_template, send_from_directory, request, redirect
 from flask_mysqldb import MySQL
 import MySQLdb.cursors as cursors
 import requests
+import random
 from werkzeug.utils import secure_filename
 from criar_ficha import post_criar_ficha
 from editar_ficha import post_editar_ficha
@@ -134,7 +135,7 @@ def api_usuarios(apelido):
 def api_cadastro():
     if request.method == "POST":
         form = request.form
-        
+
         response = {}
 
         if "email" not in form or form["email"] == "":
@@ -203,6 +204,7 @@ def inicio():
 
 # páginas de cadastro e login
 
+
 @app.route("/cadastro/", methods=['GET', 'POST'])
 def cadastro():
     if 'usuario' in session:
@@ -231,7 +233,7 @@ def cadastro():
 
         if form['senha'] != form['senha'].strip():
             return redirect('/cadastro/')
-        
+
         # previne o cadastro caso se o usuário não inserir o código correto
         # se as senhas forem diferentes,
         # se o usuário inserir uma senha com espaços
@@ -348,27 +350,48 @@ def criar_mundo():
         path = '/images/mundos/' + image.filename
 
         cursor = db.connection.cursor(cursors.DictCursor)
-        codigo = ''
-        
-        if form['privacidade'] == 'privado':
+        codigo_privacidade = ''
+
+        if form['privacidade'] == '1':
             # comando para gerar um código...
-            codigo = ''
+            minusculo = "abcdefghijklmnopqrstuvwxyz"                                                            
+            maisculo = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            numero = "0123456789"
+            pre_codigo = minusculo + maisculo + numero
+            tamanho = 8
+            codigo_privacidade = "".join(random.sample(pre_codigo, tamanho))
+            
+            # verificar se existe um codigo_privacidade igual no banco
+            sql_cod_igual = f'SELECT `codigo_mundo` FROM `mundo` WHERE `codigo_mundo` = "{codigo_privacidade}"'
+            cursor.execute(sql_cod_igual)
+            row_vefificar_codigo = cursor.fetchone()
+
+            while row_vefificar_codigo :
+                # Fazer o codigo novamente até mudar
+                codigo_privacidade = "".join(random.sample(pre_codigo, tamanho))
+                sql_cod_igual = f'SELECT `codigo_mundo` FROM `mundo` WHERE `codigo_mundo` = "{codigo_privacidade}"'
+                cursor.execute(sql_cod_igual)
+                row_vefificar_codigo = cursor.fetchone()
+
+
+
+      
 
         sql = f'''INSERT INTO `mundo`
-            (`nome_mundo`, `imagem_mundo`, `tema_mundo`, `descricao_mundo`, `participantes_mundo`,
+            (`nome_mundo`, `imagem_mundo`, `tema_mundo`, `descricao_mundo`, 
             `sistema_mundo`, `frequencia_mundo`, `data_mundo`, `jgdorNeces_mundo`, `codigo_mundo`,
             `privacidade_mundo`, `id_cadastro`)
             VALUES
-            ('{form['nome_mundo']}','{path}','{form}',
-            '{form}','{form}','{form}','{form}',
-            '{form}','{form}','{codigo}','{form}','{session['usuario']}')'''
-        
+            ('{form['nome_mundo']}','{path}','{form['tema_mundo']}',
+            '{form['descricao_mundo']}','{form['sistema']}','{form['frequencia']}','{form['data_sessao']}',
+            '{form['jogadores_necessarios']}','{codigo_privacidade}','{form['privacidade']}','{session['usuario']}')'''
+
         # executa o comando SQL
         cursor.execute(sql)
         # para comandos com insert, update ou delete é necessário fazer o commit abaixo:
         # (este commando não é necessário para comandos com select)
         db.connection.commit()
-        
+
         return form
 
 
@@ -502,7 +525,6 @@ def excluir_conta():
         db.connection.commit()
     except:
         pass
-
     delete_account_sql = f"DELETE FROM cadastro WHERE id_cadastro = {session['usuario']}"
     cursor.execute(delete_account_sql)
     db.connection.commit()
@@ -511,7 +533,7 @@ def excluir_conta():
 
     session.pop('usuario', None)
     session.pop('apelido', None)
-    
+
     return redirect(url_for('login'))
 
 
@@ -559,9 +581,8 @@ def criar_ficha():
     if request.method == 'POST':
         if post_criar_ficha(session, request, cursor, db, os, create_file_name, secure_filename, get_lists_from_ficha):
             return redirect('/personagens/')
-        
-        return redirect('/ficha/criar/')
 
+        return redirect('/ficha/criar/')
 
 
 @app.route("/ficha/<id>/editar/", methods=['GET', 'POST'])
@@ -585,9 +606,8 @@ def editar_ficha(id):
     if request.method == 'POST':
         if post_editar_ficha(session, request, cursor, db, os, create_file_name, secure_filename, get_lists_from_ficha, id):
             return redirect('/personagens/')
-        
-        return redirect(f'/ficha/{id}/editar')
 
+        return redirect(f'/ficha/{id}/editar')
 
 
 @app.route("/logout/", methods=['GET', 'POST'])
