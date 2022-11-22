@@ -87,6 +87,36 @@ def api_editar_personagem(id):
     return get_one_from_database(f'''SELECT * FROM personagem WHERE id_personagem = {id}''')
 
 
+@app.route("/api/mundos/")
+def api_mundos():
+    cursor = db.connection.cursor(cursors.DictCursor)
+    cursor.execute(f'''SELECT id_mundo, nome_mundo, imagem_mundo, mundo.id_cadastro, tema_mundo, jgdorNeces_mundo FROM mundo
+    JOIN cadastro ON cadastro.id_cadastro = mundo.id_cadastro''')
+
+    row = cursor.fetchall()
+
+    response = []
+
+    for i in range(0, len(row)):
+        mundo = {}
+        
+        for j in row[i]:
+            mundo[j] = row[i][j]
+
+        id_mundo = row[i]["id_mundo"]
+        sql_participantes = f'''SELECT id_usuario, cadastro.apelido_cadastro FROM `participantes_mundo`
+            JOIN cadastro ON participantes_mundo.id_usuario = cadastro.id_cadastro WHERE id_mundo = {id_mundo}'''
+        cursor.execute(sql_participantes)
+
+        resp_participantes = cursor.fetchall()
+
+        mundo["participantes"] = resp_participantes
+
+        response.append(mundo)
+
+    return jsonify(response)
+
+
 @app.route("/api/mundo/<id>/")
 def api_mundo(id):
     cursor = db.connection.cursor(cursors.DictCursor)
@@ -100,6 +130,15 @@ def api_mundo(id):
             world['data_mundo'] = str(row['data_mundo'])
             continue
         world[i] = row[i]
+
+    sql_participantes = f'''SELECT id_usuario, cadastro.apelido_cadastro FROM `participantes_mundo`
+            JOIN cadastro ON participantes_mundo.id_usuario = cadastro.id_cadastro WHERE id_mundo = {id}'''
+    cursor.execute(sql_participantes)
+
+    resp_participantes = cursor.fetchall()
+
+    world["participantes"] = resp_participantes
+
 
     return jsonify(world)
 
@@ -340,6 +379,9 @@ def excluir_personagem():
 
 @app.route("/criar/mundo/", methods=['GET', 'POST'])
 def criar_mundo():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
     if request.method == 'GET':
         return render_template('criar-mundo.html', apelido=session['apelido'])
 
@@ -414,6 +456,9 @@ def criar_mundo():
 
 @app.route("/editar/mundo/<id>", methods=['GET', 'POST'])
 def editar_mundo(id):
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
     if request.method == 'GET':
         return render_template('editar-mundo.html', apelido=session['apelido'], id=id)
 
