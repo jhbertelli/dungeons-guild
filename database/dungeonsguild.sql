@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 17-Nov-2022 às 22:31
+-- Tempo de geração: 22-Nov-2022 às 15:35
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.0.19
 
@@ -138,7 +138,6 @@ CREATE TABLE `mundo` (
   `imagem_mundo` varchar(70) NOT NULL,
   `tema_mundo` varchar(50) NOT NULL,
   `descricao_mundo` varchar(200) NOT NULL,
-  `participantes_mundo` varchar(50) NOT NULL,
   `sistema_mundo` varchar(50) NOT NULL,
   `frequencia_mundo` varchar(50) NOT NULL,
   `data_mundo` date NOT NULL,
@@ -146,6 +145,26 @@ CREATE TABLE `mundo` (
   `codigo_mundo` varchar(6) NOT NULL,
   `privacidade_mundo` tinyint(1) NOT NULL,
   `id_cadastro` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `mundo`
+--
+
+INSERT INTO `mundo` (`id_mundo`, `nome_mundo`, `imagem_mundo`, `tema_mundo`, `descricao_mundo`, `sistema_mundo`, `frequencia_mundo`, `data_mundo`, `jgdorNeces_mundo`, `codigo_mundo`, `privacidade_mundo`, `id_cadastro`) VALUES
+(1, 'mundo foda 2', '/images/mundos/FNZvYoohrScLLvv.jpeg', 'teste', 'codigo novo', 'codigo', 'ono', '2022-06-14', 0, 'YvVh6L', 1, 1),
+(2, 'Mundo massa', '/images/mundos/cAxrMTz8Irvklfg.html', 'Mundo pica', 'Mundo legal', '123', 'batata', '2022-11-02', 2, '5fGFJk', 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `participantes_mundo`
+--
+
+CREATE TABLE `participantes_mundo` (
+  `id_participanteMundo` int(11) NOT NULL,
+  `id_mundo` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -340,6 +359,14 @@ ALTER TABLE `mundo`
   ADD KEY `id_cadastro` (`id_cadastro`);
 
 --
+-- Índices para tabela `participantes_mundo`
+--
+ALTER TABLE `participantes_mundo`
+  ADD PRIMARY KEY (`id_participanteMundo`),
+  ADD KEY `id_mundo` (`id_mundo`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
 -- Índices para tabela `pericias`
 --
 ALTER TABLE `pericias`
@@ -407,7 +434,13 @@ ALTER TABLE `classes`
 -- AUTO_INCREMENT de tabela `mundo`
 --
 ALTER TABLE `mundo`
-  MODIFY `id_mundo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mundo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `participantes_mundo`
+--
+ALTER TABLE `participantes_mundo`
+  MODIFY `id_participanteMundo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `pericias`
@@ -454,6 +487,13 @@ ALTER TABLE `cadastro`
 --
 ALTER TABLE `mundo`
   ADD CONSTRAINT `id_cadastro` FOREIGN KEY (`id_cadastro`) REFERENCES `cadastro` (`id_cadastro`);
+
+--
+-- Limitadores para a tabela `participantes_mundo`
+--
+ALTER TABLE `participantes_mundo`
+  ADD CONSTRAINT `participantes_mundo_ibfk_1` FOREIGN KEY (`id_mundo`) REFERENCES `mundo` (`id_mundo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `participantes_mundo_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `cadastro` (`id_cadastro`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `pericias`
