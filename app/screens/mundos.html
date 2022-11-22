@@ -120,7 +120,7 @@
                         <p class="entrarpelocodigo">Entrar pelo código...</p>
                     </a>
 
-                    <form method="post" class="modal fade" id="procurarCodigo" tabindex="-1" aria-labelledby="procurarCodigoLabel" aria-hidden="true">
+                    <form method="get" action="/api/join_world/" class="modal fade" id="procurarCodigo" tabindex="-1" aria-labelledby="procurarCodigoLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -128,11 +128,11 @@
                                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <input type="text" name="apelido" required placeholder="Insira o código do mundo..." maxlength="6">
+                                    <input type="text" name="codigo" required placeholder="Insira o código do mundo..." maxlength="6">
                                     <small></small>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Inserir Código</button>
+                                    <button type="submit" class="btn btn-primary">Enviar Código</button>
                                 </div>
                             </div>
                         </div>
@@ -278,5 +278,7 @@
             integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
             crossorigin="anonymous"
         ></script>
+
+        <script src="/js/mundos.js/"></script>
     </body>
 </html>

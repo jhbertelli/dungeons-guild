@@ -210,7 +210,7 @@ def api_cadastro():
 
 
 @app.route("/api/verify_code/", methods=['POST'])
-def verify_code():
+def api_verify_code():
     # verifica se o código inserido está correto e retorna como um valor booleano
     user_sent_form = request.form
 
@@ -232,7 +232,7 @@ def verify_code():
 
 
 @app.route("/api/verify_password/", methods=["POST"])
-def verify_password():
+def api_verify_password():
     user_sent_form = request.form
     response = {}
 
@@ -252,6 +252,53 @@ def verify_password():
     return response
 
 
+@app.route("/api/join_world/")
+def api_join_world():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
+    if 'codigo' not in request.values or request.values['codigo'] == '':
+        return redirect('/mundos/')
+
+    codigo = request.values['codigo']
+    
+    cursor = db.connection.cursor(cursors.DictCursor)
+    sql = f"SELECT `id_mundo`, `id_cadastro` FROM `mundo` WHERE `codigo_mundo` = '{codigo}' AND `privacidade_mundo` = 1"
+    cursor.execute(sql)
+
+    row = cursor.fetchone()
+
+    if row['id_cadastro'] == session['usuario']:
+        return redirect('/mundos/')
+    
+    insert_sql = f"INSERT INTO `participantes_mundo`(`id_mundo`, `id_usuario`) VALUES ('{row['id_mundo']}','{session['usuario']}')"
+    cursor.execute(insert_sql)
+    db.connection.commit()
+
+    return redirect('/mundos/')
+    
+
+@app.route("/api/verify_world_code/<code>/")
+def api_verify_world_code(code):
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    sql = f"SELECT `id_mundo` FROM `mundo` WHERE `codigo_mundo` = '{code}'"
+    cursor.execute(sql)
+    row = cursor.fetchone()
+
+    response = {}
+
+    if row:
+        response['sucess'] = True
+        return response
+
+    response['sucess'] = False
+
+    return response
+
 # fim das APIs
 
 @app.route("/")
@@ -259,7 +306,6 @@ def inicio():
     return render_template('index.html')
 
 # páginas de cadastro e login
-
 
 @app.route("/cadastro/", methods=['GET', 'POST'])
 def cadastro():

@@ -213,7 +213,6 @@ h1 {
 .modal-body small {
     color: red;
     font-weight: 700;
-    display: block;
     margin-top: 0.25rem;
     float: right;
 }
