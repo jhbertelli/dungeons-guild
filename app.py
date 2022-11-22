@@ -87,6 +87,23 @@ def api_editar_personagem(id):
     return get_one_from_database(f'''SELECT * FROM personagem WHERE id_personagem = {id}''')
 
 
+@app.route("/api/mundo/<id>/")
+def api_mundo(id):
+    cursor = db.connection.cursor(cursors.DictCursor)
+    cursor.execute(f"SELECT * FROM mundo WHERE id_mundo = {id}")
+    row = cursor.fetchone()
+
+    world = {}
+
+    for i in row:
+        if i == 'data_mundo':
+            world['data_mundo'] = str(row['data_mundo'])
+            continue
+        world[i] = row[i]
+
+    return jsonify(world)
+
+
 @app.route("/api/personagens_usuario/")
 def api_personagens_usuario():
     return get_from_database(f'''SELECT id_personagem, nome_personagem, classes.nome_classe, nivel_personagem, racas.nome_raca,
@@ -393,6 +410,12 @@ def criar_mundo():
         db.connection.commit()
 
         return form
+
+
+@app.route("/editar/mundo/<id>", methods=['GET', 'POST'])
+def editar_mundo(id):
+    if request.method == 'GET':
+        return render_template('editar-mundo.html', apelido=session['apelido'], id=id)
 
 
 @app.route("/mundos/")
