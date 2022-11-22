@@ -106,6 +106,7 @@ $.getJSON("/api/perfil_usuario/", (json) => {
     mainData[1].textContent = json["email"]
 
     myStats[0].textContent = json["quant_personagem"]
+    myStats[1].textContent = json["quant_mundos"]
     myStats[2].textContent = formatTime(json["data_conta"])
 })
 

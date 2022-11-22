@@ -91,7 +91,8 @@ def api_editar_personagem(id):
 @app.route("/api/mundos/")
 def api_mundos():
     cursor = db.connection.cursor(cursors.DictCursor)
-    cursor.execute(f'''SELECT id_mundo, nome_mundo, imagem_mundo, mundo.id_cadastro, tema_mundo, jgdorNeces_mundo FROM mundo
+    cursor.execute(f'''SELECT id_mundo, nome_mundo, imagem_mundo, mundo.id_cadastro,
+    cadastro.apelido_cadastro AS mestre, tema_mundo, jgdorNeces_mundo FROM mundo
     JOIN cadastro ON cadastro.id_cadastro = mundo.id_cadastro''')
 
     row = cursor.fetchall()
@@ -99,11 +100,15 @@ def api_mundos():
     response = []
 
     for i in range(0, len(row)):
+        # ciclagem entre o array de mundos
         mundo = {}
         
         for j in row[i]:
             mundo[j] = row[i][j]
 
+        if mundo['id_cadastro'] == session['usuario']:
+            mundo['dono'] = True
+            
         id_mundo = row[i]["id_mundo"]
         sql_participantes = f'''SELECT id_usuario, cadastro.apelido_cadastro FROM `participantes_mundo`
             JOIN cadastro ON participantes_mundo.id_usuario = cadastro.id_cadastro WHERE id_mundo = {id_mundo}'''
@@ -111,7 +116,17 @@ def api_mundos():
 
         resp_participantes = cursor.fetchall()
 
-        mundo["participantes"] = resp_participantes
+        # adiciona os participantes do mundo
+        # mundo["participantes"] = resp_participantes
+        mundo["quant_participantes"] = len(resp_participantes)
+        mundo['participa'] = False
+
+        for j in range(0, len(resp_participantes)):
+            # verifica se o usuário participa do mundo e retorna como um valor booleano
+            if resp_participantes[j]['id_usuario'] == session['usuario']:
+                mundo['participa'] = True
+                break
+
 
         response.append(mundo)
 
@@ -156,10 +171,13 @@ def api_personagens_usuario():
 @app.route("/api/perfil_usuario/")
 def api_perfil_usuario():
     cursor = db.connection.cursor(cursors.DictCursor)
-    cursor.execute(f'''SELECT nome_cadastro, apelido_cadastro, email_cadastro, data_conta,
-        COUNT(personagem.id_personagem) AS quant_personagem, id_assinatura FROM cadastro
+    cursor.execute(f'''SELECT cadastro.id_cadastro, nome_cadastro, apelido_cadastro, email_cadastro, data_conta,
+        COUNT(personagem.id_personagem) AS quant_personagem,
+        COUNT(mundo.id_mundo) AS quant_mundos,
+        id_assinatura FROM cadastro
         JOIN personagem ON personagem.id_usuario = cadastro.id_cadastro
-        WHERE id_cadastro = {session['usuario']}''')
+        JOIN mundo ON mundo.id_cadastro = cadastro.id_cadastro
+        WHERE cadastro.id_cadastro = {session['usuario']}''')
     row = cursor.fetchone()
 
     date_account = str(row['data_conta'])
@@ -172,6 +190,7 @@ def api_perfil_usuario():
     user['data_conta'] = date_account
     user['quant_personagem'] = row['quant_personagem']
     user['assinatura'] = row['id_assinatura']
+    user['quant_mundos'] = row['quant_mundos']
 
     return jsonify(user)
 
@@ -276,7 +295,7 @@ def api_join_world():
     db.connection.commit()
 
     return redirect('/mundos/')
-    
+
 
 @app.route("/api/verify_world_code/<code>/")
 def api_verify_world_code(code):
