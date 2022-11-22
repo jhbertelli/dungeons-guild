@@ -108,7 +108,7 @@ def api_mundos():
 
         if mundo['id_cadastro'] == session['usuario']:
             mundo['dono'] = True
-            
+
         id_mundo = row[i]["id_mundo"]
         sql_participantes = f'''SELECT id_usuario, cadastro.apelido_cadastro FROM `participantes_mundo`
             JOIN cadastro ON participantes_mundo.id_usuario = cadastro.id_cadastro WHERE id_mundo = {id_mundo}'''
@@ -173,10 +173,9 @@ def api_perfil_usuario():
     cursor = db.connection.cursor(cursors.DictCursor)
     cursor.execute(f'''SELECT cadastro.id_cadastro, nome_cadastro, apelido_cadastro, email_cadastro, data_conta,
         COUNT(personagem.id_personagem) AS quant_personagem,
-        COUNT(mundo.id_mundo) AS quant_mundos,
-        id_assinatura FROM cadastro
-        JOIN personagem ON personagem.id_usuario = cadastro.id_cadastro
-        JOIN mundo ON mundo.id_cadastro = cadastro.id_cadastro
+        COUNT(mundo.id_mundo) AS quant_mundos, id_assinatura FROM cadastro
+        LEFT JOIN personagem ON personagem.id_usuario = cadastro.id_cadastro
+        LEFT JOIN mundo ON mundo.id_cadastro = cadastro.id_cadastro
         WHERE cadastro.id_cadastro = {session['usuario']}''')
     row = cursor.fetchone()
 

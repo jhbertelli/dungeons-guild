@@ -41,7 +41,7 @@ h1 {
     margin-top: 35px;
 }
 
-.meus-mundos {
+.meus-mundos, .mundos-comunidade {
     display: flex;
     flex-wrap: wrap;
     gap: 1%;
@@ -74,8 +74,13 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    line-height: 98px;
+    padding: 20px;
     text-align: center;
+}
+
+.criar-mundo span {
+    padding-top: 16px;
+    line-height: 40px;
 }
 
 .desc {

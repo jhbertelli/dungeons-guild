@@ -35,28 +35,30 @@ submitButton.addEventListener('click', (e) => {
 
 $.getJSON("/api/mundos/", async (json) => {
     await $.getJSON("/api/perfil_usuario/", (usuario) => {
-        const meusMundos = document.querySelector('.meus-mundos')
+        const myWorldsTag = document.querySelector('.meus-mundos')
+        const communityWorldsTag = document.querySelector('.mundos-comunidade')
+        const createButton = myWorldsTag.firstElementChild
         
+        let myWorldsArray = []
+        let enteredWorldsArray = []
+
         if (usuario.assinatura === 1) {
             if (usuario.quant_mundos === 0) {
-                meusMundos.innerHTML += `<a href="/criar/mundo" class="criar-mundo">
-                    <img src="/images/svg/plus-icon.svg" alt="" />
-                    <span>Criar Mundo</span>
-                </a>`
+                createButton.lastElementChild.textContent = 'Criar mundo'
+                createButton.setAttribute('href', '/criar/mundo/')
+            } else {
+                createButton.style.fontSize = '1.25em'
+                createButton.lastElementChild.textContent = 'Se você deseja viajar em mais mundos, você precisa de uma assinatura!'
+                createButton.setAttribute('href', '/assinaturas/')
             }
         } else {
-            meusMundos.innerHTML += `<a href="/criar/mundo" class="criar-mundo">
-                <img src="/images/svg/plus-icon.svg" alt="" />
-                <span>Criar Mundo</span>
-            </a>`
+            createButton.lastElementChild.textContent = 'Criar mundo'
+            createButton.setAttribute('href', '/criar/mundo/')
         }
         
-        for (let i = 0; i < json.length; i++) {
-            const world = json[i]
-            
-            if (world.dono) {
-                console.log(world)
-                meusMundos.innerHTML += `<div class="card-mundo">
+        class createWorldHTML {
+            constructor(world) {
+                this.html = `<div class="card-mundo">
                     <img src="${world.imagem_mundo}" alt="" />
                     <div class="desc">
                         <h3>${world.nome_mundo}</h3>
@@ -93,7 +95,41 @@ $.getJSON("/api/mundos/", async (json) => {
                         </table>
                     </div>
                 </div>`
+
+                return this
             }
+        }
+        
+        for (let i = 0; i < json.length; i++) {
+            const world = json[i]
+            const worldHTML = new createWorldHTML(world)
+            
+            if (world.dono) {
+                myWorldsArray.push(world)
+                continue
+            }
+            
+            if (world.participa) {
+                console.log(json[i])
+                enteredWorldsArray.push(world)
+                continue
+            }
+            
+            communityWorldsTag.innerHTML += worldHTML.html
+        }
+
+        for (let i = 0; i < myWorldsArray.length; i++) {
+            const world = myWorldsArray[i]
+            const worldHTML = new createWorldHTML(world)
+
+            myWorldsTag.innerHTML += worldHTML.html
+        }
+        
+        for (let i = 0; i < enteredWorldsArray.length; i++) {
+            const world = enteredWorldsArray[i]
+            const worldHTML = new createWorldHTML(world)
+            
+            myWorldsTag.innerHTML += worldHTML.html
         }
     })
 
