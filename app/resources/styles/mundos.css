@@ -126,10 +126,14 @@ h1 {
   font-size:18px;
   border:none;
   height:32px;
-  width:760px;
+  width:690px;
 }
 
 .buscarMundos{
   display: flex;
    margin-top: 20px;
+}
+
+.entrarpelocodigo{
+  font-size: 10px;
 }

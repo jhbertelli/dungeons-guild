@@ -20,6 +20,7 @@
             rel="shortcut icon"
             href="http://127.0.0.1:5000/images/svg/favicon.svg"
         />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <body>
         <nav class="d-flex flex-nowrap" style="position: fixed">
@@ -112,9 +113,29 @@
                 <div class="buscarMundos">
                     <div id="divBusca">
                         <img src="/images/buscar.png" id="btnBusca" alt="Buscar"/>
-                        <input type="text" id="txtBusca" placeholder="Buscar..."/>
+                        <input type="text" id="txtBusca" placeholder="Pesquisar pelo nome do mundo"/>
                     </div>
                     <img src="/images/cadeado.png"/>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#procurarCodigo" class="entrarpelocodigo">Entrar pelo código...</a>
+
+                    <form method="post" class="modal fade" id="procurarCodigo" tabindex="-1" aria-labelledby="procurarCodigoLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="procurarCodigoLabel">Inserir seu Código</h1>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" name="apelido" required placeholder="Insira o código do mundo...">
+                                    <small></small>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Inserir Código</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
                 <h1>Meus mundos</h1>
                 <hr />
