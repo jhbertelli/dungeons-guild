@@ -7,6 +7,7 @@ import random
 from werkzeug.utils import secure_filename
 from criar_ficha import post_criar_ficha
 from editar_ficha import post_editar_ficha
+from editar_mundo import post_editar_mundo
 from email_confirmation import *
 from utils import *
 
@@ -138,7 +139,6 @@ def api_mundo(id):
     resp_participantes = cursor.fetchall()
 
     world["participantes"] = resp_participantes
-
 
     return jsonify(world)
 
@@ -454,13 +454,69 @@ def criar_mundo():
         return form
 
 
-@app.route("/editar/mundo/<id>", methods=['GET', 'POST'])
+@app.route("/editar/mundo/<id>/", methods=['GET', 'POST'])
 def editar_mundo(id):
     if 'usuario' not in session:
         return redirect(url_for('login'))
 
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    sql_verify_owner = f"SELECT `id_cadastro` FROM `mundo` WHERE `id_mundo` = {id}"
+
+    cursor.execute(sql_verify_owner)
+    row_verify_owner = cursor.fetchone()
+
+    if row_verify_owner is None:
+        return redirect('/mundos/')
+
+    if row_verify_owner['id_cadastro'] != session['usuario']:
+        return redirect('/mundos/')
+
     if request.method == 'GET':
         return render_template('editar-mundo.html', apelido=session['apelido'], id=id)
+
+    if request.method == 'POST':
+        mundo = request.form
+
+        for key in mundo:
+            if mundo[key] == '':
+                return redirect(f'/editar/mundo/{id}/')
+        
+        if 'img-mundo' not in request.files or request.files['img-mundo'].filename == '':
+            sql = f'''UPDATE `mundo`
+                SET `nome_mundo`='{mundo['nome_mundo']}',`tema_mundo`='{mundo['tema_mundo']}',
+                `descricao_mundo`='{mundo['descricao_mundo']}', `sistema_mundo`='{mundo['sistema']}',
+                `frequencia_mundo`='{mundo['frequencia']}',`data_mundo`='{mundo['data_sessao']}',
+                `jgdorNeces_mundo`='{mundo['jogadores_necessarios']}', `privacidade_mundo`='{mundo['privacidade']}'
+                WHERE id_mundo = {id}'''
+        else:
+            image = request.files['img-mundo']
+
+            # cria um nome diferente para o arquivo e salva
+            image.filename = create_file_name(
+            ) + os.path.splitext(image.filename)[1]
+
+            # se por algum acaso o nome já existir na pasta
+            while image.filename in os.listdir('app/resources/images/mundos'):
+                image.filename = create_file_name(
+                ) + os.path.splitext(image.filename)[1]
+
+            filename = secure_filename(image.filename)
+            image.save(os.path.join('app/resources/images/mundos', filename))
+            url_imagem = '/images/mundos/' + filename
+
+            sql = f'''UPDATE `mundo`
+                SET `nome_mundo`='{mundo['nome_mundo']}',`tema_mundo`='{mundo['tema_mundo']}',
+                `descricao_mundo`='{mundo['descricao_mundo']}', `sistema_mundo`='{mundo['sistema']}',
+                `frequencia_mundo`='{mundo['frequencia']}',`data_mundo`='{mundo['data_sessao']}',
+                `jgdorNeces_mundo`='{mundo['jogadores_necessarios']}', `privacidade_mundo`='{mundo['privacidade']}',
+                `imagem_mundo`='{url_imagem}'
+                WHERE id_mundo = {id}'''
+        
+        cursor.execute(sql)
+        db.connection.commit()
+        
+        return mundo
 
 
 @app.route("/mundos/")
