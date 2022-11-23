@@ -121,14 +121,8 @@ $.getJSON("/api/mundos/", async (json) => {
 
                 return this
             }
-
-            const thisWorld = document.querySelector(".meus-mundos").children[1]
-            console.log(i)
-            thisWorld.addEventListener("click", (e) => {
-
-            window.location = "/mundo/" + json[i].id_mundo
-        })
         }
+        
         
         for (let i = 0; i < json.length; i++) {
             const world = json[i]
