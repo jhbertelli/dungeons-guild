@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Criar Mundo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="http://127.0.0.1:5000/styles/mundo.css" />
+    <link
+      rel="shortcut icon"
+      href="http://127.0.0.1:5000/images/svg/favicon.svg"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <nav id="header">
+      <a href="/mundos">
+        <img src="/images/svg/back-icon.svg" alt="" class="back-icon" />
+      </a>
+      <img id="dgicon" src="http://127.0.0.1:5000/images/logo.png" alt="" />
+    </nav>
+    <div class="titulo_informacoes">
+      <h1>Informações do Mundo</h1>
+      <h1>Informações da Sessão</h1>
+    </div>
+    <div>
+      <div class="informacoes">
+        <div class="info_mundo">
+          <p class="nome_mundo">Mundo foda</p>
+          <br/>
+
+          <label for="img-mundo">
+            <div class="img-div"></div>
+          </label>
+          <p
+            type="file"
+            name="img-mundo"
+            id="img-mundo"
+            style="display: none"
+          ></p>
+
+          <div class="tema-div">
+            <label class="tema-label">Tema:</label>
+            <p class="tema">foda</p>
+          </div>
+          <div class="descricao-div">
+            <label class="descricao-label">Descrição</label><br />
+            <p class="descricao-textarea"></p>
+            <hr />
+          </div>
+        </div>
+
+        <div class="info_sessao">
+          <div class="info-dentro">
+            <div class="first-column">
+              <div>
+                <label>Mestre</label>
+                <p class="mestre"></p>
+              </div>
+
+              <div>
+                <label>Sistema</label>
+                <p class="sistema"></p>
+              </div>
+
+              <div>
+                <label>Participantes</label>
+                <p class="participantes"></p>
+              </div>
+
+              <div>
+                <label>Frequência</label>
+                <p class="frequencia"></p>
+              </div>
+
+              <div>
+                <label>Data Sessão</label>
+                <p class="data_sessao"></p>
+              </div>
+
+              <div>
+                <label>Jogadores necessários</label>
+                <p class="jogadores_necessarios"></p>
+              </div>
+            </div>
+
+            <div class="second-column">
+              <label>Privacidade</label>
+              <p class="privacidade"></p>
+              <label>Código Mundo</label>
+              <p class="cod_mundo" id="batata"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+  <script src="/js/mundo.js"></script>
+  <script>
+    $.getJSON("/api/mundo/{{ id }}/", (json) => {
+        console.log(json)
+        const nomeMundo = document.querySelector('.nome_mundo')
+        const imagemMundo = document.querySelector('.img-div')
+        const temaMundo = document.querySelector('.tema')
+        const descricaoMundo = document.querySelector('.descricao-textarea')
+        const mestre = document.querySelector('.mestre')
+        const sistema = document.querySelector('.sistema')
+        const participantes = document.querySelector('.participantes')
+        const frequencia = document.querySelector('.frequencia')
+        const dataSessao = document.querySelector('.data_sessao')
+        const jogadoresNecessarios = document.querySelector('.jogadores_necessarios')
+        const privacidade = document.querySelector('.privacidade')
+        const codMundo = document.querySelector('.cod_mundo')
+        //const body = document.getElementsByTagName("body")[0]
+        //body.style.backgroundImage = (`url(${json.imagem_mundo})`)
+
+      
+        
+        // ver se existem participantes
+        if (json.participantes == ""){
+            participantes.innerHTML = "Sem participantes"
+        }else{
+        //Var tamanho do array
+        let quantidade_jogadores = 0
+        for (let i = 0; i < json.participantes.length; i++){
+            quantidade_jogadores++
+        }
+        //susbstituir o valor dos objetos para o nome dos participantes
+        const jogadores = []
+        for(let i = 0; i < quantidade_jogadores; i++){
+           jogadores[i] = json.participantes[i].apelido_cadastro
+        }
+        //transformar array para string
+        //const pessoas = jogadores.toString()
+
+        participantes.innerHTML = (jogadores)
+        }
+        
+        nomeMundo.innerHTML = (json.nome_mundo) 
+        imagemMundo.style.backgroundImage = (`url(${json.imagem_mundo})`)
+        temaMundo.innerHTML = (json.tema_mundo)
+        descricaoMundo.innerHTML = (json.descricao_mundo)
+        mestre.innerHTML = (json.apelido_cadastro)
+        sistema.innerHTML = (json.sistema_mundo)
+        frequencia.innerHTML = (json.frequencia_mundo)
+        dataSessao.innerHTML = (json.data_mundo)
+        jogadoresNecessarios.innerHTML = (json.jgdorNeces_mundo)
+        if (json.privacidade_mundo == 1){
+        privacidade.innerHTML = "Privado"
+        }else{
+        privacidade.innerHTML = "Publico"
+        }
+        codMundo.innerHTML = (json.codigo_mundo)
+
+        
+
+
+    })
+  </script>
+</html>

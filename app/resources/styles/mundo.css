@@ -1,0 +1,236 @@
+/* Fontes:
+
+Cinzel 400
+Inknut Antiqua 400
+Cormorant Infant 400
+
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Cormorant+Infant&family=Inknut+Antiqua&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+body {
+    background-image: url("../images/criarmundobackground.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    margin: 0 145px 0 0;
+    margin-left: 120px;
+    font-family: "Cinzel", serif;
+    font-size: 28px;
+    font-weight: 400;
+    align-self: center;
+}
+
+
+#header {
+    width: 100%;
+    height: 70px;
+
+    background-color: #161616;
+
+    position: fixed;
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+}
+
+#dgicon {
+    margin-top: 6px;
+}
+
+nav a {
+    position: absolute;
+    left: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+nav .back-icon {
+    height: 30%;
+}
+
+
+.titulo_informacoes {
+    width: 1400px;
+    height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 90px;
+    display: grid;
+    grid-template-columns: 700px 700px;
+    text-align: center;
+    background-color: #121212;
+}
+
+.informacoes {
+    width: 1400px;
+    display: grid;
+    grid-template-columns: 700px 700px;
+    margin: 0 auto 20px auto;
+    height: fit-content;
+}
+
+.info_mundo {
+    width: 700px;
+    background-color: #161616;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.info_sessao {
+    width: 700px;
+    background-color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.nome_mundo {
+    width: 350px;
+    height: 30px;
+    margin: 10px auto 2px auto;
+    text-align: center;
+    display: block;
+    border: none;
+    border-radius: 10px;
+    font-family: "Cormorant Infant", serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: white;
+    background-color: #1a1a1a;
+    cursor: text;
+}
+
+.img-div {
+    width: 650px;
+    height: 300px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-repeat: no-repeat;
+    background-color: #1a1a1a;
+    background-size: contain;
+    background-position: 50% 50%;
+    font-family: "Cormorant Infant", serif;
+    font-size: 19pt;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tema-div {
+    display: flex;
+    width: 650px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 22px;
+}
+
+.tema-label {
+    margin-top: 10px;
+    align-self: flex-start;
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+
+}
+
+.tema {
+    width: 130px;
+    height: 30px;
+    margin-top: 10px;
+    padding: 5px;
+    position: relative;
+    left: 12px;
+    color: white;
+    font-family: "Cormorant Infant", serif;
+    font-weight: 400;
+    font-size: 22px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #1a1a1a;
+}
+
+.descricao-div {
+    width: 650px;
+    height: 200px;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 22px;
+    padding-bottom: 8px;
+}
+
+.descricao-label {
+    align-self: flex-start;
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+}
+
+.descricao-textarea {
+    width: 650px;
+    height: 150px;
+    border-radius: 10px;
+    text-align: initial;
+    font-family: "Cormorant Infant", serif;
+    font-weight: 400;
+    font-size: 22px;
+    background-color: #1a1a1a;
+    border: none;
+    resize: none;
+    overflow-y: scroll
+}
+
+.info-dentro {
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    margin: 8px auto 0 auto;
+}
+
+.info-dentro > div {
+    width: 48%;
+}
+
+.info-dentro label {
+    font-family: "Inknut Antiqua";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 35px;
+}
+
+
+.info-dentro p{
+    font-family: "Cormorant Infant";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: initial;
+    background-color: #121212;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 8px;
+    word-wrap: break-word;
+}
+
+.participantes{
+    overflow-y: scroll;
+}

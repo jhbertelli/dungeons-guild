@@ -94,7 +94,19 @@ $.getJSON("/api/mundos/", async (json) => {
                     </div>
                 </div>`
             }
+
+            const thisWorld = document.querySelector(".meus-mundos").children[1]
+            console.log(i)
+            thisWorld.addEventListener("click", (e) => {
+
+            window.location = "/mundo/" + json[i].id_mundo
+        })
         }
     })
+
+    
+
+
+   
 
 })
