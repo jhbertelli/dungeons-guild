@@ -1,12 +1,26 @@
+const modalCharacterNameTag = document.querySelector(".modal-body #nome-mundo")
+const modalCharacterValue = document.querySelector(".modal-footer input")
 const codigoForm = document.getElementById('procurarCodigo')
 const submitButton = codigoForm.querySelector('.modal-footer button')
 const codigoInput = codigoForm.querySelector('input')
 const smallText = codigoForm.querySelector('small')
+const modal = document.querySelector(".modal")
+
+modal.addEventListener("hide.bs.modal", () => {
+    setTimeout(() => {
+        modalCharacterNameTag.textContent = ""
+        modalCharacterValue.value = ""
+    }, 150)
+})
 
 function errorMessage(message) {
     codigoInput.style.boxShadow = "0px 0px 8px red"
     codigoInput.style.outline = "solid 1px red"
     smallText.textContent = message
+}
+
+function redirect(el, id) {
+    console.log(el, id)
 }
 
 codigoInput.addEventListener('input', () => {
@@ -57,11 +71,20 @@ $.getJSON("/api/mundos/", async (json) => {
         }
         
         class createWorldHTML {
-            constructor(world) {
-                this.html = `<div class="card-mundo">
+            constructor(world, owner) {
+                this.html = `<div class="card-mundo" onclick="window.location = '/mundo/' + ${world.id_mundo}">
                     <img src="${world.imagem_mundo}" alt="" />
                     <div class="desc">
-                        <h3>${world.nome_mundo}</h3>
+                        <div class="nome-mundo" style="${owner ? '' : 'justify-content: center;'}">
+                            ${owner ? `<a href="/editar/mundo/${world.id_mundo}/" class="edit-button">
+                                <img src="/images/svg/pencil.svg" alt="">
+                            </a>` : ''}
+                            
+                            <h3>${world.nome_mundo}</h3>
+                            ${owner ? `<a style="width: 32px">
+                                <div></div>
+                            </a>` : ''}
+                        </div>
                         <hr />
                         <table>
                             <tr>
@@ -102,7 +125,7 @@ $.getJSON("/api/mundos/", async (json) => {
         
         for (let i = 0; i < json.length; i++) {
             const world = json[i]
-            const worldHTML = new createWorldHTML(world)
+            const worldHTML = new createWorldHTML(world, false)
             
             if (world.dono) {
                 myWorldsArray.push(world)
@@ -110,26 +133,41 @@ $.getJSON("/api/mundos/", async (json) => {
             }
             
             if (world.participa) {
-                console.log(json[i])
                 enteredWorldsArray.push(world)
                 continue
             }
             
             communityWorldsTag.innerHTML += worldHTML.html
+
+            const thisCard = communityWorldsTag.lastElementChild
+
+            thisCard.addEventListener('click', () => {
+                window.location = "/mundo/" + json[i].id_mundo
+            })
         }
 
         for (let i = 0; i < myWorldsArray.length; i++) {
             const world = myWorldsArray[i]
-            const worldHTML = new createWorldHTML(world)
+            const worldHTML = new createWorldHTML(world, true)
 
             myWorldsTag.innerHTML += worldHTML.html
+            
+            const thisCard = myWorldsTag.lastElementChild
+
+            thisCard.removeEventListener('click')           
         }
         
         for (let i = 0; i < enteredWorldsArray.length; i++) {
             const world = enteredWorldsArray[i]
-            const worldHTML = new createWorldHTML(world)
+            const worldHTML = new createWorldHTML(world, false)
             
             myWorldsTag.innerHTML += worldHTML.html
+            
+            const thisCard = myWorldsTag.lastElementChild
+
+            thisCard.addEventListener('click', () => {
+                window.location = "/mundo/" + json[i].id_mundo
+            })
         }
     })
 

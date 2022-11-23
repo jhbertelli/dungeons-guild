@@ -92,8 +92,8 @@ def api_editar_personagem(id):
 def api_mundos():
     cursor = db.connection.cursor(cursors.DictCursor)
     cursor.execute(f'''SELECT id_mundo, nome_mundo, imagem_mundo, mundo.id_cadastro,
-    cadastro.apelido_cadastro AS mestre, tema_mundo, jgdorNeces_mundo FROM mundo
-    JOIN cadastro ON cadastro.id_cadastro = mundo.id_cadastro''')
+    cadastro.apelido_cadastro AS mestre, privacidade_mundo, tema_mundo, jgdorNeces_mundo
+    FROM mundo JOIN cadastro ON cadastro.id_cadastro = mundo.id_cadastro''')
 
     row = cursor.fetchall()
 
@@ -126,7 +126,9 @@ def api_mundos():
             if resp_participantes[j]['id_usuario'] == session['usuario']:
                 mundo['participa'] = True
                 break
-
+        
+        if mundo['privacidade_mundo'] == 1 and mundo['participa'] == False:
+            continue
 
         response.append(mundo)
 

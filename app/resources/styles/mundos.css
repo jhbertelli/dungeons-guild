@@ -55,6 +55,7 @@ h1 {
     height: 640px;
     background: #181818;
     margin-bottom: 2%;
+    cursor: pointer;
 }
 
 .card-mundo > img {
@@ -94,7 +95,7 @@ h1 {
     font-size: 21px;
     line-height: 35px;
     text-align: center;
-    margin: 20px 0;
+    margin: 0;
 }
 .desc table {
     width: 100%;
@@ -120,6 +121,13 @@ h1 {
     font-size: 20px;
     line-height: 35px;
     margin-left: 15px;
+}
+
+.desc .nome-mundo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
 }
 
 /* barra de busca e código do mundo */
