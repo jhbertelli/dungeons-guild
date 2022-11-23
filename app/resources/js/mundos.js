@@ -151,10 +151,6 @@ $.getJSON("/api/mundos/", async (json) => {
             const worldHTML = new createWorldHTML(world, true)
 
             myWorldsTag.innerHTML += worldHTML.html
-            
-            const thisCard = myWorldsTag.lastElementChild
-
-            thisCard.removeEventListener('click')           
         }
         
         for (let i = 0; i < enteredWorldsArray.length; i++) {
