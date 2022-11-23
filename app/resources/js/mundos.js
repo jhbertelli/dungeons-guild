@@ -123,6 +123,7 @@ $.getJSON("/api/mundos/", async (json) => {
             }
         }
         
+        
         for (let i = 0; i < json.length; i++) {
             const world = json[i]
             const worldHTML = new createWorldHTML(world, false)
