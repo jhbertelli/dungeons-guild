@@ -7,6 +7,7 @@ import random
 from werkzeug.utils import secure_filename
 from criar_ficha import post_criar_ficha
 from editar_ficha import post_editar_ficha
+from editar_mundo import post_editar_mundo
 from email_confirmation import *
 from utils import *
 
@@ -90,7 +91,8 @@ def api_editar_personagem(id):
 @app.route("/api/mundos/")
 def api_mundos():
     cursor = db.connection.cursor(cursors.DictCursor)
-    cursor.execute(f'''SELECT id_mundo, nome_mundo, imagem_mundo, mundo.id_cadastro, tema_mundo, jgdorNeces_mundo FROM mundo
+    cursor.execute(f'''SELECT id_mundo, nome_mundo, imagem_mundo, mundo.id_cadastro,
+    cadastro.apelido_cadastro AS mestre, tema_mundo, jgdorNeces_mundo FROM mundo
     JOIN cadastro ON cadastro.id_cadastro = mundo.id_cadastro''')
 
     row = cursor.fetchall()
@@ -98,10 +100,14 @@ def api_mundos():
     response = []
 
     for i in range(0, len(row)):
+        # ciclagem entre o array de mundos
         mundo = {}
         
         for j in row[i]:
             mundo[j] = row[i][j]
+
+        if mundo['id_cadastro'] == session['usuario']:
+            mundo['dono'] = True
 
         id_mundo = row[i]["id_mundo"]
         sql_participantes = f'''SELECT id_usuario, cadastro.apelido_cadastro FROM `participantes_mundo`
@@ -110,7 +116,17 @@ def api_mundos():
 
         resp_participantes = cursor.fetchall()
 
-        mundo["participantes"] = resp_participantes
+        # adiciona os participantes do mundo
+        # mundo["participantes"] = resp_participantes
+        mundo["quant_participantes"] = len(resp_participantes)
+        mundo['participa'] = False
+
+        for j in range(0, len(resp_participantes)):
+            # verifica se o usuário participa do mundo e retorna como um valor booleano
+            if resp_participantes[j]['id_usuario'] == session['usuario']:
+                mundo['participa'] = True
+                break
+
 
         response.append(mundo)
 
@@ -139,7 +155,6 @@ def api_mundo(id):
 
     world["participantes"] = resp_participantes
 
-
     return jsonify(world)
 
 
@@ -156,10 +171,12 @@ def api_personagens_usuario():
 @app.route("/api/perfil_usuario/")
 def api_perfil_usuario():
     cursor = db.connection.cursor(cursors.DictCursor)
-    cursor.execute(f'''SELECT nome_cadastro, apelido_cadastro, email_cadastro, data_conta,
-        COUNT(personagem.id_personagem) AS quant_personagem, id_assinatura FROM cadastro
-        JOIN personagem ON personagem.id_usuario = cadastro.id_cadastro
-        WHERE id_cadastro = {session['usuario']}''')
+    cursor.execute(f'''SELECT cadastro.id_cadastro, nome_cadastro, apelido_cadastro, email_cadastro, data_conta,
+        COUNT(personagem.id_personagem) AS quant_personagem,
+        COUNT(mundo.id_mundo) AS quant_mundos, id_assinatura FROM cadastro
+        LEFT JOIN personagem ON personagem.id_usuario = cadastro.id_cadastro
+        LEFT JOIN mundo ON mundo.id_cadastro = cadastro.id_cadastro
+        WHERE cadastro.id_cadastro = {session['usuario']}''')
     row = cursor.fetchone()
 
     date_account = str(row['data_conta'])
@@ -172,6 +189,7 @@ def api_perfil_usuario():
     user['data_conta'] = date_account
     user['quant_personagem'] = row['quant_personagem']
     user['assinatura'] = row['id_assinatura']
+    user['quant_mundos'] = row['quant_mundos']
 
     return jsonify(user)
 
@@ -210,7 +228,7 @@ def api_cadastro():
 
 
 @app.route("/api/verify_code/", methods=['POST'])
-def verify_code():
+def api_verify_code():
     # verifica se o código inserido está correto e retorna como um valor booleano
     user_sent_form = request.form
 
@@ -232,7 +250,7 @@ def verify_code():
 
 
 @app.route("/api/verify_password/", methods=["POST"])
-def verify_password():
+def api_verify_password():
     user_sent_form = request.form
     response = {}
 
@@ -252,6 +270,53 @@ def verify_password():
     return response
 
 
+@app.route("/api/join_world/")
+def api_join_world():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
+    if 'codigo' not in request.values or request.values['codigo'] == '':
+        return redirect('/mundos/')
+
+    codigo = request.values['codigo']
+    
+    cursor = db.connection.cursor(cursors.DictCursor)
+    sql = f"SELECT `id_mundo`, `id_cadastro` FROM `mundo` WHERE `codigo_mundo` = '{codigo}' AND `privacidade_mundo` = 1"
+    cursor.execute(sql)
+
+    row = cursor.fetchone()
+
+    if row['id_cadastro'] == session['usuario']:
+        return redirect('/mundos/')
+    
+    insert_sql = f"INSERT INTO `participantes_mundo`(`id_mundo`, `id_usuario`) VALUES ('{row['id_mundo']}','{session['usuario']}')"
+    cursor.execute(insert_sql)
+    db.connection.commit()
+
+    return redirect('/mundos/')
+
+
+@app.route("/api/verify_world_code/<code>/")
+def api_verify_world_code(code):
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    sql = f"SELECT `id_mundo` FROM `mundo` WHERE `codigo_mundo` = '{code}'"
+    cursor.execute(sql)
+    row = cursor.fetchone()
+
+    response = {}
+
+    if row:
+        response['sucess'] = True
+        return response
+
+    response['sucess'] = False
+
+    return response
+
 # fim das APIs
 
 @app.route("/")
@@ -259,7 +324,6 @@ def inicio():
     return render_template('index.html')
 
 # páginas de cadastro e login
-
 
 @app.route("/cadastro/", methods=['GET', 'POST'])
 def cadastro():
@@ -454,13 +518,69 @@ def criar_mundo():
         return form
 
 
-@app.route("/editar/mundo/<id>", methods=['GET', 'POST'])
+@app.route("/editar/mundo/<id>/", methods=['GET', 'POST'])
 def editar_mundo(id):
     if 'usuario' not in session:
         return redirect(url_for('login'))
 
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    sql_verify_owner = f"SELECT `id_cadastro` FROM `mundo` WHERE `id_mundo` = {id}"
+
+    cursor.execute(sql_verify_owner)
+    row_verify_owner = cursor.fetchone()
+
+    if row_verify_owner is None:
+        return redirect('/mundos/')
+
+    if row_verify_owner['id_cadastro'] != session['usuario']:
+        return redirect('/mundos/')
+
     if request.method == 'GET':
         return render_template('editar-mundo.html', apelido=session['apelido'], id=id)
+
+    if request.method == 'POST':
+        mundo = request.form
+
+        for key in mundo:
+            if mundo[key] == '':
+                return redirect(f'/editar/mundo/{id}/')
+        
+        if 'img-mundo' not in request.files or request.files['img-mundo'].filename == '':
+            sql = f'''UPDATE `mundo`
+                SET `nome_mundo`='{mundo['nome_mundo']}',`tema_mundo`='{mundo['tema_mundo']}',
+                `descricao_mundo`='{mundo['descricao_mundo']}', `sistema_mundo`='{mundo['sistema']}',
+                `frequencia_mundo`='{mundo['frequencia']}',`data_mundo`='{mundo['data_sessao']}',
+                `jgdorNeces_mundo`='{mundo['jogadores_necessarios']}', `privacidade_mundo`='{mundo['privacidade']}'
+                WHERE id_mundo = {id}'''
+        else:
+            image = request.files['img-mundo']
+
+            # cria um nome diferente para o arquivo e salva
+            image.filename = create_file_name(
+            ) + os.path.splitext(image.filename)[1]
+
+            # se por algum acaso o nome já existir na pasta
+            while image.filename in os.listdir('app/resources/images/mundos'):
+                image.filename = create_file_name(
+                ) + os.path.splitext(image.filename)[1]
+
+            filename = secure_filename(image.filename)
+            image.save(os.path.join('app/resources/images/mundos', filename))
+            url_imagem = '/images/mundos/' + filename
+
+            sql = f'''UPDATE `mundo`
+                SET `nome_mundo`='{mundo['nome_mundo']}',`tema_mundo`='{mundo['tema_mundo']}',
+                `descricao_mundo`='{mundo['descricao_mundo']}', `sistema_mundo`='{mundo['sistema']}',
+                `frequencia_mundo`='{mundo['frequencia']}',`data_mundo`='{mundo['data_sessao']}',
+                `jgdorNeces_mundo`='{mundo['jogadores_necessarios']}', `privacidade_mundo`='{mundo['privacidade']}',
+                `imagem_mundo`='{url_imagem}'
+                WHERE id_mundo = {id}'''
+        
+        cursor.execute(sql)
+        db.connection.commit()
+        
+        return mundo
 
 
 @app.route("/mundos/")
