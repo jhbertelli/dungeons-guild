@@ -86,12 +86,12 @@
 
         <main>
             <div class="mundos">
-                <form action="/pesquisar_mundo/" class="buscarMundos">
+                <form class="buscarMundos">
                     <label for="txtBusca" id="divBusca">
                         <input
                             type="text"
-                            id="txtBusca"
                             name="nomemundo"
+                            id="txtBusca"
                             placeholder="Pesquisar pelo nome do mundo"
                         />
                         <img src="/images/buscar.png" id="btnBusca" alt="Buscar" />
@@ -147,34 +147,6 @@
                         </div>
                     </div>
                 </form>
-                <h1>Meus mundos</h1>
-                <hr />
-                <div class="meus-mundos">
-                    <a href="#" class="criar-mundo">
-                        <img src="/images/svg/plus-icon.svg" alt="" />
-                        <span></span>
-                    </a>
-                    <form method="post" action="/mundo/excluir/" class="modal fade" id="excluirMundo" tabindex="-1" aria-labelledby="excluirMundoLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="excluirMundoLabel">Excluir mundo</h1>
-                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    Tem certeza que deseja excluir o mundo "<span id="nome-mundo"></span>"?
-                                <b style="color: red;">
-                                    Esta ação não pode ser revertida!
-                                </b>
-                                </div>
-                                <div class="modal-footer">
-                                    <input type="number" name="id-mundo" style="display: none;">
-                                    <button type="submit" class="btn btn-primary">Excluir este mundo</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
                 <h1>Mundos da comunidade</h1>
                 <hr />
                 <div class="mundos-comunidade"></div>
@@ -187,6 +159,6 @@
             crossorigin="anonymous"
         ></script>
 
-        <script src="/js/mundos.js/"></script>
+        <script src="/js/pesquisar_mundos.js/"></script>
     </body>
 </html>

@@ -90,11 +90,41 @@ def api_editar_personagem(id):
 
 @app.route("/api/pesquisar_mundo/")
 def api_pesquisar_mundo():
-    query_usuario = 'oda'
+    query_usuario = request.values.get("?nomemundo")
     cursor = db.connection.cursor(cursors.DictCursor)
-    sql = f"SELECT * FROM `mundo` WHERE `nome_mundo` LIKE '%{query_usuario}%'"
+    sql = f'''SELECT id_mundo, nome_mundo, imagem_mundo, mundo.id_cadastro,
+    cadastro.apelido_cadastro AS mestre, privacidade_mundo, tema_mundo, jgdorNeces_mundo
+    FROM mundo JOIN cadastro ON cadastro.id_cadastro = mundo.id_cadastro
+    WHERE `nome_mundo` LIKE "%{query_usuario}%" AND privacidade_mundo = 0'''
+    
     cursor.execute(sql)
-    resp = cursor.fetchall()
+    row = cursor.fetchall()
+    
+    resp = []
+
+    for i in range(0, len(row)):
+        # ciclagem entre o array de mundos
+        mundo = {}
+        
+        for j in row[i]:
+            mundo[j] = row[i][j]
+
+        
+        if mundo['id_cadastro'] == session['usuario']:
+            continue
+
+        id_mundo = row[i]["id_mundo"]
+        sql_participantes = f'''SELECT id_usuario, cadastro.apelido_cadastro FROM `participantes_mundo`
+            JOIN cadastro ON participantes_mundo.id_usuario = cadastro.id_cadastro WHERE id_mundo = {id_mundo}'''
+        cursor.execute(sql_participantes)
+
+        resp_participantes = cursor.fetchall()
+
+        # adiciona os participantes do mundo
+        mundo["quant_participantes"] = len(resp_participantes)
+    
+        resp.append(mundo)
+
     return jsonify(resp)
 
 
@@ -595,6 +625,11 @@ def editar_mundo(id):
         db.connection.commit()
         
         return mundo
+
+
+@app.route("/pesquisar_mundo/")
+def pesquisar_mundo():
+    return render_template('pesquisar_mundos.html', apelido=session['apelido'])
 
 
 @app.route("/mundos/")
