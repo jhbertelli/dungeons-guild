@@ -112,7 +112,6 @@ $.getJSON("/api/personagens_usuario/", async (json) => {
 
             window.location = "/ficha/" + json[i].id_personagem
         })
-
         // evento para botões secundários do mouse
         thisCard.addEventListener("auxclick", (e) => {
             const editButton = thisCard.querySelector(".edit-button")

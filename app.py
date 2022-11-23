@@ -138,7 +138,8 @@ def api_mundos():
 @app.route("/api/mundo/<id>/")
 def api_mundo(id):
     cursor = db.connection.cursor(cursors.DictCursor)
-    cursor.execute(f"SELECT * FROM mundo WHERE id_mundo = {id}")
+    cursor.execute(f'''SELECT id_mundo, nome_mundo, cadastro.apelido_cadastro, imagem_mundo, tema_mundo, descricao_mundo, sistema_mundo, frequencia_mundo, data_mundo, 
+                  jgdorNeces_mundo, codigo_mundo, privacidade_mundo  FROM mundo JOIN cadastro ON cadastro.id_cadastro = mundo.id_cadastro WHERE id_mundo = {id}''')
     row = cursor.fetchone()
 
     world = {}
@@ -157,9 +158,8 @@ def api_mundo(id):
 
     world["participantes"] = resp_participantes
 
-    return jsonify(world)
-
-
+    return world
+    
 @app.route("/api/personagens_usuario/")
 def api_personagens_usuario():
     return get_from_database(f'''SELECT id_personagem, nome_personagem, classes.nome_classe, nivel_personagem, racas.nome_raca,
@@ -592,6 +592,12 @@ def mundos():
 
     return render_template('mundos.html', apelido=session['apelido'])
 
+@app.route("/mundo/<id>/")
+def mundo(id):
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
+    return render_template('mundo.html', id=id)
 
 @app.route("/mundosvazio/")
 def mundosvazio():
