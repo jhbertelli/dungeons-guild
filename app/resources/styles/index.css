@@ -152,13 +152,24 @@ a {
     position: relative;
 }
 
+.dragao{
+    width: 455px;
+    margin-top: 310px;
+    margin-left: 900px;
+}
+
+.corrente{
+    mix-blend-mode: overlay;
+}
+
 .explicacao > img {
     position: absolute;
     top: -70%;
     left: 15%;
     z-index: 0;
-    mix-blend-mode: overlay;
 }
+
+
 
 .explicacao > .title {
     display: flex;
@@ -335,3 +346,4 @@ footer {
 footer img {
     height: 68px;
 }
+
