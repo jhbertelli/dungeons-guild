@@ -88,6 +88,16 @@ def api_editar_personagem(id):
     return get_one_from_database(f'''SELECT * FROM personagem WHERE id_personagem = {id}''')
 
 
+@app.route("/api/pesquisar_mundo/")
+def api_pesquisar_mundo():
+    query_usuario = 'oda'
+    cursor = db.connection.cursor(cursors.DictCursor)
+    sql = f"SELECT * FROM `mundo` WHERE `nome_mundo` LIKE '%{query_usuario}%'"
+    cursor.execute(sql)
+    resp = cursor.fetchall()
+    return jsonify(resp)
+
+
 @app.route("/api/mundos/")
 def api_mundos():
     cursor = db.connection.cursor(cursors.DictCursor)
