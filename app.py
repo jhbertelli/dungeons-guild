@@ -116,6 +116,8 @@ def api_mundos():
         for j in row[i]:
             mundo[j] = row[i][j]
 
+        mundo['dono'] = False
+
         if mundo['id_cadastro'] == session['usuario']:
             mundo['dono'] = True
 
@@ -127,7 +129,6 @@ def api_mundos():
         resp_participantes = cursor.fetchall()
 
         # adiciona os participantes do mundo
-        # mundo["participantes"] = resp_participantes
         mundo["quant_participantes"] = len(resp_participantes)
         mundo['participa'] = False
 
@@ -137,8 +138,9 @@ def api_mundos():
                 mundo['participa'] = True
                 break
         
-        if mundo['privacidade_mundo'] == 1 and mundo['participa'] == False:
-            continue
+        if not mundo['dono']:
+            if mundo['privacidade_mundo'] == 1 and mundo['participa'] == False:
+                continue
 
         response.append(mundo)
 
