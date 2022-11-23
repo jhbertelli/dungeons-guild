@@ -97,6 +97,11 @@ nav .back-icon {
     padding-bottom: 20px;
 }
 
+.img-helper{
+    font-family: Inter;
+    color: gray;
+}
+
 .info_sessao {
     width: 700px;
     background-color: #1a1a1a;
