@@ -154,19 +154,20 @@ a {
 
 .dragao{
     width: 455px;
-    margin-top: 310px;
-    margin-left: 880px;
+    position: absolute;
+    right: 0;
+    z-index: 0;
 }
 
 .corrente{
     mix-blend-mode: overlay;
 }
 
-.explicacao > img {
+.explicacao > .corrente {
     position: absolute;
     top: -70%;
-    left: 15%;
-    z-index: 0;
+    left: 10%;
+    z-index: 1;
 }
 
 
