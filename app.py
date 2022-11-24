@@ -143,6 +143,7 @@ def api_mundos():
         # ciclagem entre o array de mundos
         mundo = {}
         
+        # constrói o mundo atual com a linha atual do SQL
         for j in row[i]:
             mundo[j] = row[i][j]
 
@@ -169,6 +170,7 @@ def api_mundos():
                 break
         
         if not mundo['dono']:
+            # previne de exibir os mundos privados que o usuário não participa
             if mundo['privacidade_mundo'] == 1 and mundo['participa'] == False:
                 continue
 

@@ -95,7 +95,7 @@ a {
     align-items: center;
     color: white;
     align-content: space-between;
-    z-index: 1;
+    z-index: 2;
     position: relative;
 }
 
@@ -166,7 +166,7 @@ a {
 .explicacao > .corrente {
     position: absolute;
     top: -70%;
-    left: 10%;
+    left: 12.5%;
     z-index: 1;
 }
 
