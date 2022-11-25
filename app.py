@@ -653,7 +653,7 @@ def criar_mundo():
         # (este commando não é necessário para comandos com select)
         db.connection.commit()
 
-        return form
+        return redirect('/mundos/')
 
 
 @app.route("/editar/mundo/<id>/", methods=['GET', 'POST'])
@@ -753,14 +753,13 @@ def mundo(id):
         # caso o mundo for privado
         if row['id_cadastro'] != session['usuario']:
             # executa o código abaixo se o usuário não for o dono do mundo
-            sql_verify_players = f'''SELECT id_usuario, cadastro.apelido_cadastro FROM `participantes_mundo`
-                JOIN cadastro ON participantes_mundo.id_usuario = cadastro.id_cadastro WHERE id_mundo = {id}'''
+            sql_verify_players = f'''SELECT id_usuario FROM `participantes_mundo` WHERE id_mundo = {id}'''
             cursor.execute(sql_verify_players)
             players_array = cursor.fetchall()
 
             for i in range(0, len(players_array)):
                 # verifica se o usuário está dentro dos participantes, e retorna o mundo se ele estiver
-                if players_array[i] == session['usuario']:
+                if players_array[i]['id_usuario'] == session['usuario']:
                     return render_template('mundo.html', id=id)
 
             return redirect('/mundos/')
@@ -878,8 +877,15 @@ def excluir_conta():
     cursor = db.connection.cursor(cursors.DictCursor)
 
     try:
-        delete_mundos_sql = f"DELETE FROM mundo WHERE id_usuario = {session['usuario']}"
+        delete_mundos_sql = f"DELETE FROM mundo WHERE id_cadastro = {session['usuario']}"
         cursor.execute(delete_mundos_sql)
+        db.connection.commit()
+    except:
+        pass
+
+    try:
+        delete_participa_mundo = f"DELETE FROM participantes_mundo WHERE id_usuario = {session['usuario']}"
+        cursor.execute(delete_participa_mundo)
         db.connection.commit()
     except:
         pass
