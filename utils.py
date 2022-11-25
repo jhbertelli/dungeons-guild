@@ -1,7 +1,8 @@
+import random
 from string import ascii_letters
 from random import choice
 from app import db
-from flask import jsonify, redirect, url_for
+from flask import jsonify
 import MySQLdb.cursors as cursors
 
 
@@ -90,3 +91,13 @@ def get_lists_from_ficha(ficha):
 
     return all_lists
 
+
+def codigo_mundo():
+    # comando para gerar um código...
+    minusculo = "abcdefghijklmnopqrstuvwxyz"
+    maisculo = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    numero = "0123456789"
+    pre_codigo = minusculo + maisculo + numero
+    tamanho = 8
+    codigo_privacidade = "".join(random.sample(pre_codigo, tamanho))
+    return codigo_privacidade
