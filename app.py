@@ -7,7 +7,6 @@ import random
 from werkzeug.utils import secure_filename
 from criar_ficha import post_criar_ficha
 from editar_ficha import post_editar_ficha
-from editar_mundo import post_editar_mundo
 from email_confirmation import *
 from utils import *
 
@@ -182,8 +181,10 @@ def api_mundos():
 @app.route("/api/mundo/<id>/")
 def api_mundo(id):
     cursor = db.connection.cursor(cursors.DictCursor)
-    cursor.execute(f'''SELECT id_mundo, nome_mundo, cadastro.apelido_cadastro, imagem_mundo, tema_mundo, descricao_mundo, sistema_mundo, frequencia_mundo, data_mundo, 
-                  jgdorNeces_mundo, codigo_mundo, privacidade_mundo  FROM mundo JOIN cadastro ON cadastro.id_cadastro = mundo.id_cadastro WHERE id_mundo = {id}''')
+    cursor.execute(f'''SELECT id_mundo, nome_mundo, cadastro.apelido_cadastro,
+        imagem_mundo, tema_mundo, descricao_mundo, sistema_mundo, frequencia_mundo,
+        data_mundo, jgdorNeces_mundo, codigo_mundo, privacidade_mundo FROM mundo
+        JOIN cadastro ON cadastro.id_cadastro = mundo.id_cadastro WHERE id_mundo = {id}''')
     row = cursor.fetchone()
 
     world = {}
@@ -197,7 +198,7 @@ def api_mundo(id):
         world[i] = row[i]
 
     sql_participantes = f'''SELECT id_usuario, cadastro.apelido_cadastro FROM `participantes_mundo`
-            JOIN cadastro ON participantes_mundo.id_usuario = cadastro.id_cadastro WHERE id_mundo = {id}'''
+        JOIN cadastro ON participantes_mundo.id_usuario = cadastro.id_cadastro WHERE id_mundo = {id}'''
     cursor.execute(sql_participantes)
 
     resp_participantes = cursor.fetchall()
@@ -473,6 +474,84 @@ def personagens():
     return render_template('personagens.html', apelido=session['apelido'])
 
 
+# ficha de criação do personagem
+@app.route("/ficha/<id>/")
+def ficha(id):
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    sql_verify_owner = f"SELECT `id_usuario` FROM `personagem` WHERE `id_personagem` = {id}"
+
+    cursor.execute(sql_verify_owner)
+    row_verify_owner = cursor.fetchone()
+
+    # se o usuário tentar acessar uma ficha que não existe
+    if row_verify_owner is None:
+        return redirect('/personagens/')
+
+    # se o usuário tentar acessar uma ficha que não é dele
+    if row_verify_owner['id_usuario'] != session['usuario']:
+        return redirect('/personagens/')
+
+    return render_template('ficha.html', id=id)
+
+
+@app.route("/ficha/criar/", methods=['GET', 'POST'])
+def criar_ficha():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
+    sql_count_personagens_assinatura = f'''SELECT cadastro.id_assinatura, COUNT(id_personagem) AS quant_personagem
+        FROM personagem JOIN cadastro ON personagem.id_usuario = cadastro.id_cadastro
+        WHERE id_usuario = {session['usuario']}'''
+
+    cursor = db.connection.cursor(cursors.DictCursor)
+    cursor.execute(sql_count_personagens_assinatura)
+    row_personagens_assinatura = cursor.fetchone()
+
+    # se o usuário tentar criar uma ficha que excede o limite de sua assinatura grátis
+    if row_personagens_assinatura['quant_personagem'] >= 3 and row_personagens_assinatura["id_assinatura"] == 1:
+        return redirect('/personagens/')
+
+    if request.method == 'GET':
+        return render_template('criar-ficha.html', usuario=session['apelido'])
+
+    if request.method == 'POST':
+        if post_criar_ficha(session, request, cursor, db, os, create_file_name, secure_filename, get_lists_from_ficha):
+            return redirect('/personagens/')
+
+        return redirect('/ficha/criar/')
+
+
+@app.route("/ficha/<id>/editar/", methods=['GET', 'POST'])
+def editar_ficha(id):
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    sql_verify_owner = f"SELECT `id_usuario` FROM `personagem` WHERE `id_personagem` = {id}"
+
+    cursor.execute(sql_verify_owner)
+    row_verify_owner = cursor.fetchone()
+
+    # se o usuário tentar editar uma ficha que não existe
+    if row_verify_owner is None:
+        return redirect('/personagens/')
+
+    # se o usuário tentar editar uma ficha que não é dele
+    if row_verify_owner['id_usuario'] != session['usuario']:
+        return redirect('/personagens/')
+
+    if request.method == 'GET':
+        return render_template('editar-ficha.html', usuario=session['apelido'], id=id)
+
+    if request.method == 'POST':
+        if post_editar_ficha(session, request, cursor, db, os, create_file_name, secure_filename, get_lists_from_ficha, id):
+            return redirect('/personagens/')
+
+        return redirect(f'/ficha/{id}/editar')
+
+
 @app.route("/personagem/excluir/", methods=['POST'])
 def excluir_personagem():
     if 'usuario' not in session:
@@ -643,7 +722,7 @@ def editar_mundo(id):
         cursor.execute(sql)
         db.connection.commit()
         
-        return mundo
+        return redirect(f'/mundos/')
 
 
 @app.route("/pesquisar_mundo/")
@@ -663,7 +742,31 @@ def mundo(id):
     if 'usuario' not in session:
         return redirect(url_for('login'))
 
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    sql_verify_owner_and_privacy = f"SELECT id_cadastro, privacidade_mundo FROM mundo WHERE id_mundo = {id}"
+    cursor.execute(sql_verify_owner_and_privacy)
+
+    row = cursor.fetchone()
+    
+    if row['privacidade_mundo'] == 1:
+        # caso o mundo for privado
+        if row['id_cadastro'] != session['usuario']:
+            # executa o código abaixo se o usuário não for o dono do mundo
+            sql_verify_players = f'''SELECT id_usuario, cadastro.apelido_cadastro FROM `participantes_mundo`
+                JOIN cadastro ON participantes_mundo.id_usuario = cadastro.id_cadastro WHERE id_mundo = {id}'''
+            cursor.execute(sql_verify_players)
+            players_array = cursor.fetchall()
+
+            for i in range(0, len(players_array)):
+                # verifica se o usuário está dentro dos participantes, e retorna o mundo se ele estiver
+                if players_array[i] == session['usuario']:
+                    return render_template('mundo.html', id=id)
+
+            return redirect('/mundos/')
+           
     return render_template('mundo.html', id=id)
+
 
 @app.route("/mundosvazio/")
 def mundosvazio():
@@ -797,84 +900,6 @@ def excluir_conta():
     session.pop('apelido', None)
 
     return redirect(url_for('login'))
-
-
-# ficha de criação do personagem
-@app.route("/ficha/<id>/")
-def ficha(id):
-    if 'usuario' not in session:
-        return redirect(url_for('login'))
-
-    cursor = db.connection.cursor(cursors.DictCursor)
-
-    sql_verify_owner = f"SELECT `id_usuario` FROM `personagem` WHERE `id_personagem` = {id}"
-
-    cursor.execute(sql_verify_owner)
-    row_verify_owner = cursor.fetchone()
-
-    # se o usuário tentar acessar uma ficha que não existe
-    if row_verify_owner is None:
-        return redirect('/personagens/')
-
-    # se o usuário tentar acessar uma ficha que não é dele
-    if row_verify_owner['id_usuario'] != session['usuario']:
-        return redirect('/personagens/')
-
-    return render_template('ficha.html', id=id)
-
-
-@app.route("/ficha/criar/", methods=['GET', 'POST'])
-def criar_ficha():
-    if 'usuario' not in session:
-        return redirect(url_for('login'))
-
-    sql_count_personagens_assinatura = f'''SELECT cadastro.id_assinatura, COUNT(id_personagem) AS quant_personagem
-        FROM personagem JOIN cadastro ON personagem.id_usuario = cadastro.id_cadastro
-        WHERE id_usuario = {session['usuario']}'''
-
-    cursor = db.connection.cursor(cursors.DictCursor)
-    cursor.execute(sql_count_personagens_assinatura)
-    row_personagens_assinatura = cursor.fetchone()
-
-    # se o usuário tentar criar uma ficha que excede o limite de sua assinatura grátis
-    if row_personagens_assinatura['quant_personagem'] >= 3 and row_personagens_assinatura["id_assinatura"] == 1:
-        return redirect('/personagens/')
-
-    if request.method == 'GET':
-        return render_template('criar-ficha.html', usuario=session['apelido'])
-
-    if request.method == 'POST':
-        if post_criar_ficha(session, request, cursor, db, os, create_file_name, secure_filename, get_lists_from_ficha):
-            return redirect('/personagens/')
-
-        return redirect('/ficha/criar/')
-
-
-@app.route("/ficha/<id>/editar/", methods=['GET', 'POST'])
-def editar_ficha(id):
-    cursor = db.connection.cursor(cursors.DictCursor)
-
-    sql_verify_owner = f"SELECT `id_usuario` FROM `personagem` WHERE `id_personagem` = {id}"
-
-    cursor.execute(sql_verify_owner)
-    row_verify_owner = cursor.fetchone()
-
-    # se o usuário tentar editar uma ficha que não existe
-    if row_verify_owner is None:
-        return redirect('/personagens/')
-
-    # se o usuário tentar editar uma ficha que não é dele
-    if row_verify_owner['id_usuario'] != session['usuario']:
-        return redirect('/personagens/')
-
-    if request.method == 'GET':
-        return render_template('editar-ficha.html', usuario=session['apelido'], id=id)
-
-    if request.method == 'POST':
-        if post_editar_ficha(session, request, cursor, db, os, create_file_name, secure_filename, get_lists_from_ficha, id):
-            return redirect('/personagens/')
-
-        return redirect(f'/ficha/{id}/editar')
 
 
 @app.route("/logout/", methods=['GET', 'POST'])

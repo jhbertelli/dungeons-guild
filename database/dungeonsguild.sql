@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 24-Nov-2022 às 23:40
--- Versão do servidor: 10.4.25-MariaDB
--- versão do PHP: 7.4.30
+-- Tempo de geração: 25-Nov-2022 às 03:57
+-- Versão do servidor: 10.4.22-MariaDB
+-- versão do PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -152,8 +152,8 @@ CREATE TABLE `mundo` (
 --
 
 INSERT INTO `mundo` (`id_mundo`, `nome_mundo`, `imagem_mundo`, `tema_mundo`, `descricao_mundo`, `sistema_mundo`, `frequencia_mundo`, `data_mundo`, `jgdorNeces_mundo`, `codigo_mundo`, `privacidade_mundo`, `id_cadastro`) VALUES
-(1, 'mundo foda 2', '/images/mundos/FNZvYoohrScLLvv.jpeg', 'teste', 'codigo novo', 'codigo', 'ono', '2022-06-14', 0, 'YvVh6L', 1, 1),
-(2, 'Mundo massa', '/images/mundos/cAxrMTz8Irvklfg.html', 'Mundo pica', 'Mundo legal', '123', 'batata', '2022-11-02', 2, '5fGFJk', 1, 3),
+(1, 'mundo foda 2', '/images/mundos/ZurMZ4ohF3uMPqK.png', 'teste', 'codigo novo', 'codigo', 'ono', '2022-06-14', 0, 'YvVh6L', 1, 1),
+(2, 'Mundo massa', '/images/mundos/BwpsIA9ZRDALyEp.jpg', 'Mundo pica', 'Mundo legal', '1234', 'batata', '2022-11-02', 2, '5fGFJk', 1, 3),
 (3, 'Mundo UAU', '/images/mundos/1iDiTTiK3f98g9m.png', 'Medieval', 'uau que mundo foda', 'testa', 'todo', '2022-11-03', 2, '', 0, 2),
 (4, 'dawdw', '/images/mundos/KXMxXdy6CyCrVCt.jpg', '12312312', '231123', '312231', '132123', '2022-11-06', 12, '', 0, 2),
 (5, 'etrtte', '/images/mundos/wodN09SdqQmFPKq.jpg', '12312', '312312312', '123123', '123', '2022-11-08', 20, '', 0, 2),
@@ -173,6 +173,14 @@ CREATE TABLE `participantes_mundo` (
   `id_mundo` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `participantes_mundo`
+--
+
+INSERT INTO `participantes_mundo` (`id_participanteMundo`, `id_mundo`, `id_usuario`) VALUES
+(1, 2, 2),
+(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -465,7 +473,7 @@ ALTER TABLE `mundo`
 -- AUTO_INCREMENT de tabela `participantes_mundo`
 --
 ALTER TABLE `participantes_mundo`
-  MODIFY `id_participanteMundo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_participanteMundo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `pericias`
