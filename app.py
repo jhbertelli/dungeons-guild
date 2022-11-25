@@ -3,7 +3,6 @@ from flask import Flask, render_template, send_from_directory, request, redirect
 from flask_mysqldb import MySQL
 import MySQLdb.cursors as cursors
 import requests
-import random
 from werkzeug.utils import secure_filename
 from criar_ficha import post_criar_ficha
 from editar_ficha import post_editar_ficha
@@ -618,25 +617,17 @@ def criar_mundo():
         codigo_privacidade = ''
 
         if form['privacidade'] == '1':
-            # comando para gerar um código...
-            minusculo = "abcdefghijklmnopqrstuvwxyz"                                                            
-            maisculo = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            numero = "0123456789"
-            pre_codigo = minusculo + maisculo + numero
-            tamanho = 8
-            codigo_privacidade = "".join(random.sample(pre_codigo, tamanho))
-            
-            # verificar se existe um codigo_privacidade igual no banco
-            sql_cod_igual = f'SELECT `codigo_mundo` FROM `mundo` WHERE `codigo_mundo` = "{codigo_privacidade}"'
-            cursor.execute(sql_cod_igual)
-            row_vefificar_codigo = cursor.fetchone()
-
-            while row_vefificar_codigo :
-                # Fazer o codigo novamente até mudar
-                codigo_privacidade = "".join(random.sample(pre_codigo, tamanho))
+            while True:
+                # comando para gerar um código...
+                codigo_privacidade = codigo_mundo()
+                
+                # verificar se existe um codigo_privacidade igual no banco
                 sql_cod_igual = f'SELECT `codigo_mundo` FROM `mundo` WHERE `codigo_mundo` = "{codigo_privacidade}"'
                 cursor.execute(sql_cod_igual)
-                row_vefificar_codigo = cursor.fetchone() 
+                row_vefificar_codigo = cursor.fetchone()
+
+                if not row_vefificar_codigo:
+                    break
 
         sql = f'''INSERT INTO `mundo`
             (`nome_mundo`, `imagem_mundo`, `tema_mundo`, `descricao_mundo`, 
@@ -653,7 +644,7 @@ def criar_mundo():
         # (este commando não é necessário para comandos com select)
         db.connection.commit()
 
-        return form
+        return redirect('/mundos/')
 
 
 @app.route("/editar/mundo/<id>/", methods=['GET', 'POST'])
@@ -686,15 +677,37 @@ def editar_mundo(id):
             # verifica se algum campo está vazio
             if mundo[key] == '':
                 return redirect(f'/editar/mundo/{id}/')
-        
+
         if 'img-mundo' not in request.files or request.files['img-mundo'].filename == '':
             # sql para caso o usuário não mande uma imagem diferente
-            sql = f'''UPDATE `mundo`
-                SET `nome_mundo`='{mundo['nome_mundo']}',`tema_mundo`='{mundo['tema_mundo']}',
-                `descricao_mundo`='{mundo['descricao_mundo']}', `sistema_mundo`='{mundo['sistema']}',
-                `frequencia_mundo`='{mundo['frequencia']}',`data_mundo`='{mundo['data_sessao']}',
-                `jgdorNeces_mundo`='{mundo['jogadores_necessarios']}', `privacidade_mundo`='{mundo['privacidade']}'
-                WHERE id_mundo = {id}'''
+            if mundo['privacidade'] == '0':
+                sql = f'''UPDATE `mundo`
+                    SET `nome_mundo`='{mundo['nome_mundo']}',`tema_mundo`='{mundo['tema_mundo']}',
+                    `descricao_mundo`='{mundo['descricao_mundo']}', `sistema_mundo`='{mundo['sistema']}',
+                    `frequencia_mundo`='{mundo['frequencia']}',`data_mundo`='{mundo['data_sessao']}',
+                    `jgdorNeces_mundo`='{mundo['jogadores_necessarios']}', `privacidade_mundo`='{mundo['privacidade']}',
+                    `codigo_mundo`=NULL
+                    WHERE id_mundo = {id}'''
+            else:
+                while True:
+                    # comando para gerar um código...
+                    codigo_privacidade = codigo_mundo()
+                    
+                    # verificar se existe um codigo_privacidade igual no banco
+                    sql_cod_igual = f'SELECT `codigo_mundo` FROM `mundo` WHERE `codigo_mundo` = "{codigo_privacidade}"'
+                    cursor.execute(sql_cod_igual)
+                    row_vefificar_codigo = cursor.fetchone()
+
+                    if not row_vefificar_codigo:
+                        break
+
+                sql = f'''UPDATE `mundo`
+                    SET `nome_mundo`='{mundo['nome_mundo']}',`tema_mundo`='{mundo['tema_mundo']}',
+                    `descricao_mundo`='{mundo['descricao_mundo']}', `sistema_mundo`='{mundo['sistema']}',
+                    `frequencia_mundo`='{mundo['frequencia']}',`data_mundo`='{mundo['data_sessao']}',
+                    `jgdorNeces_mundo`='{mundo['jogadores_necessarios']}', `privacidade_mundo`='{mundo['privacidade']}',
+                    `codigo_mundo`='{codigo_privacidade}'
+                    WHERE id_mundo = {id}'''
         else:
             image = request.files['img-mundo']
 
@@ -711,14 +724,35 @@ def editar_mundo(id):
             image.save(os.path.join('app/resources/images/mundos', filename))
             url_imagem = '/images/mundos/' + filename
 
-            sql = f'''UPDATE `mundo`
-                SET `nome_mundo`='{mundo['nome_mundo']}',`tema_mundo`='{mundo['tema_mundo']}',
-                `descricao_mundo`='{mundo['descricao_mundo']}', `sistema_mundo`='{mundo['sistema']}',
-                `frequencia_mundo`='{mundo['frequencia']}',`data_mundo`='{mundo['data_sessao']}',
-                `jgdorNeces_mundo`='{mundo['jogadores_necessarios']}', `privacidade_mundo`='{mundo['privacidade']}',
-                `imagem_mundo`='{url_imagem}'
-                WHERE id_mundo = {id}'''
-        
+            if mundo['privacidade'] == '0':
+                sql = f'''UPDATE `mundo`
+                    SET `nome_mundo`='{mundo['nome_mundo']}',`tema_mundo`='{mundo['tema_mundo']}',
+                    `descricao_mundo`='{mundo['descricao_mundo']}', `sistema_mundo`='{mundo['sistema']}',
+                    `frequencia_mundo`='{mundo['frequencia']}',`data_mundo`='{mundo['data_sessao']}',
+                    `jgdorNeces_mundo`='{mundo['jogadores_necessarios']}', `privacidade_mundo`='{mundo['privacidade']}',
+                    `imagem_mundo`='{url_imagem}', `codigo_mundo`=NULL
+                    WHERE id_mundo = {id}'''
+            else:
+                while True:
+                    # comando para gerar um código...
+                    codigo_privacidade = codigo_mundo()
+                    
+                    # verificar se existe um codigo_privacidade igual no banco
+                    sql_cod_igual = f'SELECT `codigo_mundo` FROM `mundo` WHERE `codigo_mundo` = "{codigo_privacidade}"'
+                    cursor.execute(sql_cod_igual)
+                    row_vefificar_codigo = cursor.fetchone()
+
+                    if not row_vefificar_codigo:
+                        break
+
+                sql = f'''UPDATE `mundo`
+                    SET `nome_mundo`='{mundo['nome_mundo']}',`tema_mundo`='{mundo['tema_mundo']}',
+                    `descricao_mundo`='{mundo['descricao_mundo']}', `sistema_mundo`='{mundo['sistema']}',
+                    `frequencia_mundo`='{mundo['frequencia']}',`data_mundo`='{mundo['data_sessao']}',
+                    `jgdorNeces_mundo`='{mundo['jogadores_necessarios']}', `privacidade_mundo`='{mundo['privacidade']}',
+                    `imagem_mundo`='{url_imagem}', `codigo_mundo`='{codigo_privacidade}'
+                    WHERE id_mundo = {id}'''
+
         cursor.execute(sql)
         db.connection.commit()
         
@@ -753,14 +787,13 @@ def mundo(id):
         # caso o mundo for privado
         if row['id_cadastro'] != session['usuario']:
             # executa o código abaixo se o usuário não for o dono do mundo
-            sql_verify_players = f'''SELECT id_usuario, cadastro.apelido_cadastro FROM `participantes_mundo`
-                JOIN cadastro ON participantes_mundo.id_usuario = cadastro.id_cadastro WHERE id_mundo = {id}'''
+            sql_verify_players = f'''SELECT id_usuario FROM `participantes_mundo` WHERE id_mundo = {id}'''
             cursor.execute(sql_verify_players)
             players_array = cursor.fetchall()
 
             for i in range(0, len(players_array)):
                 # verifica se o usuário está dentro dos participantes, e retorna o mundo se ele estiver
-                if players_array[i] == session['usuario']:
+                if players_array[i]['id_usuario'] == session['usuario']:
                     return render_template('mundo.html', id=id)
 
             return redirect('/mundos/')
@@ -878,8 +911,15 @@ def excluir_conta():
     cursor = db.connection.cursor(cursors.DictCursor)
 
     try:
-        delete_mundos_sql = f"DELETE FROM mundo WHERE id_usuario = {session['usuario']}"
+        delete_mundos_sql = f"DELETE FROM mundo WHERE id_cadastro = {session['usuario']}"
         cursor.execute(delete_mundos_sql)
+        db.connection.commit()
+    except:
+        pass
+
+    try:
+        delete_participa_mundo = f"DELETE FROM participantes_mundo WHERE id_usuario = {session['usuario']}"
+        cursor.execute(delete_participa_mundo)
         db.connection.commit()
     except:
         pass
