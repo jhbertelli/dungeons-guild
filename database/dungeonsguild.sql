@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 25-Nov-2022 às 03:57
+-- Tempo de geração: 25-Nov-2022 às 15:53
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -332,6 +332,18 @@ INSERT INTO `salvaguardas` (`id_salvaguardas`, `nome_salvaguarda`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `solicitacoes`
+--
+
+CREATE TABLE `solicitacoes` (
+  `id_solicitacao` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_mundo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `tendencias`
 --
 
@@ -430,6 +442,14 @@ ALTER TABLE `salvaguardas`
   ADD PRIMARY KEY (`id_salvaguardas`);
 
 --
+-- Índices para tabela `solicitacoes`
+--
+ALTER TABLE `solicitacoes`
+  ADD PRIMARY KEY (`id_solicitacao`),
+  ADD KEY `id_mundo` (`id_mundo`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
 -- Índices para tabela `tendencias`
 --
 ALTER TABLE `tendencias`
@@ -500,6 +520,12 @@ ALTER TABLE `salvaguardas`
   MODIFY `id_salvaguardas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de tabela `solicitacoes`
+--
+ALTER TABLE `solicitacoes`
+  MODIFY `id_solicitacao` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `tendencias`
 --
 ALTER TABLE `tendencias`
@@ -543,6 +569,13 @@ ALTER TABLE `personagem`
   ADD CONSTRAINT `personagem_ibfk_3` FOREIGN KEY (`id_tendencia`) REFERENCES `tendencias` (`id_tendencia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `personagem_ibfk_4` FOREIGN KEY (`id_usuario`) REFERENCES `cadastro` (`id_cadastro`),
   ADD CONSTRAINT `personagem_ibfk_5` FOREIGN KEY (`id_antecedente`) REFERENCES `antecedentes` (`id`);
+
+--
+-- Limitadores para a tabela `solicitacoes`
+--
+ALTER TABLE `solicitacoes`
+  ADD CONSTRAINT `solicitacoes_ibfk_1` FOREIGN KEY (`id_mundo`) REFERENCES `mundo` (`id_mundo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `solicitacoes_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `cadastro` (`id_cadastro`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

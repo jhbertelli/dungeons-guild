@@ -180,7 +180,7 @@ def api_mundos():
 @app.route("/api/mundo/<id>/")
 def api_mundo(id):
     cursor = db.connection.cursor(cursors.DictCursor)
-    cursor.execute(f'''SELECT id_mundo, nome_mundo, cadastro.apelido_cadastro,
+    cursor.execute(f'''SELECT id_mundo, mundo.id_cadastro, nome_mundo, cadastro.apelido_cadastro,
         imagem_mundo, tema_mundo, descricao_mundo, sistema_mundo, frequencia_mundo,
         data_mundo, jgdorNeces_mundo, codigo_mundo, privacidade_mundo FROM mundo
         JOIN cadastro ON cadastro.id_cadastro = mundo.id_cadastro WHERE id_mundo = {id}''')
@@ -196,13 +196,27 @@ def api_mundo(id):
             continue
         world[i] = row[i]
 
+    world['dono'] = False
+    # caso o usuário logado for o dono da ficha
+    if world['id_cadastro'] == session['usuario']:
+        world['dono'] = True
+
     sql_participantes = f'''SELECT id_usuario, cadastro.apelido_cadastro FROM `participantes_mundo`
         JOIN cadastro ON participantes_mundo.id_usuario = cadastro.id_cadastro WHERE id_mundo = {id}'''
     cursor.execute(sql_participantes)
 
     resp_participantes = cursor.fetchall()
 
+    # insere todos os participantes do mundo
     world["participantes"] = resp_participantes
+
+    world['participa'] = False
+
+    for j in range(0, len(resp_participantes)):
+        # verifica se o usuário participa do mundo e retorna como um valor booleano
+        if resp_participantes[j]['id_usuario'] == session['usuario']:
+            world['participa'] = True
+            break
 
     return world
     
