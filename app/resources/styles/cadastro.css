@@ -153,7 +153,7 @@ small {
     align-items: center;
 }
 
-.input-wrapper img {
+.iconinput{
     margin-left: 6px;
 }
 
@@ -194,6 +194,11 @@ small {
     border: solid 2px white;
     border-radius: 10px;
     outline: none;
+}
+.eyeicon{
+    margin-right: 10px;
+    cursor: pointer;
+    
 }
 
 input:-webkit-autofill {
