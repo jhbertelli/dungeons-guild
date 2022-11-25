@@ -6,8 +6,11 @@ const codigoInput = codigoForm.querySelector("input")
 const smallText = codigoForm.querySelector("small")
 const modal = document.querySelector(".modal")
 const mundosDiv = document.querySelector(".mundos-comunidade")
+const urlParams = new URLSearchParams(window.location.search)
+const searchInput = document.getElementById("txtBusca")
 
-console.log(window.location.search)
+// adiciona a pesquisa do usuário no input
+if (urlParams.get(["nomemundo"]) !== null) searchInput.value = urlParams.get(["nomemundo"])
 
 $.get("/api/pesquisar_mundo/", window.location.search, (data, status) => {
     // pega os mundos da API
@@ -84,7 +87,7 @@ submitButton.addEventListener("click", (e) => {
         errorMessage("Preencha este campo")
         return
     }
-    
+
     // envia o código digitado pelo usuário para o back-end, que verifica se há algum mundo privado com esse código
     $.get("/api/verify_world_code/" + codigoInput.value, (data, status) => {
         if (data.sucess) return codigoForm.submit()
