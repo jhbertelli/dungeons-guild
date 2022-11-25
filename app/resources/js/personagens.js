@@ -3,6 +3,7 @@ const modalCharacterValue = document.querySelector(".modal-footer input")
 const modal = document.querySelector(".modal")
 
 modal.addEventListener("hide.bs.modal", () => {
+    // apaga o nome e o valor do personagem a ser apagado, quando o pop-up for fechado
     setTimeout(() => {
         modalCharacterNameTag.textContent = ""
         modalCharacterValue.value = ""
@@ -32,6 +33,7 @@ $.getJSON("/api/personagens_usuario/", async (json) => {
     })
 
     for (let i = 0; i < json.length; i++) {
+        // insere cada personagem do usuário
         document.querySelector(".criar-personagem").insertAdjacentHTML(
             "afterend",
             `<div>

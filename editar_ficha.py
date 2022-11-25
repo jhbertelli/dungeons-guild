@@ -2,6 +2,7 @@ def post_editar_ficha(session, request, cursor, db, os, create_file_name, secure
     ficha = request.form
 
     for key in ficha:
+        # verifica se há algum campo vazio
         if ficha[key] == '':
             return False
 
@@ -37,6 +38,7 @@ def post_editar_ficha(session, request, cursor, db, os, create_file_name, secure
     lista_ficha["aliados"] = ficha.get("aliados").strip()
 
     if 'img-personagem' not in request.files or request.files['img-personagem'].filename == '':
+        # se o usuário não enviou uma imagem
         sql = f'''UPDATE personagem
             SET nome_personagem="{lista_ficha["nome_personagem"]}",
             vida_atual="{lista_ficha["vida_atual"]}",

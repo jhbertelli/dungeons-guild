@@ -14,6 +14,7 @@ modal.addEventListener("hide.bs.modal", () => {
 })
 
 function errorMessage(message) {
+    // exibe uma mensagem de erro no input abaixo, trocando a cor do input também
     codigoInput.style.boxShadow = "0px 0px 8px red"
     codigoInput.style.outline = "solid 1px red"
     smallText.textContent = message
@@ -39,6 +40,7 @@ submitButton.addEventListener('click', (e) => {
         return
     }
 
+    // envia o código digitado pelo usuário para o back-end, que verifica se há algum mundo privado com esse código
     $.get("/api/verify_world_code/" + codigoInput.value, (data, status) => {
         if (data.sucess) return codigoForm.submit()
         
@@ -125,19 +127,23 @@ $.getJSON("/api/mundos/", async (json) => {
         
         
         for (let i = 0; i < json.length; i++) {
+            // pega todos os mundos visíveis pelo usuário e os filtra
             const world = json[i]
             const worldHTML = new createWorldHTML(world, false)
             
             if (world.dono) {
+                // verifica se o usuário é o dono do mundo e pula
                 myWorldsArray.push(world)
                 continue
             }
             
             if (world.participa) {
+                // verifica se o usuário participa do mundo e pula
                 enteredWorldsArray.push(world)
                 continue
             }
             
+            // adiciona o mundo para o campo de "Mundos da comunidade"
             communityWorldsTag.innerHTML += worldHTML.html
 
             const thisCard = communityWorldsTag.lastElementChild
@@ -148,13 +154,15 @@ $.getJSON("/api/mundos/", async (json) => {
         }
 
         for (let i = 0; i < myWorldsArray.length; i++) {
+            // adiciona os mundos criados pelo usuário no campo "Meus mundos"
             const world = myWorldsArray[i]
             const worldHTML = new createWorldHTML(world, true)
-
+            
             myWorldsTag.innerHTML += worldHTML.html
         }
         
         for (let i = 0; i < enteredWorldsArray.length; i++) {
+            // adiciona os mundos que o usuário participa no campo "Meus mundos"
             const world = enteredWorldsArray[i]
             const worldHTML = new createWorldHTML(world, false)
             
@@ -167,10 +175,4 @@ $.getJSON("/api/mundos/", async (json) => {
             })
         }
     })
-
-    
-
-
-   
-
 })

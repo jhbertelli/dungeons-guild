@@ -2,12 +2,14 @@ $.getJSON("/api/perfil_usuario/", (json) => {
     const paidVersionCard = document.getElementsByClassName("signature-card")[1]
 
     if (json["assinatura"] === 1) {
+        // exibe a opção de pagamento, se o usuário possuir a assinatura de graça
         paidVersionCard.setAttribute("data-bs-toggle", "modal")
         paidVersionCard.setAttribute("data-bs-target", "#pagamento")
 
         return
     }
 
+    // remove-a, caso ele tiver a assinatura paga
     document.querySelector("form").remove()
     paidVersionCard.lastElementChild.textContent = "Já Adquirido"
 })

@@ -6,12 +6,14 @@ playersAmountInput.addEventListener("input", (e) => {
     const numberRegex = /^\d+$/
     let newValue = ""
 
+    // previne o usuário de digitar números no input
     for (let i = 0; i < value.length; i++) {
         if (!numberRegex.test(value[i])) continue
 
         newValue += value[i]
     }
-
+    
+    // previne o usuário de digitar um número maior que 20
     if (Number(value) > 20) {
         return e.target.value = 20
     }

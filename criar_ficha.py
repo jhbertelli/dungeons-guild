@@ -2,9 +2,11 @@ def post_criar_ficha(session, request, cursor, db, os, create_file_name, secure_
     ficha = request.form
 
     for key in ficha:
+        # verifica se há algum campo vazio
         if ficha[key] == '':
             return False
 
+    # verifica se a imagem foi enviada
     if 'img-personagem' not in request.files:
         return False
 

@@ -100,6 +100,7 @@ modalButton.addEventListener("click", (e) => {
     modalErrorText.textContent = ''
     verificationCodeInput.style.boxShadow = "none"
     
+    // envia a requisição para o back-end (que verifica se o código inserido está correto)
     $.post("/api/verify_code/", form, (data, status) => {
         if (data.sucess) {
             return registerForm.submit()

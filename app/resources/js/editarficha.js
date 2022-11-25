@@ -15,6 +15,7 @@ inputCounterAndMaxLength(inputEquipamentos, 500)
 
 magiasSelect.addEventListener("input", () => {
     for (let i = 1; i < magiasSelect.children.length; i++) {
+        // exibe claramente as seleções do usuário nos inputs de magias
         if (magiasSelect.children[i].selected) {
             magiasSelect.children[i].style.backgroundColor = "dodgerblue"
             magiasSelect.children[i].style.color = "white"

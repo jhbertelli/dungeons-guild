@@ -188,8 +188,10 @@ def api_mundo(id):
 
     world = {}
 
+    # constrói o mundo para retorná-lo como JSON depois
     for i in row:
         if i == 'data_mundo':
+            # transforma a data em uma string (mais fácil de manipular no front-end)
             world['data_mundo'] = str(row['data_mundo'])
             continue
         world[i] = row[i]
@@ -217,15 +219,23 @@ def api_personagens_usuario():
 @app.route("/api/perfil_usuario/")
 def api_perfil_usuario():
     cursor = db.connection.cursor(cursors.DictCursor)
-    cursor.execute(f'''SELECT cadastro.id_cadastro, nome_cadastro, apelido_cadastro, email_cadastro, data_conta,
-        COUNT(personagem.id_personagem) AS quant_personagem,
-        COUNT(mundo.id_mundo) AS quant_mundos, id_assinatura FROM cadastro
-        LEFT JOIN personagem ON personagem.id_usuario = cadastro.id_cadastro
-        LEFT JOIN mundo ON mundo.id_cadastro = cadastro.id_cadastro
-        WHERE cadastro.id_cadastro = {session['usuario']}''')
+    # dados gerais do usuário
+    cursor.execute(f'''SELECT cadastro.id_cadastro, nome_cadastro,
+        apelido_cadastro, email_cadastro, data_conta, id_assinatura
+        FROM cadastro WHERE cadastro.id_cadastro = {session['usuario']}''')
     row = cursor.fetchone()
 
     date_account = str(row['data_conta'])
+
+    # contagem de mundos e personagens do usuário
+    sql_count_mundos = f"SELECT COUNT(id_mundo) AS quant_mundos FROM mundo WHERE id_cadastro = {session['usuario']}"
+    sql_count_personagens = f"SELECT COUNT(id_personagem) AS quant_personagem FROM personagem WHERE id_usuario = {session['usuario']}"
+
+    cursor.execute(sql_count_mundos)
+    quant_mundos = cursor.fetchone()['quant_mundos']
+
+    cursor.execute(sql_count_personagens)
+    quant_personagem = cursor.fetchone()['quant_personagem']
 
     user = {}
 
@@ -233,9 +243,9 @@ def api_perfil_usuario():
     user['apelido'] = row['apelido_cadastro']
     user['email'] = row['email_cadastro']
     user['data_conta'] = date_account
-    user['quant_personagem'] = row['quant_personagem']
+    user['quant_personagem'] = quant_personagem
     user['assinatura'] = row['id_assinatura']
-    user['quant_mundos'] = row['quant_mundos']
+    user['quant_mundos'] = quant_mundos
 
     return jsonify(user)
 
@@ -258,6 +268,7 @@ def api_cadastro():
 
         response = {}
 
+        # caso a requisição do usuário venha sem e-mail
         if "email" not in form or form["email"] == "":
             response['sucess'] = False
             return response
@@ -297,6 +308,7 @@ def api_verify_code():
 
 @app.route("/api/verify_password/", methods=["POST"])
 def api_verify_password():
+    # verifica a senha após o usuário tentar alterar o e-mail ou a senha
     user_sent_form = request.form
     response = {}
 
@@ -318,6 +330,7 @@ def api_verify_password():
 
 @app.route("/api/join_world/")
 def api_join_world():
+    # adiciona o usuário a um mundo privado, caso ele insira o código correto
     if 'usuario' not in session:
         return redirect(url_for('login'))
 
@@ -339,11 +352,12 @@ def api_join_world():
     cursor.execute(insert_sql)
     db.connection.commit()
 
-    return redirect('/mundos/')
+    return redirect(f"/mundo/{row['id_mundo']}")
 
 
 @app.route("/api/verify_world_code/<code>/")
 def api_verify_world_code(code):
+    # verifica se o usuário inseriu um código válido e retorna como um valor booleano
     if 'usuario' not in session:
         return redirect(url_for('login'))
 
@@ -439,6 +453,7 @@ def login():
         row = cursor.fetchone()
 
         if row:
+            # realiza o login e salva a sessão do usuário
             session['usuario'] = row['id_cadastro']
             session['apelido'] = row['apelido_cadastro']
             return redirect(url_for('personagens'))
@@ -472,14 +487,16 @@ def excluir_personagem():
     cursor.execute(sql_verify_owner)
     row_verify_owner = cursor.fetchone()
 
+    # caso o usuário tente excluir um personagem que não existe
     if row_verify_owner is None:
         return redirect('/personagens/')
 
+    # caso o usuário tente excluir um personagem que não é dele
     if row_verify_owner['id_usuario'] != session['usuario']:
         return redirect('/personagens/')
 
     sql = f"DELETE FROM personagem WHERE id_personagem = {id_personagem}"
-
+    # realiza a exclusão
     cursor.execute(sql)
     db.connection.commit()
     cursor.close()
@@ -540,11 +557,7 @@ def criar_mundo():
                 codigo_privacidade = "".join(random.sample(pre_codigo, tamanho))
                 sql_cod_igual = f'SELECT `codigo_mundo` FROM `mundo` WHERE `codigo_mundo` = "{codigo_privacidade}"'
                 cursor.execute(sql_cod_igual)
-                row_vefificar_codigo = cursor.fetchone()
-
-
-
-      
+                row_vefificar_codigo = cursor.fetchone() 
 
         sql = f'''INSERT INTO `mundo`
             (`nome_mundo`, `imagem_mundo`, `tema_mundo`, `descricao_mundo`, 
@@ -575,12 +588,14 @@ def editar_mundo(id):
 
     cursor.execute(sql_verify_owner)
     row_verify_owner = cursor.fetchone()
-
+    
+    # caso o usuário tente editar um mundo que não existe
     if row_verify_owner is None:
         return redirect('/mundos/')
 
+    # caso o usuário tente acessar a edição de um mundo que não é dele
     if row_verify_owner['id_cadastro'] != session['usuario']:
-        return redirect('/mundos/')
+        return redirect(f'/mundo/{id}')
 
     if request.method == 'GET':
         return render_template('editar-mundo.html', apelido=session['apelido'], id=id)
@@ -589,10 +604,12 @@ def editar_mundo(id):
         mundo = request.form
 
         for key in mundo:
+            # verifica se algum campo está vazio
             if mundo[key] == '':
                 return redirect(f'/editar/mundo/{id}/')
         
         if 'img-mundo' not in request.files or request.files['img-mundo'].filename == '':
+            # sql para caso o usuário não mande uma imagem diferente
             sql = f'''UPDATE `mundo`
                 SET `nome_mundo`='{mundo['nome_mundo']}',`tema_mundo`='{mundo['tema_mundo']}',
                 `descricao_mundo`='{mundo['descricao_mundo']}', `sistema_mundo`='{mundo['sistema']}',
@@ -758,7 +775,7 @@ def excluir_conta():
     cursor = db.connection.cursor(cursors.DictCursor)
 
     try:
-        delete_mundos_sql = f"DELETE FROM mundos WHERE id_usuario = {session['usuario']}"
+        delete_mundos_sql = f"DELETE FROM mundo WHERE id_usuario = {session['usuario']}"
         cursor.execute(delete_mundos_sql)
         db.connection.commit()
     except:
@@ -795,9 +812,11 @@ def ficha(id):
     cursor.execute(sql_verify_owner)
     row_verify_owner = cursor.fetchone()
 
+    # se o usuário tentar acessar uma ficha que não existe
     if row_verify_owner is None:
         return redirect('/personagens/')
 
+    # se o usuário tentar acessar uma ficha que não é dele
     if row_verify_owner['id_usuario'] != session['usuario']:
         return redirect('/personagens/')
 
@@ -817,6 +836,7 @@ def criar_ficha():
     cursor.execute(sql_count_personagens_assinatura)
     row_personagens_assinatura = cursor.fetchone()
 
+    # se o usuário tentar criar uma ficha que excede o limite de sua assinatura grátis
     if row_personagens_assinatura['quant_personagem'] >= 3 and row_personagens_assinatura["id_assinatura"] == 1:
         return redirect('/personagens/')
 
@@ -839,9 +859,11 @@ def editar_ficha(id):
     cursor.execute(sql_verify_owner)
     row_verify_owner = cursor.fetchone()
 
+    # se o usuário tentar editar uma ficha que não existe
     if row_verify_owner is None:
         return redirect('/personagens/')
 
+    # se o usuário tentar editar uma ficha que não é dele
     if row_verify_owner['id_usuario'] != session['usuario']:
         return redirect('/personagens/')
 
