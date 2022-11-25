@@ -946,8 +946,8 @@
 
         <script src="/js/editarficha.js"></script>
         <script>
-            window.addEventListener("load", () => {
-                $.getJSON("http://127.0.0.1:5000/api/personagem/{{ id }}/editar/", (json) => {
+            window.addEventListener("load", async () => {
+                await $.getJSON("http://127.0.0.1:5000/api/personagem/{{ id }}/editar/", (json) => {
                     // pega todas as tendencias da api
                     const cor = json["cor_ficha"]
                     const salvaguardas = document.querySelectorAll(".salvaguardas p input")
