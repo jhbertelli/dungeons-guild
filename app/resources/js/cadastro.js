@@ -2,6 +2,22 @@ const signUpButton = document.querySelector("#register-button")
 const modal = document.querySelector("#verificationCode")
 const modalButton = modal.querySelector(".modal-footer button")
 const registerForm = document.querySelector("form")
+const senhadiv = document.querySelector(".senhadiv")
+const inputsenha = document.querySelector("#password-input")
+const iconesenha = document. querySelector(".eyeicon")
+
+iconesenha.addEventListener('click', function(){
+    senhadiv.classList.toggle('visible')
+    if(senhadiv.classList.contains('visible')){
+        iconesenha.src = 'http://127.0.0.1:5000/images/svg/eye-off.svg'
+        inputsenha.type = 'text'
+    }else{
+        iconesenha.src = 'http://127.0.0.1:5000/images/svg/eye.svg'
+        inputsenha.type = 'password'
+    }
+})
+
+
 
 signUpButton.addEventListener("click", (e) => {
     e.preventDefault()
