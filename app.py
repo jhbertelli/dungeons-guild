@@ -782,6 +782,10 @@ def mundo(id):
     cursor.execute(sql_verify_owner_and_privacy)
 
     row = cursor.fetchone()
+
+    # se o mundo não existir
+    if row is None:
+        return redirect('/mundos/')
     
     if row['privacidade_mundo'] == 1:
         # caso o mundo for privado
@@ -799,6 +803,11 @@ def mundo(id):
             return redirect('/mundos/')
            
     return render_template('mundo.html', id=id)
+
+
+@app.route("/mundo/<id>/solicitacoes/")
+def solicitacoes_mundo(id):
+    return render_template("solicitacoes.html", id=id)
 
 
 @app.route("/mundosvazio/")

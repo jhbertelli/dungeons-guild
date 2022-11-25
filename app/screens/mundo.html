@@ -117,7 +117,6 @@
       crossorigin="anonymous"
     ></script>
   </body>
-  <script src="/js/mundo.js"></script>
   <script>
     $.getJSON("/api/mundo/{{ id }}/", (json) => {
         console.log(json)
@@ -136,8 +135,6 @@
         //const body = document.getElementsByTagName("body")[0]
         //body.style.backgroundImage = (`url(${json.imagem_mundo})`)
 
-      
-        
         // ver se existem participantes
         if (json.participantes == ""){
             participantes.innerHTML = "Sem participantes"

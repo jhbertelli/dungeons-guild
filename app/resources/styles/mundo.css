@@ -18,6 +18,10 @@ body {
     background-image: url("../images/criarmundobackground.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 h1 {
@@ -59,6 +63,9 @@ nav .back-icon {
     height: 30%;
 }
 
+main {
+    width: 90%;
+}
 
 .titulo_informacoes {
     width: 1400px;
@@ -233,4 +240,75 @@ nav .back-icon {
 
 .participantes{
     overflow-y: scroll;
+}
+
+.solicitacoes {
+    width: 90%;
+    
+}
+
+.titulo_solicitacoes {
+    width: 100%;
+    height: 80px;
+    margin-top: 90px;
+    text-align: center;
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.solicitacoes {
+    width: 100%;
+    min-height: 500px;
+    height: fit-content;
+    background-color: #161616;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1em;
+}
+
+.solicitacao-usuario {
+    width: 90%;
+    border-top: white 1px solid;
+    border-bottom: white 1px solid;
+    height: 4em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.solicitacao-usuario img {
+    width: 28px;
+}
+
+
+.solicitacao-usuario .usuario {
+    display: flex;
+    align-items: center;
+}
+
+.solicitacao-usuario .usuario img {
+    margin-left: 0.5em;
+}
+
+.solicitacao-usuario p {
+    margin: 0 0 0 1em;
+    font-family: 'Cormorant Infant';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.solicitacao-usuario .gerenciar-solicitacao {
+    display: flex;
+    align-items: center;
+}
+
+.solicitacao-usuario .gerenciar-solicitacao button {
+    background-color: transparent;
+    outline: transparent;
+    border: none;
+    padding: 0.5em 0.5em;
+    margin: 0 0.75em;
 }

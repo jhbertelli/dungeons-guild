@@ -41,7 +41,8 @@ h1 {
     margin-top: 35px;
 }
 
-.meus-mundos, .mundos-comunidade {
+.meus-mundos,
+.mundos-comunidade {
     display: flex;
     flex-wrap: wrap;
     gap: 1%;
@@ -105,7 +106,10 @@ h1 {
     font-family: "Cormorant Infant";
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     line-height: 35px;
     padding-bottom: 5px;
     text-align: right;
@@ -118,7 +122,10 @@ h1 {
     font-family: "Cinzel";
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     line-height: 35px;
     margin-left: 15px;
 }
@@ -165,8 +172,8 @@ h1 {
 
     color: white;
     outline: none;
-    
-    font-family: 'Cinzel';
+
+    font-family: "Cinzel";
     font-style: normal;
     font-weight: 400;
     font-size: 12pt;
@@ -186,7 +193,7 @@ h1 {
 
 .entrarpelocodigo {
     margin: 0 0 0 0.5em;
-    font-family: 'Cinzel';
+    font-family: "Cinzel";
     font-style: normal;
     font-weight: 400;
     font-size: 12pt;
