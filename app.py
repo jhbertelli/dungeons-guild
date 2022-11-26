@@ -218,8 +218,28 @@ def api_mundo(id):
             world['participa'] = True
             break
 
+    if world['privacidade_mundo'] == 0:
+        # verifica se o usuário solicitou a entrar no mundo
+        sql_usuario_solicitou = f'''SELECT `id_usuario`, `id_mundo` FROM `solicitacoes`
+            WHERE `id_usuario` = {session['usuario']} AND `id_mundo` = {id}'''
+
+        cursor.execute(sql_usuario_solicitou)
+        solicitacao_usuario = cursor.fetchone()
+
+        world['solicitacao'] = False
+
+        if solicitacao_usuario:
+            world['solicitacao'] = True
+
     return world
-    
+
+
+@app.route("/api/mundo/<id>/solicitacoes/")
+def api_solicitacoes_mundo(id):
+    return get_from_database(f'''SELECT id_usuario, cadastro.apelido_cadastro, cadastro.nome_cadastro FROM solicitacoes
+        INNER JOIN cadastro ON cadastro.id_cadastro = solicitacoes.id_usuario WHERE id_mundo = {id}''')
+
+
 @app.route("/api/personagens_usuario/")
 def api_personagens_usuario():
     return get_from_database(f'''SELECT id_personagem, nome_personagem, classes.nome_classe, nivel_personagem, racas.nome_raca,
@@ -775,6 +795,9 @@ def editar_mundo(id):
 
 @app.route("/pesquisar_mundo/")
 def pesquisar_mundo():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
     return render_template('pesquisar_mundos.html', apelido=session['apelido'])
 
 
@@ -785,7 +808,7 @@ def mundos():
 
     return render_template('mundos.html', apelido=session['apelido'])
 
-@app.route("/mundo/<id>/")
+@app.route("/mundo/<id>/", methods=['GET', 'POST'])
 def mundo(id):
     if 'usuario' not in session:
         return redirect(url_for('login'))
@@ -801,26 +824,53 @@ def mundo(id):
     if row is None:
         return redirect('/mundos/')
     
-    if row['privacidade_mundo'] == 1:
-        # caso o mundo for privado
-        if row['id_cadastro'] != session['usuario']:
-            # executa o código abaixo se o usuário não for o dono do mundo
-            sql_verify_players = f'''SELECT id_usuario FROM `participantes_mundo` WHERE id_mundo = {id}'''
-            cursor.execute(sql_verify_players)
-            players_array = cursor.fetchall()
+    if request.method == 'GET':
+        if row['privacidade_mundo'] == 1:
+            # caso o mundo for privado
+            if row['id_cadastro'] != session['usuario']:
+                # executa o código abaixo se o usuário não for o dono do mundo
+                sql_verify_players = f'''SELECT id_usuario FROM `participantes_mundo` WHERE id_mundo = {id}'''
+                cursor.execute(sql_verify_players)
+                players_array = cursor.fetchall()
 
-            for i in range(0, len(players_array)):
-                # verifica se o usuário está dentro dos participantes, e retorna o mundo se ele estiver
-                if players_array[i]['id_usuario'] == session['usuario']:
-                    return render_template('mundo.html', id=id)
+                for i in range(0, len(players_array)):
+                    # verifica se o usuário está dentro dos participantes, e retorna o mundo se ele estiver
+                    if players_array[i]['id_usuario'] == session['usuario']:
+                        return render_template('mundo.html', id=id)
 
-            return redirect('/mundos/')
+                return redirect('/mundos/')
            
-    return render_template('mundo.html', id=id)
+        return render_template('mundo.html', id=id)
+
+    if request.method == 'POST':
+        user_request = {}
+
+        user_request['usuario'] = session['usuario']
+        user_request['mundo'] = id
+
+        # verifica se o usuário já entrou no mundo
+        sql_verify_player_entered = f"SELECT * FROM participantes_mundo WHERE id_usuario = {session['usuario']} AND id_mundo = {id}"
+        cursor.execute(sql_verify_player_entered)
+        player_entered_row = cursor.fetchone()
+
+        if player_entered_row:
+            # se o usuário entrou no mundo, a requisição dele é para sair
+            user_request_sql = f"DELETE * FROM participantes_mundo WHERE id_usuario = {session['usuario']} AND id_mundo = {id}"
+        else:
+            # se o usuário não entrou no mundo, a requisição dele é para entrar nele
+            user_request_sql = f"INSERT INTO `solicitacoes` (`id_usuario`, `id_mundo`) VALUES ('{session['usuario']}', '{id}')"
+
+        cursor.execute(user_request_sql)
+        db.connection.commit()
+        
+        return render_template('mundo.html', id=id)
 
 
 @app.route("/mundo/<id>/solicitacoes/")
 def solicitacoes_mundo(id):
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+        
     return render_template("solicitacoes.html", id=id)
 
 

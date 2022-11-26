@@ -267,21 +267,25 @@ main {
     flex-direction: column;
     align-items: center;
     padding-top: 1em;
+    font-family: 'Cormorant Infant';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
 }
 
 .solicitacao-usuario {
     width: 90%;
     border-top: white 1px solid;
     border-bottom: white 1px solid;
-    height: 4em;
+    height: 3.5em;
     display: flex;
     justify-content: space-between;
+    font-size: 20px;
 }
 
 .solicitacao-usuario img {
     width: 28px;
 }
-
 
 .solicitacao-usuario .usuario {
     display: flex;
@@ -292,12 +296,15 @@ main {
     margin-left: 0.5em;
 }
 
+.solicitacao-usuario .usuario p span {
+    padding-left: 0.5em;
+}
+
 .solicitacao-usuario p {
     margin: 0 0 0 1em;
     font-family: 'Cormorant Infant';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
 }
 
 .solicitacao-usuario .gerenciar-solicitacao {
@@ -317,7 +324,7 @@ main {
     width: 70%;
     height: 60px;
     margin-top: 60px;
-    line-height:50%;
+    line-height: 50%;
     font-family: "Inknut Antiqua";
     font-style: normal;
     font-weight: 400;

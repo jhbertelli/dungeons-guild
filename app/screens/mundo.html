@@ -95,7 +95,7 @@
               <p class="privacidade"></p>
             </div>
           </div>
-          <button class="botao-entrar-sair"></button>
+          <button type="submit" class="botao-entrar-sair"></button>
         </div>
       </div>
     </form>
@@ -127,8 +127,16 @@
         // caso a privacidade seja público
         if (json.privacidade_mundo === 0) {
           if (!json.participa) {
-            // para entrar, se o usuário não participar do mundo
-            enterLeaveButton.textContent = 'Solicitar para entrar neste mundo'
+            if (json.solicitacao) {
+              // se o usuário enviou uma solicitação
+              enterLeaveButton.textContent = 'Você solicitou para entrar neste mundo'
+              enterLeaveButton.addEventListener('click', (e) => {
+                e.preventDefault()
+              })
+            } else {
+              // para entrar, se o usuário não participar do mundo e não ter enviado uma solicitação
+              enterLeaveButton.textContent = 'Solicitar para entrar neste mundo'
+            }
           } else {
             // para sair, se o usuário participar do mundo
             enterLeaveButton.textContent = 'Sair deste mundo'
