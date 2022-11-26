@@ -1081,15 +1081,34 @@ def excluir_conta():
     cursor = db.connection.cursor(cursors.DictCursor)
 
     try:
-        delete_mundos_sql = f"DELETE FROM mundo WHERE id_cadastro = {session['usuario']}"
-        cursor.execute(delete_mundos_sql)
+        delete_participa_mundo = f"DELETE FROM participantes_mundo WHERE id_usuario = {session['usuario']}"
+        cursor.execute(delete_participa_mundo)
         db.connection.commit()
     except:
         pass
 
     try:
-        delete_participa_mundo = f"DELETE FROM participantes_mundo WHERE id_usuario = {session['usuario']}"
+        delete_participa_mundo = f"DELETE FROM solicitacoes WHERE id_usuario = {session['usuario']}"
         cursor.execute(delete_participa_mundo)
+        db.connection.commit()
+    except:
+        pass
+
+    try:
+        user_worlds_sql = f"SELECT `id_mundo` FROM `mundo` WHERE `id_cadastro` = {session['usuario']}"
+        cursor.execute(user_worlds_sql)
+        user_worlds = cursor.fetchall()
+
+        for i in range(0, len(user_worlds)):
+            try:
+                sql_delete_participants = f"DELETE FROM `participantes_mundo` WHERE `id_mundo` = {user_worlds[i]['id_mundo']}"
+                cursor.execute(sql_delete_participants)
+                db.connection.commit()
+            except:
+                pass
+
+        delete_mundos_sql = f"DELETE FROM `mundo` WHERE `id_cadastro` = {session['usuario']}"
+        cursor.execute(delete_mundos_sql)
         db.connection.commit()
     except:
         pass
@@ -1100,6 +1119,7 @@ def excluir_conta():
         db.connection.commit()
     except:
         pass
+
     delete_account_sql = f"DELETE FROM cadastro WHERE id_cadastro = {session['usuario']}"
     cursor.execute(delete_account_sql)
     db.connection.commit()
