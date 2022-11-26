@@ -123,6 +123,7 @@
         //body.style.backgroundImage = (`url(${json.imagem_mundo})`)
         const secondColumn = document.querySelector('.second-column')
         const enterLeaveButton = document.querySelector('.botao-entrar-sair')
+        const infoSessaoDiv = document.querySelector('.info_sessao')
 
         // caso a privacidade seja público
         if (json.privacidade_mundo === 0) {
@@ -148,6 +149,12 @@
           `
         }
         
+        if (json.dono) {
+          // remove o botão de entrar no mundo se o usuário for o dono
+          enterLeaveButton.remove()
+          infoSessaoDiv.innerHTML += `<button type="button" class="btn btn-danger">Excluir Mundo</button>`
+        }
+
         const nomeMundo = document.querySelector('.nome_mundo')
         const imagemMundo = document.querySelector('.img-div')
         const temaMundo = document.querySelector('.tema')
@@ -163,21 +170,21 @@
         // ver se existem participantes
         if (json.participantes == ""){
             participantes.innerHTML = "Sem participantes"
-        }else{
-        //Var tamanho do array
-        let quantidade_jogadores = 0
-        for (let i = 0; i < json.participantes.length; i++){
-            quantidade_jogadores++
-        }
-        //susbstituir o valor dos objetos para o nome dos participantes
-        const jogadores = []
-        for(let i = 0; i < quantidade_jogadores; i++){
-           jogadores[i] = json.participantes[i].apelido_cadastro
-        }
-        //transformar array para string
-        //const pessoas = jogadores.toString()
+        } else {
+          //Var tamanho do array
+          let quantidade_jogadores = 0
+          for (let i = 0; i < json.participantes.length; i++){
+              quantidade_jogadores++
+          }
+          //susbstituir o valor dos objetos para o nome dos participantes
+          const jogadores = []
+          for(let i = 0; i < quantidade_jogadores; i++){
+            jogadores[i] = json.participantes[i].apelido_cadastro
+          }
+          //transformar array para string
+          //const pessoas = jogadores.toString()
 
-        participantes.innerHTML = (jogadores)
+          participantes.innerHTML = (jogadores)
         }
         
         nomeMundo.innerHTML = (json.nome_mundo) 

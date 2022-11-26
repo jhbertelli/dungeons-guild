@@ -266,7 +266,8 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 1em;
+    padding: 1em 1em 0 1em;
+    text-align: center;
     font-family: 'Cormorant Infant';
     font-style: normal;
     font-weight: 400;
@@ -274,7 +275,7 @@ main {
 }
 
 .solicitacao-usuario {
-    width: 90%;
+    width: 95%;
     border-top: white 1px solid;
     border-bottom: white 1px solid;
     height: 3.5em;

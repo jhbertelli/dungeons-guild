@@ -234,10 +234,79 @@ def api_mundo(id):
     return world
 
 
-@app.route("/api/mundo/<id>/solicitacoes/")
+@app.route("/api/mundo/<id>/solicitacoes/", methods=['GET', 'POST'])
 def api_solicitacoes_mundo(id):
-    return get_from_database(f'''SELECT id_usuario, cadastro.apelido_cadastro, cadastro.nome_cadastro FROM solicitacoes
-        INNER JOIN cadastro ON cadastro.id_cadastro = solicitacoes.id_usuario WHERE id_mundo = {id}''')
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
+    if request.method == 'GET':
+        return get_from_database(f'''SELECT id_usuario, cadastro.apelido_cadastro, cadastro.nome_cadastro FROM solicitacoes
+            INNER JOIN cadastro ON cadastro.id_cadastro = solicitacoes.id_usuario WHERE id_mundo = {id}''')
+    
+    if request.method == 'POST':
+        cursor = db.connection.cursor(cursors.DictCursor)
+
+        sql_verify_owner = f"SELECT `id_cadastro` FROM `mundo` WHERE `id_mundo` = {id}"
+
+        cursor.execute(sql_verify_owner)
+        row_verify_owner = cursor.fetchone()
+        
+        response = {}
+
+        # caso o usuário tente aceitar/rejeitar as solicitações de um mundo que não existe
+        if row_verify_owner is None:
+            response['sucess'] = False
+            return response
+
+        # caso o usuário tente aceitar/rejeitar as solicitações de um mundo que não é dele
+        if row_verify_owner['id_cadastro'] != session['usuario']:
+            response['sucess'] = False
+            return response
+        
+        user_form = request.form
+        required_params = ('idMundo', 'type', 'userId')
+
+        for i in range(0, len(required_params)):
+            # verifica se o formulário do usuário não tem as informações necessárias
+            # (id do mundo, rejeição/aceitação e id do usuário que solicitou para entrar no mundo)
+            if required_params[i] not in user_form:
+                response['sucess'] = False
+                return response
+
+        # verifica se o tipo de gerenciamento da solicitação é aceitar ou rejeitar
+        # se não for nenhum dos dois, retorna como falso
+        if user_form['type'] != 'accept' and user_form['type'] != 'reject':
+            response['sucess'] = False
+            return response
+
+        # verifica se a solicitação existe no banco
+        verify_solicitation_exists = f'''SELECT `id_usuario`, `id_mundo` FROM `solicitacoes`
+            WHERE `id_usuario` = {user_form['userId']} AND `id_mundo` = {user_form['idMundo']}'''
+        cursor.execute(verify_solicitation_exists)
+        row_solicitation_exists = cursor.fetchone()
+
+        if not row_solicitation_exists:
+            response['sucess'] = False
+            return response
+        
+        if user_form['type'] == 'accept':
+            # insere o usuário no mundo, se o mestre aceitar
+            accept_solicitation_sql = f'''INSERT INTO `participantes_mundo`(`id_mundo`, `id_usuario`)
+                VALUES ('{user_form['idMundo']}','{user_form['userId']}')'''
+            cursor.execute(accept_solicitation_sql)
+            db.connection.commit()
+        
+        delete_solicitation_sql = f'''DELETE FROM `solicitacoes`
+            WHERE `id_usuario` = {user_form['userId']} AND `id_mundo` = {user_form['idMundo']}'''
+        
+        # exclui a solicitação
+        cursor.execute(delete_solicitation_sql)
+        db.connection.commit()
+
+        response['sucess'] = True
+
+        return response
+
 
 
 @app.route("/api/personagens_usuario/")
@@ -843,10 +912,23 @@ def mundo(id):
         return render_template('mundo.html', id=id)
 
     if request.method == 'POST':
+        # impede o dono da ficha de solicitar a entrada no próprio mundo
+        if row['id_cadastro'] == session['usuario']:
+            return redirect(f'/mundo/{id}/')
+
         user_request = {}
 
         user_request['usuario'] = session['usuario']
         user_request['mundo'] = id
+
+        # verifica se o usuário já solicitou a entrada no mundo
+        # e previne a criação de novas solicitações
+        sql_verify_player_request = f"SELECT * FROM solicitacoes WHERE id_usuario = {session['usuario']} AND id_mundo = {id}"
+        cursor.execute(sql_verify_player_request)
+        player_request_row = cursor.fetchone()
+        
+        if player_request_row:
+            return redirect(f'/mundo/{id}/')
 
         # verifica se o usuário já entrou no mundo
         sql_verify_player_entered = f"SELECT * FROM participantes_mundo WHERE id_usuario = {session['usuario']} AND id_mundo = {id}"
@@ -855,7 +937,7 @@ def mundo(id):
 
         if player_entered_row:
             # se o usuário entrou no mundo, a requisição dele é para sair
-            user_request_sql = f"DELETE * FROM participantes_mundo WHERE id_usuario = {session['usuario']} AND id_mundo = {id}"
+            user_request_sql = f"DELETE FROM participantes_mundo WHERE id_usuario = {session['usuario']} AND id_mundo = {id}"
         else:
             # se o usuário não entrou no mundo, a requisição dele é para entrar nele
             user_request_sql = f"INSERT INTO `solicitacoes` (`id_usuario`, `id_mundo`) VALUES ('{session['usuario']}', '{id}')"
@@ -863,13 +945,28 @@ def mundo(id):
         cursor.execute(user_request_sql)
         db.connection.commit()
         
-        return render_template('mundo.html', id=id)
+        return redirect(f'/mundo/{id}/')
 
 
 @app.route("/mundo/<id>/solicitacoes/")
 def solicitacoes_mundo(id):
     if 'usuario' not in session:
         return redirect(url_for('login'))
+
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    sql_verify_owner = f"SELECT `id_cadastro` FROM `mundo` WHERE `id_mundo` = {id}"
+
+    cursor.execute(sql_verify_owner)
+    row_verify_owner = cursor.fetchone()
+    
+    # caso o usuário tente acessar as solicitações de um mundo que não existe
+    if row_verify_owner is None:
+        return redirect('/mundos/')
+
+    # caso o usuário tente acessar as solicitações de um mundo que não é dele
+    if row_verify_owner['id_cadastro'] != session['usuario']:
+        return redirect(f'/mundo/{id}')
         
     return render_template("solicitacoes.html", id=id)
 
