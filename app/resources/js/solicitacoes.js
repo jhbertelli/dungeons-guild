@@ -17,15 +17,16 @@ function handleSolicitation(type, userId, solicitationDiv) {
             solicitationDiv.remove()
         }
 
-        if (listaSolicitacoes.childElementCount === 1)
-            listaSolicitacoes.children[0].style.borderBottom = "white 1px solid"
-
         if (listaSolicitacoes.childElementCount === 0) {
             listaSolicitacoes.style.justifyContent = "center"
             listaSolicitacoes.style.paddingTop = "0"
             listaSolicitacoes.textContent =
                 "Não há nenhuma solicitação de viajantes para entrar no seu mundo"
+
+            return
         }
+
+        listaSolicitacoes.children[0].style.borderTop = "white 1px solid"
     })
 }
 
@@ -33,7 +34,7 @@ $.getJSON(`/api/mundo/${idMundo}/solicitacoes/`, (json) => {
     if (json.length > 0) {
         for (let i = 0; i < json.length; i++) {
             listaSolicitacoes.innerHTML += `<div class="solicitacao-usuario" style="${
-                i === 0 ? "border-bottom: none" : ""
+                i === 0 ? "" : "border-top: none"
             }">
                 <div class="usuario">
                     <img src="/images/svg/mail.svg/" alt="">
