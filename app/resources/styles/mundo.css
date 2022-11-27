@@ -321,17 +321,71 @@ main {
     margin: 0 0.75em;
 }
 
-.botao-entrar-sair {
-    width: 70%;
-    height: 60px;
+.botao-info {
+    width: 85%;
+    height: 52px;
     margin-top: 60px;
     line-height: 50%;
     font-family: "Inknut Antiqua";
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 18px;
     color: white;
     background-color: transparent;
     border-radius: 10px;
     border-color: white;
+}
+
+.btn-danger {
+    width: 85%;
+    margin-top: 12px;
+}
+
+/* CSS para o popup */
+
+.modal-content {
+    background-color: #1c1c1c;
+}
+
+.modal-content h1 {
+    margin: 0;
+}
+
+.modal-content > div {
+    border: none;
+}
+
+.modal-content .btn-close {
+    opacity: 0.8;
+}
+
+.modal-body {
+    padding: 0 1rem 1rem 1rem;
+}
+
+.modal-body input {
+    width: 100%;
+    padding: 0.45em;
+    margin-top: 1rem;
+    border-radius: 0.5em;
+    border: 1px rgba(30, 30, 30, 0.6) solid;
+    outline: none;
+    transition: 0.25s;
+}
+
+.modal-body small {
+    color: red;
+    font-weight: 700;
+    display: block;
+    margin-top: 0.25rem;
+    float: right;
+}
+
+.modal-footer button {
+    background-color: #2356a1;
+    border: none;
+}
+
+.modal-footer button:focus {
+    box-shadow: 0px 0px 8px #2356a1;
 }

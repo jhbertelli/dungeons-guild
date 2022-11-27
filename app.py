@@ -971,6 +971,46 @@ def solicitacoes_mundo(id):
     return render_template("solicitacoes.html", id=id)
 
 
+@app.route("/excluir/mundo/", methods=['POST'])
+def excluir_mundo():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+
+    user_form = request.form
+
+    if 'id-mundo' not in user_form:
+        return redirect('/mundos/')
+
+    cursor = db.connection.cursor(cursors.DictCursor)
+
+    sql_verify_owner = f"SELECT `id_cadastro` FROM `mundo` WHERE `id_mundo` = {user_form['id-mundo']}"
+
+    cursor.execute(sql_verify_owner)
+    row_verify_owner = cursor.fetchone()
+    
+    # caso o usuário tente excluir um mundo que não existe
+    if row_verify_owner is None:
+        return redirect('/mundos/')
+
+    # caso o usuário tente excluir um mundo que não é dele
+    if row_verify_owner['id_cadastro'] != session['usuario']:
+        return redirect(f"/mundo/{user_form['id-mundo']}")
+    
+    delete_participants_sql = f"DELETE FROM `participantes_mundo` WHERE `id_mundo` = {user_form['id-mundo']}"
+    cursor.execute(delete_participants_sql)
+    db.connection.commit()
+
+    delete_solicitations_sql = f"DELETE FROM `solicitacoes` WHERE `id_mundo` = {user_form['id-mundo']}"
+    cursor.execute(delete_solicitations_sql)
+    db.connection.commit()
+
+    delete_worlds_sql = f"DELETE FROM `mundo` WHERE `id_cadastro` = {session['usuario']}"
+    cursor.execute(delete_worlds_sql)
+    db.connection.commit()
+
+    return redirect('/mundos/')
+
+
 @app.route("/mundosvazio/")
 def mundosvazio():
     if 'usuario' not in session:
@@ -1081,15 +1121,15 @@ def excluir_conta():
     cursor = db.connection.cursor(cursors.DictCursor)
 
     try:
-        delete_participa_mundo = f"DELETE FROM participantes_mundo WHERE id_usuario = {session['usuario']}"
-        cursor.execute(delete_participa_mundo)
+        delete_user_in_worlds = f"DELETE FROM participantes_mundo WHERE id_usuario = {session['usuario']}"
+        cursor.execute(delete_user_in_worlds)
         db.connection.commit()
     except:
         pass
 
     try:
-        delete_participa_mundo = f"DELETE FROM solicitacoes WHERE id_usuario = {session['usuario']}"
-        cursor.execute(delete_participa_mundo)
+        delete_solicitations_in_worlds = f"DELETE FROM solicitacoes WHERE id_usuario = {session['usuario']}"
+        cursor.execute(delete_solicitations_in_worlds)
         db.connection.commit()
     except:
         pass
@@ -1104,18 +1144,22 @@ def excluir_conta():
                 sql_delete_participants = f"DELETE FROM `participantes_mundo` WHERE `id_mundo` = {user_worlds[i]['id_mundo']}"
                 cursor.execute(sql_delete_participants)
                 db.connection.commit()
+
+                sql_delete_solicitations = f"DELETE FROM `solicitacoes` WHERE `id_mundo` = {user_worlds[i]['id_mundo']}"
+                cursor.execute(sql_delete_solicitations)
+                db.connection.commit()
             except:
                 pass
 
-        delete_mundos_sql = f"DELETE FROM `mundo` WHERE `id_cadastro` = {session['usuario']}"
-        cursor.execute(delete_mundos_sql)
+        delete_worlds_sql = f"DELETE FROM `mundo` WHERE `id_cadastro` = {session['usuario']}"
+        cursor.execute(delete_worlds_sql)
         db.connection.commit()
     except:
         pass
 
     try:
-        delete_personagens_sql = f"DELETE FROM personagem WHERE id_usuario = {session['usuario']}"
-        cursor.execute(delete_personagens_sql)
+        delete_characters_sql = f"DELETE FROM personagem WHERE id_usuario = {session['usuario']}"
+        cursor.execute(delete_characters_sql)
         db.connection.commit()
     except:
         pass

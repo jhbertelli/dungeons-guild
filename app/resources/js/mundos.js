@@ -149,10 +149,9 @@ $.getJSON("/api/mundos/", async (json) => {
             const thisCard = communityWorldsTag.lastElementChild
 
             thisCard.addEventListener('click', () => {
-                window.location = "/mundo/" + json[i].id_mundo
+                window.location = "/mundo/" + world.id_mundo
             })
         }
-
         for (let i = 0; i < myWorldsArray.length; i++) {
             // adiciona os mundos criados pelo usuário no campo "Meus mundos"
             const world = myWorldsArray[i]
@@ -167,12 +166,6 @@ $.getJSON("/api/mundos/", async (json) => {
             const worldHTML = new createWorldHTML(world, false)
             
             myWorldsTag.innerHTML += worldHTML.html
-            
-            const thisCard = myWorldsTag.lastElementChild
-
-            thisCard.addEventListener('click', () => {
-                window.location = "/mundo/" + json[i].id_mundo
-            })
         }
     })
 })
