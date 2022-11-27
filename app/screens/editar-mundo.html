@@ -76,12 +76,17 @@
                             </div>
 
                             <div>
-                                <label>Sistema</label>
+                                <label for="sistema">Sistema</label>
                                 <input type="text" name="sistema" id="sistema" maxlength="25" />
                             </div>
 
                             <div>
-                                <label>Frequência</label>
+                                <label>Participantes</label>
+                                <div class="participantes"></div>
+                            </div>
+
+                            <div>
+                                <label for="frequencia">Frequência</label>
                                 <input
                                     type="text"
                                     name="frequencia"
@@ -91,12 +96,12 @@
                             </div>
 
                             <div>
-                                <label>Data Sessão</label>
+                                <label for="data_sessao">Data Sessão</label>
                                 <input type="date" name="data_sessao" id="data_sessao" />
                             </div>
 
                             <div>
-                                <label>Jogadores necessários</label>
+                                <label for="jogadores_necessarios">Jogadores necessários</label>
                                 <input
                                     type="text"
                                     name="jogadores_necessarios"
@@ -119,9 +124,57 @@
                         </div>
                     </div>
                     <button class="criar-mundo">Editar Mundo</button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#excluirMundo"
+                    >
+                        Excluir Mundo
+                    </button>
                 </div>
             </div>
         </form>
+
+        <form
+            method="post"
+            action="/excluir/mundo/"
+            class="modal fade"
+            id="excluirMundo"
+            tabindex="-1"
+            aria-labelledby="excluirMundoLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="excluirMundoLabel">Excluir mundo</h1>
+                        <button
+                            type="button"
+                            class="btn-close btn-close-white"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+
+                    <div class="modal-body">
+                        Tem certeza que deseja excluir o mundo "<span id="modal-nome-mundo"></span>"?
+                        <b style="color: red"> Esta ação não pode ser revertida! </b>
+                    </div>
+
+                    <div class="modal-footer">
+                        <input
+                            type="number"
+                            name="id-mundo"
+                            value="{{ id }}"
+                            style="display: none"
+                        />
+                        <button type="submit" class="btn btn-primary">Excluir este mundo</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -139,34 +192,4 @@
         ></script>
     </body>
     <script src="/js/editarmundo.js"></script>
-    <script>
-        $.getJSON("/api/mundo/{{ id }}/", (json) => {
-            const nomeMundoInput = document.querySelector(".nome_mundo")
-            const temaInput = document.querySelector(".tema-input")
-            const descricaoInput = document.querySelector(".descricao-textarea")
-            const sistemaInput = document.querySelector("#sistema")
-            const frequenciaInput = document.querySelector("#frequencia")
-            const dataSessaoInput = document.querySelector("#data_sessao")
-            const jogadoresNecessariosInput = document.querySelector("#jogadores_necessarios")
-            const imgDiv = document.querySelector(".img-div")
-            const radioButtons = document.querySelectorAll("[type='radio']")
-
-            nomeMundoInput.value = json.nome_mundo
-            temaInput.value = json.tema_mundo
-            descricaoInput.value = json.descricao_mundo
-            sistemaInput.value = json.sistema_mundo
-            frequenciaInput.value = json.frequencia_mundo
-            dataSessaoInput.value = json.data_mundo.split(" ")[0] // apenas o ano/mês/dia
-            jogadoresNecessariosInput.value = json.jgdorNeces_mundo
-            imgDiv.style.backgroundImage = `url(${json.imagem_mundo})`
-
-            console.log(json.privacidade_mundo)
-            
-            if (json.privacidade_mundo === 0) {
-                radioButtons[0].checked = true
-            } else {
-                radioButtons[1].checked = true
-            }
-        })
-    </script>
 </html>

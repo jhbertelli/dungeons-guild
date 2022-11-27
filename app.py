@@ -308,6 +308,40 @@ def api_solicitacoes_mundo(id):
         return response
 
 
+@app.route("/api/mundo/remover_participante/", methods=['POST'])
+def api_remover_participante():
+    cursor = db.connection.cursor(cursors.DictCursor)
+    user_request = request.form
+
+    response = {}
+
+    # verifica se o usuário enviou os campos corretos
+    if 'idMundo' not in user_request or 'idUsuario' not in user_request:
+        response['sucess'] = False
+        return response
+
+    sql_verify_owner = f"SELECT `id_cadastro` FROM `mundo` WHERE `id_mundo` = {user_request['idMundo']}"
+
+    cursor.execute(sql_verify_owner)
+    row_verify_owner = cursor.fetchone()
+
+    # verifica se o usuário é dono do mundo
+    if row_verify_owner['id_cadastro'] != session['usuario']:
+        response['sucess'] = False
+        return response
+
+    # exclui o participante do mundo
+    sql_delete_participant = f'''DELETE FROM `participantes_mundo`
+        WHERE `id_mundo` = {user_request['idMundo']}
+        AND `id_usuario` = {user_request['idUsuario']}'''
+
+    cursor.execute(sql_delete_participant)
+    db.connection.commit()
+
+    response['sucess'] = True
+
+    return response
+
 
 @app.route("/api/personagens_usuario/")
 def api_personagens_usuario():
@@ -1004,7 +1038,7 @@ def excluir_mundo():
     cursor.execute(delete_solicitations_sql)
     db.connection.commit()
 
-    delete_worlds_sql = f"DELETE FROM `mundo` WHERE `id_cadastro` = {session['usuario']}"
+    delete_worlds_sql = f"DELETE FROM `mundo` WHERE `id_mundo` = {user_form['id-mundo']}"
     cursor.execute(delete_worlds_sql)
     db.connection.commit()
 

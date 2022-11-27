@@ -100,31 +100,6 @@
       </div>
     </form>
 
-    <form method="post" action="/excluir/mundo/" class="modal fade" id="excluirMundo" tabindex="-1" aria-labelledby="excluirMundoLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="excluirMundoLabel">Excluir mundo</h1>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-
-          <div class="modal-body">
-            Tem certeza que deseja excluir o mundo "<span id="modal-nome-mundo"></span>"?
-            <b style="color: red;">
-              Esta ação não pode ser revertida!
-            </b>
-          </div>
-
-          <div class="modal-footer">
-            <input type="number" name="id-mundo" value="{{ id }}" style="display: none;">
-            <button type="submit" class="btn btn-primary">Excluir este mundo</button>
-          </div>
-
-        </div>
-      </div>
-    </form>
-
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -186,27 +161,15 @@
             infoSessaoDiv.innerHTML +=
               `<button
                 type="button"
-                style="margin-top: 12px"
                 onclick="window.location.href = '/mundo/{{ id }}/solicitacoes'"
                 class="botao-info"
               >
                 Visualizar solicitações deste mundo
               </button>`
           }
-
-          infoSessaoDiv.innerHTML +=
-            `<button
-              type="button"
-              class="btn btn-danger"
-              data-bs-toggle="modal"
-              data-bs-target="#excluirMundo"
-            >
-              Excluir Mundo
-            </button>`
         }
 
         const nomeMundo = document.querySelector('.nome_mundo')
-        const nomeMundoPopup = document.querySelector('#modal-nome-mundo')
         const imagemMundo = document.querySelector('.img-div')
         const temaMundo = document.querySelector('.tema')
         const descricaoMundo = document.querySelector('.descricao-textarea')
@@ -239,7 +202,6 @@
         }
         
         nomeMundo.innerHTML = (json.nome_mundo)
-        nomeMundoPopup.textContent = json.nome_mundo
         imagemMundo.style.backgroundImage = (`url(${json.imagem_mundo})`)
         temaMundo.innerHTML = (json.tema_mundo)
         descricaoMundo.innerHTML = (json.descricao_mundo)

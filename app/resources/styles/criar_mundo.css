@@ -245,7 +245,7 @@ nav .back-icon {
 
 }
 
-.info-dentro p, input{
+.info-dentro p, input {
     font-family: "Cormorant Infant";
     font-style: normal;
     font-weight: 400;
@@ -255,7 +255,36 @@ nav .back-icon {
     border: none;
     border-radius: 10px;
     padding: 5px;
-    margin-bottom: 8px';
+    margin-bottom: 8px;
+}
+
+.participantes {
+    min-height: 40px;
+    border-radius: 10px;
+    padding: 4px 8px;
+    margin-bottom: 8px;
+    background-color: #121212;
+    font-family: "Cormorant Infant";
+    font-size: 18px;
+}
+
+.participantes > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4px 0;
+}
+
+.participantes p {
+    background-color: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+.participantes button {
+    background-color: inherit;
+    border: none;
+    outline: none;
 }
 
 ::-webkit-calendar-picker-indicator {
@@ -263,16 +292,70 @@ nav .back-icon {
 }
 
 .criar-mundo{
-    width: 500px;
-    height: 60px;
-    margin-top: 180px;
-    line-height:50%;
+    width: 85%;
+    height: 52px;
+    margin-top: 60px;
+    line-height: 50%;
     font-family: "Inknut Antiqua";
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     color: white;
     background-color: transparent;
     border-radius: 10px;
     border-color: white;
+}
+
+.btn-danger {
+    width: 85%;
+    margin-top: 20px;
+}
+
+/* CSS para o popup */
+
+.modal-content {
+    background-color: #1c1c1c;
+}
+
+.modal-content h1 {
+    margin: 0;
+}
+
+.modal-content > div {
+    border: none;
+}
+
+.modal-content .btn-close {
+    opacity: 0.8;
+}
+
+.modal-body {
+    padding: 0 1rem 1rem 1rem;
+}
+
+.modal-body input {
+    width: 100%;
+    padding: 0.45em;
+    margin-top: 1rem;
+    border-radius: 0.5em;
+    border: 1px rgba(30, 30, 30, 0.6) solid;
+    outline: none;
+    transition: 0.25s;
+}
+
+.modal-body small {
+    color: red;
+    font-weight: 700;
+    display: block;
+    margin-top: 0.25rem;
+    float: right;
+}
+
+.modal-footer button {
+    background-color: #2356a1;
+    border: none;
+}
+
+.modal-footer button:focus {
+    box-shadow: 0px 0px 8px #2356a1;
 }

@@ -1,4 +1,5 @@
-const idMundo = Number(window.location.pathname.split("/")[2])
+// pega o id do mundo pela url - 2 é a posição do id na url
+const idMundo = window.location.pathname.split("/")[2]
 const listaSolicitacoes = document.querySelector(".solicitacoes")
 
 function handleSolicitation(type, userId, solicitationDiv) {
@@ -12,11 +13,13 @@ function handleSolicitation(type, userId, solicitationDiv) {
     }
 
     // envia a solicitação
-    $.post(`/api/mundo/${idMundo}/solicitacoes`, request, (data, status) => {
-        if (data.sucess) {
+    $.post(`/api/mundo/${idMundo}/solicitacoes`, request, (response) => {
+        // remove o elemento caso a solitação seja aceita/rejeitada com sucesso
+        if (response.sucess) {
             solicitationDiv.remove()
         }
 
+        // caso o mundo não tenha mais solicitações
         if (listaSolicitacoes.childElementCount === 0) {
             listaSolicitacoes.style.justifyContent = "center"
             listaSolicitacoes.style.paddingTop = "0"
