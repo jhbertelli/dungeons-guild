@@ -33,6 +33,8 @@ const handleFormSubmit = (e) => {
     function validateInput(input) {
         // previne de enviar o formulário se o usuário clicou diretamente no botão de enviar, sem inserir dados
         const smallText = input.parentElement.lastElementChild
+        const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[$*&@#._/;!+-])(?!.*\s).{8,25}$/  // deve conter entre 8 a 25 caracteres, letras maiúsculas e minúsculas, números e pode ter caracteres especiais
+        const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g // deve conter caracteres antes do @, depois do @, pelo menos um ponto e entre 2 a 4 caracteres depois do ponto
 
         smallText.textContent = ""
         input.style.boxShadow = "none"
@@ -44,6 +46,26 @@ const handleFormSubmit = (e) => {
             smallText.textContent = "Preencha este campo"
 
             return true
+        }
+
+        if (input.type === 'email') {
+            if (!emailRegex.test(input.value)) {
+                input.style.boxShadow = "0px 0px 8px red"
+                input.style.outline = "solid 1px red"
+                smallText.textContent = "Insira um e-mail válido"
+                
+                return true
+            }
+        }
+
+        if (input.id === 'senha-nova') {
+            if (!passwordRegex.test(input.value)) {
+                input.style.boxShadow = "0px 0px 8px red"
+                input.style.outline = "solid 1px red"
+                smallText.textContent = "Sua senha deve conter entre 8 a 25 caracteres, letras maiúsculas e minúsculas, números e deve possuir caracteres especiais"
+
+                return true
+            }
         }
 
         return false
