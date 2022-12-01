@@ -16,4 +16,5 @@ Em seguida, rode esse comando para iniciar o aplicativo:
 Para o cadastro funcionar é nescessário um arquivo .env
 
 EMAIL = (email)
+
 PASSWORD = (senha)
