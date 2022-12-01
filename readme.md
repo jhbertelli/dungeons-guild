@@ -12,3 +12,8 @@ No PHPMyAdmin ou MySQL Workbench, crie um banco de dados chamado "dungeonsguild"
 Em seguida, rode esse comando para iniciar o aplicativo:
 
 * python app.py
+
+Para o cadastro funcionar é nescessário um arquivo .env
+
+EMAIL = (email)
+PASSWORD = (senha)
